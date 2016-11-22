@@ -1,25 +1,16 @@
-# CakePHP Application Skeleton
+# Studierent
 
-[![Build Status](https://img.shields.io/travis/cakephp/app/master.svg?style=flat-square)](https://travis-ci.org/cakephp/app)
-[![License](https://img.shields.io/packagist/l/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
 
-A skeleton for creating applications with [CakePHP](http://cakephp.org) 3.x.
+An academic project for Student Apartment Finding & Rental built with [CakePHP](http://cakephp.org) 3.x.
 
-The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
 
-## Installation
+## Documentation
 
-1. Download [Composer](http://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app [app_name]`.
+For Milestone 2 document, please follow this link:
+[https://docs.google.com/document/d/1jVdwClVi2JvRXnXDwAsc5o74v_FQIkm03l8ss_lccKk/edit?usp=sharing](https://docs.google.com/document/d/1jVdwClVi2JvRXnXDwAsc5o74v_FQIkm03l8ss_lccKk/edit?usp=sharing)
 
-If Composer is installed globally, run
-```bash
-composer create-project --prefer-dist cakephp/app [app_name]
-```
 
-You should now be able to visit the path to where you installed the app and see the default home page.
 
-## Configuration
+## For Team Members
 
-Read and edit `config/app.php` and setup the 'Datasources' and any other
-configuration relevant for your application.
+Instructions Coming Up!!
