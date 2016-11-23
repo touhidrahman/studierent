@@ -69,12 +69,12 @@
 								<div class="row">
 									<fieldset class="form-group col-sm-6">
 										<label for="">Min Rent</label>
-										<input type="password" class="form-control" id="" placeholder="EUR">
+										<input type="text" class="form-control" id="" placeholder="EUR">
 									</fieldset>
 
 									<fieldset class="form-group col-sm-6">
 										<label for="">Max Rent</label>
-										<input type="password" class="form-control" id="" placeholder="EUR">
+										<input type="text" class="form-control" id="" placeholder="EUR">
 									</fieldset>
 								</div>
 
@@ -98,7 +98,73 @@
 									<label style="display:block;"><input type="radio" name="dist" id="dist" value="option1"> 5+ km / 30+ min walking</label>
 								</div>
 
+								<div id="accordion" role="tablist" aria-multiselectable="true">
 
+									<div class="card">
+										<div class="card-header" role="tab" id="headingOne">
+											<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="display:block">
+								          Amenities
+								        </a>
+										</div>
+										<div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
+											<div class="card-block">
+												<!-- Sizes -->
+												<div class="row">
+													<fieldset class="form-group col-sm-6">
+														<label for="">Room Size</label>
+														<input type="password" class="form-control" id="" placeholder="EUR">
+													</fieldset>
+
+													<fieldset class="form-group col-sm-6">
+														<label for="">Flat Size</label>
+														<input type="password" class="form-control" id="" placeholder="EUR">
+													</fieldset>
+												</div>
+												<!-- size fields end -->
+
+												<!-- Utilities -->
+												<label for="priceRange">Utilities</label>
+												<div class="checkbox">
+													<label style="display:block"><input type="checkbox"> Electricity</label>
+													<label style="display:block"><input type="checkbox" checked> Washing Machine</label>
+													<label style="display:block"><input type="checkbox" checked> Fire Alerm</label>
+													<label style="display:block"><input type="checkbox" checked> Heating</label>
+													<label style="display:block"><input type="checkbox" checked> Parking</label>
+													<label style="display:block"><input type="checkbox" checked> Bike Parking</label>
+													<label style="display:block"><input type="checkbox" checked> Garden</label>
+													<label style="display:block"><input type="checkbox" checked> Balcony</label>
+												</div>
+												<!-- Utilities end -->
+											</div>
+										</div>
+									</div>
+
+									<div class="card">
+										<div class="card-header" role="tab" id="headingTwo">
+											<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="display:block">
+								          Landlord Rating
+								        </a>
+										</div>
+										<div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+											<div class="card-block">
+
+											</div>
+										</div>
+									</div>
+
+									<div class="card">
+										<div class="card-header" role="tab" id="headingThree">
+											<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="display:block">
+								          Posted
+								        </a>
+										</div>
+										<div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+											<div class="card-block">
+
+											</div>
+										</div>
+									</div>
+								</div>
 
 								<button type="submit" class="btn btn-primary">Submit</button>
 							</form>
