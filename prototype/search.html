@@ -9,6 +9,7 @@
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 
 <body>
@@ -79,7 +80,7 @@
 								</div>
 
 								<fieldset class="form-group">
-									<label for="">Studierent Score </label>
+									<label for="" style="display:block" data-toggle="tooltip" data-placement="right" title="A score ranging 0-100 given by Studierent website to help you find the best match!">Studierent Score <i class="fa fa-question"></i></label>
 									<select class="form-control" id="">
 									  <option value="0" checked>Select</option>
 									  <option value="0">90+</option>
@@ -97,44 +98,67 @@
 									<label style="display:block;"><input type="radio" name="dist" id="dist" value="option1"> 2 - 5 km / 10 - 30 min walking</label>
 									<label style="display:block;"><input type="radio" name="dist" id="dist" value="option1"> 5+ km / 30+ min walking</label>
 								</div>
+                <div class="checkbox">
+									<label style="display:block"><input type="checkbox"> Direct Bus to University</label>
+								</div>
 
 								<div id="accordion" role="tablist" aria-multiselectable="true">
 
 									<div class="card">
 										<div class="card-header" role="tab" id="headingOne">
 											<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="display:block">
-								          Amenities
+								          More
 								        </a>
 										</div>
 										<div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
 											<div class="card-block">
+												<!-- Available -->
+												<div class="row">
+													<fieldset class="form-group col-xs-12">
+														<label for="">Available (From - To)</label>
+													</fieldset>
+
+													<fieldset class="form-group col-sm-6">
+														<input type="password" class="form-control" id="" placeholder="YYYYMMDD">
+													</fieldset>
+
+													<fieldset class="form-group col-sm-6">
+														<input type="password" class="form-control" id="" placeholder="YYYYMMDD">
+													</fieldset>
+												</div>
+												<!-- Available fields end -->
+
 												<!-- Sizes -->
 												<div class="row">
 													<fieldset class="form-group col-sm-6">
 														<label for="">Room Size</label>
-														<input type="password" class="form-control" id="" placeholder="EUR">
+														<input type="password" class="form-control" id="" placeholder="">
 													</fieldset>
 
 													<fieldset class="form-group col-sm-6">
 														<label for="">Flat Size</label>
-														<input type="password" class="form-control" id="" placeholder="EUR">
+														<input type="password" class="form-control" id="" placeholder="">
 													</fieldset>
 												</div>
 												<!-- size fields end -->
 
-												<!-- Utilities -->
-												<label for="priceRange">Utilities</label>
+												<!-- Amenities -->
+												<label for="">Amenities</label>
 												<div class="checkbox">
-													<label style="display:block"><input type="checkbox"> Electricity</label>
-													<label style="display:block"><input type="checkbox" checked> Washing Machine</label>
-													<label style="display:block"><input type="checkbox" checked> Fire Alerm</label>
-													<label style="display:block"><input type="checkbox" checked> Heating</label>
-													<label style="display:block"><input type="checkbox" checked> Parking</label>
-													<label style="display:block"><input type="checkbox" checked> Bike Parking</label>
-													<label style="display:block"><input type="checkbox" checked> Garden</label>
-													<label style="display:block"><input type="checkbox" checked> Balcony</label>
+													<label style="display:block"><input type="checkbox"> Electricity Bill Included</label>
+													<label style="display:block"><input type="checkbox"> Cable TV</label>
+													<label style="display:block"><input type="checkbox"> Internet</label>
+													<label style="display:block"><input type="checkbox"> Washing Machine</label>
+													<label style="display:block"><input type="checkbox"> Fire Alerm</label>
+													<label style="display:block"><input type="checkbox"> Heating</label>
+													<label style="display:block"><input type="checkbox"> Parking</label>
+													<label style="display:block"><input type="checkbox"> Bike Parking</label>
+													<label style="display:block"><input type="checkbox"> Garden</label>
+													<label style="display:block"><input type="checkbox"> Balcony</label>
+													<label style="display:block"><input type="checkbox"> Smoking</label>
+													<label style="display:block"><input type="checkbox"> Pets</label>
 												</div>
-												<!-- Utilities end -->
+												<!-- Amenities end -->
 											</div>
 										</div>
 									</div>
@@ -147,7 +171,33 @@
 										</div>
 										<div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
 											<div class="card-block">
-
+												<div class="checkbox">
+													<label style="display:block"><input type="checkbox">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+													</label>
+													<label style="display:block"><input type="checkbox">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+													</label>
+													<label style="display:block"><input type="checkbox">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+													</label>
+													<label style="display:block"><input type="checkbox">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+													</label>
+													<label style="display:block"><input type="checkbox">
+														<i class="fa fa-star"></i>
+													</label>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -155,12 +205,18 @@
 									<div class="card">
 										<div class="card-header" role="tab" id="headingThree">
 											<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="display:block">
-								          Posted
+								          Sort By
 								        </a>
 										</div>
 										<div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
 											<div class="card-block">
-
+												<div class="radio">
+													<label style="display:block;"><input type="radio" name="sortby" id="sortby" value="option1"> Rent (High - Low)</label>
+													<label style="display:block;"><input type="radio" name="sortby" id="sortby" value="option1"> Rent (Low - High)</label>
+													<label style="display:block;"><input type="radio" name="sortby" id="sortby" value="option1"> Zipcode / Street</label>
+													<label style="display:block;"><input type="radio" name="sortby" id="sortby" value="option1"> Available From Date</label>
+													<label style="display:block;"><input type="radio" name="sortby" id="sortby" value="option1"> Available To Date</label>
+												</div>
 											</div>
 										</div>
 									</div>
