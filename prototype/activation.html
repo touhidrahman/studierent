@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html class="" lang="en">
+<head prefix="og: http://ogp.me/ns#">
+<meta charset="utf-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="object" property="og:type">
+<meta content="GitLab" property="og:site_name">
+<meta content="prototype/activation.html · d625a6cff8931cc5a4fb5beb6294ba359634e1d2 · hsfulda / studierent" property="og:title">
+<meta content="Main project repository for the Studierent project, developed by HS Fulda / MSc GSD / WS 2016 / Group 4 (Local)" property="og:description">
+<meta content="https://gitlab.com/assets/gitlab_logo-7ae504fe4f68fdebb3c2034e36621930cd36ea87924c11ff65dbcb8ed50dca58.png" property="og:image">
+<meta content="https://gitlab.com/hsfulda/studierent/blob/d625a6cff8931cc5a4fb5beb6294ba359634e1d2/prototype/activation.html" property="og:url">
+<meta content="summary" property="twitter:card">
+<meta content="prototype/activation.html · d625a6cff8931cc5a4fb5beb6294ba359634e1d2 · hsfulda / studierent" property="twitter:title">
+<meta content="Main project repository for the Studierent project, developed by HS Fulda / MSc GSD / WS 2016 / Group 4 (Local)" property="twitter:description">
+<meta content="https://gitlab.com/assets/gitlab_logo-7ae504fe4f68fdebb3c2034e36621930cd36ea87924c11ff65dbcb8ed50dca58.png" property="twitter:image">
+
+<title>prototype/activation.html · d625a6cff8931cc5a4fb5beb6294ba359634e1d2 · hsfulda / studierent · GitLab</title>
+<meta content="Main project repository for the Studierent project, developed by HS Fulda / MSc GSD / WS 2016 / Group 4 (Local)" name="description">
+<link rel="shortcut icon" type="image/x-icon" href="/assets/favicon-075eba76312e8421991a0c1f89a89ee81678bcde72319dd3e8047e2a47cd3a42.ico" />
+<link rel="stylesheet" media="all" href="/assets/application-6b7773195c8a8e063c9b6a6de5a9e291c5d2a7ac6c607868334c8be2b9f30234.css" />
+<link rel="stylesheet" media="print" href="/assets/print-9c3a1eb4a2f45c9f3d7dd4de03f14c2e6b921e757168b595d7f161bbc320fc05.css" />
+<script src="/assets/application-93e8bfa931fff34efa1a87d8863bdd6ceffee49fcd8f6e1b6a3655421c1acbd8.js"></script>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="Nm+/kDG8Zl+U/bxg9iYuceNnXFlSJnCPJKyRbs7EHPW5JdpIa7RvhIaLyjP6XCYbMAmSGEMMMHBgphTeV0ss0A==" />
+<meta content="origin-when-cross-origin" name="referrer">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+<meta content="#474D57" name="theme-color">
+<link rel="apple-touch-icon" type="image/x-icon" href="/assets/touch-icon-iphone-5a9cee0e8a51212e70b90c87c12f382c428870c0ff67d1eb034d884b78d2dae7.png" />
+<link rel="apple-touch-icon" type="image/x-icon" href="/assets/touch-icon-ipad-a6eec6aeb9da138e507593b464fdac213047e49d3093fc30e90d9a995df83ba3.png" sizes="76x76" />
+<link rel="apple-touch-icon" type="image/x-icon" href="/assets/touch-icon-iphone-retina-72e2aadf86513a56e050e7f0f2355deaa19cc17ed97bbe5147847f2748e5a3e3.png" sizes="120x120" />
+<link rel="apple-touch-icon" type="image/x-icon" href="/assets/touch-icon-ipad-retina-8ebe416f5313483d9c1bc772b5bbe03ecad52a54eba443e5215a22caed2a16a2.png" sizes="152x152" />
+<link color="rgb(226, 67, 41)" href="/assets/logo-d36b5212042cebc89b96df4bf6ac24e43db316143e89926c0db839ff694d2de4.svg" rel="mask-icon">
+<meta content="/assets/msapplication-tile-1196ec67452f618d39cdd85e2e3a542f76574c071051ae7effbfde01710eb17d.png" name="msapplication-TileImage">
+<meta content="#30353E" name="msapplication-TileColor">
+
+
+<!-- Piwik -->
+<script>
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.gitlab.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.gitlab.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+<style>
+  [data-user-is] {
+    display: none !important;
+  }
+  
+  [data-user-is="804763"] {
+    display: block !important;
+  }
+  
+  [data-user-is="804763"][data-display="inline"] {
+    display: inline !important;
+  }
+  
+  [data-user-is-not] {
+    display: block !important;
+  }
+  
+  [data-user-is-not][data-display="inline"] {
+    display: inline !important;
+  }
+  
+  [data-user-is-not="804763"] {
+    display: none !important;
+  }
+</style>
+
+</head>
+
+<body class="ui_charcoal" data-group="" data-page="projects:blob:show" data-project="studierent">
+<script>
+//<![CDATA[
+window.gon={};gon.api_version="v3";gon.default_avatar_url="https:\/\/gitlab.com\/assets\/no_avatar-849f9c04a3a0d0cea2424ae97b27447dc64a7dbfae83c036c45b403392f0e8ba.png";gon.max_file_size=10;gon.relative_url_root="";gon.shortcuts_path="\/help\/shortcuts";gon.user_color_scheme="white";gon.award_menu_url="\/emojis";gon.current_user_id=804763;
+//]]>
+</script>
+<script>
+  window.project_uploads_path = "/hsfulda/studierent/uploads";
+  window.preview_markdown_path = "/hsfulda/studierent/preview_markdown";
+</script>
+
+<header class="navbar navbar-fixed-top navbar-gitlab with-horizontal-nav">
+<a class="sr-only gl-accessibility" href="#content-body" tabindex="1">Skip to content</a>
+<div class="container-fluid">
+<div class="header-content">
+<button aria-label="Toggle global navigation" class="side-nav-toggle" type="button">
+<span class="sr-only">Toggle navigation</span>
+<i class="fa fa-bars"></i>
+</button>
+<button class="navbar-toggle" type="button">
+<span class="sr-only">Toggle navigation</span>
+<i class="fa fa-ellipsis-v"></i>
+</button>
+<div class="navbar-collapse collapse">
+<ul class="nav navbar-nav">
+<li class="hidden-sm hidden-xs">
+<div class="has-location-badge search search-form">
+<form class="navbar-form" action="/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" /><div class="search-input-container">
+<div class="location-badge">This project</div>
+<div class="search-input-wrap">
+<div class="dropdown" data-url="/search/autocomplete">
+<input type="search" name="search" id="search" placeholder="Search" class="search-input dropdown-menu-toggle no-outline js-search-dashboard-options" spellcheck="false" tabindex="1" autocomplete="off" data-toggle="dropdown" data-issues-path="https://gitlab.com/dashboard/issues" data-mr-path="https://gitlab.com/dashboard/merge_requests" />
+<div class="dropdown-menu dropdown-select">
+<div class="dropdown-content"><ul>
+<li>
+<a class="is-focused dropdown-menu-empty-link">
+Loading...
+</a>
+</li>
+</ul>
+</div><div class="dropdown-loading"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+<i class="search-icon"></i>
+<i class="clear-icon js-clear-input"></i>
+</div>
+</div>
+</div>
+<input type="hidden" name="group_id" id="group_id" class="js-search-group-options" />
+<input type="hidden" name="project_id" id="search_project_id" value="2041322" class="js-search-project-options" data-project-path="studierent" data-name="studierent" data-issues-path="/hsfulda/studierent/issues" data-mr-path="/hsfulda/studierent/merge_requests" />
+<input type="hidden" name="search_code" id="search_code" value="true" />
+<input type="hidden" name="repository_ref" id="repository_ref" value="d625a6cff8931cc5a4fb5beb6294ba359634e1d2" />
+
+<div class="search-autocomplete-opts hide" data-autocomplete-path="/search/autocomplete" data-autocomplete-project-id="2041322" data-autocomplete-project-ref="d625a6cff8931cc5a4fb5beb6294ba359634e1d2"></div>
+</form></div>
+
+</li>
+<li class="visible-sm visible-xs">
+<a title="Search" aria-label="Search" data-toggle="tooltip" data-placement="bottom" data-container="body" href="/search"><i class="fa fa-search"></i>
+</a></li>
+<li>
+<a title="Todos" aria-label="Todos" data-toggle="tooltip" data-placement="bottom" data-container="body" href="/dashboard/todos"><i class="fa fa-bell fa-fw"></i>
+<span class="badge hidden todos-pending-count">
+0
+</span>
+</a></li>
+<li class="header-user dropdown">
+<a class="header-user-dropdown-toggle" data-toggle="dropdown" href="/aprobinda"><img width="26" height="26" class="header-user-avatar" src="https://secure.gravatar.com/avatar/3bcb2b53e146cb8a6ea82105bb53404e?s=52&amp;d=identicon" alt="3bcb2b53e146cb8a6ea82105bb53404e?s=52&amp;d=identicon" />
+<i class="fa fa-caret-down"></i>
+</a><div class="dropdown-menu-nav dropdown-menu-align-right">
+<ul>
+<li>
+<a class="profile-link" aria-label="Profile" data-user="aprobinda" href="/aprobinda">Profile</a>
+</li>
+<li>
+<a aria-label="Profile Settings" href="/profile">Profile Settings</a>
+</li>
+<li>
+<a aria-label="Help" href="/help">Help</a>
+</li>
+<li class="divider"></li>
+<li>
+<a class="sign-out-link" aria-label="Sign out" rel="nofollow" data-method="delete" href="/users/sign_out">Sign out</a>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h1 class="title"><a href="/hsfulda">hsfulda</a> / <a class="project-item-select-holder" href="/hsfulda/studierent">studierent</a><button name="button" type="button" class="dropdown-toggle-caret js-projects-dropdown-toggle" aria-label="Toggle switch project dropdown" data-target=".js-dropdown-menu-projects" data-toggle="dropdown"><i class="fa fa-chevron-down"></i></button></h1>
+<div class="header-logo">
+<a class="home" title="Dashboard" id="logo" href="/"><svg width="36" height="36" class="tanuki-logo">
+  <path class="tanuki-shape tanuki-left-ear" fill="#e24329" d="M2 14l9.38 9v-9l-4-12.28c-.205-.632-1.176-.632-1.38 0z"/>
+  <path class="tanuki-shape tanuki-right-ear" fill="#e24329" d="M34 14l-9.38 9v-9l4-12.28c.205-.632 1.176-.632 1.38 0z"/>
+  <path class="tanuki-shape tanuki-nose" fill="#e24329" d="M18,34.38 3,14 33,14 Z"/>
+  <path class="tanuki-shape tanuki-left-eye" fill="#fc6d26" d="M18,34.38 11.38,14 2,14 6,25Z"/>
+  <path class="tanuki-shape tanuki-right-eye" fill="#fc6d26" d="M18,34.38 24.62,14 34,14 30,25Z"/>
+  <path class="tanuki-shape tanuki-left-cheek" fill="#fca326" d="M2 14L.1 20.16c-.18.565 0 1.2.5 1.56l17.42 12.66z"/>
+  <path class="tanuki-shape tanuki-right-cheek" fill="#fca326" d="M34 14l1.9 6.16c.18.565 0 1.2-.5 1.56L18 34.38z"/>
+</svg>
+
+</a></div>
+<div class="js-dropdown-menu-projects">
+<div class="dropdown-menu dropdown-select dropdown-menu-projects">
+<div class="dropdown-title"><span>Go to a project</span><button class="dropdown-title-button dropdown-menu-close" aria-label="Close" type="button"><i class="fa fa-times dropdown-menu-close-icon"></i></button></div>
+<div class="dropdown-input"><input type="search" id="" class="dropdown-input-field" placeholder="Search your projects" autocomplete="off" /><i class="fa fa-search dropdown-input-search"></i><i role="button" class="fa fa-times dropdown-input-clear js-dropdown-input-clear"></i></div>
+<div class="dropdown-content"></div>
+<div class="dropdown-loading"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+</div>
+
+</div>
+</div>
+</header>
+
+<script>
+  var findFileURL = "/hsfulda/studierent/find_file/d625a6cff8931cc5a4fb5beb6294ba359634e1d2";
+</script>
+
+<div class="page-with-sidebar">
+<div class="sidebar-wrapper nicescroll">
+<div class="sidebar-action-buttons">
+<div class="nav-header-btn toggle-nav-collapse" title="Open/Close">
+<span class="sr-only">Toggle navigation</span>
+<i class="fa fa-bars"></i>
+</div>
+<div class="nav-header-btn pin-nav-btn has-tooltip  js-nav-pin" data-container="body" data-placement="right" title="Pin Navigation">
+<span class="sr-only">Toggle navigation pinning</span>
+<i class="fa fa-fw fa-thumb-tack"></i>
+</div>
+</div>
+<div class="nav-sidebar">
+<div class="sidebar-header">Across GitLab</div>
+<ul class="nav">
+<li class="active home"><a title="Projects" class="dashboard-shortcuts-projects" href="/dashboard/projects"><span>
+Projects
+</span>
+</a></li><li class=""><a class="dashboard-shortcuts-activity" title="Activity" href="/dashboard/activity"><span>
+Activity
+</span>
+</a></li><li class=""><a title="Groups" href="/dashboard/groups"><span>
+Groups
+</span>
+</a></li><li class=""><a title="Milestones" href="/dashboard/milestones"><span>
+Milestones
+</span>
+</a></li><li class=""><a title="Issues" class="dashboard-shortcuts-issues" href="/dashboard/issues?assignee_id=804763"><span>
+Issues
+<span class="count">0</span>
+</span>
+</a></li><li class=""><a title="Merge Requests" class="dashboard-shortcuts-merge_requests" href="/dashboard/merge_requests?assignee_id=804763"><span>
+Merge Requests
+<span class="count">0</span>
+</span>
+</a></li><li class=""><a title="Snippets" href="/dashboard/snippets"><span>
+Snippets
+</span>
+</a></li></ul>
+</div>
+
+</div>
+<div class="layout-nav">
+<div class="container-fluid">
+<div class="controls">
+<div class="dropdown project-settings-dropdown">
+<a class="dropdown-new btn btn-default" data-toggle="dropdown" href="#" id="project-settings-button">
+<i class="fa fa-cog"></i>
+<i class="fa fa-caret-down"></i>
+</a>
+<ul class="dropdown-menu dropdown-menu-align-right">
+<li class=""><a title="Members" class="team-tab tab" href="/hsfulda/studierent/project_members"><span>
+Members
+</span>
+</a></li>
+</ul>
+</div>
+</div>
+<div class="nav-control scrolling-tabs-container">
+<div class="fade-left">
+<i class="fa fa-angle-left"></i>
+</div>
+<div class="fade-right">
+<i class="fa fa-angle-right"></i>
+</div>
+<ul class="nav-links scrolling-tabs">
+<li class="home"><a title="Project" class="shortcuts-project" href="/hsfulda/studierent"><span>
+Project
+</span>
+</a></li><li class=""><a title="Activity" class="shortcuts-project-activity" href="/hsfulda/studierent/activity"><span>
+Activity
+</span>
+</a></li><li class="active"><a title="Repository" class="shortcuts-tree" href="/hsfulda/studierent/tree/d625a6cff8931cc5a4fb5beb6294ba359634e1d2"><span>
+Repository
+</span>
+</a></li><li class=""><a title="Pipelines" class="shortcuts-pipelines" href="/hsfulda/studierent/pipelines"><span>
+Pipelines
+</span>
+</a></li><li class=""><a title="Container Registry" class="shortcuts-container-registry" href="/hsfulda/studierent/container_registry"><span>
+Registry
+</span>
+</a></li><li class=""><a title="Graphs" class="shortcuts-graphs" href="/hsfulda/studierent/graphs/d625a6cff8931cc5a4fb5beb6294ba359634e1d2"><span>
+Graphs
+</span>
+</a></li><li class=""><a title="Issues" class="shortcuts-issues" href="/hsfulda/studierent/issues"><span>
+Issues
+<span class="badge count issue_counter">0</span>
+</span>
+</a></li><li class=""><a title="Merge Requests" class="shortcuts-merge_requests" href="/hsfulda/studierent/merge_requests"><span>
+Merge Requests
+<span class="badge count merge_counter">0</span>
+</span>
+</a></li><li class=""><a title="Wiki" class="shortcuts-wiki" href="/hsfulda/studierent/wikis/home"><span>
+Wiki
+</span>
+</a></li><li class="hidden">
+<a title="Network" class="shortcuts-network" href="/hsfulda/studierent/network/d625a6cff8931cc5a4fb5beb6294ba359634e1d2">Network
+</a></li>
+<li class="hidden">
+<a class="shortcuts-new-issue" href="/hsfulda/studierent/issues/new">Create a new issue
+</a></li>
+<li class="hidden">
+<a title="Builds" class="shortcuts-builds" href="/hsfulda/studierent/builds">Builds
+</a></li>
+<li class="hidden">
+<a title="Commits" class="shortcuts-commits" href="/hsfulda/studierent/commits/d625a6cff8931cc5a4fb5beb6294ba359634e1d2">Commits
+</a></li>
+<li class="hidden">
+<a title="Issue Boards" class="shortcuts-issue-boards" href="/hsfulda/studierent/boards">Issue Boards</a>
+</li>
+</ul>
+</div>
+
+</div>
+</div>
+<div class="content-wrapper page-with-layout-nav">
+<div class="scrolling-tabs-container sub-nav-scroll">
+<div class="fade-left">
+<i class="fa fa-angle-left"></i>
+</div>
+<div class="fade-right">
+<i class="fa fa-angle-right"></i>
+</div>
+
+<div class="nav-links sub-nav scrolling-tabs">
+<ul class="container-fluid container-limited">
+<li class="active"><a href="/hsfulda/studierent/tree/d625a6cff8931cc5a4fb5beb6294ba359634e1d2">Files
+</a></li><li class=""><a href="/hsfulda/studierent/commits/d625a6cff8931cc5a4fb5beb6294ba359634e1d2">Commits
+</a></li><li class=""><a href="/hsfulda/studierent/network/d625a6cff8931cc5a4fb5beb6294ba359634e1d2">Network
+</a></li><li class=""><a href="/hsfulda/studierent/compare?from=development&amp;to=d625a6cff8931cc5a4fb5beb6294ba359634e1d2">Compare
+</a></li><li class=""><a href="/hsfulda/studierent/branches">Branches
+</a></li><li class=""><a href="/hsfulda/studierent/tags">Tags
+</a></li><li class=""><a href="/hsfulda/studierent/path_locks">Locked Files
+</a></li></ul>
+</div>
+</div>
+
+
+
+<div class="flash-container flash-container-page">
+</div>
+
+
+<div class=" ">
+<div class="content" id="content-body">
+
+<div class="container-fluid container-limited">
+
+<div class="tree-holder" id="tree-holder">
+<div class="nav-block">
+<div class="tree-ref-holder">
+<form class="project-refs-form" action="/hsfulda/studierent/refs/switch" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="destination" id="destination" value="blob" />
+<input type="hidden" name="path" id="path" value="prototype/activation.html" />
+<div class="dropdown">
+<button class="dropdown-menu-toggle js-project-refs-dropdown" type="button" data-toggle="dropdown" data-selected="d625a6cff8931cc5a4fb5beb6294ba359634e1d2" data-ref="d625a6cff8931cc5a4fb5beb6294ba359634e1d2" data-refs-url="/hsfulda/studierent/refs" data-field-name="ref" data-submit-form-on-click="true"><span class="dropdown-toggle-text ">d625a6cff8931cc5a4fb5beb6294ba359634e1d2</span><i class="fa fa-caret-down"></i></button>
+<div class="dropdown-menu dropdown-menu-selectable">
+<div class="dropdown-title"><span>Switch branch/tag</span><button class="dropdown-title-button dropdown-menu-close" aria-label="Close" type="button"><i class="fa fa-times dropdown-menu-close-icon"></i></button></div>
+<div class="dropdown-input"><input type="search" id="" class="dropdown-input-field" placeholder="Search branches and tags" autocomplete="off" /><i class="fa fa-search dropdown-input-search"></i><i role="button" class="fa fa-times dropdown-input-clear js-dropdown-input-clear"></i></div>
+<div class="dropdown-content"></div>
+<div class="dropdown-loading"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+</div>
+</form>
+</div>
+<ul class="breadcrumb repo-breadcrumb">
+<li>
+<a href="/hsfulda/studierent/tree/d625a6cff8931cc5a4fb5beb6294ba359634e1d2">studierent
+</a></li>
+<li>
+<a href="/hsfulda/studierent/tree/d625a6cff8931cc5a4fb5beb6294ba359634e1d2/prototype">prototype</a>
+
+</li>
+<li>
+<a href="/hsfulda/studierent/blob/d625a6cff8931cc5a4fb5beb6294ba359634e1d2/prototype/activation.html"><strong>
+activation.html
+</strong>
+</a>
+</li>
+</ul>
+</div>
+<ul class="blob-commit-info hidden-xs">
+<li class="commit js-toggle-container" id="commit-d625a6cf">
+<a href="/aprobinda"><img class="avatar has-tooltip s36 hidden-xs" alt="Aleksandr&#39;s avatar" title="Aleksandr" data-container="body" src="https://secure.gravatar.com/avatar/3bcb2b53e146cb8a6ea82105bb53404e?s=72&amp;d=identicon" /></a>
+<div class="commit-info-block">
+<div class="commit-row-title">
+<span class="item-title">
+<a class="commit-row-message" href="/hsfulda/studierent/commit/d625a6cff8931cc5a4fb5beb6294ba359634e1d2">Added templates for 3 pages assigned to me: Account Activation page, Forgot pass…</a>
+<span class="commit-row-message visible-xs-inline">
+&middot;
+d625a6cf
+</span>
+<a class="text-expander hidden-xs js-toggle-button">...</a>
+</span>
+<div class="commit-actions hidden-xs">
+<button class="btn btn-clipboard btn-transparent" data-toggle="tooltip" data-placement="bottom" data-container="body" data-clipboard-text="d625a6cff8931cc5a4fb5beb6294ba359634e1d2" type="button" title="Copy to Clipboard"><i class="fa fa-clipboard"></i></button>
+<a class="commit-short-id btn btn-transparent" href="/hsfulda/studierent/commit/d625a6cff8931cc5a4fb5beb6294ba359634e1d2">d625a6cf</a>
+<a class="btn btn-default" href="/hsfulda/studierent/tree/d625a6cff8931cc5a4fb5beb6294ba359634e1d2">Browse Files</a>
+</div>
+</div>
+<pre class="commit-row-description js-toggle-content">…word, Property Ad view</pre>
+<a class="commit-author-link has-tooltip" title="aprobinda@gmail.com" href="/aprobinda">Aleksandr</a>
+authored
+<time class="js-timeago" title="Nov 26, 2016 12:47pm" datetime="2016-11-26T12:47:49Z" data-toggle="tooltip" data-placement="top" data-container="body">2016-11-26 13:47:49 +0100</time>
+</div>
+</li>
+
+</ul>
+<div class="blob-content-holder" id="blob-content-holder">
+<article class="file-holder">
+<div class="file-title">
+<i class="fa fa-file-text-o fa-fw"></i>
+<strong>
+activation.html
+</strong>
+<small>
+2.45 KB
+</small>
+<div class="file-actions hidden-xs">
+<div class="btn-group tree-btn-group">
+<a class="btn btn-sm" target="_blank" href="/hsfulda/studierent/raw/d625a6cff8931cc5a4fb5beb6294ba359634e1d2/prototype/activation.html">Raw</a>
+<a class="btn btn-sm" href="/hsfulda/studierent/blame/d625a6cff8931cc5a4fb5beb6294ba359634e1d2/prototype/activation.html">Blame</a>
+<a class="btn btn-sm" href="/hsfulda/studierent/commits/d625a6cff8931cc5a4fb5beb6294ba359634e1d2/prototype/activation.html">History</a>
+<a class="btn btn-sm" href="/hsfulda/studierent/blob/d625a6cff8931cc5a4fb5beb6294ba359634e1d2/prototype/activation.html">Permalink</a>
+</div>
+<div class="btn-group" role="group">
+<a class="btn btn-sm path-lock has-tooltip" data-state="lock" data-toggle="tooltip" title="" href="#">Lock</a>
+<button name="button" type="submit" class="btn disabled has-tooltip btn-file-option" title="You can only edit files when you are on a branch" data-container="body">Edit</button>
+<button name="button" type="submit" class="btn btn-default disabled has-tooltip" title="You can only replace files when you are on a branch" data-container="body">Replace</button>
+<button name="button" type="submit" class="btn btn-remove disabled has-tooltip" title="You can only delete files when you are on a branch" data-container="body">Delete</button>
+</div>
+<script>
+  PathLocks.init(
+    '/hsfulda/studierent/path_locks/toggle',
+    'prototype/activation.html'
+  );
+</script>
+
+</div>
+</div>
+<div class="file-content code js-syntax-highlight">
+<div class="line-numbers">
+<a class="diff-line-num" data-line-number="1" href="#L1" id="L1">
+<i class="fa fa-link"></i>
+1
+</a>
+<a class="diff-line-num" data-line-number="2" href="#L2" id="L2">
+<i class="fa fa-link"></i>
+2
+</a>
+<a class="diff-line-num" data-line-number="3" href="#L3" id="L3">
+<i class="fa fa-link"></i>
+3
+</a>
+<a class="diff-line-num" data-line-number="4" href="#L4" id="L4">
+<i class="fa fa-link"></i>
+4
+</a>
+<a class="diff-line-num" data-line-number="5" href="#L5" id="L5">
+<i class="fa fa-link"></i>
+5
+</a>
+<a class="diff-line-num" data-line-number="6" href="#L6" id="L6">
+<i class="fa fa-link"></i>
+6
+</a>
+<a class="diff-line-num" data-line-number="7" href="#L7" id="L7">
+<i class="fa fa-link"></i>
+7
+</a>
+<a class="diff-line-num" data-line-number="8" href="#L8" id="L8">
+<i class="fa fa-link"></i>
+8
+</a>
+<a class="diff-line-num" data-line-number="9" href="#L9" id="L9">
+<i class="fa fa-link"></i>
+9
+</a>
+<a class="diff-line-num" data-line-number="10" href="#L10" id="L10">
+<i class="fa fa-link"></i>
+10
+</a>
+<a class="diff-line-num" data-line-number="11" href="#L11" id="L11">
+<i class="fa fa-link"></i>
+11
+</a>
+<a class="diff-line-num" data-line-number="12" href="#L12" id="L12">
+<i class="fa fa-link"></i>
+12
+</a>
+<a class="diff-line-num" data-line-number="13" href="#L13" id="L13">
+<i class="fa fa-link"></i>
+13
+</a>
+<a class="diff-line-num" data-line-number="14" href="#L14" id="L14">
+<i class="fa fa-link"></i>
+14
+</a>
+<a class="diff-line-num" data-line-number="15" href="#L15" id="L15">
+<i class="fa fa-link"></i>
+15
+</a>
+<a class="diff-line-num" data-line-number="16" href="#L16" id="L16">
+<i class="fa fa-link"></i>
+16
+</a>
+<a class="diff-line-num" data-line-number="17" href="#L17" id="L17">
+<i class="fa fa-link"></i>
+17
+</a>
+<a class="diff-line-num" data-line-number="18" href="#L18" id="L18">
+<i class="fa fa-link"></i>
+18
+</a>
+<a class="diff-line-num" data-line-number="19" href="#L19" id="L19">
+<i class="fa fa-link"></i>
+19
+</a>
+<a class="diff-line-num" data-line-number="20" href="#L20" id="L20">
+<i class="fa fa-link"></i>
+20
+</a>
+<a class="diff-line-num" data-line-number="21" href="#L21" id="L21">
+<i class="fa fa-link"></i>
+21
+</a>
+<a class="diff-line-num" data-line-number="22" href="#L22" id="L22">
+<i class="fa fa-link"></i>
+22
+</a>
+<a class="diff-line-num" data-line-number="23" href="#L23" id="L23">
+<i class="fa fa-link"></i>
+23
+</a>
+<a class="diff-line-num" data-line-number="24" href="#L24" id="L24">
+<i class="fa fa-link"></i>
+24
+</a>
+<a class="diff-line-num" data-line-number="25" href="#L25" id="L25">
+<i class="fa fa-link"></i>
+25
+</a>
+<a class="diff-line-num" data-line-number="26" href="#L26" id="L26">
+<i class="fa fa-link"></i>
+26
+</a>
+<a class="diff-line-num" data-line-number="27" href="#L27" id="L27">
+<i class="fa fa-link"></i>
+27
+</a>
+<a class="diff-line-num" data-line-number="28" href="#L28" id="L28">
+<i class="fa fa-link"></i>
+28
+</a>
+<a class="diff-line-num" data-line-number="29" href="#L29" id="L29">
+<i class="fa fa-link"></i>
+29
+</a>
+<a class="diff-line-num" data-line-number="30" href="#L30" id="L30">
+<i class="fa fa-link"></i>
+30
+</a>
+<a class="diff-line-num" data-line-number="31" href="#L31" id="L31">
+<i class="fa fa-link"></i>
+31
+</a>
+<a class="diff-line-num" data-line-number="32" href="#L32" id="L32">
+<i class="fa fa-link"></i>
+32
+</a>
+<a class="diff-line-num" data-line-number="33" href="#L33" id="L33">
+<i class="fa fa-link"></i>
+33
+</a>
+<a class="diff-line-num" data-line-number="34" href="#L34" id="L34">
+<i class="fa fa-link"></i>
+34
+</a>
+<a class="diff-line-num" data-line-number="35" href="#L35" id="L35">
+<i class="fa fa-link"></i>
+35
+</a>
+<a class="diff-line-num" data-line-number="36" href="#L36" id="L36">
+<i class="fa fa-link"></i>
+36
+</a>
+<a class="diff-line-num" data-line-number="37" href="#L37" id="L37">
+<i class="fa fa-link"></i>
+37
+</a>
+<a class="diff-line-num" data-line-number="38" href="#L38" id="L38">
+<i class="fa fa-link"></i>
+38
+</a>
+<a class="diff-line-num" data-line-number="39" href="#L39" id="L39">
+<i class="fa fa-link"></i>
+39
+</a>
+<a class="diff-line-num" data-line-number="40" href="#L40" id="L40">
+<i class="fa fa-link"></i>
+40
+</a>
+<a class="diff-line-num" data-line-number="41" href="#L41" id="L41">
+<i class="fa fa-link"></i>
+41
+</a>
+<a class="diff-line-num" data-line-number="42" href="#L42" id="L42">
+<i class="fa fa-link"></i>
+42
+</a>
+<a class="diff-line-num" data-line-number="43" href="#L43" id="L43">
+<i class="fa fa-link"></i>
+43
+</a>
+<a class="diff-line-num" data-line-number="44" href="#L44" id="L44">
+<i class="fa fa-link"></i>
+44
+</a>
+<a class="diff-line-num" data-line-number="45" href="#L45" id="L45">
+<i class="fa fa-link"></i>
+45
+</a>
+<a class="diff-line-num" data-line-number="46" href="#L46" id="L46">
+<i class="fa fa-link"></i>
+46
+</a>
+<a class="diff-line-num" data-line-number="47" href="#L47" id="L47">
+<i class="fa fa-link"></i>
+47
+</a>
+<a class="diff-line-num" data-line-number="48" href="#L48" id="L48">
+<i class="fa fa-link"></i>
+48
+</a>
+<a class="diff-line-num" data-line-number="49" href="#L49" id="L49">
+<i class="fa fa-link"></i>
+49
+</a>
+<a class="diff-line-num" data-line-number="50" href="#L50" id="L50">
+<i class="fa fa-link"></i>
+50
+</a>
+<a class="diff-line-num" data-line-number="51" href="#L51" id="L51">
+<i class="fa fa-link"></i>
+51
+</a>
+<a class="diff-line-num" data-line-number="52" href="#L52" id="L52">
+<i class="fa fa-link"></i>
+52
+</a>
+<a class="diff-line-num" data-line-number="53" href="#L53" id="L53">
+<i class="fa fa-link"></i>
+53
+</a>
+<a class="diff-line-num" data-line-number="54" href="#L54" id="L54">
+<i class="fa fa-link"></i>
+54
+</a>
+<a class="diff-line-num" data-line-number="55" href="#L55" id="L55">
+<i class="fa fa-link"></i>
+55
+</a>
+<a class="diff-line-num" data-line-number="56" href="#L56" id="L56">
+<i class="fa fa-link"></i>
+56
+</a>
+<a class="diff-line-num" data-line-number="57" href="#L57" id="L57">
+<i class="fa fa-link"></i>
+57
+</a>
+<a class="diff-line-num" data-line-number="58" href="#L58" id="L58">
+<i class="fa fa-link"></i>
+58
+</a>
+<a class="diff-line-num" data-line-number="59" href="#L59" id="L59">
+<i class="fa fa-link"></i>
+59
+</a>
+<a class="diff-line-num" data-line-number="60" href="#L60" id="L60">
+<i class="fa fa-link"></i>
+60
+</a>
+<a class="diff-line-num" data-line-number="61" href="#L61" id="L61">
+<i class="fa fa-link"></i>
+61
+</a>
+<a class="diff-line-num" data-line-number="62" href="#L62" id="L62">
+<i class="fa fa-link"></i>
+62
+</a>
+</div>
+<div class="blob-content" data-blob-id="f804558f07d5ad36e0b2cff34460e0366f19921b">
+<pre class="code highlight"><code><span id="LC1" class="line"><span class="cp">&lt;!DOCTYPE html&gt;</span></span>
+<span id="LC2" class="line"><span class="nt">&lt;html&gt;</span></span>
+<span id="LC3" class="line"></span>
+<span id="LC4" class="line"><span class="nt">&lt;head&gt;</span></span>
+<span id="LC5" class="line">	<span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"author"</span> <span class="na">content=</span><span class="s">"Aleksandr Anfilov"</span><span class="nt">&gt;</span></span>
+<span id="LC6" class="line">	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span></span>
+<span id="LC7" class="line">	<span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="nt">&gt;</span></span>
+<span id="LC8" class="line">	<span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"x-ua-compatible"</span> <span class="na">content=</span><span class="s">"ie=edge"</span><span class="nt">&gt;</span></span>
+<span id="LC9" class="line">	<span class="nt">&lt;title&gt;</span>Studierent<span class="nt">&lt;/title&gt;</span></span>
+<span id="LC10" class="line"></span>
+<span id="LC11" class="line">	<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.min.css"</span> <span class="nt">/&gt;</span></span>
+<span id="LC12" class="line">	<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css"</span> <span class="nt">/&gt;</span></span>
+<span id="LC13" class="line">	<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"</span> <span class="nt">/&gt;</span></span>
+<span id="LC14" class="line"><span class="nt">&lt;/head&gt;</span></span>
+<span id="LC15" class="line"></span>
+<span id="LC16" class="line"><span class="nt">&lt;body&gt;</span></span>
+<span id="LC17" class="line">	<span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-light bg-faded"</span><span class="nt">&gt;</span></span>
+<span id="LC18" class="line">		<span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"navbar-toggler hidden-lg-up"</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">data-toggle=</span><span class="s">"collapse"</span> <span class="na">data-target=</span><span class="s">"#navbarResponsive"</span> <span class="na">aria-controls=</span><span class="s">"navbarResponsive"</span> <span class="na">aria-expanded=</span><span class="s">"false"</span> <span class="na">aria-label=</span><span class="s">"Toggle navigation"</span><span class="nt">&gt;&lt;/button&gt;</span></span>
+<span id="LC19" class="line">		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"collapse navbar-toggleable-md"</span> <span class="na">id=</span><span class="s">"navbarResponsive"</span><span class="nt">&gt;</span></span>
+<span id="LC20" class="line">			<span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"index.html"</span><span class="nt">&gt;</span>Studierent<span class="nt">&lt;/a&gt;</span></span>
+<span id="LC21" class="line">			<span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"nav navbar-nav"</span><span class="nt">&gt;</span></span>
+<span id="LC22" class="line">				<span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item active"</span><span class="nt">&gt;</span></span>
+<span id="LC23" class="line">					<span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"index.html"</span><span class="nt">&gt;</span>Home <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"sr-only"</span><span class="nt">&gt;</span>(current)<span class="nt">&lt;/span&gt;&lt;/a&gt;</span></span>
+<span id="LC24" class="line">				<span class="nt">&lt;/li&gt;</span></span>
+<span id="LC25" class="line">				<span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;</span></span>
+<span id="LC26" class="line">					<span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"login.html"</span><span class="nt">&gt;</span>Login<span class="nt">&lt;/a&gt;</span></span>
+<span id="LC27" class="line">				<span class="nt">&lt;/li&gt;</span></span>
+<span id="LC28" class="line">				<span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;</span></span>
+<span id="LC29" class="line">					<span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"signup.com"</span><span class="nt">&gt;</span>Register<span class="nt">&lt;/a&gt;</span></span>
+<span id="LC30" class="line">				<span class="nt">&lt;/li&gt;</span></span>
+<span id="LC31" class="line">				<span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item dropdown"</span><span class="nt">&gt;</span></span>
+<span id="LC32" class="line">					<span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link dropdown-toggle"</span> <span class="na">href=</span><span class="s">"http://example.com"</span> <span class="na">id=</span><span class="s">"responsiveNavbarDropdown"</span> <span class="na">data-toggle=</span><span class="s">"dropdown"</span> <span class="na">aria-haspopup=</span><span class="s">"true"</span> <span class="na">aria-expanded=</span><span class="s">"false"</span><span class="nt">&gt;</span>My Account<span class="nt">&lt;/a&gt;</span></span>
+<span id="LC33" class="line">					<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"dropdown-menu"</span> <span class="na">aria-labelledby=</span><span class="s">"responsiveNavbarDropdown"</span><span class="nt">&gt;</span></span>
+<span id="LC34" class="line">						<span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"dropdown-item"</span> <span class="na">href=</span><span class="s">"myaccount.html"</span><span class="nt">&gt;</span>Dashboard<span class="nt">&lt;/a&gt;</span></span>
+<span id="LC35" class="line">						<span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"dropdown-item"</span> <span class="na">href=</span><span class="s">"user-profile.html"</span><span class="nt">&gt;</span>My Profile<span class="nt">&lt;/a&gt;</span></span>
+<span id="LC36" class="line">						<span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"dropdown-item"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Logout<span class="nt">&lt;/a&gt;</span></span>
+<span id="LC37" class="line">					<span class="nt">&lt;/div&gt;</span></span>
+<span id="LC38" class="line">				<span class="nt">&lt;/li&gt;</span></span>
+<span id="LC39" class="line">			<span class="nt">&lt;/ul&gt;</span></span>
+<span id="LC40" class="line">			<span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"form-inline float-lg-right"</span><span class="nt">&gt;</span></span>
+<span id="LC41" class="line">				<span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Search"</span><span class="nt">&gt;</span></span>
+<span id="LC42" class="line">				<span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn btn-outline-success"</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Search<span class="nt">&lt;/button&gt;</span></span>
+<span id="LC43" class="line">			<span class="nt">&lt;/form&gt;</span></span>
+<span id="LC44" class="line">		<span class="nt">&lt;/div&gt;</span></span>
+<span id="LC45" class="line">	<span class="nt">&lt;/nav&gt;</span></span>
+<span id="LC46" class="line"></span>
+<span id="LC47" class="line">	<span class="c">&lt;!-- START YOUR CODE FROM HERE --&gt;</span></span>
+<span id="LC48" class="line"></span>
+<span id="LC49" class="line"></span>
+<span id="LC50" class="line"></span>
+<span id="LC51" class="line"></span>
+<span id="LC52" class="line"></span>
+<span id="LC53" class="line"></span>
+<span id="LC54" class="line"></span>
+<span id="LC55" class="line">	<span class="c">&lt;!-- END --&gt;</span></span>
+<span id="LC56" class="line"></span>
+<span id="LC57" class="line">	<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span></span>
+<span id="LC58" class="line">	<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span></span>
+<span id="LC59" class="line">	<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span></span>
+<span id="LC60" class="line"><span class="nt">&lt;/body&gt;</span></span>
+<span id="LC61" class="line"></span>
+<span id="LC62" class="line"><span class="nt">&lt;/html&gt;</span></span></code></pre>
+</div>
+</div>
+
+
+</article>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+</body>
+</html>
+
