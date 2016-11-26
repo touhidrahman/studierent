@@ -113,7 +113,7 @@
 }
 
 #login-modal input[type=text], input[type=password] {
-	margin-top: 10px;
+
 }
 
 #div-login-msg,
@@ -296,15 +296,23 @@
                     <!-- Begining of Login Form -->
                     <form id="login-form">
 		                <div class="modal-body">
-				    		<div id="div-login-msg">
-                                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-                                <span id="text-login-msg">Please enter your username and password</span>
+				    		
+				    		<div class="form-group">
+                    
+					<label for="login_username" class="col-form-label">Email Address:</label>
+				    <input id="login_username" class="form-control" type="text" placeholder="Email address" required>
+				    		
+							</div>
+							
+							    		<div class="form-group">
+                    
+					<label for="login_password" class="col-form-label">Password:</label>
+				
+							<input id="login_password" class="form-control" type="password" placeholder="Password" required>
                             </div>
-				    		<input id="login_username" class="form-control" type="text" placeholder="Username" required>
-				    		<input id="login_password" class="form-control" type="password" placeholder="Password" required>
-                            <div class="checkbox">
+							<div class="checkbox">
                                 <label>
-                                    <input type="checkbox"> Remember me
+                                    <input type="checkbox"> Keep me signed in
                                 </label>
                             </div>
         		    	</div>
@@ -313,8 +321,8 @@
                                 <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
                             </div>
 				    	    <div>
-                                <button id="login_lost_btn" type="button" class="btn btn-link">Lost Password?</button>
-                                <a href="signup.html" class="btn btn-link">Register</a>
+                                <button id="login_lost_btn" type="button" class="btn btn-link">Forgot your Password?</button>
+                                <a href="signup.html" class="btn btn-link">New User?</a>
                             </div>
 				        </div>
                     </form>
