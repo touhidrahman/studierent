@@ -6,54 +6,55 @@
                 <h4 class="card-title">Filters</h4>
                 <p class="card-text">
 
-                    <form>
+                    <?= $this->Form->create(NULL, ['type' => 'get']); ?>
+
                         <fieldset class="form-group">
                             <label >Street or Zipcode</label>
-                            <input type="email" class="form-control"  placeholder="Marktstrasse or 36037">
+                            <input type="text" class="form-control" name="address" placeholder="Marktstrasse or 36037">
                         </fieldset>
 
                         <label for="priceRange">Type</label>
                         <div class="checkbox">
-                            <label style="display:block"><input type="checkbox" checked> Flatshare</label>
-                            <label style="display:block"><input type="checkbox" checked> Flat</label>
-                            <label style="display:block"><input type="checkbox" checked> Student Residence</label>
-                            <label style="display:block"><input type="checkbox" checked> House</label>
+                            <label style="display:block"><input type="checkbox" value="1" name="flatshare" checked> Flatshare</label>
+                            <label style="display:block"><input type="checkbox" value="1" name="flat" checked> Flat</label>
+                            <label style="display:block"><input type="checkbox" value="1" name="stdResidence" checked> Student Residence</label>
+                            <label style="display:block"><input type="checkbox" value="1" name="house" checked> House</label>
                         </div>
                         <hr>
 
                         <div class="row">
                             <fieldset class="form-group col-sm-6">
                                 <label for="">Min Rent</label>
-                                <input type="text" class="form-control" id="" placeholder="EUR">
+                                <input type="text" class="form-control" id="" name="min" placeholder="EUR">
                             </fieldset>
 
                             <fieldset class="form-group col-sm-6">
                                 <label for="">Max Rent</label>
-                                <input type="text" class="form-control" id="" placeholder="EUR">
+                                <input type="text" class="form-control" id="" name="max" placeholder="EUR">
                             </fieldset>
                         </div>
 
                         <fieldset class="form-group">
                             <label for="" style="display:block" data-toggle="tooltip" data-placement="right" title="A score ranging 0-100 given by Studierent website to help you find the best match!">Studierent Score <i class="fa fa-question"></i></label>
-                            <select class="form-control" id="">
+                            <select class="form-control" id="" name="score">
                               <option value="0" checked>Select</option>
-                              <option value="0">90+</option>
-                              <option value="0">80+</option>
-                              <option value="0">70+</option>
-                              <option value="0">60+</option>
-                              <option value="0">50+</option>
+                              <option value="90">90+</option>
+                              <option value="80">80+</option>
+                              <option value="70">70+</option>
+                              <option value="60">60+</option>
+                              <option value="50">50+</option>
                               <option value="0">0+</option>
                           </select>
                         </fieldset>
 
                         <div class="radio">
                             <label for="">Distance from University</label>
-                            <label style="display:block;"><input type="radio" name="dist" id="dist" value="option1"> 0 - 1 km / 5 - 10 min walking</label>
-                            <label style="display:block;"><input type="radio" name="dist" id="dist" value="option1"> 2 - 5 km / 10 - 30 min walking</label>
-                            <label style="display:block;"><input type="radio" name="dist" id="dist" value="option1"> 5+ km / 30+ min walking</label>
+                            <label style="display:block;"><input type="radio" name="dist" id="dist" value="1"> 0 - 1 km / 5 - 10 min walking</label>
+                            <label style="display:block;"><input type="radio" name="dist" id="dist" value="5"> 2 - 5 km / 10 - 30 min walking</label>
+                            <label style="display:block;"><input type="radio" name="dist" id="dist" value="100"> 5+ km / 30+ min walking</label>
                         </div>
                         <div class="checkbox">
-                            <label style="display:block"><input type="checkbox"> Direct Bus to University</label>
+                            <label style="display:block"><input name="directBus" type="checkbox" value="1"> Direct Bus to University</label>
                         </div>
 
                         <div id="accordion" role="tablist" aria-multiselectable="true">
@@ -73,11 +74,11 @@
                                             </fieldset>
 
                                             <fieldset class="form-group col-sm-6">
-                                                <input type="text" class="form-control" id="fromDt" placeholder="yyyymmdd">
+                                                <input type="text" name="avalFrom" class="form-control" id="fromDt" placeholder="yyyymmdd">
                                             </fieldset>
 
                                             <fieldset class="form-group col-sm-6">
-                                                <input type="text" class="form-control" id="toDt" placeholder="yyyymmdd">
+                                                <input type="text" name="avalTo" class="form-control" id="toDt" placeholder="yyyymmdd">
                                             </fieldset>
                                         </div>
                                         <!-- Available fields end -->
@@ -86,12 +87,12 @@
                                         <div class="row">
                                             <fieldset class="form-group col-sm-6">
                                                 <label for="">Room Size</label>
-                                                <input type="text" class="form-control" id="" placeholder="">
+                                                <input type="text" name="rSize" class="form-control" id="" placeholder="">
                                             </fieldset>
 
                                             <fieldset class="form-group col-sm-6">
                                                 <label for="">Flat Size</label>
-                                                <input type="text" class="form-control" id="" placeholder="">
+                                                <input type="text" name="fSize" class="form-control" id="" placeholder="">
                                             </fieldset>
                                         </div>
                                         <!-- size fields end -->
@@ -99,18 +100,18 @@
                                         <!-- Amenities -->
                                         <label for="">Amenities</label>
                                         <div class="checkbox">
-                                            <label style="display:block"><input type="checkbox"> Electricity Bill Included</label>
-                                            <label style="display:block"><input type="checkbox"> Cable TV</label>
-                                            <label style="display:block"><input type="checkbox"> Internet</label>
-                                            <label style="display:block"><input type="checkbox"> Washing Machine</label>
-                                            <label style="display:block"><input type="checkbox"> Fire Alerm</label>
-                                            <label style="display:block"><input type="checkbox"> Heating</label>
-                                            <label style="display:block"><input type="checkbox"> Parking</label>
-                                            <label style="display:block"><input type="checkbox"> Bike Parking</label>
-                                            <label style="display:block"><input type="checkbox"> Garden</label>
-                                            <label style="display:block"><input type="checkbox"> Balcony</label>
-                                            <label style="display:block"><input type="checkbox"> Smoking</label>
-                                            <label style="display:block"><input type="checkbox"> Pets</label>
+                                            <label style="display:block"><input type="checkbox" name="eBillIncl" value="1"> Electricity Bill Included</label>
+                                            <label style="display:block"><input type="checkbox" name="internet" value="1"> Internet</label>
+                                            <label style="display:block"><input type="checkbox" name="cableTv" value="1"> Cable TV</label>
+                                            <label style="display:block"><input type="checkbox" name="wMachine" value="1"> Washing Machine</label>
+                                            <label style="display:block"><input type="checkbox" name="fireAlarm" value="1"> Fire Alerm</label>
+                                            <label style="display:block"><input type="checkbox" name="heating" value="1"> Heating</label>
+                                            <label style="display:block"><input type="checkbox" name="parking" value="1"> Parking</label>
+                                            <label style="display:block"><input type="checkbox" name="bikeParking" value="1"> Bike Parking</label>
+                                            <label style="display:block"><input type="checkbox" name="garden" value="1"> Garden</label>
+                                            <label style="display:block"><input type="checkbox" name="balcony" value="1"> Balcony</label>
+                                            <label style="display:block"><input type="checkbox" name="smoking" value="1"> Smoking Allowed</label>
+                                            <label style="display:block"><input type="checkbox" name="pets" value="1"> Pets Allowed</label>
                                         </div>
                                         <!-- Amenities end -->
                                     </div>
@@ -126,29 +127,29 @@
                                 <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
                                     <div class="card-block">
                                         <div class="checkbox">
-                                            <label style="display:block"><input type="checkbox">
+                                            <label style="display:block"><input name="rating" value="5" type="checkbox">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                             </label>
-                                            <label style="display:block"><input type="checkbox">
+                                            <label style="display:block"><input name="rating" value="4" type="checkbox">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                             </label>
-                                            <label style="display:block"><input type="checkbox">
+                                            <label style="display:block"><input name="rating" value="3" type="checkbox">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                             </label>
-                                            <label style="display:block"><input type="checkbox">
+                                            <label style="display:block"><input name="rating" value="2" type="checkbox">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                             </label>
-                                            <label style="display:block"><input type="checkbox">
+                                            <label style="display:block"><input name="rating" value="1" type="checkbox">
                                                 <i class="fa fa-star"></i>
                                             </label>
                                         </div>
@@ -165,11 +166,11 @@
                                 <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
                                     <div class="card-block">
                                         <div class="radio">
-                                            <label style="display:block;"><input type="radio" name="sortby" id="sortby" value="option1"> Rent (High - Low)</label>
-                                            <label style="display:block;"><input type="radio" name="sortby" id="sortby" value="option1"> Rent (Low - High)</label>
-                                            <label style="display:block;"><input type="radio" name="sortby" id="sortby" value="option1"> Zipcode / Street</label>
-                                            <label style="display:block;"><input type="radio" name="sortby" id="sortby" value="option1"> Available From Date</label>
-                                            <label style="display:block;"><input type="radio" name="sortby" id="sortby" value="option1"> Available To Date</label>
+                                            <label style="display:block;"><input type="radio" name="sortby" id="sortby" value="rentUp"> Rent (High - Low)</label>
+                                            <label style="display:block;"><input type="radio" name="sortby" id="sortby" value="rentDown"> Rent (Low - High)</label>
+                                            <label style="display:block;"><input type="radio" name="sortby" id="sortby" value="zipStreet"> Zipcode / Street</label>
+                                            <label style="display:block;"><input type="radio" name="sortby" id="sortby" value="available_from_dt"> Available From Date</label>
+                                            <label style="display:block;"><input type="radio" name="sortby" id="sortby" value="available_to_dt"> Available To Date</label>
                                         </div>
                                     </div>
                                 </div>
@@ -177,7 +178,7 @@
                         </div>
 
                         <button type="submit" class="btn btn-success">Submit</button>
-                    </form>
+                    <?= $this->Form->end(); ?>
                 </p>
             </div>
         </div>
