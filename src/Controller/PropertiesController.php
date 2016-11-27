@@ -116,5 +116,11 @@ class PropertiesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    
+    /**
+     * Search method
+     *
+     */
+    public function search($param = NULL) {
+        
+    }
 }

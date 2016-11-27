@@ -8,11 +8,15 @@
 		<?= $this->fetch('title') ?>
 	</title>
 	<?= $this->Html->meta('icon') ?>
-
+	<!-- CSS Deps -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-
+	<?= $this->Html->css('style') ?>
+	<!-- JS Dependencies -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
 	<?= $this->fetch('meta') ?>
 	<?= $this->fetch('css') ?>
 	<?= $this->fetch('script') ?>
@@ -47,11 +51,14 @@
 			</form>
 		</div>
 	</nav>
-	<?= $this->Flash->render() ?>
 	<div class="container-fluid clearfix" style="margin-top:1em;">
+		<?= $this->Flash->render() ?>
 		<?= $this->fetch('content') ?>
 	</div>
+
+
 	<footer>
+
 	</footer>
 </body>
 </html>
