@@ -225,7 +225,7 @@ class Initial extends AbstractMigration
             ->addColumn('available_until', 'date', [
                 'default' => null,
                 'limit' => null,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('rent', 'integer', [
                 'default' => null,
@@ -245,12 +245,12 @@ class Initial extends AbstractMigration
             ->addColumn('dist_from_uni', 'integer', [
                 'default' => null,
                 'limit' => 3,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('time_dist_from_uni', 'string', [
                 'default' => null,
                 'limit' => 27,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('smoking', 'boolean', [
                 'default' => null,
@@ -320,7 +320,7 @@ class Initial extends AbstractMigration
             ->addColumn('view_times', 'integer', [
                 'default' => null,
                 'limit' => 10,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('created', 'datetime', [
                 'default' => null,
