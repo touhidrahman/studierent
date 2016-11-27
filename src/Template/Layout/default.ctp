@@ -47,7 +47,7 @@
 			</ul>
 			<form class="form-inline float-lg-right">
 				<input class="form-control" type="text" placeholder="Search">
-				<button class="btn btn-outline-success" type="submit">Search</button>
+				<button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
 			</form>
 		</div>
 	</nav>
@@ -58,7 +58,13 @@
 
 
 	<footer>
-
+		<div class="">
+			<p>&nbsp;</p>
+			<div class="card card-inverse" style="background-color: #666; border-radius: 0">
+			    <p class="card-text text-xs-center">&copy; This Site is a part of an Academic Project developed by students of Hochschule Fulda, MScGSD WS 2016, Group 4. All data are fake and only for academic purpose.</p>
+			  </div>
+			</div>
+		</div>
 	</footer>
 </body>
 </html>
