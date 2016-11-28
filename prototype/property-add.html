@@ -9,6 +9,7 @@
 	<link href="logo.png" rel="icon" type="image/png">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" />
+        <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
@@ -27,13 +28,16 @@
 					<div class="dropdown-menu" aria-labelledby="responsiveNavbarDropdown">
 						<a class="dropdown-item" href="myaccount.html">Dashboard</a>
 						<a class="dropdown-item" href="user-profile.html">My Profile</a>
-						<a class="dropdown-item" href="#">Logout</a>
+						<a class="dropdown-item" href="index.html">Logout</a>
 					</div>
 				</li>
 			</ul>
 			<form class="form-inline float-lg-right">
 				<input class="form-control" type="text" placeholder="Search">
-				<button class="btn btn-outline-success" type="submit"><img src="images/search_icon.png" alt="Search icon" id="button_search" width="20"></button>
+				<!--		<button class="btn btn-outline-success" type="submit"><img src="images/search_icon.png" alt="Search icon" id="button_search"></button>
+                          --> 
+                           <a href="search.html" class="btn btn-outline-success" role="button"><img src="images/search_icon.png" alt="Search icon" id="button_search"></a>
+                          
 			</form>
 		</div>
 	</nav>
@@ -351,7 +355,8 @@
 
 					</div>
 
-					<button type="submit" class="btn btn-primary">Submit</button>
+				<!--	<button type="submit" class="btn btn-primary">Submit</button>-->
+                                        <a href="property-add-images.html" class="btn btn-primary" role="button">Submit</a>
 					<a href="#" class="btn btn-primary" role="button">Cancel</a><br>
 				</form>
 
