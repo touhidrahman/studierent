@@ -15,10 +15,10 @@
 
                         <label for="priceRange">Type</label>
                         <div class="checkbox">
-                            <label style="display:block"><input type="checkbox" value="1" name="flatshare" checked> Flatshare</label>
-                            <label style="display:block"><input type="checkbox" value="1" name="flat" checked> Flat</label>
-                            <label style="display:block"><input type="checkbox" value="1" name="stdResidence" checked> Student Residence</label>
-                            <label style="display:block"><input type="checkbox" value="1" name="house" checked> House</label>
+                            <label style="display:block"><input type="radio" name="type" value="Flatshare" checked> Flatshare</label>
+                            <label style="display:block"><input type="radio" name="type" value="Flat"> Flat</label>
+                            <label style="display:block"><input type="radio" name="type" value="Student Residence"> Student Residence</label>
+                            <label style="display:block"><input type="radio" name="type" value="House"> House</label>
                         </div>
                         <hr>
 
@@ -49,7 +49,7 @@
 
                         <div class="radio">
                             <label for="">Distance from University</label>
-                            <label style="display:block;"><input type="radio" name="dist" id="dist" value="1"> 0 - 1 km / 5 - 10 min walking</label>
+                            <label style="display:block;"><input type="radio" name="dist" id="dist" value="2"> 0 - 2 km / 5 - 10 min walking</label>
                             <label style="display:block;"><input type="radio" name="dist" id="dist" value="5"> 2 - 5 km / 10 - 30 min walking</label>
                             <label style="display:block;"><input type="radio" name="dist" id="dist" value="100"> 5+ km / 30+ min walking</label>
                         </div>
@@ -188,13 +188,13 @@
     <!-- Results -->
     <div class="col-md-9 col-sm-8 col-xs-12">
 
-        <h1 class="display-4">133 Properties Found</h1>
-        <?php for ($i=0; $i < 4; $i++){ ?>
+        <h1 class="display-4"><?= $count ?> Properties Found</h1>
+        <?php foreach ($properties as $property){ ?>
         <!-- Single Property Ad Card -->
         <div class="card">
             <div class="card-block" style="padding-bottom: 0rem">
-                <h4 class="card-title">Nice Little Title of the Property Ad</h4>
-                <h6 class="card-subtitle text-muted">Some Street Name</h6>
+                <h4 class="card-title"><?= $property['title'] ?></h4>
+                <h6 class="card-subtitle text-muted"><?= $property['address'] ?></h6>
             </div>
             <div class="card-block">
                 <div class="row">
@@ -202,7 +202,7 @@
                         <?= $this->Html->image('property.jpg', ['alt' => 'Property image', 'class' => 'rounded-left img-fluid']); ?>
                     </div>
                     <div class="col-sm-6">
-                        <p class="card-text text-justify">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p class="card-text text-justify"><?= $property['description'] ?></p>
                         <div class="clearfix">
                             <div class="text-success float-xs-left">
                                 Studierent Score <i class="fa fa-bolt"></i> <label><strong>86</strong></label>
@@ -224,8 +224,11 @@
                         <?= $this->Html->link('<i class="fa fa-flag-o"></i>', '/report/add/', ['class' => 'card-link text-muted', 'escapeTitle' => false]) ?>
                     </div>
                     <div class="col-sm-3">
-                        <p class="text-xs-center text-muted">EUR</p>
-                        <h4 class="display-4 text-xs-center text-warning font-weight-bold">250</h4>
+                        <p class="text-xs-center text-muted" style="margin-bottom:0">EUR</p>
+                        <h4 class="display-4 text-xs-center text-warning font-weight-bold"><?= $property['rent'] ?></h4>
+                        <table class="table table-sm table-fluid text-xs-center text-muted">
+                            <tr style="font-size:.8rem"><td>Room:</td><td><?= $property['room_size'] ?> M<sup>2</sup></td><td>Total:</td><td><?= $property['total_size'] ?> M<sup>2</sup></td></tr>
+                        </table>
                     </div>
                 </div>
             </div>
