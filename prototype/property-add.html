@@ -6,22 +6,22 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>Studierent</title>
-        <link href = "logo.png" rel="icon" type="image/png">
+	<link href="logo.png" rel="icon" type="image/png">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" />
 </head>
-  
+
 <body>
-      <!--Header Start-->
+	<!--Header Start-->
 	<nav class="navbar navbar-light bg-faded">
 		<button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"></button>
 		<div class="collapse navbar-toggleable-md" id="navbarResponsive">
-                    <a class="navbar-brand" href="index.html"><img src="images/logo_studierent.png"></a>
+			<a class="navbar-brand" href="index.html"><img src="images/logo_studierent.png"></a>
 			<ul class="nav navbar-nav">
 				<li class="nav-item active">
 					<a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
 				</li>
-				
+
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="http://example.com" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Account</a>
 					<div class="dropdown-menu" aria-labelledby="responsiveNavbarDropdown">
@@ -37,8 +37,8 @@
 			</form>
 		</div>
 	</nav>
- <!--Header End-->
-	
+	<!--Header End-->
+
 	<div class="container-fluid" style="margin-top:1em;">
 		<div class="row">
 			<!-- explore bar -->
@@ -48,16 +48,16 @@
 						<h4 class="card-title">Explore</h4>
 						<p class="card-text">
 							<form>
-                                                            <hr><br>
-					                        <div class="btn-group-vertical">
-                                                                    <a href="property-add.html" class="btn btn-primary" role="button">Add Property</a><br>
-                                                                    <a href="#" class="btn btn-primary" role="button">My Properties</a><br>
-                                                                   <a href="property-favorites" class="btn btn-primary" role="button">My Favourites</a><br>
-                                                                    <a href="user-profile.html" class="btn btn-primary" role="button">My Profile</a><br>
-                                                                   <a href="#" class="btn btn-primary" role="button">Logout</a>
-</div>
+								<hr><br>
+								<div class="btn-group-vertical">
+									<a href="property-add.html" class="btn btn-primary" role="button">Add Property</a><br>
+									<a href="#" class="btn btn-primary" role="button">My Properties</a><br>
+									<a href="property-favorites" class="btn btn-primary" role="button">My Favourites</a><br>
+									<a href="user-profile.html" class="btn btn-primary" role="button">My Profile</a><br>
+									<a href="#" class="btn btn-primary" role="button">Logout</a>
+								</div>
 							</form>
-						
+
 					</div>
 				</div>
 			</div>
@@ -68,288 +68,295 @@
 
 				<h1 class="display-4">Add Property</h1>
 
-                            <form>
-                                
-<div class="card card-block">
-<h4 class="card-title">For the add</h4>
-					
-<!-- class="row" -->
-  <div class="form-group row">
-      
-      <fieldset class="form-group">
-      <label class="col-sm-2 form-control-label">Property type</label>
-      <select class="custom-select">
-  <option>Flat</option>
-  <option>Apartment</option>
-  <option>Room</option>
-</select> 
-       </fieldset>
-      
-      <fieldset class="form-group">
-      <label class="col-sm-2 form-control-label">Available from</label>
-      
-   <div class="col-xs-4">
-    <input class="form-control" type="datetime-local"  >
-  </div>
-      
-      </fieldset>
-  
-<fieldset class="form-group">
-      <label class="col-sm-2 form-control-label">Available to</label>
-   
-    <div class="col-xs-4">
-    <input class="form-control" type="datetime-local" >
-  </div>
-      
-       </fieldset>
+				<form>
 
-<fieldset class="form-group">
-      <label class="col-sm-2 form-control-label">Location</label>
+					<div class="card card-block">
+						<h4 class="card-title">For the add</h4>
 
-      <div class="col-sm-4"> <!-- class="col-sm-10" -->
-      <input type="text" class="form-control" placeholder="Add location">
-    </div>
-      
-       </fieldset>
+						<!-- class="row" -->
+						<div class="form-group row">
 
-<fieldset class="form-group">
-      <label class="col-sm-2 form-control-label">Street & house number</label>
-     
-      <div class="col-sm-4"> <!-- class="col-sm-10" -->
-      <input type="text" class="form-control" placeholder="">
-    </div>
-      
-       </fieldset>
+							<fieldset class="form-group">
+								<label class="col-sm-2 form-control-label">Property type</label>
+								<select class="custom-select">
+								  <option>Flat</option>
+								  <option>Apartment</option>
+								  <option>Room</option>
+								</select>
+							</fieldset>
 
-<fieldset class="form-group">
-      <label class="col-sm-2 form-control-label">Postal code/ zip code</label>
- 
-      <div class="col-sm-4"> <!-- class="col-sm-10" -->
-      <input type="text" class="form-control" placeholder="">
-    </div>
-      
-       </fieldset>
-      
-  </div>
- 
-</div>
-<div class="card card-block">
-  <h4 class="card-title">Details about property</h4>
-					
-<!-- class="row" -->
-  <div class="form-group row">
-      
-      <fieldset class="form-group">
-      <label class="col-sm-2 form-control-label">Room size</label>
-    
-       <div class="col-sm-4"> <!-- class="col-sm-10" -->
-      <input type="text" class="form-control" placeholder="in m2">
-    </div>
-      
-       </fieldset>
-      
-      <fieldset class="form-group">
-      <label class="col-sm-2 form-control-label">Total flat size</label>
-  
-      <div class="col-sm-4"> <!-- class="col-sm-10" -->
-      <input type="text" class="form-control" placeholder="in m2">
-    </div>
-      
-      </fieldset>
-  
-<fieldset class="form-group">
-      <label class="col-sm-2 form-control-label">Handicap friendly</label>
-      
-      <label class="custom-control custom-radio">
+							<fieldset class="form-group">
+								<label class="col-sm-2 form-control-label">Available from</label>
+
+								<div class="col-xs-4">
+									<input class="form-control" type="datetime-local">
+								</div>
+
+							</fieldset>
+
+							<fieldset class="form-group">
+								<label class="col-sm-2 form-control-label">Available to</label>
+
+								<div class="col-xs-4">
+									<input class="form-control" type="datetime-local">
+								</div>
+
+							</fieldset>
+
+							<fieldset class="form-group">
+								<label class="col-sm-2 form-control-label">Location</label>
+
+								<div class="col-sm-4">
+									<!-- class="col-sm-10" -->
+									<input type="text" class="form-control" placeholder="Add location">
+								</div>
+
+							</fieldset>
+
+							<fieldset class="form-group">
+								<label class="col-sm-2 form-control-label">Street & house number</label>
+
+								<div class="col-sm-4">
+									<!-- class="col-sm-10" -->
+									<input type="text" class="form-control" placeholder="">
+								</div>
+
+							</fieldset>
+
+							<fieldset class="form-group">
+								<label class="col-sm-2 form-control-label">Postal code/ zip code</label>
+
+								<div class="col-sm-4">
+									<!-- class="col-sm-10" -->
+									<input type="text" class="form-control" placeholder="">
+								</div>
+
+							</fieldset>
+
+						</div>
+
+					</div>
+					<div class="card card-block">
+						<h4 class="card-title">Details about property</h4>
+
+						<!-- class="row" -->
+						<div class="form-group row">
+
+							<fieldset class="form-group">
+								<label class="col-sm-2 form-control-label">Room size</label>
+
+								<div class="col-sm-4">
+									<!-- class="col-sm-10" -->
+									<input type="text" class="form-control" placeholder="in m2">
+								</div>
+
+							</fieldset>
+
+							<fieldset class="form-group">
+								<label class="col-sm-2 form-control-label">Total flat size</label>
+
+								<div class="col-sm-4">
+									<!-- class="col-sm-10" -->
+									<input type="text" class="form-control" placeholder="in m2">
+								</div>
+
+							</fieldset>
+
+							<fieldset class="form-group">
+								<label class="col-sm-2 form-control-label">Handicap friendly</label>
+
+								<label class="custom-control custom-radio">
 <input id="radio1" name="radio" type="radio" class="custom-control-input">
 <span class="custom-control-indicator"></span>
 <span class="custom-control-description">Yes</span>
 </label>
-<label class="custom-control custom-radio">
+								<label class="custom-control custom-radio">
 <input id="radio2" name="radio" type="radio" class="custom-control-input">
 <span class="custom-control-indicator"></span>
 <span class="custom-control-description">No</span>
 </label>
-      
-       </fieldset>
 
-<fieldset class="form-group">
-      <label class="col-sm-2 form-control-label">Parking</label>
-      
-    <label class="custom-control custom-radio">
+							</fieldset>
+
+							<fieldset class="form-group">
+								<label class="col-sm-2 form-control-label">Parking</label>
+
+								<label class="custom-control custom-radio">
 <input id="radio1" name="radio" type="radio" class="custom-control-input">
 <span class="custom-control-indicator"></span>
 <span class="custom-control-description">Yes</span>
 </label>
-<label class="custom-control custom-radio">
+								<label class="custom-control custom-radio">
 <input id="radio2" name="radio" type="radio" class="custom-control-input">
 <span class="custom-control-indicator"></span>
 <span class="custom-control-description">No</span>
 </label>
-      
-       </fieldset>
 
-<fieldset class="form-group">
-      <label class="col-sm-2 form-control-label">Smoking allowed</label>
-    
-       <label class="custom-control custom-radio">
+							</fieldset>
+
+							<fieldset class="form-group">
+								<label class="col-sm-2 form-control-label">Smoking allowed</label>
+
+								<label class="custom-control custom-radio">
 <input id="radio1" name="radio" type="radio" class="custom-control-input">
 <span class="custom-control-indicator"></span>
 <span class="custom-control-description">Yes</span>
 </label>
-<label class="custom-control custom-radio">
+								<label class="custom-control custom-radio">
 <input id="radio2" name="radio" type="radio" class="custom-control-input">
 <span class="custom-control-indicator"></span>
 <span class="custom-control-description">No</span>
 </label>
-      
-       </fieldset>
 
-<fieldset class="form-group">
-      <label class="col-sm-2 form-control-label">Pets allowed</label>
-    
-       <label class="custom-control custom-radio">
+							</fieldset>
+
+							<fieldset class="form-group">
+								<label class="col-sm-2 form-control-label">Pets allowed</label>
+
+								<label class="custom-control custom-radio">
 <input id="radio1" name="radio" type="radio" class="custom-control-input">
 <span class="custom-control-indicator"></span>
 <span class="custom-control-description">Yes</span>
 </label>
-<label class="custom-control custom-radio">
+								<label class="custom-control custom-radio">
 <input id="radio2" name="radio" type="radio" class="custom-control-input">
 <span class="custom-control-indicator"></span>
 <span class="custom-control-description">No</span>
 </label>
-      
-       </fieldset>
-      
-   
-  </div>
- 
-</div>
-<div class="card card-block">
-  <h4 class="card-title">Amenities</h4>
-					
-<!-- class="row" -->
-  <div class="form-group row">
-      
-      <fieldset class="form-group">
-   <label class="custom-control custom-checkbox ">
+
+							</fieldset>
+
+
+						</div>
+
+					</div>
+					<div class="card card-block">
+						<h4 class="card-title">Amenities</h4>
+
+						<!-- class="row" -->
+						<div class="form-group row">
+
+							<fieldset class="form-group">
+								<label class="custom-control custom-checkbox ">
 <input type="checkbox" class="custom-control-input">
 <span class="custom-control-indicator"></span>
 <span class="custom-control-description">Fire Alarm</span>
 </label>
-          
-       </fieldset>
-      
-      <fieldset class="form-group">
-   <label class="custom-control custom-checkbox">
+
+							</fieldset>
+
+							<fieldset class="form-group">
+								<label class="custom-control custom-checkbox">
 <input type="checkbox" class="custom-control-input">
 <span class="custom-control-indicator"></span>
 <span class="custom-control-description">Washing machine</span>
 </label>
-      </fieldset>
-  
-<fieldset class="form-group">
-    <label class="custom-control custom-checkbox">
+							</fieldset>
+
+							<fieldset class="form-group">
+								<label class="custom-control custom-checkbox">
 <input type="checkbox" class="custom-control-input">
 <span class="custom-control-indicator"></span>
 <span class="custom-control-description">Parking</span>
 </label>
-       </fieldset>
+							</fieldset>
 
-<fieldset class="form-group">
-    
-  <label class="custom-control custom-checkbox">
+							<fieldset class="form-group">
+
+								<label class="custom-control custom-checkbox">
 <input type="checkbox" class="custom-control-input">
 <span class="custom-control-indicator"></span>
 <span class="custom-control-description">Internet</span>
 </label>
-    
-       </fieldset>
 
-<fieldset class="form-group">
- 
-     <label class="custom-control custom-checkbox">
+							</fieldset>
+
+							<fieldset class="form-group">
+
+								<label class="custom-control custom-checkbox">
 <input type="checkbox" class="custom-control-input">
 <span class="custom-control-indicator"></span>
 <span class="custom-control-description">Garden</span>
 </label>
-    
-       </fieldset>
 
-<fieldset class="form-group">
-      
-     <label class="custom-control custom-checkbox">
+							</fieldset>
+
+							<fieldset class="form-group">
+
+								<label class="custom-control custom-checkbox">
 <input type="checkbox" class="custom-control-input">
 <span class="custom-control-indicator"></span>
 <span class="custom-control-description">Balcony</span>
 </label>
-     
-       </fieldset>
-   
-      <fieldset class="form-group">
-      
-     <label class="custom-control custom-checkbox">
+
+							</fieldset>
+
+							<fieldset class="form-group">
+
+								<label class="custom-control custom-checkbox">
 <input type="checkbox" class="custom-control-input">
 <span class="custom-control-indicator"></span>
 <span class="custom-control-description">Cable TV</span>
 </label>
-     
-       </fieldset>
-  </div>
- 
-				</div>
-                                <div class="card card-block">
-					<h4 class="card-title">Costs</h4>
-					
-<!-- class="row" -->
-  <div class="form-group row">
-      
-  
-<fieldset class="form-group">
-      <label class="col-sm-2 form-control-label">Rent per month</label>
-    
-       <div class="col-sm-4"> <!-- class="col-sm-10" -->
-      <input type="text" class="form-control" placeholder="in Euro">
-    </div>
-      
-       </fieldset>
 
-<fieldset class="form-group">
-    
-     <label class="col-sm-2 form-control-label">Electricity included</label>
-    
-       <label class="custom-control custom-radio">
+							</fieldset>
+						</div>
+
+					</div>
+					<div class="card card-block">
+						<h4 class="card-title">Costs</h4>
+
+						<!-- class="row" -->
+						<div class="form-group row">
+
+
+							<fieldset class="form-group">
+								<label class="col-sm-2 form-control-label">Rent per month</label>
+
+								<div class="col-sm-4">
+									<!-- class="col-sm-10" -->
+									<input type="text" class="form-control" placeholder="in Euro">
+								</div>
+
+							</fieldset>
+
+							<fieldset class="form-group">
+
+								<label class="col-sm-2 form-control-label">Electricity included</label>
+
+								<label class="custom-control custom-radio">
 <input id="radio1" name="radio" type="radio" class="custom-control-input">
 <span class="custom-control-indicator"></span>
 <span class="custom-control-description">Yes</span>
 </label>
-<label class="custom-control custom-radio">
+								<label class="custom-control custom-radio">
 <input id="radio2" name="radio" type="radio" class="custom-control-input">
 <span class="custom-control-indicator"></span>
 <span class="custom-control-description">No</span>
 </label>
-     
-       </fieldset>
 
-<fieldset class="form-group">
-      <label class="col-sm-2 form-control-label">Utility cost</label>
-  
-       <div class="col-sm-4"> <!-- class="col-sm-10" -->
-      <input type="text" class="form-control" placeholder="in Euro">
-    </div>
-      
-       </fieldset>
+							</fieldset>
 
-  </div>
- 
-				</div>
-                                
-  <button type="submit" class="btn btn-primary">Submit</button> 
-  <a href="#" class="btn btn-primary" role="button">Cancel</a><br>
-                                </form>
+							<fieldset class="form-group">
+								<label class="col-sm-2 form-control-label">Utility cost</label>
+
+								<div class="col-sm-4">
+									<!-- class="col-sm-10" -->
+									<input type="text" class="form-control" placeholder="in Euro">
+								</div>
+
+							</fieldset>
+
+						</div>
+
+					</div>
+
+					<button type="submit" class="btn btn-primary">Submit</button>
+					<a href="#" class="btn btn-primary" role="button">Cancel</a><br>
+				</form>
 
 			</div>
-                        
+
 			<!-- end results -->
 
 			<!-- pagination -->
@@ -363,7 +370,7 @@
 
 
 
-	
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>

@@ -4,3 +4,4 @@
 /logs/*
 .directory
 /nbproject/private/
+/nbproject/*
