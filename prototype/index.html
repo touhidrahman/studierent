@@ -10,360 +10,377 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-  <link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	
-	<script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script>
 	$(function() {
-    
-    var $formLogin = $('#login-form');
-    var $formLost = $('#lost-form');
-    var $formRegister = $('#register-form');
-    var $divForms = $('#div-forms');
-    var $modalAnimateTime = 300;
-    var $msgAnimateTime = 150;
-    var $msgShowTime = 2000;
 
-    $("form").submit(function () {
-        switch(this.id) {
-            case "login-form":
-                var $lg_username=$('#login_username').val();
-                var $lg_password=$('#login_password').val();
-                if ($lg_username == "ERROR") {
-                    msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Login error");
-                } else {
-                    msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "success", "glyphicon-ok", "Login OK");
-                }
-                return false;
-                break;
-            case "lost-form":
-                var $ls_email=$('#lost_email').val();
-                if ($ls_email == "ERROR") {
-                    msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "error", "glyphicon-remove", "Send error");
-                } else {
-                    msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "success", "glyphicon-ok", "Send OK");
-                }
-                return false;
-                break;
-            case "register-form":
-                var $rg_username=$('#register_username').val();
-                var $rg_email=$('#register_email').val();
-                var $rg_password=$('#register_password').val();
-                if ($rg_username == "ERROR") {
-                    msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Register error");
-                } else {
-                    msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-ok", "Register OK");
-                }
-                return false;
-                break;
-            default:
-                return false;
-        }
-        return false;
-    });
-    
-    $('#login_register_btn').click( function () { modalAnimate($formLogin, $formRegister) });
-    $('#register_login_btn').click( function () { modalAnimate($formRegister, $formLogin); });
-    $('#login_lost_btn').click( function () { modalAnimate($formLogin, $formLost); });
-    $('#lost_login_btn').click( function () { modalAnimate($formLost, $formLogin); });
-    $('#lost_register_btn').click( function () { modalAnimate($formLost, $formRegister); });
-    $('#register_lost_btn').click( function () { modalAnimate($formRegister, $formLost); });
-    
-    function modalAnimate ($oldForm, $newForm) {
-        var $oldH = $oldForm.height();
-        var $newH = $newForm.height();
-        $divForms.css("height",$oldH);
-        $oldForm.fadeToggle($modalAnimateTime, function(){
-            $divForms.animate({height: $newH}, $modalAnimateTime, function(){
-                $newForm.fadeToggle($modalAnimateTime);
-            });
-        });
-    }
-    
-    function msgFade ($msgId, $msgText) {
-        $msgId.fadeOut($msgAnimateTime, function() {
-            $(this).text($msgText).fadeIn($msgAnimateTime);
-        });
-    }
-    
-    function msgChange($divTag, $iconTag, $textTag, $divClass, $iconClass, $msgText) {
-        var $msgOld = $divTag.text();
-        msgFade($textTag, $msgText);
-        $divTag.addClass($divClass);
-        $iconTag.removeClass("glyphicon-chevron-right");
-        $iconTag.addClass($iconClass + " " + $divClass);
-        setTimeout(function() {
-            msgFade($textTag, $msgOld);
-            $divTag.removeClass($divClass);
-            $iconTag.addClass("glyphicon-chevron-right");
-            $iconTag.removeClass($iconClass + " " + $divClass);
-  		}, $msgShowTime);
-    }
-});
-	</script>
-	
-	<style>
-@import url(http://fonts.googleapis.com/css?family=Roboto);
+		var $formLogin = $('#login-form');
+		var $formLost = $('#lost-form');
+		var $formRegister = $('#register-form');
+		var $divForms = $('#div-forms');
+		var $modalAnimateTime = 300;
+		var $msgAnimateTime = 150;
+		var $msgShowTime = 2000;
 
-* {
-    font-family: 'Roboto', sans-serif;
-}
+		$("form").submit(function() {
+			switch (this.id) {
+				case "login-form":
+					var $lg_username = $('#login_username').val();
+					var $lg_password = $('#login_password').val();
+					if ($lg_username == "ERROR") {
+						msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Login error");
+					} else {
+						msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "success", "glyphicon-ok", "Login OK");
+					}
+					return false;
+					break;
+				case "lost-form":
+					var $ls_email = $('#lost_email').val();
+					if ($ls_email == "ERROR") {
+						msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "error", "glyphicon-remove", "Send error");
+					} else {
+						msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "success", "glyphicon-ok", "Send OK");
+					}
+					return false;
+					break;
+				case "register-form":
+					var $rg_username = $('#register_username').val();
+					var $rg_email = $('#register_email').val();
+					var $rg_password = $('#register_password').val();
+					if ($rg_username == "ERROR") {
+						msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Register error");
+					} else {
+						msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-ok", "Register OK");
+					}
+					return false;
+					break;
+				default:
+					return false;
+			}
+			return false;
+		});
 
-#login-modal .modal-dialog {
-    width: 350px;
-}
+		$('#login_register_btn').click(function() {
+			modalAnimate($formLogin, $formRegister)
+		});
+		$('#register_login_btn').click(function() {
+			modalAnimate($formRegister, $formLogin);
+		});
+		$('#login_lost_btn').click(function() {
+			modalAnimate($formLogin, $formLost);
+		});
+		$('#lost_login_btn').click(function() {
+			modalAnimate($formLost, $formLogin);
+		});
+		$('#lost_register_btn').click(function() {
+			modalAnimate($formLost, $formRegister);
+		});
+		$('#register_lost_btn').click(function() {
+			modalAnimate($formRegister, $formLost);
+		});
 
-#login-modal input[type=text], input[type=password] {
+		function modalAnimate($oldForm, $newForm) {
+			var $oldH = $oldForm.height();
+			var $newH = $newForm.height();
+			$divForms.css("height", $oldH);
+			$oldForm.fadeToggle($modalAnimateTime, function() {
+				$divForms.animate({
+					height: $newH
+				}, $modalAnimateTime, function() {
+					$newForm.fadeToggle($modalAnimateTime);
+				});
+			});
+		}
 
-}
+		function msgFade($msgId, $msgText) {
+			$msgId.fadeOut($msgAnimateTime, function() {
+				$(this).text($msgText).fadeIn($msgAnimateTime);
+			});
+		}
 
-#div-login-msg,
-#div-lost-msg,
-#div-register-msg {
-    height: 30px;
-    line-height: 28px;
-    transition: all ease-in-out 500ms;
-}
+		function msgChange($divTag, $iconTag, $textTag, $divClass, $iconClass, $msgText) {
+			var $msgOld = $divTag.text();
+			msgFade($textTag, $msgText);
+			$divTag.addClass($divClass);
+			$iconTag.removeClass("glyphicon-chevron-right");
+			$iconTag.addClass($iconClass + " " + $divClass);
+			setTimeout(function() {
+				msgFade($textTag, $msgOld);
+				$divTag.removeClass($divClass);
+				$iconTag.addClass("glyphicon-chevron-right");
+				$iconTag.removeClass($iconClass + " " + $divClass);
+			}, $msgShowTime);
+		}
+	});
+</script>
 
-#div-login-msg.success,
-#div-lost-msg.success,
-#div-register-msg.success {
-    border: 1px solid #68c3a3;
-    background-color: #c8f7c5;
-}
+<style>
+	@import url(http://fonts.googleapis.com/css?family=Roboto);
+	* {
+		font-family: 'Roboto', sans-serif;
+	}
 
-#div-login-msg.error,
-#div-lost-msg.error,
-#div-register-msg.error {
-    border: 1px solid #eb575b;
-    background-color: #ffcad1;
-}
+	#login-modal .modal-dialog {
+		width: 350px;
+	}
 
-#icon-login-msg,
-#icon-lost-msg,
-#icon-register-msg {
-    width: 30px;
-    float: left;
-    line-height: 28px;
-    text-align: center;
-    background-color: #dadfe1;
-    margin-right: 5px;
-    transition: all ease-in-out 500ms;
-}
+	#login-modal input[type=text],
+	input[type=password] {}
 
-#icon-login-msg.success,
-#icon-lost-msg.success,
-#icon-register-msg.success {
-    background-color: #68c3a3 !important;
-}
+	#div-login-msg,
+	#div-lost-msg,
+	#div-register-msg {
+		height: 30px;
+		line-height: 28px;
+		transition: all ease-in-out 500ms;
+	}
 
-#icon-login-msg.error,
-#icon-lost-msg.error,
-#icon-register-msg.error {
-    background-color: #eb575b !important;
-}
+	#div-login-msg.success,
+	#div-lost-msg.success,
+	#div-register-msg.success {
+		border: 1px solid #68c3a3;
+		background-color: #c8f7c5;
+	}
 
-#img_logo {
-    max-height: 100px;
-    max-width: 100px;
-}
+	#div-login-msg.error,
+	#div-lost-msg.error,
+	#div-register-msg.error {
+		border: 1px solid #eb575b;
+		background-color: #ffcad1;
+	}
 
-/* #########################################
+	#icon-login-msg,
+	#icon-lost-msg,
+	#icon-register-msg {
+		width: 30px;
+		float: left;
+		line-height: 28px;
+		text-align: center;
+		background-color: #dadfe1;
+		margin-right: 5px;
+		transition: all ease-in-out 500ms;
+	}
+
+	#icon-login-msg.success,
+	#icon-lost-msg.success,
+	#icon-register-msg.success {
+		background-color: #68c3a3 !important;
+	}
+
+	#icon-login-msg.error,
+	#icon-lost-msg.error,
+	#icon-register-msg.error {
+		background-color: #eb575b !important;
+	}
+
+	#img_logo {
+		max-height: 100px;
+		max-width: 100px;
+	}
+	/* #########################################
    #    override the bootstrap configs     #
    ######################################### */
 
-.modal-backdrop.in {
-    filter: alpha(opacity=50);
-    opacity: .8;
-}
+	.modal-backdrop.in {
+		filter: alpha(opacity=50);
+		opacity: .8;
+	}
 
-.modal-content {
-    background-color: #ffffff;
-    border: 1px solid #bdc3c7;
-    border-radius: 0px;
-    outline: 0;
-}
+	.modal-content {
+		background-color: #ffffff;
+		border: 1px solid #bdc3c7;
+		border-radius: 0px;
+		outline: 0;
+	}
 
-.modal-header {
-    min-height: 16.43px;
-    padding: 15px 15px 15px 15px;
-    border-bottom: 0px;
-}
+	.modal-header {
+		min-height: 16.43px;
+		padding: 15px 15px 15px 15px;
+		border-bottom: 0px;
+	}
 
-.modal-body {
-    position: relative;
-    padding: 5px 15px 5px 15px;
-}
+	.modal-body {
+		position: relative;
+		padding: 5px 15px 5px 15px;
+	}
 
-.modal-footer {
-    padding: 15px 15px 15px 15px;
-    text-align: left;
-    border-top: 0px;
-}
+	.modal-footer {
+		padding: 15px 15px 15px 15px;
+		text-align: left;
+		border-top: 0px;
+	}
 
-.checkbox {
-    margin-bottom: 0px;
-	margin-top:10px;
-}
+	.checkbox {
+		margin-bottom: 0px;
+		margin-top: 10px;
+	}
 
-.btn {
-    border-radius: 0px;
-}
+	.btn {
+		border-radius: 0px;
+	}
 
-.btn:focus,
-.btn:active:focus,
-.btn.active:focus,
-.btn.focus,
-.btn:active.focus,
-.btn.active.focus {
-    outline: none;
-}
+	.btn:focus,
+	.btn:active:focus,
+	.btn.active:focus,
+	.btn.focus,
+	.btn:active.focus,
+	.btn.active.focus {
+		outline: none;
+	}
 
-.btn-lg, .btn-group-lg>.btn {
-    border-radius: 0px;
-}
+	.btn-lg,
+	.btn-group-lg>.btn {
+		border-radius: 0px;
+	}
 
-.btn-link {
-    padding: 5px 10px 0px 0px;
-    color: #95a5a6;
-}
+	.btn-link {
+		padding: 5px 10px 0px 0px;
+		color: #95a5a6;
+	}
 
-.btn-link:hover, .btn-link:focus {
-    color: #2c3e50;
-    text-decoration: none;
-}
+	.btn-link:hover,
+	.btn-link:focus {
+		color: #2c3e50;
+		text-decoration: none;
+	}
 
-.glyphicon {
-    top: 0px;
-}
+	.glyphicon {
+		top: 0px;
+	}
 
-.form-control {
-  border-radius: 0px;
-}
-
+	.form-control {
+		border-radius: 0px;
+	}
 </style>
 
 
-	
-	</head>
+
+</head>
 
 <body>
-    <!--Header Start-->
+	<!--Header Start-->
 	<nav class="navbar navbar-light bg-faded">
 		<button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"></button>
 		<div class="collapse navbar-toggleable-md" id="navbarResponsive">
-                    
-                    <form class="form-inline float-lg-right">
+
+			<form class="form-inline float-lg-right">
 				<input class="form-control" type="text" placeholder="Quick Search">
-				<button class="btn btn-outline-success" type="submit"><img src="images/search_icon.png" alt="Search icon" id="button_search"></button>
+                                
+		<!--		<button class="btn btn-outline-success" type="submit"><img src="images/search_icon.png" alt="Search icon" id="button_search"></button>
+                          --> 
+                           <a href="search.html" class="btn btn-outline-success" role="button"><img src="images/search_icon.png" alt="Search icon" id="button_search"></a>
+                          
 			</form>
-                    
+
 			<a class="navbar-brand" href="index.html"><img src="images/logo_studierent.png" alt="logo" class="img-fluid img-thumbnail"></a>
 			<ul class="nav navbar-nav">
-				
+
 				<li class="nav-item">
-					<a class="nav-link" role="button" data-toggle="modal" data-target="#login-modal" href="#" >Login</a>
+					<a class="nav-link" role="button" data-toggle="modal" data-target="#login-modal" href="#">Login</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="signup.html">Register</a>
 				</li>
-				
+
 			</ul>
-			
+
 		</div>
 	</nav>
-    <!--Header End-->
+	<!--Header End-->
 
 	<!-- Rest -->
-     <img src="images/fulda.jpg" alt="Welcome image" class="img-fluid img-thumbnail rounded mx-auto d-block uptop spacewide">
-     <form class="center_please uptop ">
-        <fieldset class="form-group ">
-	  <input type="email"   placeholder="Street or Zipcode" class="space">
-          
-	     <select class="space">
+	<img src="images/fulda.jpg" alt="Welcome image" class="img-fluid img-thumbnail rounded mx-auto d-block uptop spacewide">
+	<form class="center_please uptop ">
+		<fieldset class="form-group ">
+			<input type="email" placeholder="Street or Zipcode" class="space">
+
+			<select class="space">
 		<option value="0" >Property type</option>
 		<option value="0">Apartment</option>
 		<option value="0">Room</option>
 		<option value="0">WG</option>
 	     </select>
-         
-          <button type="submit" class="btn btn-primary space" >Submit</button>
-          </fieldset>
-     </form>    
-          
-     
-     <div id="carousel" class="carousel slide uptop spacewide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carousel" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel" data-slide-to="1"></li>
-    <li data-target="#carousel" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner" role="listbox">
-    <div class="carousel-item active center_please">
-      <img src="images/hochschule_fulda1.jpg" alt="First slide">
-      <div class="carousel-caption">
-    <h3>First top property</h3>
-    <a class="" href="login.html">Check it out</a>
-  </div>
-    </div>
-    <div class="carousel-item center_please">
-      <img src="images/hochschule_fulda2.jpg" alt="Second slide">
-      <div class="carousel-caption">
-    <h3>Second top property</h3>
-    <a class="" href="login.html">Check it out</a>
-  </div>
-    </div>
-    <div class="carousel-item center_please">
-      <img src="images/hochschule_fulda3.jpg" alt="Third slide">
-      <div class="carousel-caption ">
-    <h3>Third top property</h3>
-   <a class="" href="login.html">Check it out</a>
-  </div>
-    </div>
-  </div>
-  <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
-    <span class="icon-prev" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
-    <span class="icon-next" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-<div class="spacewide">
-<div class="card-group uptop ">
-  <div class="card">
-    <img class="card-img-top img-fluid"  src="images/pic03.jpg" style="width: 100%" alt="Card image cap">
-    <div class="card-block">
-      <h4 class="card-title">Advertisement 1</h4>
-      <p class="card-text">Eat this and you will never have to diet again, is the miracle plant for fat burning!</p>
-      <a href="#" class="btn btn-primary" >Read More</a>
-    </div>
-  </div>
-  <div class="card">
-    <img class="card-img-top img-fluid " src="images/pic02.jpg" style="width: 100%" alt="Card image cap">
-    <div class="card-block">
-      <h4 class="card-title">Advertisement 2</h4>
-      <p class="card-text">You won't belive what nature did to this man, it change his life for ever!</p>
-      <a href="#" class="btn btn-primary" >Read More</a>
-    </div>
-  </div>
-  <div class="card">
-    <img class="card-img-top img-fluid " src="images/pic01.jpg" style="width: 100%"  alt="Card image cap">
-    <div class="card-block">
-      <h4 class="card-title">Advertisement 3</h4>
-      <p class="card-text"> The bigest garden tournament started! the most beuatiful plants in the world are here!</p>
-      <a href="#" class="btn btn-primary" >Read More</a>
-    </div>
-  </div>
-</div>
-</div>
+
+		<!--	<button type="submit" class="btn btn-primary space">Submit</button>-->
+                        <a href="search.html" class="btn btn-primary" role="button">Submit</a>
+		</fieldset>
+	</form>
+
+
+	<div id="carousel" class="carousel slide uptop spacewide" data-ride="carousel">
+		<ol class="carousel-indicators">
+			<li data-target="#carousel" data-slide-to="0" class="active"></li>
+			<li data-target="#carousel" data-slide-to="1"></li>
+			<li data-target="#carousel" data-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner" role="listbox">
+			<div class="carousel-item active center_please">
+				<img src="images/hochschule_fulda1.jpg" alt="First slide">
+				<div class="carousel-caption">
+					<h3>First top property</h3>
+					<a class="" href="property-view.html">Check it out</a>
+				</div>
+			</div>
+			<div class="carousel-item center_please">
+				<img src="images/hochschule_fulda2.jpg" alt="Second slide">
+				<div class="carousel-caption">
+					<h3>Second top property</h3>
+					<a class="" href="property-view.html">Check it out</a>
+				</div>
+			</div>
+			<div class="carousel-item center_please">
+				<img src="images/hochschule_fulda3.jpg" alt="Third slide">
+				<div class="carousel-caption ">
+					<h3>Third top property</h3>
+					<a class="" href="property-view.html">Check it out</a>
+				</div>
+			</div>
+		</div>
+		<a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+			<span class="icon-prev" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+			<span class="icon-next" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+	</div>
+	<div class="spacewide">
+		<div class="card-group uptop ">
+			<div class="card">
+				<img class="card-img-top img-fluid" src="images/pic03.jpg" style="width: 100%" alt="Card image cap">
+				<div class="card-block">
+					<h4 class="card-title">Advertisement 1</h4>
+					<p class="card-text">Eat this and you will never have to diet again, is the miracle plant for fat burning!</p>
+					<a href="#" class="btn btn-primary">Read More</a>
+				</div>
+			</div>
+			<div class="card">
+				<img class="card-img-top img-fluid " src="images/pic02.jpg" style="width: 100%" alt="Card image cap">
+				<div class="card-block">
+					<h4 class="card-title">Advertisement 2</h4>
+					<p class="card-text">You won't belive what nature did to this man, it change his life for ever!</p>
+					<a href="#" class="btn btn-primary">Read More</a>
+				</div>
+			</div>
+			<div class="card">
+				<img class="card-img-top img-fluid " src="images/pic01.jpg" style="width: 100%" alt="Card image cap">
+				<div class="card-block">
+					<h4 class="card-title">Advertisement 3</h4>
+					<p class="card-text"> The bigest garden tournament started! the most beuatiful plants in the world are here!</p>
+					<a href="#" class="btn btn-primary">Read More</a>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- START YOUR CODE FROM HERE -->
 
-<!-- BEGINING OF LOGIN MODULE -->
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    	<div class="modal-dialog">
+	<!-- BEGINING OF LOGIN MODULE -->
+	<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header" align="center">
 					<img class="img-circle" id="img_logo" src="logo.png">
@@ -371,98 +388,98 @@
 						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 					</button>
 				</div>
-                
-                
-                <div id="div-forms">
-                
-                    <!-- Begining of Login Form -->
-                    <form id="login-form">
-		                <div class="modal-body">
-				    		
-				    		<div class="form-group">
-                    
-					<label for="login_username" class="col-form-label">Email Address:</label>
-				    <input id="login_username" class="form-control" type="text" placeholder="Email address" required>
-				    		
+
+
+				<div id="div-forms">
+
+					<!-- Begining of Login Form -->
+					<form id="login-form">
+						<div class="modal-body">
+
+							<div class="form-group">
+
+								<label for="login_username" class="col-form-label">Email Address:</label>
+								<input id="login_username" class="form-control" type="text" placeholder="Email address" required>
+
 							</div>
-							
-							    		<div class="form-group">
-                    
-					<label for="login_password" class="col-form-label">Password:</label>
-				
-							<input id="login_password" class="form-control" type="password" placeholder="Password" required>
-                            </div>
+
+							<div class="form-group">
+
+								<label for="login_password" class="col-form-label">Password:</label>
+
+								<input id="login_password" class="form-control" type="password" placeholder="Password" required>
+							</div>
 							<div class="checkbox">
-                                <label>
+								<label>
                                     <input type="checkbox"> Keep me signed in
                                 </label>
-                            </div>
-        		    	</div>
-				        <div class="modal-footer">
-                            <div>
-                                <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
-                            </div>
-				    	    <div>
-                                <button id="login_lost_btn" type="button" class="btn btn-link">Forgot your Password?</button>
-                                <a href="signup.html" class="btn btn-link">New User?</a>
-                            </div>
-				        </div>
-                    </form>
-                    <!-- End of Login Form -->
-                    
-                    <!-- Begining of Password Reset Form -->
-                    <form id="lost-form" style="display:none;">
-    	    		    <div class="modal-body">
-		    				<div id="div-lost-msg">
-                                <div id="icon-lost-msg" class="glyphicon glyphicon-chevron-right"></div>
-                                <span id="text-lost-msg">Please enter your email id</span>
-                            </div>
-		    				<input id="lost_email" class="form-control" type="text" placeholder="abc@xyz.com" required>
-            			</div>
-		    		    <div class="modal-footer">
-                            <div>
-                                <button type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
-                            </div>
-                            <div>
-                                <button id="lost_login_btn" type="button" class="btn btn-link">Log In</button>
-                               <a href="signup.html" class="btn btn-link">Register</a>
-                             </div>
-		    		    </div>
-                    </form>
-                    <!-- End of Password Reset Form -->
-                    
-                    <!-- Begin | Register Form -->
-                    <form id="register-form" style="display:none;">
-            		    <div class="modal-body">
-		    				<div id="div-register-msg">
-                                <div id="icon-register-msg" class="glyphicon glyphicon-chevron-right"></div>
-                                <span id="text-register-msg">Register an account.</span>
-                            </div>
-		    				<input id="register_username" class="form-control" type="text" placeholder="Username (type ERROR for error effect)" required>
-                            <input id="register_email" class="form-control" type="text" placeholder="E-Mail" required>
-                            <input id="register_password" class="form-control" type="password" placeholder="Password" required>
-            			</div>
-		    		    <div class="modal-footer">
-                            <div>
-                                <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
-                            </div>
-                            <div>
-                                <button id="register_login_btn" type="button" class="btn btn-link">Log In</button>
-                                <button id="register_lost_btn" type="button" class="btn btn-link">Lost Password?</button>
-                            </div>
-		    		    </div>
-                    </form>
-                    <!-- End | Register Form -->
-                    
-                </div>
-                <!-- End # DIV Form -->
-                
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div>
+								<button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+							</div>
+							<div>
+								<button id="login_lost_btn" type="button" class="btn btn-link">Forgot your Password?</button>
+								<a href="signup.html" class="btn btn-link">New User?</a>
+							</div>
+						</div>
+					</form>
+					<!-- End of Login Form -->
+
+					<!-- Begining of Password Reset Form -->
+					<form id="lost-form" style="display:none;">
+						<div class="modal-body">
+							<div id="div-lost-msg">
+								<div id="icon-lost-msg" class="glyphicon glyphicon-chevron-right"></div>
+								<span id="text-lost-msg">Please enter your email id</span>
+							</div>
+							<input id="lost_email" class="form-control" type="text" placeholder="abc@xyz.com" required>
+						</div>
+						<div class="modal-footer">
+							<div>
+								<button type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
+							</div>
+							<div>
+								<button id="lost_login_btn" type="button" class="btn btn-link">Log In</button>
+								<a href="signup.html" class="btn btn-link">Register</a>
+							</div>
+						</div>
+					</form>
+					<!-- End of Password Reset Form -->
+
+					<!-- Begin | Register Form -->
+					<form id="register-form" style="display:none;">
+						<div class="modal-body">
+							<div id="div-register-msg">
+								<div id="icon-register-msg" class="glyphicon glyphicon-chevron-right"></div>
+								<span id="text-register-msg">Register an account.</span>
+							</div>
+							<input id="register_username" class="form-control" type="text" placeholder="Username (type ERROR for error effect)" required>
+							<input id="register_email" class="form-control" type="text" placeholder="E-Mail" required>
+							<input id="register_password" class="form-control" type="password" placeholder="Password" required>
+						</div>
+						<div class="modal-footer">
+							<div>
+								<button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+							</div>
+							<div>
+								<button id="register_login_btn" type="button" class="btn btn-link">Log In</button>
+								<button id="register_lost_btn" type="button" class="btn btn-link">Lost Password?</button>
+							</div>
+						</div>
+					</form>
+					<!-- End | Register Form -->
+
+				</div>
+				<!-- End # DIV Form -->
+
 			</div>
 		</div>
 	</div>
-    <!-- ENDING OF LOGIN MODULE-->
-	
-	
+	<!-- ENDING OF LOGIN MODULE-->
+
+
 
 
 

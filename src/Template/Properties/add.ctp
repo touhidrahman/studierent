@@ -98,7 +98,6 @@
             <div class="col-sm-12">
                 <div class="card">
                   <div class="card-block">
-                      <h4 class="card-title">Details</h4>
                       <?php
                       echo $this->Form->input('description');
                       echo $this->Form->input('transportation');
