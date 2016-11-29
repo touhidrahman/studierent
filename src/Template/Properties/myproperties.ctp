@@ -38,25 +38,9 @@
                         </div>
                         <div class="col-sm-6">
                             <p class="card-text text-justify"><?= $property['description'] ?></p>
-                            <div class="clearfix">
-                                <div class="text-success float-xs-left">
-                                    Studierent Score <i class="fa fa-bolt"></i> <label><strong>86</strong></label>
-                                </div>
-                                <div class="text-info float-xs-right">
-                                    Landlord Rating
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                </div>
-                            </div>
 
-                            <?= $this->Html->link('View Details', '/properties/view/', ['class' => 'card-link']) ?>
-                            <?= $this->Html->link('Landlord Profile', '/users/view/', ['class' => 'card-link text-info']) ?>
-                            <?= $this->Html->link('<i class="fa fa-heart-o"></i>', '/favorites/add/', ['class' => 'card-link text-danger', 'escapeTitle' => false]) ?>
-                            <?= $this->Html->link('<i class="fa fa-thumbs-o-up"></i>', '/feedbacks/add/', ['class' => 'card-link text-success', 'escapeTitle' => false]) ?>
-                            <?= $this->Html->link('<i class="fa fa-flag-o"></i>', '/report/add/', ['class' => 'card-link text-muted', 'escapeTitle' => false]) ?>
+                            <?= $this->Html->link('View Details', '/properties/view/'.$property['id'], ['class' => 'card-link']) ?>
+                            <?= $this->Html->link('Edit', '/properties/edit/'.$property['id'], ['class' => 'card-link text-info']) ?>
                         </div>
                         <div class="col-sm-3">
                             <p class="text-xs-center text-muted" style="margin-bottom:0">EUR</p>

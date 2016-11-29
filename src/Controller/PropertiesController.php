@@ -38,12 +38,12 @@ class PropertiesController extends AppController
      */
     public function view($id = null)
     {
-        $property = $this->Properties->get($id, [
-            'contain' => ['Zips', 'Users', 'FavoriteProperties', 'Images']
-        ]);
-
-        $this->set('property', $property);
-        $this->set('_serialize', ['property']);
+        // $property = $this->Properties->get($id, [
+        //     'contain' => ['Zips', 'Users', 'FavoriteProperties', 'Images']
+        // ]);
+        //
+        // $this->set('property', $property);
+        // $this->set('_serialize', ['property']);
     }
 
     /**
