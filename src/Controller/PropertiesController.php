@@ -140,6 +140,7 @@ class PropertiesController extends AppController
         $connection = ConnectionManager::get('default');
 // TODO: address, zipcode, studierent score, status left
         $query = "SELECT id, title, zip_id, address, description, rent, room_size, total_size FROM properties WHERE `type`='" . $qs['type'] . "' ";
+        if ($qs['address']) $query .= " AND zip_id ='" . (int)$qs['address'] . "' ";
         if ($qs['max']) {
             $min = ($qs['min']) ? $qs['min'] : 0;
             $query .= " AND rent >= " . $min . " AND rent <= ". $qs['max']. " "; // casting to prevent sql injection
@@ -186,7 +187,7 @@ class PropertiesController extends AppController
         $stmt = $connection->execute($query);
         $count = $stmt->rowCount();
         $properties = $stmt->fetchAll('assoc');
-// var_dump($properties);
+// var_dump($query);
         $this->set(compact('properties', 'count'));
         $this->set('_serialize', ['properties']);
 

@@ -7,7 +7,8 @@
     <p>We are featuring hundreds of properties that you can choose from. </p>
     <hr class="m-y-md">
     <p class="lead">
-        <form class="form-inline text-xs-center">
+        <?= $this->Form->create(NULL, ['url' => ['controller' => 'properties', 'action' => 'search'], 'class' => 'form-inline text-xs-center', 'type' => 'get']); ?>
+        <!-- <form class="form-inline text-xs-center"> -->
             <div class="form-group">
                 <input type="text" class="form-control" id="zipcode" placeholder="Zipcode">
             </div>
@@ -21,7 +22,7 @@
                 </select>
             </div>
             <button type="submit" class="btn btn-success">Search Now</button>
-        </form>
+        <?= $this->Form->end(); ?>
     </p>
     <hr class="m-y-md">
 </div>

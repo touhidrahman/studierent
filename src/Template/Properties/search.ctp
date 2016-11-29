@@ -194,7 +194,7 @@
         <div class="card">
             <div class="card-block" style="padding-bottom: 0rem">
                 <h4 class="card-title"><?= $property['title'] ?></h4>
-                <h6 class="card-subtitle text-muted"><?= $property['address'] ?></h6>
+                <h6 class="card-subtitle text-muted"><?= $property['address'] . ' | ' . $property['zip_id'] ?></h6>
             </div>
             <div class="card-block">
                 <div class="row">
