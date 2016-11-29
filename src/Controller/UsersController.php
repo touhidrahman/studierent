@@ -37,12 +37,7 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
-        $user = $this->Users->get($id, [
-            'contain' => ['Cities', 'Properties', 'FavoriteProperties', 'Feedbacks']
-        ]);
-
-        $this->set('user', $user);
-        $this->set('_serialize', ['user']);
+        
     }
 
     /**
@@ -141,7 +136,7 @@ class UsersController extends AppController
 					]);
 				}
 				
-				return $this->redirect(['controller' => 'properties','action' => 'search']);
+				return $this->redirect(['controller' => 'users','action' => 'view']);
 				
 			}
 			
