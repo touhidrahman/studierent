@@ -2,14 +2,12 @@
 <html>
 
 <head>
-	<meta name="author" content="Aleksandr Anfilov">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>Studierent</title>
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 
@@ -46,24 +44,21 @@
 
 	<!-- START YOUR CODE FROM HERE -->
 <div class="container">
-    <div class="card"><!-- ABOUT THE OWNER START -->
-    <h4 class="card-title">Owner's details</h4>
-    <table>
-       <tr>
-           <td><img src="images/user_photo.jpg" alt="owner's photo"></td>
-           <td>
-            <p>first_name varchar(30) last_name varchar(30)</p>
-            <p>`contact_number`</p>
-            <p>`email`</p>
-            <p>Gender: gender char(1) </p>
-            <p>City: 'city_id' int(11) </p>
-        </td>
-       </tr>
-    </table>
-    </div>         
-
+<h1 class="display4 text-xs-center">Owner's details</h1>
+  <div class="row">
+    <div class="col-md-5 col-xs-5">
+      <img class="img-fluid" src="images/default-profile.jpg" alt="owner's photo">
+    </div>
+   
+    <div class="col-md-7 col-xs-7">
+      <h4>Mike West</h4>            <!--first_name varchar(30) last_name varchar(30)-->
+        <p>123456777</p>            <!--`contact_number`-->
+        <p>mike_west@gmail.com</p>    <!--`email`-->
+        <span class="text-info">Fulda</span><!--'city_id' int(11) -->
+    </div>
+  </div>
 </div>
-	<!-- END -->
+    	<!-- END -->
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
