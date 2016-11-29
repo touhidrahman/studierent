@@ -34,6 +34,17 @@ class AppController extends Controller
         'Paginator' => ['className' => 'Bootstrap.BootstrapPaginator'],
         'Modal'     => ['className' => 'Bootstrap.BootstrapModal'],
     ];
+	
+	public $components = [
+    'Cookie',
+    'Auth' => [
+        'authenticate' => [
+            'Form',
+            'Xety/Cake3CookieAuth.Cookie'
+        ]
+    ]
+
+	];
 
     /**
      * Initialization hook method.
@@ -53,14 +64,6 @@ class AppController extends Controller
 		
 		
 		$this->loadComponent('Auth', [
-            'authenticate' => [
-                'Form' => [
-                    'fields' => [
-                        'username' => 'username',
-                        'password' => 'password'
-                    ]
-                ]
-            ],
             'loginAction' => [
                 'controller' => 'Users',
                 'action' => 'login'
@@ -102,4 +105,17 @@ class AppController extends Controller
 			$this->set('loggedIn',false);
 		}
     }
+	
+	public function beforeFilter(Event $event) {
+    //Automaticaly Login.
+    if (!$this->Auth->user() && $this->Cookie->read('CookieAuth')) {
+
+        $user = $this->Auth->identify();
+        if ($user) {
+            $this->Auth->setUser($user);
+        } else {
+            $this->Cookie->delete('CookieAuth');
+        }
+    }
+	}
 }

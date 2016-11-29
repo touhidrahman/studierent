@@ -37,12 +37,7 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
-        $user = $this->Users->get($id, [
-            'contain' => ['Cities', 'Properties', 'FavoriteProperties', 'Feedbacks']
-        ]);
-
-        $this->set('user', $user);
-        $this->set('_serialize', ['user']);
+        
     }
 
     /**
@@ -129,7 +124,19 @@ class UsersController extends AppController
 			if($user)
 			{	
 				$this->Auth->setUser($user);
-				return $this->redirect(['controller' => 'properties','action' => 'search']);
+			
+				if($this->request->data('remember_me')) {
+					$this->Cookie->configKey('CookieAuth', [
+						'expires' => '+1 month',
+						'httpOnly' => true
+					]);
+					$this->Cookie->write('CookieAuth', [
+						'username' => $this->request->data('username'),
+						'password' => $this->request->data('password')
+					]);
+				}
+				
+				return $this->redirect(['controller' => 'users','action' => 'view']);
 				
 			}
 			
