@@ -129,6 +129,18 @@ class UsersController extends AppController
 			if($user)
 			{	
 				$this->Auth->setUser($user);
+			
+				if($this->request->data('remember_me')) {
+					$this->Cookie->configKey('CookieAuth', [
+						'expires' => '+1 month',
+						'httpOnly' => true
+					]);
+					$this->Cookie->write('CookieAuth', [
+						'username' => $this->request->data('username'),
+						'password' => $this->request->data('password')
+					]);
+				}
+				
 				return $this->redirect(['controller' => 'properties','action' => 'search']);
 				
 			}

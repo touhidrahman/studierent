@@ -194,6 +194,10 @@ Type::build('date')
 Type::build('datetime')
     ->useImmutable();
 
+	
+	// Plugin added for cookies
+	Plugin::load('Xety/Cake3CookieAuth');
+	
 /*
  * Custom Inflector rules, can be set to correctly pluralize or singularize
  * table, model, controller names or whatever other string is passed to the
