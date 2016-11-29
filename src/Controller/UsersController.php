@@ -37,7 +37,7 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
-        
+
     }
 
     /**
@@ -111,20 +111,20 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-	
-		
+
+
 	public function login()
 	{
-		
-		
+
+
 		if($this->request->is('post'))
 		{
 			$user = $this->Auth->identify();
-		
+
 			if($user)
-			{	
+			{
 				$this->Auth->setUser($user);
-			
+
 				if($this->request->data('remember_me')) {
 					$this->Cookie->configKey('CookieAuth', [
 						'expires' => '+1 month',
@@ -135,37 +135,37 @@ class UsersController extends AppController
 						'password' => $this->request->data('password')
 					]);
 				}
-				
+
 				return $this->redirect(['controller' => 'users','action' => 'view']);
-				
+
 			}
-			
+
 			$this->Flash->error('Username or password is incorrect');
-			
+
 		}
 	}
-	
+
 	public function register()
 	{
 		$user = $this->Users->newEntity();
 		if($this->request->is('post'))
 		{
 			$user = $this->Users->patchEntity($user, $this->request->data);
-			
+
 			if($this->Users->save($user))
 			{
 				$this->Flash->success('Thank you for registration, you can log in now');
 				return $this->redirect(['action' => 'login']);
-				
+
 			}
 			else
 				$this->Flash->error('Registration not successful');
-			
+
 		}
 		$this->set(compact('user'));
 		$this->set('_serialize',['user']);
 	}
-	
+
 	public function initialize()
 	{
 		parent::initialize();
@@ -178,6 +178,9 @@ class UsersController extends AppController
 		$this->Flash->success('You are now logged out.');
 		return $this->redirect($this->Auth->logout());
 	}
+
+
+    public function dashboard(){}
 
 
 }

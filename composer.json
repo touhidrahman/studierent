@@ -11,7 +11,8 @@
         "cakephp/migrations": "~1.0",
         "cakephp/plugin-installer": "*",
         "holt59/cakephp3-bootstrap-helpers": "dev-v4.0.0-alpha",
-        "fzaninotto/faker": "^1.6"
+        "fzaninotto/faker": "^1.6",
+        "xety/cake3-cookieauth": "1.*"
     },
     "require-dev": {
         "psy/psysh": "@stable",

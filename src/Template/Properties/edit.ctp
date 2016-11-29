@@ -11,8 +11,8 @@
 
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><?= $this->Html->link('Add a Property Ad', '/properties/add', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
-                <li class="list-group-item"><?= $this->Html->link('My Properties', '/properties', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
-                <li class="list-group-item"><?= $this->Html->link('My Favorites', '/favorites/list/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
+                <li class="list-group-item"><?= $this->Html->link('My Properties', '/properties/myproperties', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
+                <li class="list-group-item"><?= $this->Html->link('My Favorites', '/properties/favorites/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
                 <li class="list-group-item"><?= $this->Html->link('My Profile', '/users/view/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
                 <li class="list-group-item"><?= $this->Html->link('Logout', '/users/logout', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
             </ul>

@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.js"></script>
 	<?= $this->Html->css('style') ?>
 	<!-- JS Dependencies -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -31,28 +32,28 @@
 				<li class="nav-item active">
 					<a class="nav-link" href="/studierent">Home <span class="sr-only">(current)</span></a>
 				</li>
-				
-				<? if (!$loggedIn): ?>
+
+				<?php if (!$loggedIn): ?>
 				<li class="nav-item">
-				<?= $this->Html->link(__('Login'), ['controller' => 'users', 'action' => 'login'], ['class' => 'nav-link']); ?>
+					<?= $this->Html->link(__('Login'), ['controller' => 'users', 'action' => 'login'], ['class' => 'nav-link']); ?>
 				</li>
-			  <?php endif ?>	
-				
-				<? if (!$loggedIn): ?>
+				<?php endif; ?>
+
+				<?php if (!$loggedIn): ?>
 				<li class="nav-item">
 					<?= $this->Html->link(__('Register'), ['controller' => 'users', 'action' => 'register'], ['class' => 'nav-link']); ?>
 				</li>
 				<?php endif; ?>
-				<? if ($loggedIn): ?>
+				<?php if ($loggedIn): ?>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Account</a>
 					<div class="dropdown-menu" aria-labelledby="responsiveNavbarDropdown">
-						<a class="dropdown-item" href="myaccount.html">Dashboard</a>
-						<a class="dropdown-item" href="user-profile.html">My Profile</a>
+					    <?= $this->Html->link(__('Dashboard'), ['controller' => 'users', 'action' => 'dashboard'], ['class' => 'dropdown-item']); ?>
+					    <?= $this->Html->link(__('My Profile'), ['controller' => 'users', 'action' => 'view'], ['class' => 'dropdown-item']); ?>
 					    <?= $this->Html->link(__('Logout'), ['controller' => 'users', 'action' => 'logout'], ['class' => 'dropdown-item']); ?>
 					</div>
 				</li>
-				<?php endif;?>
+				<?php endif; ?>
 			</ul>
 			<?= $this->Form->create(NULL, ['url' => ['controller' => 'properties', 'action' => 'search'], 'class' => 'form-inline float-lg-right', 'type' => 'get']); ?>
 				<input class="form-control" type="text" name="address" placeholder="Search">

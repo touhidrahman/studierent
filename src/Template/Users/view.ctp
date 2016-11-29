@@ -1,74 +1,155 @@
 <div class="row">
-    <!-- explore bar -->
-    <div class="col-md-3 col-sm-4 col-xs-12">
-        <div class="card">
-            <img class="card-img img-fluid" src="/studierent/img/property.jpg" alt="Card image cap">
-              <div class="card-img-overlay">
-                <h4 class="card-title" style="color:#fff">My Dashboard</h4>
-                <p class="card-text"></p>
-                <p class="card-text"><small class="text-muted"></small></p>
-              </div>
+	<div class="col-xs-12">
+		<div class="jumbotron jumbotron-fluid text-xs-center">
+		  <div class="container">
+			  <img class="rounded-circle " style="width:8rem; height:8rem;" src="/studierent/img/boy.jpg" />
+			<h1 class="display-3">John Doe</h1>
+			<p class="lead">"My nice and bold tagline!"</p>
+		  </div>
+		</div>
+	</div>
 
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><?= $this->Html->link('Add a Property Ad', '/properties/add', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
-                <li class="list-group-item"><?= $this->Html->link('My Properties', '/properties', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
-                <li class="list-group-item"><?= $this->Html->link('My Favorites', '/favorites/list/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
-                <li class="list-group-item"><?= $this->Html->link('My Profile', '/users/view/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
-                <li class="list-group-item"><?= $this->Html->link('Logout', '/users/logout', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
-            </ul>
-        </div>
-    </div>
-    <!-- end sidebar -->
+	<div class="col-xs-4">
+		<div class="card">
+		  <div class="card-header">
+				Basic Info
+			  </div>
+			  <div class="card-block">
+				<blockquote class="card-blockquote">
+				  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+				  <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+				</blockquote>
+			  </div>
+		</div>
+	</div>
 
-    <!-- My Profile -->
-    <div class="col-md-9 col-sm-8 col-xs-12">
+	<div class="col-xs-4">
+		<div class="card">
+		  <div class="card-header">
+				Posted Properties (3)
+			  </div>
+			  <div class="card-block">
 
-    	<h1 class="display-4">Welcome User!!</h1>
+				  <a href="#">
+				  <div class="card">
+					  <div class="card-block" style="padding-bottom: 0rem">
+						  <h4 class="card-title">A title of the Property</h4>
+						  <h6 class="card-subtitle text-muted">SomeStreet | 36037</h6>
+					  </div>
+					  <div class="card-block">
+						  <div class="row">
+							  <div class="col-sm-6">
+								  <?= $this->Html->image('property.jpg', ['alt' => 'Property image', 'class' => 'rounded-left img-fluid']); ?>
+							  </div>
 
-				<div class="card card-block">
-					<h4 class="card-title">Recent Activities!!!</h4>
-                                        <p class="card-text"><h5>Added two new properties to the Website</h5></p>
-                                        <div class="row">
-							<div class="col-sm-6">
-                                                            <img class="rounded-left img-fluid" src="images/hochschule_fulda3.jpg" alt="Card image cap"><br><br>
-                                                            <p class="card-text text-justify">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-							</div>
-							<div class="col-sm-6">
-                                                            <img class="rounded-left img-fluid" src="images/hochschule_fulda2.jpg" alt="Card image cap"><br><br>
-                                                            <p class="card-text text-justify">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-							</div>
-							
-														
-							</div>
-                                                                       
-							
-                                        
-					
-				</div>
-                                <div class="card card-block">
-                                        <p class="card-text"><h5>Added one property to Favourites</h5></p>
-                                        <div class="row">
-							<div class="col-sm-6">
-                                                            <img class="rounded-left img-fluid" src="images/hochschule_fulda1.jpg" alt="Card image cap"><br><br>
-                                                            
-							</div>
-                                            <div class="col-sm-6">
-                                                <p class="card-text text-justify">Some quick example text to build on the card title and make up the bulk of the card's content.
-                                                    Some quick example text to build on the card title and make up the bulk of the card's content.
-                                                    Some quick example text to build on the card title and make up the bulk of the card's content.
-                                                    Some quick example text to build on the card title and make up the bulk of the card's content.
-                                                    Some quick example text to build on the card title and make up the bulk of the card's content.
-                                                    Some quick example text to build on the card title and make up the bulk of the card's content.</p></div>
-							
-													
-							</div>
-                                                                       
-					
-                                        				
-				</div>
+							  <div class="col-sm-6">
+								  <p class="text-xs-center text-muted" style="margin-bottom:0">EUR</p>
+								  <h4 class="display-4 text-xs-center text-warning font-weight-bold">250</h4>
+							  </div>
+						  </div>
+					  </div>
+				  </div>
+				</a>
 
-				
-			
-        </div>
+				  <a href="#">
+				  <div class="card">
+					  <div class="card-block" style="padding-bottom: 0rem">
+						  <h4 class="card-title">A title of the Property</h4>
+						  <h6 class="card-subtitle text-muted">SomeStreet | 36037</h6>
+					  </div>
+					  <div class="card-block">
+						  <div class="row">
+							  <div class="col-sm-6">
+								  <?= $this->Html->image('property.jpg', ['alt' => 'Property image', 'class' => 'rounded-left img-fluid']); ?>
+							  </div>
 
-        v>
+							  <div class="col-sm-6">
+								  <p class="text-xs-center text-muted" style="margin-bottom:0">EUR</p>
+								  <h4 class="display-4 text-xs-center text-warning font-weight-bold">250</h4>
+							  </div>
+						  </div>
+					  </div>
+				  </div>
+				</a>
+
+				  <a href="#">
+				  <div class="card">
+					  <div class="card-block" style="padding-bottom: 0rem">
+						  <h4 class="card-title">A title of the Property</h4>
+						  <h6 class="card-subtitle text-muted">SomeStreet | 36037</h6>
+					  </div>
+					  <div class="card-block">
+						  <div class="row">
+							  <div class="col-sm-6">
+								  <?= $this->Html->image('property.jpg', ['alt' => 'Property image', 'class' => 'rounded-left img-fluid']); ?>
+							  </div>
+
+							  <div class="col-sm-6">
+								  <p class="text-xs-center text-muted" style="margin-bottom:0">EUR</p>
+								  <h4 class="display-4 text-xs-center text-warning font-weight-bold">250</h4>
+							  </div>
+						  </div>
+					  </div>
+				  </div>
+				</a>
+
+			  </div>
+		</div>
+	</div>
+
+	<div class="col-xs-4">
+		<div class="card">
+		  <div class="card-header">
+				Send a Feedback
+			  </div>
+			  <div class="card-block">
+				  <form>
+
+
+  					<div class="radio">
+  						<label style="display:block"><input name="rating" value="5" type="radio">
+  							<i class="fa fa-star"></i>
+  							<i class="fa fa-star"></i>
+  							<i class="fa fa-star"></i>
+  							<i class="fa fa-star"></i>
+  							<i class="fa fa-star"></i>
+  						</label>
+  						<label style="display:block"><input name="rating" value="4" type="radio">
+  							<i class="fa fa-star"></i>
+  							<i class="fa fa-star"></i>
+  							<i class="fa fa-star"></i>
+  							<i class="fa fa-star"></i>
+  						</label>
+  						<label style="display:block"><input name="rating" value="3" type="radio">
+  							<i class="fa fa-star"></i>
+  							<i class="fa fa-star"></i>
+  							<i class="fa fa-star"></i>
+  						</label>
+  						<label style="display:block"><input name="rating" value="2" type="radio">
+  							<i class="fa fa-star"></i>
+  							<i class="fa fa-star"></i>
+  						</label>
+  						<label style="display:block"><input name="rating" value="1" type="radio">
+  							<i class="fa fa-star"></i>
+  						</label>
+  					</div>
+
+				    <fieldset class="form-group">
+				      <label for="exampleSelect1">How do you know this user?</label>
+				      <select class="form-control" id="exampleSelect1">
+				        <option>Rented a property from him/her</option>
+				        <option>Contacted, but not rented</option>
+				        <option>Personal relation</option>
+				        <option>Don't know at all</option>
+				      </select>
+				    </fieldset>
+				    <fieldset class="form-group">
+				      <label for="exampleTextarea">Details</label>
+				      <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+				    </fieldset>
+
+				    <button type="submit" class="btn btn-success">Submit</button>
+				  </form>
+			  </div>
+		</div>
+	</div>

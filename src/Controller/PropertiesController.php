@@ -194,4 +194,20 @@ class PropertiesController extends AppController
         $this->set('_serialize', ['properties']);
 
     }
+
+
+
+    public function favorites()
+    {
+        $properties = $this->Properties->find('all')->limit(10);
+        $this->set(compact('properties'));
+        $this->set('_serialize', ['properties']);
+    }
+
+    public function myproperties()
+    {
+        $properties = $this->Properties->find('all')->limit(10);
+        $this->set(compact('properties'));
+        $this->set('_serialize', ['properties']);
+    }
 }
