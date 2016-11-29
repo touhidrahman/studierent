@@ -50,6 +50,31 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+		
+		
+		$this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'username',
+                        'password' => 'password'
+                    ]
+                ]
+            ],
+            'loginAction' => [
+                'controller' => 'Users',
+                'action' => 'login'
+            ],
+            'unauthorizedRedirect' => $this->referer() // If unauthorized, return them to page they were just on
+        ]);
+		
+
+        // Allow the display action so our pages controller
+        // continues to work.
+        $this->Auth->allow(['display']);
+		
+		//Set authentication status 
+		$this->set('authUser', $this->Auth->user());
     }
 
     /**
@@ -65,5 +90,16 @@ class AppController extends Controller
         ) {
             $this->set('_serialize', true);
         }
+		
+		//Create a variable for checking login status
+		
+		if($this->request->session()->read('Auth.User'))
+		{
+			$this->set('loggedIn',true);
+		}
+		else
+		{
+			$this->set('loggedIn',false);
+		}
     }
 }
