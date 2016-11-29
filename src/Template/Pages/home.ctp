@@ -40,21 +40,21 @@
       		<div class="carousel-item active center_please">
       			<img src="/studierent/img/hochschule_fulda1.jpg" alt="First slide">
       			<div class="carousel-caption">
-      				<h3>First top property</h3>
+      				<h3>First recent property</h3>
       				<a class="" href="login.html">Check it out</a>
       			</div>
       		</div>
       		<div class="carousel-item center_please">
       			<img src="/studierent/img/hochschule_fulda2.jpg" alt="Second slide">
       			<div class="carousel-caption">
-      				<h3>Second top property</h3>
+      				<h3>Second recent property</h3>
       				<a class="" href="login.html">Check it out</a>
       			</div>
       		</div>
       		<div class="carousel-item center_please">
       			<img src="/studierent/img/hochschule_fulda3.jpg" alt="Third slide">
       			<div class="carousel-caption ">
-      				<h3>Third top property</h3>
+      				<h3>Third recent property</h3>
       				<a class="" href="login.html">Check it out</a>
       			</div>
       		</div>
