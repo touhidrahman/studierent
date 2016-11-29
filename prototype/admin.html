@@ -10,13 +10,14 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
 	<nav class="navbar navbar-light bg-faded">
 		<button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"></button>
 		<div class="collapse navbar-toggleable-md" id="navbarResponsive">
-			<a class="navbar-brand" href="index.html"><img src="logo.png" height="50px" width="90px"></a>
+			<a class="navbar-brand" href="index.html"><img src="images/logo_studierent.png"></a>
 			<ul class="nav navbar-nav">
 				<li class="nav-item active">
 					<a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
@@ -27,13 +28,13 @@
 					<div class="dropdown-menu" aria-labelledby="responsiveNavbarDropdown">
 						<a class="dropdown-item" href="admin.html">Dashboard</a>
 						<a class="dropdown-item" href="user-profile.html">My Profile</a>
-						<a class="dropdown-item" href="#">Logout</a>
+						<a class="dropdown-item" href="index.html">Logout</a>
 					</div>
 				</li>
 			</ul>
 			<form class="form-inline float-lg-right">
 				<input class="form-control" type="text" placeholder="Search">
-				<button class="btn btn-outline-success" type="submit">Search</button>
+				<a href="search.html" class="btn btn-outline-success" role="button"><img src="images/search_icon.png" alt="Search icon" id="button_search"></a>
 			</form>
 		</div>
 	</nav>
@@ -90,7 +91,7 @@
 
                                                                                 <li><a href="user-profile.html">My Profile</a></li>
 
-                                                                                <li><a href="#">Logout</a></li>
+                                                                                <li><a href="index.html">Logout</a></li>
 
                                                                             </ul>
 
@@ -133,11 +134,11 @@
 						<div class="row">
                                                     <label for="uid"><b>&nbsp;&nbsp;Search by User-Id:</b></label><form class="form-inline float-lg-center">
 				<input class="form-control" type="text" placeholder="Enter User Id">
-				<button class="btn btn-outline-success" type="submit">Search</button>
+				<button class="btn btn-primary" type="submit">Search</button>
                                                     </form><br>
                                                     <label for="uid"><b>&nbsp;&nbsp;Search by User-Name:</b></label><form class="form-inline float-lg-center">
 				<input class="form-control" type="text" placeholder="Enter User Name">
-				<button class="btn btn-outline-success" type="submit">Search</button>
+				<button class="btn btn-primary" type="submit">Search</button>
                                                     </form><br><br>
                                                     <div class="list-group">
   <a href="#" class="list-group-item clearfix">
@@ -146,7 +147,7 @@
     
     Touhid Rahman
     <span class="pull-right">
-      <button class="btn btn-outline-success" type="submit">Block</button>
+      <button class="btn btn-primary" type="submit">Block</button>
       
     </span>
   </a>
@@ -156,7 +157,7 @@
     
     Norman Lista
     <span class="pull-right">
-      <button class="btn btn-outline-success" type="submit">Block</button>
+      <button class="btn btn-primary" type="submit">Block</button>
       
     </span>
   </a>
@@ -166,7 +167,7 @@
     
     Mythri Manjunath
     <span class="pull-right">
-      <button class="btn btn-outline-success" type="submit">Block</button>
+      <button class="btn btn-primary" type="submit">Block</button>
       
     </span>
   </a>
@@ -176,7 +177,7 @@
     
     Ramanpreet Kaur
     <span class="pull-right">
-      <button class="btn btn-outline-success" type="submit">Block</button>
+      <button class="btn btn-primary" type="submit">Block</button>
       
     </span>
   </a>
