@@ -55,12 +55,12 @@ class Initial extends AbstractMigration
             ])
             ->addIndex(
                 [
-                    'property_id',
+                    'user_id',
                 ]
             )
             ->addIndex(
                 [
-                    'user_id',
+                    'property_id',
                 ]
             )
             ->create();
@@ -103,12 +103,12 @@ class Initial extends AbstractMigration
             ])
             ->addIndex(
                 [
-                    'for_user_id',
+                    'user_id',
                 ]
             )
             ->addIndex(
                 [
-                    'user_id',
+                    'for_user_id',
                 ]
             )
             ->create();
@@ -175,7 +175,7 @@ class Initial extends AbstractMigration
             ->addColumn('contact_number', 'integer', [
                 'default' => null,
                 'limit' => 20,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('email', 'string', [
                 'default' => null,
@@ -195,27 +195,27 @@ class Initial extends AbstractMigration
             ->addColumn('description', 'text', [
                 'default' => null,
                 'limit' => null,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('transportation', 'text', [
                 'default' => null,
                 'limit' => null,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('direct_bus_to_uni', 'boolean', [
                 'default' => null,
                 'limit' => null,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('house_rules', 'text', [
                 'default' => null,
                 'limit' => null,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('looking_for', 'string', [
                 'default' => null,
                 'limit' => 20,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('available_from', 'date', [
                 'default' => null,
@@ -225,7 +225,7 @@ class Initial extends AbstractMigration
             ->addColumn('available_until', 'date', [
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('rent', 'integer', [
                 'default' => null,
@@ -255,67 +255,67 @@ class Initial extends AbstractMigration
             ->addColumn('smoking', 'boolean', [
                 'default' => null,
                 'limit' => null,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('pets', 'boolean', [
                 'default' => null,
                 'limit' => null,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('handicap', 'boolean', [
                 'default' => null,
                 'limit' => null,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('fire_alarm', 'boolean', [
                 'default' => null,
                 'limit' => null,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('washing_machine', 'boolean', [
                 'default' => null,
                 'limit' => null,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('parking', 'boolean', [
                 'default' => null,
                 'limit' => null,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('heating', 'boolean', [
                 'default' => null,
                 'limit' => null,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('bike_parking', 'boolean', [
                 'default' => null,
                 'limit' => null,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('garden', 'boolean', [
                 'default' => null,
                 'limit' => null,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('balcony', 'boolean', [
                 'default' => null,
                 'limit' => null,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('cable_tv', 'boolean', [
                 'default' => null,
                 'limit' => null,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('electricity_bill_included', 'boolean', [
                 'default' => null,
                 'limit' => null,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('internet', 'boolean', [
                 'default' => null,
                 'limit' => null,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('view_times', 'integer', [
                 'default' => null,
@@ -339,6 +339,34 @@ class Initial extends AbstractMigration
             )
             ->create();
 
+        $this->table('reports')
+            ->addColumn('user_id', 'integer', [
+                'default' => null,
+                'limit' => 11,
+                'null' => false,
+            ])
+            ->addColumn('property_id', 'integer', [
+                'default' => null,
+                'limit' => 11,
+                'null' => false,
+            ])
+            ->addColumn('reported_by_user_id', 'integer', [
+                'default' => null,
+                'limit' => 11,
+                'null' => false,
+            ])
+            ->addColumn('message', 'text', [
+                'default' => null,
+                'limit' => null,
+                'null' => false,
+            ])
+            ->addColumn('email', 'string', [
+                'default' => null,
+                'limit' => 127,
+                'null' => true,
+            ])
+            ->create();
+
         $this->table('users')
             ->addColumn('first_name', 'string', [
                 'default' => null,
@@ -357,7 +385,7 @@ class Initial extends AbstractMigration
             ])
             ->addColumn('password', 'string', [
                 'default' => null,
-                'limit' => 30,
+                'limit' => 255,
                 'null' => false,
             ])
             ->addColumn('gender', 'string', [
@@ -383,12 +411,12 @@ class Initial extends AbstractMigration
             ->addColumn('contact_number', 'integer', [
                 'default' => null,
                 'limit' => 20,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('photo', 'text', [
                 'default' => null,
                 'limit' => null,
-                'null' => false,
+                'null' => true,
             ])
             ->addColumn('created', 'datetime', [
                 'default' => null,
@@ -403,7 +431,7 @@ class Initial extends AbstractMigration
             ->addColumn('reset_key', 'string', [
                 'default' => null,
                 'limit' => 100,
-                'null' => false,
+                'null' => true,
             ])
             ->addIndex(
                 [
@@ -412,7 +440,7 @@ class Initial extends AbstractMigration
             )
             ->create();
 
-        $this->table('users_properties', ['id' => false, /*'primary_key' => [''] */])
+        $this->table('users_properties', ['id' => false])
             ->addColumn('user_id', 'integer', [
                 'default' => null,
                 'limit' => 11,
@@ -425,12 +453,12 @@ class Initial extends AbstractMigration
             ])
             ->addIndex(
                 [
-                    'property_id',
+                    'user_id',
                 ]
             )
             ->addIndex(
                 [
-                    'user_id',
+                    'property_id',
                 ]
             )
             ->create();
@@ -452,188 +480,17 @@ class Initial extends AbstractMigration
                 ]
             )
             ->create();
-
-        $this->table('cities')
-            ->addForeignKey(
-                'country_id',
-                'countries',
-                'id',
-                [
-                    'update' => 'RESTRICT',
-                    'delete' => 'RESTRICT'
-                ]
-            )
-            ->update();
-
-        $this->table('favorite_properties')
-            ->addForeignKey(
-                'property_id',
-                'properties',
-                'id',
-                [
-                    'update' => 'RESTRICT',
-                    'delete' => 'RESTRICT'
-                ]
-            )
-            ->addForeignKey(
-                'user_id',
-                'users',
-                'id',
-                [
-                    'update' => 'RESTRICT',
-                    'delete' => 'RESTRICT'
-                ]
-            )
-            ->update();
-
-        $this->table('feedbacks')
-            ->addForeignKey(
-                'for_user_id',
-                'users',
-                'id',
-                [
-                    'update' => 'RESTRICT',
-                    'delete' => 'RESTRICT'
-                ]
-            )
-            ->addForeignKey(
-                'user_id',
-                'users',
-                'id',
-                [
-                    'update' => 'RESTRICT',
-                    'delete' => 'RESTRICT'
-                ]
-            )
-            ->update();
-
-        $this->table('images')
-            ->addForeignKey(
-                'property_id',
-                'properties',
-                'id',
-                [
-                    'update' => 'RESTRICT',
-                    'delete' => 'RESTRICT'
-                ]
-            )
-            ->update();
-
-        $this->table('properties')
-            ->addForeignKey(
-                'zip_id',
-                'zips',
-                'id',
-                [
-                    'update' => 'RESTRICT',
-                    'delete' => 'RESTRICT'
-                ]
-            )
-            ->update();
-
-        $this->table('users')
-            ->addForeignKey(
-                'city_id',
-                'cities',
-                'id',
-                [
-                    'update' => 'RESTRICT',
-                    'delete' => 'RESTRICT'
-                ]
-            )
-            ->update();
-
-        $this->table('users_properties')
-            ->addForeignKey(
-                'property_id',
-                'properties',
-                'id',
-                [
-                    'update' => 'RESTRICT',
-                    'delete' => 'RESTRICT'
-                ]
-            )
-            ->addForeignKey(
-                'user_id',
-                'users',
-                'id',
-                [
-                    'update' => 'RESTRICT',
-                    'delete' => 'RESTRICT'
-                ]
-            )
-            ->update();
-
-        $this->table('zips')
-            ->addForeignKey(
-                'city_id',
-                'cities',
-                'id',
-                [
-                    'update' => 'RESTRICT',
-                    'delete' => 'RESTRICT'
-                ]
-            )
-            ->update();
     }
 
     public function down()
     {
-        $this->table('cities')
-            ->dropForeignKey(
-                'country_id'
-            );
-
-        $this->table('favorite_properties')
-            ->dropForeignKey(
-                'property_id'
-            )
-            ->dropForeignKey(
-                'user_id'
-            );
-
-        $this->table('feedbacks')
-            ->dropForeignKey(
-                'for_user_id'
-            )
-            ->dropForeignKey(
-                'user_id'
-            );
-
-        $this->table('images')
-            ->dropForeignKey(
-                'property_id'
-            );
-
-        $this->table('properties')
-            ->dropForeignKey(
-                'zip_id'
-            );
-
-        $this->table('users')
-            ->dropForeignKey(
-                'city_id'
-            );
-
-        $this->table('users_properties')
-            ->dropForeignKey(
-                'property_id'
-            )
-            ->dropForeignKey(
-                'user_id'
-            );
-
-        $this->table('zips')
-            ->dropForeignKey(
-                'city_id'
-            );
-
         $this->dropTable('cities');
         $this->dropTable('countries');
         $this->dropTable('favorite_properties');
         $this->dropTable('feedbacks');
         $this->dropTable('images');
         $this->dropTable('properties');
+        $this->dropTable('reports');
         $this->dropTable('users');
         $this->dropTable('users_properties');
         $this->dropTable('zips');

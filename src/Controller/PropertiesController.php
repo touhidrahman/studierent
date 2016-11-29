@@ -19,13 +19,14 @@ class PropertiesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Zips']
-        ];
-        $properties = $this->paginate($this->Properties);
-
-        $this->set(compact('properties'));
-        $this->set('_serialize', ['properties']);
+        // $this->paginate = [
+        //     'contain' => ['Zips']
+        // ];
+        // $properties = $this->paginate($this->Properties);
+        //
+        // $this->set(compact('properties'));
+        // $this->set('_serialize', ['properties']);
+        $this->search();
     }
 
     /**
@@ -139,7 +140,9 @@ class PropertiesController extends AppController
 
         $connection = ConnectionManager::get('default');
 // TODO: address, zipcode, studierent score, status left
-        $query = "SELECT id, title, zip_id, address, description, rent, room_size, total_size FROM properties WHERE `type`='" . $qs['type'] . "' ";
+        $query = "SELECT id, title, zip_id, address, description, rent, room_size, total_size FROM properties WHERE";
+        if ($qs['type']) {$query .= "`type`='" . $qs['type'] . "' ";} else { $query .= " type = 'Flatshare' ";}
+        if ($qs['address']) $query .= " AND zip_id ='" . (int)$qs['address'] . "' ";
         if ($qs['max']) {
             $min = ($qs['min']) ? $qs['min'] : 0;
             $query .= " AND rent >= " . $min . " AND rent <= ". $qs['max']. " "; // casting to prevent sql injection
@@ -186,7 +189,7 @@ class PropertiesController extends AppController
         $stmt = $connection->execute($query);
         $count = $stmt->rowCount();
         $properties = $stmt->fetchAll('assoc');
-// var_dump($properties);
+// var_dump($query);
         $this->set(compact('properties', 'count'));
         $this->set('_serialize', ['properties']);
 
