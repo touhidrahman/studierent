@@ -26,10 +26,10 @@
 	<nav class="navbar navbar-light bg-faded">
 		<button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"></button>
 		<div class="collapse navbar-toggleable-md" id="navbarResponsive">
-			<a class="navbar-brand" href="index.html">Studierent</a>
+			<a class="navbar-brand" href="/studierent">Studierent</a>
 			<ul class="nav navbar-nav">
 				<li class="nav-item active">
-					<a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="/studierent">Home <span class="sr-only">(current)</span></a>
 				</li>
 				
 				<? if (!$loggedIn): ?>
@@ -54,10 +54,10 @@
 				</li>
 				<?php endif;?>
 			</ul>
-			<form class="form-inline float-lg-right">
-				<input class="form-control" type="text" placeholder="Search">
+			<?= $this->Form->create(NULL, ['url' => ['controller' => 'properties', 'action' => 'search'], 'class' => 'form-inline float-lg-right', 'type' => 'get']); ?>
+				<input class="form-control" type="text" name="address" placeholder="Search">
 				<button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
-			</form>
+			<?= $this->Form->end(); ?>
 		</div>
 	</nav>
 	<div class="container-fluid clearfix" style="margin-top:1em;">
