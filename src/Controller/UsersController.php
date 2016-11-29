@@ -136,7 +136,7 @@ class UsersController extends AppController
 					]);
 				}
 
-				return $this->redirect(['controller' => 'users','action' => 'view']);
+				return $this->redirect(['controller' => 'users','action' => 'dashboard']);
 
 			}
 
