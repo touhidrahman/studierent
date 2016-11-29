@@ -8,17 +8,16 @@
     <hr class="m-y-md">
     <p class="lead">
         <?= $this->Form->create(NULL, ['url' => ['controller' => 'properties', 'action' => 'search'], 'class' => 'form-inline text-xs-center', 'type' => 'get']); ?>
-        <!-- <form class="form-inline text-xs-center"> -->
             <div class="form-group">
-                <input type="text" class="form-control" id="zipcode" placeholder="Zipcode">
+                <input type="text" class="form-control" id="zipcode" name="address" placeholder="Zipcode or Street">
             </div>
             <div class="form-group">
-                <select class="form-control">
-                    <option value="0" checked>Property type</option>
-                    <option value="0">Flatshare</option>
-                    <option value="0">Flat</option>
-                    <option value="0">Student Residence</option>
-                    <option value="0">House</option>
+                <select class="form-control" name="type">
+                    <option value="Flatshare" checked>Select Property type</option>
+                    <option value="Flatshare">Flatshare</option>
+                    <option value="Flat">Flat</option>
+                    <option value="Student Residence">Student Residence</option>
+                    <option value="House">House</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-success">Search Now</button>
@@ -28,45 +27,103 @@
 </div>
 <p></p>
 <p></p>
-<h1 class="display-4 text-xs-center">Recent Properties</h1>
-<div id="carousel" class="carousel slide uptop spacewide" data-ride="carousel">
-	<ol class="carousel-indicators">
-		<li data-target="#carousel" data-slide-to="0" class="active"></li>
-		<li data-target="#carousel" data-slide-to="1"></li>
-		<li data-target="#carousel" data-slide-to="2"></li>
-	</ol>
-	<div class="carousel-inner" role="listbox">
-		<div class="carousel-item active center_please">
-			<img src="/studierent/img/hochschule_fulda1.jpg" alt="First slide">
-			<div class="carousel-caption">
-				<h3>First top property</h3>
-				<a class="" href="login.html">Check it out</a>
-			</div>
-		</div>
-		<div class="carousel-item center_please">
-			<img src="/studierent/img/hochschule_fulda2.jpg" alt="Second slide">
-			<div class="carousel-caption">
-				<h3>Second top property</h3>
-				<a class="" href="login.html">Check it out</a>
-			</div>
-		</div>
-		<div class="carousel-item center_please">
-			<img src="/studierent/img/hochschule_fulda3.jpg" alt="Third slide">
-			<div class="carousel-caption ">
-				<h3>Third top property</h3>
-				<a class="" href="login.html">Check it out</a>
-			</div>
-		</div>
-	</div>
-	<a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
-		<span class="icon-prev" aria-hidden="true"></span>
-		<span class="sr-only">Previous</span>
-	</a>
-	<a class="right carousel-control" href="#carousel" role="button" data-slide="next">
-		<span class="icon-next" aria-hidden="true"></span>
-		<span class="sr-only">Next</span>
-	</a>
+<div class="row">
+  <div class="col-xs-6">
+      <h1 class="text-xs-center text-success">Recent Properties</h1>
+      <div id="carousel" class="carousel slide uptop spacewide" data-ride="carousel">
+      	<ol class="carousel-indicators">
+      		<li data-target="#carousel" data-slide-to="0" class="active"></li>
+      		<li data-target="#carousel" data-slide-to="1"></li>
+      		<li data-target="#carousel" data-slide-to="2"></li>
+      	</ol>
+      	<div class="carousel-inner" role="listbox">
+      		<div class="carousel-item active center_please">
+      			<img src="/studierent/img/hochschule_fulda1.jpg" alt="First slide">
+      			<div class="carousel-caption">
+      				<h3>First top property</h3>
+      				<a class="" href="login.html">Check it out</a>
+      			</div>
+      		</div>
+      		<div class="carousel-item center_please">
+      			<img src="/studierent/img/hochschule_fulda2.jpg" alt="Second slide">
+      			<div class="carousel-caption">
+      				<h3>Second top property</h3>
+      				<a class="" href="login.html">Check it out</a>
+      			</div>
+      		</div>
+      		<div class="carousel-item center_please">
+      			<img src="/studierent/img/hochschule_fulda3.jpg" alt="Third slide">
+      			<div class="carousel-caption ">
+      				<h3>Third top property</h3>
+      				<a class="" href="login.html">Check it out</a>
+      			</div>
+      		</div>
+      	</div>
+      	<a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+      		<span class="icon-prev" aria-hidden="true"></span>
+      		<span class="sr-only">Previous</span>
+      	</a>
+      	<a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+      		<span class="icon-next" aria-hidden="true"></span>
+      		<span class="sr-only">Next</span>
+      	</a>
+      </div>
+  </div>
+
+  <div class="col-xs-6">
+      <h1 class="text-xs-center text-success">Top Properties</h1>
+      <div id="carousel" class="carousel slide uptop spacewide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel" data-slide-to="1"></li>
+            <li data-target="#carousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active center_please">
+                <img src="/studierent/img/hochschule_fulda3.jpg" alt="First slide">
+                <div class="carousel-caption">
+                    <h3>First top property</h3>
+                    <a class="" href="login.html">Check it out</a>
+                </div>
+            </div>
+            <div class="carousel-item center_please">
+                <img src="/studierent/img/hochschule_fulda1.jpg" alt="Second slide">
+                <div class="carousel-caption">
+                    <h3>Second top property</h3>
+                    <a class="" href="login.html">Check it out</a>
+                </div>
+            </div>
+            <div class="carousel-item center_please">
+                <img src="/studierent/img/hochschule_fulda2.jpg" alt="Third slide">
+                <div class="carousel-caption ">
+                    <h3>Third top property</h3>
+                    <a class="" href="login.html">Check it out</a>
+                </div>
+            </div>
+        </div>
+        <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+            <span class="icon-prev" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+            <span class="icon-next" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+      </div>
+  </div>
 </div>
+<p></p>
+<p></p>
+
+    <div class="jumbotron text-xs-center" style="background-color: #ffffff">
+        <h1 class="display-4">What Our Customers Are Saying?</h1>
+        <img src="/studierent/img/boy.jpg" class="img-fluid rounded-circle">
+        <p class="lead">
+            I am so happy! <br>
+            <small>- Alexandr Anfilov</small>
+        </p>
+        <hr class="m-y-md">
+    </div>
 
 <div class="spacewide">
 	<div class="card-group uptop ">
