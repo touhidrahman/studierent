@@ -196,7 +196,12 @@ class PropertiesController extends AppController
     }
 
 
-
+	
+	 public function beforeFilter(Event $event)
+    {
+		$this->Auth->allow(['search']);
+	}
+	
     public function favorites()
     {
         $properties = $this->Properties->find('all')->limit(10);
