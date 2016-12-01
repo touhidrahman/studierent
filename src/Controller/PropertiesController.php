@@ -121,6 +121,7 @@ class PropertiesController extends AppController
     /**
      * Search method
      * URL: http://localhost/studierent/properties/search?address=&type=Student+Residence&min=&max=&score=0&dist=100&directBus=1&avalFrom=20161123&avalTo=20161130&rSize=10&fSize=20&eBillIncl=1&internet=1&cableTv=1&wMachine=1&fireAlarm=1&heating=1&parking=1&bikeParking=1&garden=1&balcony=1&smoking=1&pets=1&rating=5&rating=4&sortby=rentUp
+     * @author Touhidur Rahman
      */
     public function search() {
         // access query strings and store in array

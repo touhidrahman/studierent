@@ -193,8 +193,14 @@
         <!-- Single Property Ad Card -->
         <div class="card">
             <div class="card-block" style="padding-bottom: 0rem">
-                <h4 class="card-title"><?= $property['title'] ?></h4>
-                <h6 class="card-subtitle text-muted"><?= $property['address'] . ' | ' . $property['zip_id'] ?></h6>
+                <a href="/properties/view/<?= $property['id'] ?>">
+                    <h4 class="card-title"><?= $property['title'] ?></h4>
+                </a>
+                <h6 class="card-subtitle text-muted">
+                    <?= $this->Html->link($property['address'], '/properties/search?address='.$property['address']) ?>
+                    &nbsp;|&nbsp;
+                    <?= $this->Html->link($property['zip_id'], '/properties/search?address='.$property['zip_id']) ?>
+                </h6>
             </div>
             <div class="card-block">
                 <div class="row">
