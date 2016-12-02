@@ -29,6 +29,8 @@ class PropertiesTableTest extends TestCase
         'app.favorite_properties',
         'app.images',
         'app.users',
+        'app.cities',
+        'app.feedbacks',
         'app.users_properties'
     ];
 

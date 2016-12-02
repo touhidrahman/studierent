@@ -12,7 +12,7 @@ use Cake\ORM\Entity;
  * @property string $address
  * @property int $zip_id
  * @property int $status
- * @property int $contact_number
+ * @property string $contact_number
  * @property string $email
  * @property int $room_size
  * @property int $total_size

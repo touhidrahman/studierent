@@ -16,7 +16,7 @@ use Cake\Auth\DefaultPasswordHasher;
  * @property string $address
  * @property int $city_id
  * @property int $status
- * @property int $contact_number
+ * @property string $contact_number
  * @property string $photo
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
