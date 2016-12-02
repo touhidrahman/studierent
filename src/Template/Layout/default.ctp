@@ -62,8 +62,17 @@
 		</div>
 	</nav>
 	<div class="container-fluid clearfix" style="margin-top:1em;">
-		<?= $this->Flash->render() ?>
+		<!-- ALERT or NOTIFICATION BLOCK -->
+		<div class="row">
+			<div class="offset-sm-3 col-sm-6 text-xs-center">
+				<?= $this->Flash->render() ?>
+			</div>
+		</div>
+		<!-- END ALERT -->
+
+		<!-- CONTENT -->
 		<?= $this->fetch('content') ?>
+		<!-- END CONTENT -->
 	</div>
 
 
