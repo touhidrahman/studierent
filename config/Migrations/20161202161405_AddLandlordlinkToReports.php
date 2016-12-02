@@ -16,7 +16,7 @@ class AddLandlordlinkToReports extends AbstractMigration
         $table->addColumn('landlordlink', 'string', [
             'default' => null,
             'limit' => 55,
-            'null' => false,
+            'null' => true,
         ]);
         $table->update();
     }
