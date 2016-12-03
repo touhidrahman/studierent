@@ -57,8 +57,8 @@ class PropertiesSeed extends AbstractSeed
                 'electricity_bill_included' => $faker->randomDigit() % 2,
                 'internet' => $faker->randomDigit() % 2,
                 'view_times' => $faker->randomNumber(),
-                'created' => $faker->dateTimeThisYear(),
-                'modified' => $faker->dateTimeThisYear(),
+                'created' => date('Y-m-d H:i:s'),
+                'modified' => date('Y-m-d H:i:s'),
 
             ];
         }
