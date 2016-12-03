@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class AddLandlordlinkToReports extends AbstractMigration
+class AlterProperties extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,10 +12,10 @@ class AddLandlordlinkToReports extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('reports');
-        $table->addColumn('landlordlink', 'string', [
+        $table = $this->table('properties');
+        $table->changeColumn('contact_number', 'string', [
             'default' => null,
-            'limit' => 55,
+            'limit' => 30,
             'null' => true,
         ]);
         $table->update();

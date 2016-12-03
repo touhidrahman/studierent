@@ -12,6 +12,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Zips
  * @property \Cake\ORM\Association\HasMany $FavoriteProperties
  * @property \Cake\ORM\Association\HasMany $Images
+ * @property \Cake\ORM\Association\HasMany $Reports
  * @property \Cake\ORM\Association\BelongsToMany $Users
  *
  * @method \App\Model\Entity\Property get($primaryKey, $options = [])
@@ -53,6 +54,9 @@ class PropertiesTable extends Table
         $this->hasMany('Images', [
             'foreignKey' => 'property_id'
         ]);
+        $this->hasMany('Reports', [
+            'foreignKey' => 'property_id'
+        ]);
         $this->belongsToMany('Users', [
             'foreignKey' => 'property_id',
             'targetForeignKey' => 'user_id',
@@ -90,9 +94,7 @@ class PropertiesTable extends Table
             ->notEmpty('status');
 
         $validator
-            ->integer('contact_number')
-            ->requirePresence('contact_number', 'create')
-            ->notEmpty('contact_number');
+            ->allowEmpty('contact_number');
 
         $validator
             ->email('email')
@@ -110,25 +112,20 @@ class PropertiesTable extends Table
             ->notEmpty('total_size');
 
         $validator
-            ->requirePresence('description', 'create')
-            ->notEmpty('description');
+            ->allowEmpty('description');
 
         $validator
-            ->requirePresence('transportation', 'create')
-            ->notEmpty('transportation');
+            ->allowEmpty('transportation');
 
         $validator
             ->boolean('direct_bus_to_uni')
-            ->requirePresence('direct_bus_to_uni', 'create')
-            ->notEmpty('direct_bus_to_uni');
+            ->allowEmpty('direct_bus_to_uni');
 
         $validator
-            ->requirePresence('house_rules', 'create')
-            ->notEmpty('house_rules');
+            ->allowEmpty('house_rules');
 
         $validator
-            ->requirePresence('looking_for', 'create')
-            ->notEmpty('looking_for');
+            ->allowEmpty('looking_for');
 
         $validator
             ->date('available_from')
@@ -157,82 +154,66 @@ class PropertiesTable extends Table
 
         $validator
             ->integer('dist_from_uni')
-            ->requirePresence('dist_from_uni', 'create')
-            ->notEmpty('dist_from_uni');
+            ->allowEmpty('dist_from_uni');
 
         $validator
-            ->requirePresence('time_dist_from_uni', 'create')
-            ->notEmpty('time_dist_from_uni');
+            ->allowEmpty('time_dist_from_uni');
 
         $validator
             ->boolean('smoking')
-            ->requirePresence('smoking', 'create')
-            ->notEmpty('smoking');
+            ->allowEmpty('smoking');
 
         $validator
             ->boolean('pets')
-            ->requirePresence('pets', 'create')
-            ->notEmpty('pets');
+            ->allowEmpty('pets');
 
         $validator
             ->boolean('handicap')
-            ->requirePresence('handicap', 'create')
-            ->notEmpty('handicap');
+            ->allowEmpty('handicap');
 
         $validator
             ->boolean('fire_alarm')
-            ->requirePresence('fire_alarm', 'create')
-            ->notEmpty('fire_alarm');
+            ->allowEmpty('fire_alarm');
 
         $validator
             ->boolean('washing_machine')
-            ->requirePresence('washing_machine', 'create')
-            ->notEmpty('washing_machine');
+            ->allowEmpty('washing_machine');
 
         $validator
             ->boolean('parking')
-            ->requirePresence('parking', 'create')
-            ->notEmpty('parking');
+            ->allowEmpty('parking');
 
         $validator
             ->boolean('heating')
-            ->requirePresence('heating', 'create')
-            ->notEmpty('heating');
+            ->allowEmpty('heating');
 
         $validator
             ->boolean('bike_parking')
-            ->requirePresence('bike_parking', 'create')
-            ->notEmpty('bike_parking');
+            ->allowEmpty('bike_parking');
 
         $validator
             ->boolean('garden')
-            ->requirePresence('garden', 'create')
-            ->notEmpty('garden');
+            ->allowEmpty('garden');
 
         $validator
             ->boolean('balcony')
-            ->requirePresence('balcony', 'create')
-            ->notEmpty('balcony');
+            ->allowEmpty('balcony');
 
         $validator
             ->boolean('cable_tv')
-            ->requirePresence('cable_tv', 'create')
-            ->notEmpty('cable_tv');
+            ->allowEmpty('cable_tv');
 
         $validator
             ->boolean('electricity_bill_included')
-            ->requirePresence('electricity_bill_included', 'create')
-            ->notEmpty('electricity_bill_included');
+            ->allowEmpty('electricity_bill_included');
 
         $validator
             ->boolean('internet')
-            ->requirePresence('internet', 'create')
-            ->notEmpty('internet');
+            ->allowEmpty('internet');
 
         $validator
             ->integer('view_times')
-            ->requirePresence('view_times', 'create')
-            ->notEmpty('view_times');
+            ->allowEmpty('view_times');
 
         return $validator;
     }

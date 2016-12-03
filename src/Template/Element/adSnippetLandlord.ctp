@@ -5,9 +5,9 @@
             <h4 class="card-title"><?= $property['title'] ?></h4>
         </a>
         <h6 class="card-subtitle text-muted">
-            <?= $this->Html->link($property['address'], '/properties/search?address='.$property['address']) ?>
+            <?= $this->Html->link($property['address'], '/properties/search?address='.$property['address'], ['title' => 'Click here to search all properties in '.$property['address']]) ?>
             &nbsp;|&nbsp;
-            <?= $this->Html->link($property['zip_id'], '/properties/search?address='.$property['zip_id']) ?>
+            <?= $this->Html->link($property['zip_id'], '/properties/search?address='.$property['zip_id'], ['title' => 'Click here to search all properties in '.$property['zip_id']]) ?>
         </h6>
     </div>
     <div class="card-block">
@@ -18,8 +18,8 @@
             <div class="col-sm-6">
                 <p class="card-text text-justify"><?= $property['description'] ?></p>
 
-                <?= $this->Html->link('View Details', '/properties/view/'.$property['id'], ['class' => 'card-link']) ?>
-                <?= $this->Html->link('Edit', '/properties/edit/'.$property['id'], ['class' => 'card-link text-info']) ?>
+                <?= $this->Html->link('<i class="fa fa-eye"></i> View Details', '/properties/view/'.$property['id'], ['class' => 'card-link', 'escapeTitle' => false]) ?>
+                <?= $this->Html->link('<i class="fa fa-pencil"></i> Edit', '/properties/edit/'.$property['id'], ['class' => 'card-link text-info', 'escapeTitle' => false]) ?>
             </div>
             <div class="col-sm-3">
                 <p class="text-xs-center text-muted" style="margin-bottom:0">EUR</p>

@@ -190,7 +190,7 @@
     <div class="col-md-9 col-sm-8 col-xs-12">
 
         <h1 class="display-4"><?= $count ?> Properties Found</h1>
-        <?php foreach ($properties as $property){ ?>
+        <?php foreach ($properties as $property){
             echo $this->element('adSnippet', ['property' => $property]);
         } ?>
 
@@ -200,5 +200,4 @@
     <!-- pagination -->
 
 
-</div>
 </div>

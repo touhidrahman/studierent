@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class AddlanlordLinktoreports extends AbstractMigration
+class RemoveReportedByUserIdFromReports extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,5 +12,8 @@ class AddlanlordLinktoreports extends AbstractMigration
      */
     public function change()
     {
+        $table = $this->table('reports');
+        $table->removeColumn('reported_by_user_id');
+        $table->update();
     }
 }

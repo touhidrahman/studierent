@@ -100,7 +100,7 @@ class UsersTable extends Table
             ->allowEmpty('status');
 
         $validator
-            ->integer('contact_number')
+            ->requirePresence('contact_number')
             ->allowEmpty('contact_number');
 
         $validator

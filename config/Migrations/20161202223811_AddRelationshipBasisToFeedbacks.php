@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class AddLandlordlinkToReports extends AbstractMigration
+class AddRelationshipBasisToFeedbacks extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,11 +12,11 @@ class AddLandlordlinkToReports extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('reports');
-        $table->addColumn('landlordlink', 'string', [
+        $table = $this->table('feedbacks');
+        $table->addColumn('relationship_basis', 'string', [
             'default' => null,
             'limit' => 55,
-            'null' => true,
+            'null' => false,
         ]);
         $table->update();
     }
