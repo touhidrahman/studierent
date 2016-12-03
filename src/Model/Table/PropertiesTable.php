@@ -57,10 +57,9 @@ class PropertiesTable extends Table
         $this->hasMany('Reports', [
             'foreignKey' => 'property_id'
         ]);
-        $this->belongsToMany('Users', [
-            'foreignKey' => 'property_id',
-            'targetForeignKey' => 'user_id',
-            'joinTable' => 'users_properties'
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER'
         ]);
     }
 
@@ -83,6 +82,10 @@ class PropertiesTable extends Table
         $validator
             ->requirePresence('title', 'create')
             ->notEmpty('title');
+
+        $validator
+            ->requirePresence('house_no', 'create')
+            ->notEmpty('house_no');
 
         $validator
             ->requirePresence('address', 'create')

@@ -26,7 +26,7 @@ class ZipsSeed extends AbstractSeed
                 'number' => $faker->numberBetween(36030, 36040),
                 'province' => 'Hessen',
                 'country' => 'Germany',
-                'city_id' => $faker->randomNumber(3),
+                'city_id' => $faker->randomNumber(2),
             ];
         }
 

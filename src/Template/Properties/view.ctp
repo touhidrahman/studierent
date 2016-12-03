@@ -109,16 +109,16 @@
 	<div class="col-xs-4">
 		<div class="card">
     		<div class="card-header">
-    			Basic Info
+    			<i class="fa fa-home"></i> Basic Info
     		</div>
-			<table class="table">
+			<table class="table table-hover">
 			  <thead>
 			    <tr>
 			      <th colspan="2" class="text-xs-center">
 					  <label>Monthly Total Rent (EUR)</label>
 					  <h4 class="display-4 text-warning"><?= $property->rent + $property->utility_cost ?></h4>
-					  <p class="text-muted">Rent: <?= $property->rent ?> EUR + Utilities: <?= $property->utility_cost ?> EUR</p>
-					  <p class="text-muted">Deposit: <?= $property->deposit ?> EUR</p>
+					  <label class="text-muted">Rent: <?= $property->rent ?> EUR + Utilities: <?= $property->utility_cost ?> EUR</label><br>
+					  <label class="text-primary">Deposit: <?= $property->deposit ?> EUR</label>
 				  </th>
 			    </tr>
 			  </thead>
@@ -145,7 +145,7 @@
 			    </tr>
 			    <tr>
 			      <td>Address</td>
-			      <td><?= $property->address ?></td>
+			      <td><?php echo $property->address .',<br> '. $property->zip->number .' '. $property->zip->city; ?></td>
 			    </tr>
 			  </tbody>
 			</table>
@@ -153,13 +153,13 @@
 
 		<div class="card">
     		<div class="card-header">
-    				Landlord Info
+    			<i class="fa fa-user"></i> Landlord Info
     		</div>
 			<table class="table">
 			  <tbody>
 			    <tr>
 			      <th>Name</th>
-				  <td>(To be added later)</td>
+				  <td><?= $property->user->first_name . ' ' . $property->user->last_name ?></td>
 			    </tr>
 			    <tr>
 			      <th>Contact Number</th>

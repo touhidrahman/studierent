@@ -9,6 +9,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $type
  * @property string $title
+ * @property string $house_no
  * @property string $address
  * @property int $zip_id
  * @property int $status

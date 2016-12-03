@@ -1,7 +1,7 @@
 <div class="row">
     <?= $this->element('userSidebar', [], ['cache' => true]) ?>
 
-    <!-- Add Property -->
+    <!-- Edit Property -->
     <div class="col-md-9 col-sm-8 col-xs-12">
 
         <h1 class="display-4">Edit Property Ad</h1>
@@ -25,7 +25,8 @@
                   <div class="card-block">
                       <h4 class="card-title">Address</h4>
                       <?php
-                      echo $this->Form->input('address', ['label' => 'Street and House Number']);
+                      echo $this->Form->input('house_no', ['label' => 'House Number']);
+                      echo $this->Form->input('address', ['label' => 'Street']);
                       echo $this->Form->input('zip_id', ['type' => 'hidden']);
                       echo $this->Form->input('zip', ['type' => 'text', 'label' => 'Zip Code', 'id' => 'zip']);
                       ?>
@@ -89,7 +90,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-12">
+            <div class="col-sm-6">
                 <div class="card">
                   <div class="card-block">
                       <h4 class="card-title">Owner's Contact Information</h4>
