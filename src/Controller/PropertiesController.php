@@ -12,6 +12,16 @@ use Cake\Datasource\ConnectionManager;
 class PropertiesController extends AppController
 {
 
+    public $paginate = [
+        'limit' => 5,
+        'order' => ['Properties.created' => 'desc']
+    ];
+
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('Paginator', ['template' => 'paginator-template']);
+    }
+
     /**
      * Index method
      *
@@ -207,9 +217,14 @@ class PropertiesController extends AppController
         $this->set('_serialize', ['properties']);
     }
 
+    /**
+     * Displays list of properties a user has posted
+     * @author Touhidur Rahman
+     */
     public function myproperties()
     {
-        $properties = $this->Properties->find('all')->limit(10);
+        $query = $this->Properties->find('all');
+        $properties = $this->paginate($query);
         $this->set(compact('properties'));
         $this->set('_serialize', ['properties']);
     }
