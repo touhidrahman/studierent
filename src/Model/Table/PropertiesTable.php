@@ -103,13 +103,11 @@ class PropertiesTable extends Table
 
         $validator
             ->integer('room_size')
-            ->requirePresence('room_size', 'create')
-            ->notEmpty('room_size');
+            ->allowEmpty('room_size');
 
         $validator
             ->integer('total_size')
-            ->requirePresence('total_size', 'create')
-            ->notEmpty('total_size');
+            ->allowEmpty('total_size');
 
         $validator
             ->allowEmpty('description');
@@ -228,7 +226,7 @@ class PropertiesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['email']));
-        $rules->add($rules->existsIn(['zip_id'], 'Zips'));
+        // $rules->add($rules->existsIn(['zip_id'], 'Zips'));
 
         return $rules;
     }

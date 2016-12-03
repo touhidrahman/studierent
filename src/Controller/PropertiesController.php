@@ -50,6 +50,7 @@ class PropertiesController extends AppController
      * Add method
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
+     * @author Touhidur Rahman
      */
     public function add()
     {
@@ -59,7 +60,7 @@ class PropertiesController extends AppController
             if ($this->Properties->save($property)) {
                 $this->Flash->success(__('The property has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'myproperties']);
             } else {
                 $this->Flash->error(__('The property could not be saved. Please, try again.'));
             }

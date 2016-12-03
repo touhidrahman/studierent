@@ -4,7 +4,7 @@
     <!-- Add Property -->
     <div class="col-md-9 col-sm-8 col-xs-12">
 
-        <h1 class="display-4">Add a Property Ad</h1>
+        <h1 class="display-4">Edit Property Ad</h1>
 
         <?= $this->Form->create($property, ['horizontal' => false]) ?>
         <div class="row">
@@ -13,7 +13,7 @@
                   <div class="card-block">
                       <h4 class="card-title">Type & Title</h4>
                       <?php
-                      echo $this->Form->input('type');
+                      echo $this->Form->input('type', ['type' => 'select', 'options' => ['Flatshare' => 'Flatshare', 'Flat' => 'Flat', 'Student Residence' => 'Syudent Residence', 'House' => 'House']]);
                       echo $this->Form->input('title');
                       ?>
                   </div>
@@ -25,8 +25,9 @@
                   <div class="card-block">
                       <h4 class="card-title">Address</h4>
                       <?php
-                      echo $this->Form->input('address');
-                      echo $this->Form->input('zip_id');
+                      echo $this->Form->input('address', ['label' => 'Street and House Number']);
+                      echo $this->Form->input('zip_id', ['type' => 'hidden']);
+                      echo $this->Form->input('zip', ['type' => 'text', 'label' => 'Zip Code', 'id' => 'zip']);
                       ?>
                   </div>
                 </div>
@@ -37,14 +38,14 @@
                   <div class="card-block">
                       <h4 class="card-title">Details</h4>
                       <?php
-                      echo $this->Form->input('room_size');
-                      echo $this->Form->input('total_size');
+                      echo $this->Form->input('room_size', ['min' => 0]);
+                      echo $this->Form->input('total_size', ['min' => 0]);
                       echo $this->Form->input('available_from');
                       echo $this->Form->input('available_until');
-                      echo $this->Form->input('looking_for');
-                      echo $this->Form->input('rent');
-                      echo $this->Form->input('deposit');
-                      echo $this->Form->input('utility_cost');
+                      echo $this->Form->input('looking_for', ['type' => 'select', 'options' => ['Any Gender' => 'Any Gender', 'Male' => 'Male', 'Female' => 'Female']]);
+                      echo $this->Form->input('rent', ['min' => 0, 'label' => 'Rent (Monthly)']);
+                      echo $this->Form->input('deposit', ['min' => 0, 'label' => 'Initial Deposit (One Time)']);
+                      echo $this->Form->input('utility_cost', ['min' => 0, 'label' => 'Utilities Cost (Monthly)']);
                       ?>
                   </div>
                 </div>
@@ -55,10 +56,10 @@
                   <div class="card-block">
                       <h4 class="card-title">Amenities</h4>
                       <?php
-                      echo $this->Form->input('electricity_bill_included');
-                      echo $this->Form->input('dist_from_uni');
-                      echo $this->Form->input('time_dist_from_uni');
-                      echo $this->Form->input('direct_bus_to_uni');
+                      echo $this->Form->input('electricity_bill_included', ['label' => 'Electricity Bill Included in Rent']);
+                      echo $this->Form->input('dist_from_uni', ['type' => 'text', 'label' => 'Distance From the University (Km)', 'placeholder' => '.2']);
+                      echo $this->Form->input('time_dist_from_uni', ['type' => 'number', 'min' => 0, 'max' => 100, 'step' => '5', 'label' => 'Walking Distance From the University (Minutes)', 'placeholder' => '10']);
+                      echo $this->Form->input('direct_bus_to_uni', ['label' => 'Direct Bus Route to University']);
                       echo $this->Form->input('internet');
                       echo $this->Form->input('heating');
                       echo $this->Form->input('cable_tv');
@@ -83,6 +84,16 @@
                       echo $this->Form->input('description');
                       echo $this->Form->input('transportation');
                       echo $this->Form->input('house_rules');
+                      ?>
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <div class="card">
+                  <div class="card-block">
+                      <h4 class="card-title">Owner's Contact Information</h4>
+                      <?php
                       echo $this->Form->input('contact_number');
                       echo $this->Form->input('email');
                       ?>
