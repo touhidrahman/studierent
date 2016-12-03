@@ -169,7 +169,7 @@ class UsersController extends AppController
 	public function initialize()
 	{
 		parent::initialize();
-		$this->Auth->allow(['logout']);
+		$this->Auth->allow(['logout', 'activation']); // Aleksandr: just added 'activation' to make it viewable without login
 		$this->Auth->allow(['logout', 'register']);
 	}
 
@@ -183,6 +183,12 @@ class UsersController extends AppController
     public function dashboard(){}
         
     public function admin(){}
+    
+    public function activation()
+    {
+        
+
+    }
    
 
 }
