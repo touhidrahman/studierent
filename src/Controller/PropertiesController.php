@@ -35,15 +35,17 @@ class PropertiesController extends AppController
      * @param string|null $id Property id.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @author Touhidur Rahman
      */
     public function view($id = null)
     {
+        $property = $this->Properties->get($id);
         // $property = $this->Properties->get($id, [
         //     'contain' => ['Zips', 'Users', 'FavoriteProperties', 'Images']
         // ]);
-        //
-        // $this->set('property', $property);
-        // $this->set('_serialize', ['property']);
+
+        $this->set('property', $property);
+        $this->set('_serialize', ['property']);
     }
 
     /**

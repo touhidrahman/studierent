@@ -35,7 +35,7 @@
           <div class="col-xs-12">
               <div class="card">
       		      <div class="card-header">
-      				<h3>A Nice little Property Title to attract users</h3>
+      				<h3><?= $property->title ?></h3>
       			  </div>
                   <div class="card-block">
                       <table class="table table-sm table-fluid">

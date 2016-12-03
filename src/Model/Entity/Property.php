@@ -66,4 +66,13 @@ class Property extends Entity
         '*' => true,
         'id' => false
     ];
+
+
+    /**
+     * Virtual field
+     * @author Touhidur Rahman
+     */
+     protected function _getZipcode() {
+        //  return $this->_properties
+     }
 }

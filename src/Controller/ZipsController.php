@@ -45,6 +45,23 @@ class ZipsController extends AppController
     }
 
     /**
+     * Get Zip_id method
+     *
+     * @param string|null $id Zip id.
+     * @return \Cake\Network\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function getZipIdFromCode($code = null)
+    {
+        $zip = $this->Zips->get($id, [
+            'contain' => ['Cities', 'Properties']
+        ]);
+
+        $this->set('zip', $zip);
+        $this->set('_serialize', ['zip']);
+    }
+
+    /**
      * Add method
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
