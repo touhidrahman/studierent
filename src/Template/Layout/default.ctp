@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.js"></script>
-	<?= $this->Html->css('style') ?>
+		<?= $this->Html->css('style') ?>
 	<!-- JS Dependencies -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
@@ -27,7 +27,7 @@
 	<nav class="navbar navbar-light bg-faded">
 		<button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"></button>
 		<div class="collapse navbar-toggleable-md" id="navbarResponsive">
-			<a class="navbar-brand" href="/studierent">Studierent</a>
+			<a class="navbar-brand" href="/studierent"><?= $this->Html->image('logo.png',array('width'=>'80px','height'=>'40px'), ['alt' => 'Property image','class' => 'rounded-left img-fluid']); ?></a>
 			<ul class="nav navbar-nav">
 				<li class="nav-item active">
 					<a class="nav-link" href="/studierent">Home <span class="sr-only">(current)</span></a>
@@ -56,7 +56,7 @@
 				<?php endif; ?>
 			</ul>
 			<?= $this->Form->create(NULL, ['url' => ['controller' => 'properties', 'action' => 'search'], 'class' => 'form-inline float-lg-right', 'type' => 'get']); ?>
-				<input class="form-control" type="text" name="address" placeholder="Search">
+				<input class="form-control" type="text" name="address" placeholder="Street or Zipcode">
 				<button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
 			<?= $this->Form->end(); ?>
 		</div>
