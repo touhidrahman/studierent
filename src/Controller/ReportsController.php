@@ -61,6 +61,9 @@ class ReportsController extends AppController
         }
         $this->set(compact('report'));
         $this->set('_serialize', ['report']);
+       $this->set('users',$this->Reports->Users->find('list')) ;
+       $this->set('properties',$this->Reports->Properties->find('list')) ;
+       
     }
 
     /**

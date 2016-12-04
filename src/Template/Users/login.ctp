@@ -35,7 +35,7 @@
 								<?= $this->Form->end() ?>
 								</div>
 							<div>
-								<button id="login_lost_btn" type="button" class="btn btn-link">Forgot your Password?</button>
+								<a href="forgotpassword" class="btn btn-link">Forgot your password?</a>
 								<a href="register" class="btn btn-link">New User?</a>
 							</div>
 						</div>
