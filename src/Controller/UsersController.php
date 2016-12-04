@@ -136,7 +136,7 @@ class UsersController extends AppController
 					]);
 				}
 
-				return $this->redirect(['controller' => 'users','action' => 'dashboard']);
+				return $this->redirect(['controller' => 'properties','action' => 'search']);
 
 			}
 
@@ -170,7 +170,7 @@ class UsersController extends AppController
 	{
 		parent::initialize();
 		$this->Auth->allow(['logout', 'activation']); // Aleksandr: just added 'activation' to make it viewable without login
-		$this->Auth->allow(['logout', 'register']);
+		$this->Auth->allow(['register']);
 	}
 
 	public function logout()
