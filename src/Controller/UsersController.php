@@ -182,13 +182,23 @@ class UsersController extends AppController
 
     public function dashboard(){}
         
-    public function admin(){}
-    
-    public function activation()
-    {
-        
-
+    public function admin(){
+        $users = $this->Users->find('all');
+        $this->set(compact('users')); //TODO: paginate
     }
+    
+    public function activation()  { }
+
+    //Admin: search for user by id
+    /* the convention is that your URLs are lowercase and dashed using the 
+     * DashedRoute class, therefore /article-categories/view-all is the correct 
+     * form to access the ArticleCategoriesController::viewAll() action.
+     */
+    public function adminSearchById($id = null)  { // author: Aleksandr
+        $user = $this->Users->get($id);
+        $this->set(compact('user'));
+    }
+        
    
 
 }
