@@ -1,13 +1,8 @@
 <?php
 namespace App\Controller;
 
-use Cake\ORM\TableRegistry;
-use App\Model\Entity\Device;
 use App\Controller\AppController;
 use Cake\Error\Debugger;
-use Cake\ORM\Entity;
-use Cake\ORM\Query;
-use Cake\Auth\DefaultPasswordHasher;
 
 /**
  * Users Controller
@@ -16,6 +11,7 @@ use Cake\Auth\DefaultPasswordHasher;
  */
 class UsersController extends AppController
 {
+
     /**
      * Index method
      *
@@ -27,7 +23,7 @@ class UsersController extends AppController
             'contain' => ['Cities']
         ];
         $users = $this->paginate($this->Users);
-        
+
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
     }
@@ -173,14 +169,8 @@ class UsersController extends AppController
 	public function initialize()
 	{
 		parent::initialize();
-<<<<<<< HEAD
-		$this->Auth->allow(['logout']);
-		$this->Auth->allow(['logout', 'register',]);
-		$this->Auth->allow(['forgotpassword']);
-=======
 		$this->Auth->allow(['logout', 'activation']); // Aleksandr: just added 'activation' to make it viewable without login
 		$this->Auth->allow(['register']);
->>>>>>> 9fab30ab26c95be59bcb1ff5f45c49aabd463b6b
 	}
 
 	public function logout()
@@ -200,33 +190,5 @@ class UsersController extends AppController
 
     }
    
-    public function forgotPassword($username = null)
-    {
 
-    if($this->request->is('post')) {
-         $username = $this->request->data['username'];
-         $options = array('conditions' => array('User.' . $this->Users->username => $username));
-         $found = $this->Users->find('first');
-        
-         
-         if (!$username) {
-             $this->Flash->error(__('No user with that email found.'));
-             return $this->redirect(['controller' => 'Users','action' => 'forgotPassword']);
-
-        }else{
-
-                $random = 'a';
-                $hasher = new DefaultPasswordHasher();
-                $val = $hasher->hash($random);
-                $data = $this->Users->password =  $val; 
-                if ($this->Users->save($data)) {
-                    $this->Flash->success(__('Password changed Succesfully.'));
-                     return $this->redirect(['controller' => 'Users','action' => 'forgotPassword']);
-
-                }
-
-
-        }
-    }
-   }
 }

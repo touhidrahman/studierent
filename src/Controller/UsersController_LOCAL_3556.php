@@ -140,7 +140,7 @@ class UsersController extends AppController
 					]);
 				}
 
-				return $this->redirect(['controller' => 'properties','action' => 'search']);
+				return $this->redirect(['controller' => 'users','action' => 'dashboard']);
 
 			}
 
@@ -173,14 +173,9 @@ class UsersController extends AppController
 	public function initialize()
 	{
 		parent::initialize();
-<<<<<<< HEAD
 		$this->Auth->allow(['logout']);
 		$this->Auth->allow(['logout', 'register',]);
 		$this->Auth->allow(['forgotpassword']);
-=======
-		$this->Auth->allow(['logout', 'activation']); // Aleksandr: just added 'activation' to make it viewable without login
-		$this->Auth->allow(['register']);
->>>>>>> 9fab30ab26c95be59bcb1ff5f45c49aabd463b6b
 	}
 
 	public function logout()
@@ -193,12 +188,6 @@ class UsersController extends AppController
     public function dashboard(){}
         
     public function admin(){}
-    
-    public function activation()
-    {
-        
-
-    }
    
     public function forgotPassword($username = null)
     {

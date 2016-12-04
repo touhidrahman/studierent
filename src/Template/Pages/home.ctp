@@ -13,7 +13,7 @@
             </div>
             <div class="form-group">
                 <select class="form-control" name="type">
-                    <option value="Flatshare" checked>Select Property type</option>
+                    <option value="" checked>Select Property type</option>
                     <option value="Flatshare">Flatshare</option>
                     <option value="Flat">Flat</option>
                     <option value="Student Residence">Student Residence</option>
