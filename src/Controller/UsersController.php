@@ -124,10 +124,10 @@ class UsersController extends AppController
 		if($this->request->is('post'))
 		{
 			$user = $this->Auth->identify();
-                       // echo print_r($user);
+                        echo print_r($user);
                         if($user['status']==9)
                         {
-                            return $this->redirect(['controller' => 'users','action' => 'admin']);
+                            $this->redirect(['controller' => 'users','action' => 'admin']);
                         } 
                      	if($user)
 			{
@@ -144,11 +144,13 @@ class UsersController extends AppController
 					]);
 				}
 
-				return $this->redirect(['controller' => 'properties','action' => 'search']);
+				$this->redirect(['controller' => 'properties','action' => 'search']);
 
-			}
+			}else{
+                         $this->Flash->error('Username or password is incorrect');    
+                        }
 
-			$this->Flash->error('Username or password is incorrect');
+			
 
 		}
 	}
