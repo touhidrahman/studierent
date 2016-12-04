@@ -9,18 +9,43 @@
                 <ul>
                     <li><b>Properties</b>
                         <ul>
+                            <li><a href="#"><i>Recent(3-static)</i></a></li>
+<!--author: Ramanpreet         -->
+<?php
+                        foreach($results as $r){
+                            echo 
+                            '<li><a href="#">'.$r['type']."(".$r['counts'].")".'</a></li>';
+                        }
+?>
+<!-- STATIC BEFORE:
+                        
                             <li><a href="#">Recent(3)</a></li>
                             <li><a href="#">Flats(7)</a></li>
                             <li><a href="#">Flatshare(8)</a></li>
                             <li><a href="#">Houses(9)</a></li>
                             <li><a href="#">Student Residence(15)</a></li>
+                        
+-->
                         </ul>
                     </li>
+                    
                     <li><b>Users</b>
                         <ul>
+                           
+<!--author: Ramanpreet         -->
+<?php
+                            
+                        foreach($users as $u){
+                            echo 
+                            '<li><a href="#">' . $u['status'] . '(' .$u['counts'] . ')' .'</a></li>';
+                            
+                        }
+?>                           
+<!-- STATIC BEFORE:
                             <li><a href="#">Landlord(10)</a></li>
                             <li><a href="#">Tenants(10)</a></li>
                             <li><a href="#">Blocked(3)</a></li>
+-->
                         </ul>
                     </li>
                     
@@ -68,13 +93,15 @@
                 </form>
                 <br>
                 <br>
+<!-- author: Aleksandr     -->
                 <h3><?= __('Users') ?></h3>
                 <div class="list-group">
-<!-- Here is where we iterate through our $users query object, printing out users info.
-    TODO: pagination     -->
-<?php foreach ($users as $user): ?>
-    <div class="list-group-item ">                   
-<?= $this->Html->image("/img/boy.jpg", 
+      
+    
+<?php //foreach ($users as $usersAll): //TODO: pagination   ?>
+  <div class="list-group-item "> <!--  Display user image, view link, and name          -->
+<?php /*
+    $this->Html->image("/img/boy.jpg", 
     [
     'class'  => "img-thumbnail", 
     'height' => "100px",
@@ -84,13 +111,18 @@
     ]
                       );
     echo $user->id.'. '.h($user->first_name).' '.h($user->last_name); 
+    */
 ?>
-    
+<!--   Block button
     <span class="pull-right">
         <button class="btn btn-primary" type="submit">Block</button>
     </span>
     </div>
-<?php endforeach; ?>  
+-->
+    
+<?php 
+//  endforeach; 
+?>  
                 </div><!--  list-group-->
             </div>
         </div>

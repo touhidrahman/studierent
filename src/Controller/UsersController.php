@@ -179,7 +179,7 @@ class UsersController extends AppController
 	public function initialize()
 	{
 		parent::initialize();
-		$this->Auth->allow(['logout', 'activation']); // Aleksandr: just added 'activation' to make it viewable without login
+		$this->Auth->allow(['logout']); 
 		$this->Auth->allow(['register', 'forgotpassword']);
 
 	}
@@ -193,39 +193,28 @@ class UsersController extends AppController
 
     public function dashboard(){}
         
-<<<<<<< HEAD
-    public function admin(){
-        $users = $this->Users->find('all');
-        $this->set(compact('users')); //TODO: paginate
-    }
-||||||| merged common ancestors
-    public function admin(){}
-=======
+//  author: Ramanpreet
     public function admin(){
         // In a controller or table method.
         //select type, count(*) from properties group by type
           
-           $connection = ConnectionManager::get('default');
-            $results = $connection->execute('select count(id) as counts , type from properties group by type')->fetchAll('assoc');
-            $this->set('results',$results);
-            $users = $connection->execute('select count(id) as counts , status from users group by status')->fetchAll('assoc');
-            //$users = $connection->execute('select count(id) as counts , status,roles from users left join roles on users.status=roles.id group by status')->fetchAll('assoc');
-            $this->set('users',$users);
+        $connection = ConnectionManager::get('default');
+        $results = $connection->execute('select count(id) as counts , type from properties group by type')->fetchAll('assoc');
+        //   Aleksandr: please note that Recent properties are not included ^^^
+        $this->set('results',$results);
+        $users = $connection->execute('select count(id) as counts , status from users group by status')->fetchAll('assoc');
+        //$users = $connection->execute('select count(id) as counts , status,roles from users left join roles on users.status=roles.id group by status')->fetchAll('assoc');
+        $this->set('users',$users);
+/*  author: Aleksandr
+* Select all users
+* $usersAll = $this->Users->find('all');
+* $this->set(compact('usersAll')); //TODO: paginate    http://book.cakephp.org/3.0/en/controllers/components/pagination.html
+*/
             
     }
->>>>>>> 72b407a17b8f44cfd7fbebdf99e1b94b16f32961
-    
-<<<<<<< HEAD
-    public function activation()  { }
-||||||| merged common ancestors
-    public function activation()
-    {
-        
-=======
-    public function activation()
-    {
 
->>>>>>> 72b407a17b8f44cfd7fbebdf99e1b94b16f32961
+    public function activation()  { }
+
 
     //Admin: search for user by id
     /* the convention is that your URLs are lowercase and dashed using the 

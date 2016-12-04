@@ -107,7 +107,8 @@ class AppController extends Controller
     }
 
 	public function beforeFilter(Event $event) {
-         $this->Auth->allow(['index', 'view', 'display', 'adminSearchById']); //Blog tut: tell the AuthComponent to not require a login for all listed [' ', ' ' ] actions, in every controller. 
+         $this->Auth->allow(['index', 'view', 'display', 'admin', 'adminSearchById']); //Aleksandr: do not require a login for all of my actions, in every controller. 
+        
     //Automaticaly Login.
     if (!$this->Auth->user() && $this->Cookie->read('CookieAuth')) {
 
