@@ -9,6 +9,7 @@ use Cake\ORM\Entity;
 use Cake\ORM\Query;
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\Controller\Component\AuthComponent;
+use Cake\Datasource\ConnectionManager;
 /**
  * Users Controller
  *
@@ -197,7 +198,18 @@ class UsersController extends AppController
 
     public function dashboard(){}
         
-    public function admin(){}
+    public function admin(){
+        // In a controller or table method.
+        //select type, count(*) from properties group by type
+          
+           $connection = ConnectionManager::get('default');
+            $results = $connection->execute('select count(id) as counts , type from properties group by type')->fetchAll('assoc');
+            $this->set('results',$results);
+            $users = $connection->execute('select count(id) as counts , status from users group by status')->fetchAll('assoc');
+            //$users = $connection->execute('select count(id) as counts , status,roles from users left join roles on users.status=roles.id group by status')->fetchAll('assoc');
+            $this->set('users',$users);
+            
+    }
     
     public function activation()
     {

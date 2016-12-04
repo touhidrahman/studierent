@@ -11,25 +11,27 @@
                                                                         <li><b>Properties</b>
 
                                                                             <ul>
-                                                                                <li><a href="#">Recent(3)</a></li>
+                                                                               
 
-                                                                                <li><a href="#">Flats(7)</a></li>
-
-                                                                                <li><a href="#">Flatshare(8)</a></li>
-                                                                                <li><a href="#">Houses(9)</a></li>
-                                                                                <li><a href="#">Student Residence(15)</a></li>
-
+                                                                                <?php 
+                                                                                    foreach($results as $r)
+                                                                                           {
+                                                                                             echo "<li>".$r['type']."(".$r['counts'].")"."</li>";
+                                                                                           }
+                                                                                                ?>
+                                                                               
                                                                             </ul>
 
                                                                         </li>
                                                                         <li><b>Users</b>
 
                                                                             <ul>
-                                                                                <li><a href="#">Landlord(10)</a></li>
-
-                                                                                <li><a href="#">Tenants(10)</a></li>
-
-                                                                                <li><a href="#">Blocked(3)</a></li>
+                                                                                <?php 
+                                                                                    foreach($users as $u)
+                                                                                           {
+                                                                                             echo "<li>".$u['status']."(".$u['counts'].")"."</li>";
+                                                                                           }
+                                                                                                ?>
 
 
                                                                             </ul>
