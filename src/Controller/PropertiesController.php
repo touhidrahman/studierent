@@ -20,6 +20,8 @@ class PropertiesController extends AppController
     public function initialize() {
         parent::initialize();
         $this->loadComponent('Paginator', ['template' => 'paginator-template']);
+		$this->Auth->allow(['search']);
+		
     }
 
     /**
