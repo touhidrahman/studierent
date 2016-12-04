@@ -10,5 +10,5 @@
         } ?>
     </div>
 
-
+    <?php echo $this->Paginator->numbers(); ?>
 </div>

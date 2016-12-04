@@ -25,7 +25,7 @@ class PropertiesSeed extends AbstractSeed
                 'type' => $faker->randomElement(['Flatshare', 'Flat', 'Student Residence', 'House']),
                 'title' => $faker->sentence(),
                 'address' => $faker->streetName,
-                'zip_id' => $faker->numberBetween(36030, 36040),
+                'zip_id' => $faker->numberBetween(1, 50),
                 'status' => 1,
                 'contact_number' => $faker->phoneNumber,
                 'email' => $faker->email,
