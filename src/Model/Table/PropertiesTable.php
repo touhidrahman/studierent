@@ -233,4 +233,5 @@ class PropertiesTable extends Table
 
         return $rules;
     }
+    
 }
