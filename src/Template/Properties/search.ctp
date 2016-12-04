@@ -194,7 +194,12 @@
         <?php foreach ($properties as $property){
             echo $this->element('adSnippet', ['property' => $property]);
         } ?>
-
+        
+        <div class="text-xs-center">
+            <?php echo $this->Paginator->prev('<<'); ?>
+            <?php echo $this->Paginator->numbers(); ?>
+            <?php echo $this->Paginator->next('>>'); ?>
+        </div>
     </div>
     <!-- end results -->
 

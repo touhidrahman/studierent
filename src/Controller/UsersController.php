@@ -28,7 +28,7 @@ class UsersController extends AppController
             'contain' => ['Cities']
         ];
         $users = $this->paginate($this->Users);
-        
+
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
     }
@@ -125,12 +125,8 @@ class UsersController extends AppController
 		if($this->request->is('post'))
 		{
 			$user = $this->Auth->identify();
-                        echo print_r($user);
-                        if($user['status']==9)
-                        {
-                            $this->redirect(['controller' => 'users','action' => 'admin']);
-                        } 
-                     	if($user)
+
+            if($user)
 			{
 				$this->Auth->setUser($user);
 
@@ -144,8 +140,11 @@ class UsersController extends AppController
 						'password' => $this->request->data('password')
 					]);
 				}
-
-				$this->redirect(['controller' => 'properties','action' => 'search']);
+				if($user['status']==9)
+                {
+                    return $this->redirect(['controller' => 'users','action' => 'admin']);
+                } 
+				return $this->redirect(['controller' => 'users','action' => 'dashboard']);
 
 			}else{
                          $this->Flash->error('Username or password is incorrect');    
@@ -180,12 +179,8 @@ class UsersController extends AppController
 	public function initialize()
 	{
 		parent::initialize();
-
-		$this->Auth->allow(['logout']);
-		$this->Auth->allow(['logout', 'register',]);
-		$this->Auth->allow(['forgotpassword']);
 		$this->Auth->allow(['logout', 'activation']); // Aleksandr: just added 'activation' to make it viewable without login
-		$this->Auth->allow(['register']);
+		$this->Auth->allow(['register', 'forgotpassword']);
 
 	}
 
@@ -213,7 +208,7 @@ class UsersController extends AppController
     
     public function activation()
     {
-        
+
 
     }
    
