@@ -8,7 +8,7 @@ use Cake\Error\Debugger;
 use Cake\ORM\Entity;
 use Cake\ORM\Query;
 use Cake\Auth\DefaultPasswordHasher;
-
+use Cake\Controller\Component\AuthComponent;
 /**
  * Users Controller
  *
@@ -124,8 +124,12 @@ class UsersController extends AppController
 		if($this->request->is('post'))
 		{
 			$user = $this->Auth->identify();
-
-			if($user)
+                       // echo print_r($user);
+                        if($user['status']==9)
+                        {
+                            return $this->redirect(['controller' => 'users','action' => 'admin']);
+                        } 
+                     	if($user)
 			{
 				$this->Auth->setUser($user);
 
@@ -173,14 +177,13 @@ class UsersController extends AppController
 	public function initialize()
 	{
 		parent::initialize();
-<<<<<<< HEAD
+
 		$this->Auth->allow(['logout']);
 		$this->Auth->allow(['logout', 'register',]);
 		$this->Auth->allow(['forgotpassword']);
-=======
 		$this->Auth->allow(['logout', 'activation']); // Aleksandr: just added 'activation' to make it viewable without login
 		$this->Auth->allow(['register']);
->>>>>>> 9fab30ab26c95be59bcb1ff5f45c49aabd463b6b
+
 	}
 
 	public function logout()
