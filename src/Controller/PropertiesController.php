@@ -153,10 +153,13 @@ class PropertiesController extends AppController
         }
 
         $connection = ConnectionManager::get('default');
-// TODO: address, zipcode, studierent score, status left
-        $query = "SELECT id, title, zip_id, address, description, rent, room_size, total_size FROM properties WHERE";
-        if ($qs['type']) {$query .= "`type`='" . $qs['type'] . "' ";} else { $query .= " type = 'Flatshare' ";}
-        if ($qs['address']) $query .= " AND zip_id ='" . (int)$qs['address'] . "' ";
+// TODO: studierent score, status left
+        $query = "SELECT id, title, zip_id, address, description, rent, room_size, total_size FROM properties WHERE status = 1 AND ";
+        if ($qs['type']) {$query .= " `type`='" . $qs['type'] . "' ";} else { $query .= " type = 'Flatshare' ";}
+        if ($qs['address']) {
+            $query .= " AND (address LIKE '%" . $qs['address'] . "%' ";
+            $query .= " OR zip_id = (SELECT id FROM zips WHERE number = '" . (int)$qs['address'] . "' LIMIT 1)) ";
+        }
         if ($qs['max']) {
             $min = ($qs['min']) ? $qs['min'] : 0;
             $query .= " AND rent >= " . $min . " AND rent <= ". $qs['max']. " "; // casting to prevent sql injection
@@ -204,7 +207,7 @@ class PropertiesController extends AppController
         $count = $stmt->rowCount();
         $properties = $stmt->fetchAll('assoc');
 // var_dump($query);
-        $this->set(compact('properties', 'count'));
+        $this->set(compact('properties', 'count', 'qs'));
         $this->set('_serialize', ['properties']);
 
     }
