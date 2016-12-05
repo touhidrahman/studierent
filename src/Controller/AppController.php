@@ -31,10 +31,10 @@ class AppController extends Controller
     public $helpers = [
         'Html'      => ['className' => 'Bootstrap.BootstrapHtml', 'useFontAwesome' => true],
         'Form'      => ['className' => 'Bootstrap.BootstrapForm'],
-        'Paginator' => ['className' => 'Bootstrap.BootstrapPaginator'],
+        // 'Paginator' => ['className' => 'Bootstrap.BootstrapPaginator'],
         'Modal'     => ['className' => 'Bootstrap.BootstrapModal'],
     ];
-	
+
 	public $components = [
     'Cookie',
     'Auth' => [
@@ -61,8 +61,8 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-		
-		
+
+
 		$this->loadComponent('Auth', [
             'loginAction' => [
                 'controller' => 'Users',
@@ -70,13 +70,13 @@ class AppController extends Controller
             ],
             'unauthorizedRedirect' => $this->referer() // If unauthorized, return them to page they were just on
         ]);
-		
+
 
         // Allow the display action so our pages controller
         // continues to work.
         $this->Auth->allow(['display']);
-		
-		//Set authentication status 
+
+		//Set authentication status
 		$this->set('authUser', $this->Auth->user());
     }
 
@@ -93,9 +93,9 @@ class AppController extends Controller
         ) {
             $this->set('_serialize', true);
         }
-		
+
 		//Create a variable for checking login status
-		
+
 		if($this->request->session()->read('Auth.User'))
 		{
 			$this->set('loggedIn',true);
@@ -105,8 +105,10 @@ class AppController extends Controller
 			$this->set('loggedIn',false);
 		}
     }
-	
+
 	public function beforeFilter(Event $event) {
+         $this->Auth->allow(['index', 'view', 'display', 'admin', 'adminSearchById']); //Aleksandr: do not require a login for all of my actions, in every controller. 
+        
     //Automaticaly Login.
     if (!$this->Auth->user() && $this->Cookie->read('CookieAuth')) {
 

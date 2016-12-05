@@ -25,7 +25,7 @@ class PropertiesSeed extends AbstractSeed
                 'type' => $faker->randomElement(['Flatshare', 'Flat', 'Student Residence', 'House']),
                 'title' => $faker->sentence(),
                 'address' => $faker->streetName,
-                'zip_id' => $faker->numberBetween(36030, 36040),
+                'zip_id' => $faker->numberBetween(1, 50),
                 'status' => 1,
                 'contact_number' => $faker->phoneNumber,
                 'email' => $faker->email,
@@ -57,8 +57,10 @@ class PropertiesSeed extends AbstractSeed
                 'electricity_bill_included' => $faker->randomDigit() % 2,
                 'internet' => $faker->randomDigit() % 2,
                 'view_times' => $faker->randomNumber(),
-                'created' => $faker->dateTimeThisYear(),
-                'modified' => $faker->dateTimeThisYear(),
+                'created' => date('Y-m-d H:i:s'),
+                'modified' => date('Y-m-d H:i:s'),
+                'house_no' => $faker->numberBetween($min = 1, $max = 100),
+                'user_id'=> $faker->numberBetween($min = 1, $max = 100)
 
             ];
         }

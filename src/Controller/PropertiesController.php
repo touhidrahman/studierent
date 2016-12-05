@@ -2,7 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use Cake\Datasource\ConnectionManager;
+use Cake\ORM\TableRegistry;
+use Cake\I18n\Date;
 
 /**
  * Properties Controller
@@ -11,6 +12,18 @@ use Cake\Datasource\ConnectionManager;
  */
 class PropertiesController extends AppController
 {
+
+    public $paginate = [
+        'limit' => 10,
+        // 'order' => ['Properties.created' => 'desc']
+    ];
+
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('Paginator');
+		$this->Auth->allow(['search']);
+
+    }
 
     /**
      * Index method
@@ -35,21 +48,24 @@ class PropertiesController extends AppController
      * @param string|null $id Property id.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @author Touhidur Rahman
      */
     public function view($id = null)
     {
-        // $property = $this->Properties->get($id, [
-        //     'contain' => ['Zips', 'Users', 'FavoriteProperties', 'Images']
-        // ]);
-        //
-        // $this->set('property', $property);
-        // $this->set('_serialize', ['property']);
+        // , 'FavoriteProperties', 'Images'
+        $property = $this->Properties->get($id, [
+            'contain' => ['Zips', 'Users']
+        ]);
+
+        $this->set('property', $property);
+        $this->set('_serialize', ['property']);
     }
 
     /**
      * Add method
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
+     * @author Touhidur Rahman
      */
     public function add()
     {
@@ -59,7 +75,7 @@ class PropertiesController extends AppController
             if ($this->Properties->save($property)) {
                 $this->Flash->success(__('The property has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'myproperties']);
             } else {
                 $this->Flash->error(__('The property could not be saved. Please, try again.'));
             }
@@ -138,62 +154,100 @@ class PropertiesController extends AppController
                 $qs[$key] = $this->request->query($key);
             }
         }
-
-        $connection = ConnectionManager::get('default');
-// TODO: address, zipcode, studierent score, status left
-        $query = "SELECT id, title, zip_id, address, description, rent, room_size, total_size FROM properties WHERE";
-        if ($qs['type']) {$query .= "`type`='" . $qs['type'] . "' ";} else { $query .= " type = 'Flatshare' ";}
-        if ($qs['address']) $query .= " AND zip_id ='" . (int)$qs['address'] . "' ";
-        if ($qs['max']) {
-            $min = ($qs['min']) ? $qs['min'] : 0;
-            $query .= " AND rent >= " . $min . " AND rent <= ". $qs['max']. " "; // casting to prevent sql injection
+        // get the query object
+        $query = $this->Properties->find();
+        // search only in ads that are active [status = 1]
+        $query->where(['status' => '1']);
+        // if type is supplied, use that
+        if ($qs['type']) $query->where(['type' => $qs['type']]);
+        if ($qs['address']) {
+            $query->where(function($exp){
+                // find out zip_id from zips table from the supplied query
+                // and use that to lookup in properties table
+                $zips = TableRegistry::get('zips')->find()->where(['number' => $this->request->query('address')])->first();
+                return $exp->or_([
+                    'zip_id' => $zips->id,
+                    'address LIKE' => '%'.$this->request->query('address').'%'
+                ]);
+            });
         }
-        if ($qs['dist']) $query .= " AND dist_from_uni <= " . $qs['dist'] . " ";
-        if ($qs['directBus']) $query .= " AND direct_bus_to_uni = 1 ";
-        if ($qs['eBillIncl']) $query .= " AND electricity_bill_included = 1 ";
-        if ($qs['internet']) $query .= " AND internet = 1 ";
-        if ($qs['wMachine']) $query .= " AND washing_machine = 1 ";
-        if ($qs['fireAlarm']) $query .= " AND fire_alarm = 1 ";
-        if ($qs['heating']) $query .= " AND heating = 1 ";
-        if ($qs['parking']) $query .= " AND parking = 1 ";
-        if ($qs['bikeParking']) $query .= " AND bike_parking = 1 ";
-        if ($qs['garden']) $query .= " AND garden = 1 ";
-        if ($qs['balcony']) $query .= " AND balcony = 1 ";
-        if ($qs['smoking']) $query .= " AND smoking = 1 ";
-        if ($qs['pets']) $query .= " AND pets = 1 ";
-        if ($qs['avalFrom']) $query .= " AND available_from <= '" . $qs['avalFrom'] . "' ";
-        if ($qs['avalTo']) $query .= " AND available_until >= '" . $qs['avalTo'] . "' ";
-        if ($qs['rSize']) $query .= " AND (room_size BETWEEN " . ($qs['rSize']-5) . " AND " . ($qs['rSize']+5) .") ";
-        if ($qs['fSize']) $query .= " AND (total_size BETWEEN " . ($qs['fSize']-10) . " AND " . ($qs['fSize']+10) .") ";
+        // if max rent is given, use also min. (make min 0 if not supplied)
+        if ($qs['max']) {
+            $query->where(function($exp){
+                return $exp
+                    ->gte('rent', $this->request->query('min') ? $this->request->query('min') : 0)
+                    ->lte('rent', $this->request->query('max'));
+            });
+        }
+        if ($qs['dist']) $query->where(['dist_from_uni' => $qs['dist']]);
+        if ($qs['directBus']) $query->where(['direct_bus_to_uni' => $qs['directBus']]);
+        if ($qs['eBillIncl']) $query->where(['electricity_bill_included' => $qs['eBillIncl']]);
+        if ($qs['internet']) $query->where(['internet' => $qs['internet']]);
+        if ($qs['wMachine']) $query->where(['washing_machine' => $qs['wMachine']]);
+        if ($qs['fireAlarm']) $query->where(['fire_alarm' => $qs['fireAlarm']]);
+        if ($qs['heating']) $query->where(['heating' => $qs['heating']]);
+        if ($qs['parking']) $query->where(['parking' => $qs['parking']]);
+        if ($qs['bikeParking']) $query->where(['bike_parking' => $qs['bikeParking']]);
+        if ($qs['garden']) $query->where(['garden' => $qs['garden']]);
+        if ($qs['balcony']) $query->where(['balcony' => $qs['balcony']]);
+        if ($qs['smoking']) $query->where(['smoking' => $qs['smoking']]);
+        if ($qs['pets']) $query->where(['pets' => $qs['pets']]);
+        // search properties in between +5 / -5 room size than the supplied
+        if ($qs['rSize']) {
+            $query->where(function($exp){
+                return $exp->between('room_size', $this->request->query('rSize')-5, $this->request->query('rSize')+5);
+            });
+        }
+        // search properties in between +10 / -10 total size than the supplied
+        if ($qs['fSize']) {
+            $query->where(function($exp){
+                return $exp->between('total_size', $this->request->query('fSize')-10, $this->request->query('fSize')+10);
+            });
+        }
+        // get all properties below availability lower bound
+        if ($qs['avalFrom']) {
+            $query->where(function($exp){
+                return $exp->lte('available_from', new Date($this->request->query('avalFrom')));
+            });
+        }
+        // and above the upper bound
+        if ($qs['avalTo']) {
+            $query->where(function($exp){
+                return $exp->gte('available_until', new Date($this->request->query('avalTo')));
+            });
+        }
+        // prepare sort by
         switch ($qs['sortby']) {
             case 'rentUp':
-                $query .= " ORDER BY rent DESC";
+                $query->order(['rent' => 'DESC']);
                 break;
             case 'rentDown':
-                $query .= " ORDER BY rent ASC";
+                $query->order(['rent' => 'ASC']);
                 break;
             case 'zipStreet':
-                $query .= " ORDER BY zip_id ASC, address ASC";
+                $query->order(['address' => 'ASC', 'zip_id' => 'ASC']);
                 break;
             case 'available_to_dt':
-                $query .= " ORDER BY available_to DESC";
+                $query->order(['available_to' => 'ASC']);
                 break;
             case 'available_from_dt':
-                $query .= " ORDER BY available_from ASC";
+                $query->order(['available_from' => 'ASC']);
                 break;
-
             default:
-                $query .= " ORDER BY rent ASC";
+                $query->order(['created' => 'DESC']);
                 break;
         }
-
-        $stmt = $connection->execute($query);
-        $count = $stmt->rowCount();
-        $properties = $stmt->fetchAll('assoc');
-// var_dump($query);
-        $this->set(compact('properties', 'count'));
+        // join zips.number field
+        $query->contain(['Zips' => function($q){
+            return $q->select('number', 'city', 'province');
+        }]);
+        // convert the result set to array
+        $properties = $this->paginate($query);
+        // count of total retrieved rows
+        $count = $query->count();
+        // send to view
+        $this->set(compact('properties', 'count', 'qs'));
         $this->set('_serialize', ['properties']);
-
     }
 
 
@@ -204,9 +258,14 @@ class PropertiesController extends AppController
         $this->set('_serialize', ['properties']);
     }
 
+    /**
+     * Displays list of properties a user has posted
+     * @author Touhidur Rahman
+     */
     public function myproperties()
     {
-        $properties = $this->Properties->find('all')->limit(10);
+        $query = $this->Properties->find('all');
+        $properties = $this->paginate($query);
         $this->set(compact('properties'));
         $this->set('_serialize', ['properties']);
     }

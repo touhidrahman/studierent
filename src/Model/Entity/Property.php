@@ -9,6 +9,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $type
  * @property string $title
+ * @property string $house_no
  * @property string $address
  * @property int $zip_id
  * @property int $status
@@ -66,4 +67,13 @@ class Property extends Entity
         '*' => true,
         'id' => false
     ];
+
+
+    /**
+     * Virtual field
+     * @author Touhidur Rahman
+     */
+     protected function _getZipcode() {
+        //  return $this->_properties
+     }
 }

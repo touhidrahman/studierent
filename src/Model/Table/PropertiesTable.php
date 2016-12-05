@@ -57,10 +57,9 @@ class PropertiesTable extends Table
         $this->hasMany('Reports', [
             'foreignKey' => 'property_id'
         ]);
-        $this->belongsToMany('Users', [
-            'foreignKey' => 'property_id',
-            'targetForeignKey' => 'user_id',
-            'joinTable' => 'users_properties'
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER'
         ]);
     }
 
@@ -85,6 +84,10 @@ class PropertiesTable extends Table
             ->notEmpty('title');
 
         $validator
+            ->requirePresence('house_no', 'create')
+            ->notEmpty('house_no');
+
+        $validator
             ->requirePresence('address', 'create')
             ->notEmpty('address');
 
@@ -103,13 +106,11 @@ class PropertiesTable extends Table
 
         $validator
             ->integer('room_size')
-            ->requirePresence('room_size', 'create')
-            ->notEmpty('room_size');
+            ->allowEmpty('room_size');
 
         $validator
             ->integer('total_size')
-            ->requirePresence('total_size', 'create')
-            ->notEmpty('total_size');
+            ->allowEmpty('total_size');
 
         $validator
             ->allowEmpty('description');
@@ -228,8 +229,9 @@ class PropertiesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['email']));
-        $rules->add($rules->existsIn(['zip_id'], 'Zips'));
+        // $rules->add($rules->existsIn(['zip_id'], 'Zips'));
 
         return $rules;
     }
+    
 }

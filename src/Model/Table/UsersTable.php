@@ -38,7 +38,7 @@ class UsersTable extends Table
         parent::initialize($config);
 
         $this->table('users');
-        $this->displayField('id');
+        $this->displayField('username');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
@@ -52,11 +52,14 @@ class UsersTable extends Table
         $this->hasMany('Feedbacks', [
             'foreignKey' => 'user_id'
         ]);
-        $this->belongsToMany('Properties', [
-            'foreignKey' => 'user_id',
-            'targetForeignKey' => 'property_id',
-            'joinTable' => 'users_properties'
+        $this->hasMany('Properties', [
+            'foreignKey' => 'user_id'
         ]);
+        // $this->belongsToMany('Properties', [
+        //     'foreignKey' => 'user_id',
+        //     'targetForeignKey' => 'property_id',
+        //     'joinTable' => 'users_properties'
+        // ]);
     }
 
     /**

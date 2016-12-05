@@ -8,7 +8,11 @@
         <?php foreach ($properties as $property){
             echo $this->element('adSnippetLandlord', ['property' => $property]);
         } ?>
+        <div class="text-xs-center">
+            <?php echo $this->Paginator->prev('<<'); ?>
+            <?php echo $this->Paginator->numbers(); ?>
+            <?php echo $this->Paginator->next('>>'); ?>
+        </div>
     </div>
-
 
 </div>
