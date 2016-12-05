@@ -13,7 +13,7 @@
     </ul>
 </nav>
 <div class="users form large-9 medium-8 columns content">
-    <?= $this->Form->create($user) ?>
+    <?= $this->Form->create($user,['type' => 'file']); ?>
     <fieldset>
         <legend><?= __('Add User') ?></legend>
         <?php
@@ -26,11 +26,11 @@
             echo $this->Form->input('city_id', ['options' => $cities, 'empty' => true]);
             echo $this->Form->input('status');
             echo $this->Form->input('contact_number');
-            echo $this->Form->input('photo');
+            echo $this->Form->input('photo',['type' => 'file']);
             echo $this->Form->input('reset_key');
             echo $this->Form->input('properties._ids', ['options' => $properties]);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Submit'),['type'=>'submit','class' => 'btn btn-success']) ?>
     <?= $this->Form->end() ?>
 </div>

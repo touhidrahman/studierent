@@ -2,7 +2,10 @@
 	<div class="col-xs-12">
 		<div class="jumbotron jumbotron-fluid text-xs-center">
 		  <div class="container">
-			  <img class="rounded-circle " style="width:8rem; height:8rem;" src="/studierent/img/boy.jpg" />
+			<?php   
+         echo $this->Html->image('uploads/02.jpg', array('alt' => 'CakePHP','class'=>'rounded-circle','height' => '128', 'width' => '128'));
+?>
+                          
 			<h1 class="display-3">John Doe</h1>
 			<p class="lead">"My nice and bold tagline!"</p>
 		  </div>

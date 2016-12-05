@@ -37,7 +37,7 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
-
+             
     }
 
     /**
@@ -47,7 +47,30 @@ class UsersController extends AppController
      */
     public function add()
     {
-        $user = $this->Users->newEntity();
+        $user = '';
+        if ($this->request->is('post')) {
+            if(!empty($this->request->data['photo']['name'])){
+                $fileName = $this->request->data['photo']['name'];
+                $uploadPath ='WWW_ROOT\img\uploads\\';
+                if(move_uploaded_file($this->request->data['photo']['tmp_name'],WWW_ROOT . 'img' . DS . 'uploads' . DS .$fileName)){
+                    $user = $this->Users->newEntity();  
+ 
+                    $user->photo = $uploadPath.$fileName;
+                    
+                    if ($this->Users->save($user)) {
+                        $this->Flash->success(__('Image has been uploaded and inserted successfully.'));
+                    }else{
+                        $this->Flash->error(__('Unable to upload image, please try again.'));
+                    }
+                }else{
+                    $this->Flash->error(__('Unable to upload image, please try again.'));
+                }
+            }else{
+                $this->Flash->error(__('Please choose a image to upload.'));
+            }
+            
+        }
+       /* $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
@@ -57,7 +80,7 @@ class UsersController extends AppController
             } else {
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
-        }
+        }*/
         $cities = $this->Users->Cities->find('list', ['limit' => 200]);
         $properties = $this->Users->Properties->find('list', ['limit' => 200]);
         $this->set(compact('user', 'cities', 'properties'));
