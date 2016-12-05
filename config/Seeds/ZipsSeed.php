@@ -23,7 +23,7 @@ class ZipsSeed extends AbstractSeed
         for ($i=0; $i < 100; $i++) {
             $data[] = [
                 'city' => $faker->randomElement(['Fulda', 'Darmstdat', 'Giessen']),
-                'number' => $faker->numberBetween(36030, 36040),
+                'number' => $faker->numberBetween(36035, 36040),
                 'province' => 'Hessen',
                 'country' => 'Germany',
                 'city_id' => $faker->randomNumber(2),

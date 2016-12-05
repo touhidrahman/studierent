@@ -6,12 +6,12 @@ use Migrations\AbstractSeed;
  */
 class PropertiesSeed extends AbstractSeed
 {
-    
+
     public function run()
     {
         $data = [];
         $faker = Faker\Factory::create();
-        for ($i=0; $i < 100; $i++) {
+        for ($i=0; $i < 500; $i++) {
             $data[] = [
                 'type' => $faker->randomElement(['Flatshare', 'Flat', 'Student Residence', 'House']),
                 'title' => $faker->sentence(),
