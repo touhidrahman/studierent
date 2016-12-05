@@ -143,14 +143,14 @@ class UsersController extends AppController
 				if($user['status']==9)
                 {
                     return $this->redirect(['controller' => 'users','action' => 'admin']);
-                } 
+                }
 				return $this->redirect(['controller' => 'users','action' => 'dashboard']);
 
 			}else{
-                         $this->Flash->error('Username or password is incorrect');    
+                         $this->Flash->error('Username or password is incorrect');
                         }
 
-			
+
 
 		}
 	}
@@ -179,7 +179,7 @@ class UsersController extends AppController
 	public function initialize()
 	{
 		parent::initialize();
-		$this->Auth->allow(['logout']); 
+		$this->Auth->allow(['logout']);
 		$this->Auth->allow(['register', 'forgotpassword']);
 
 	}
@@ -189,15 +189,28 @@ class UsersController extends AppController
 		$this->Flash->success('You are now logged out.');
 		return $this->redirect($this->Auth->logout());
 	}
-        
-      
-    public function dashboard(){}
-        
-//  author: Ramanpreet
+
+    /**
+     * Display User dashboard after login
+     * @author Touhidur Rahman
+     */
+    public function dashboard(){
+        $propertiesTbl = TableRegistry::get('Properties');
+        $propertyCount = $propertiesTbl->find()->where(['user_id' => $this->Auth->user('id')])->count();
+        $name = $this->Auth->user('first_name') . ' ' . $this->Auth->user('last_name');
+        $this->set(compact('name', 'propertyCount'));
+    }
+
+
+
+    /**
+     * Display Admin dashboard after login
+     * @author Ramanpreet
+     */
     public function admin(){
         // In a controller or table method.
         //select type, count(*) from properties group by type
-          
+
         $connection = ConnectionManager::get('default');
         $results = $connection->execute('select count(id) as counts , type from properties group by type')->fetchAll('assoc');
         //   Aleksandr: please note that Recent properties are not included ^^^
@@ -210,23 +223,23 @@ class UsersController extends AppController
 * $usersAll = $this->Users->find('all');
 * $this->set(compact('usersAll')); //TODO: paginate    http://book.cakephp.org/3.0/en/controllers/components/pagination.html
 */
-            
+
     }
 
     public function activation()  { }
 
 
     //Admin: search for user by id
-    /* the convention is that your URLs are lowercase and dashed using the 
-     * DashedRoute class, therefore /article-categories/view-all is the correct 
+    /* the convention is that your URLs are lowercase and dashed using the
+     * DashedRoute class, therefore /article-categories/view-all is the correct
      * form to access the ArticleCategoriesController::viewAll() action.
      */
     public function adminSearchById($id = null)  { // author: Aleksandr
         $user = $this->Users->get($id);
         $this->set(compact('user'));
     }
-        
-   
+
+
     public function forgotPassword($username = null)
     {
 
@@ -234,8 +247,8 @@ class UsersController extends AppController
          $username = $this->request->data['username'];
          $options = array('conditions' => array('User.' . $this->Users->username => $username));
          $found = $this->Users->find('first');
-        
-         
+
+
          if (!$username) {
              $this->Flash->error(__('No user with that email found.'));
              return $this->redirect(['controller' => 'Users','action' => 'forgotPassword']);
@@ -245,7 +258,7 @@ class UsersController extends AppController
                 $random = 'a';
                 $hasher = new DefaultPasswordHasher();
                 $val = $hasher->hash($random);
-                $data = $this->Users->password =  $val; 
+                $data = $this->Users->password =  $val;
                 if ($this->Users->save($data)) {
                     $this->Flash->success(__('Password changed Succesfully.'));
                      return $this->redirect(['controller' => 'Users','action' => 'forgotPassword']);

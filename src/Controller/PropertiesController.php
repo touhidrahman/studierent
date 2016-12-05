@@ -264,11 +264,12 @@ class PropertiesController extends AppController
      */
     public function myproperties()
     {
+        debug($this->Auth->user('first_name'));
         $query = $this->Properties->find('all');
         $properties = $this->paginate($query);
         $this->set(compact('properties'));
         $this->set('_serialize', ['properties']);
     }
-    
-   
+
+
 }

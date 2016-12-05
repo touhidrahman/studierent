@@ -50,8 +50,8 @@ class PropertiesSeed extends AbstractSeed
                 'view_times' => $faker->randomNumber(),
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
-                'house_no' => $faker->numberBetween($min = 1, $max = 100),
-                'user_id'=> $faker->numberBetween($min = 1, $max = 100)
+                'house_no' => $faker->numberBetween(1, 100),
+                'user_id'=> $faker->numberBetween(1, 100)
 
             ];
         }

@@ -12,17 +12,17 @@
 				<div id="div-forms">
 
 					<!-- Begining of Login Form -->
-					
+
 					<?= $this->Form->create(); ?>
-					
+
 					<form id="login-form">
 						<div class="modal-body">
 
-							<?= $this->Form->input('username',array('placeholder'=>'Your email id')); ?>
-							
-						
+							<?= $this->Form->input('username',array('placeholder'=>'Your email id', 'label' => 'Email')); ?>
+
+
 							<?= $this->Form->input('password',array('placeholder'=>'Your password')); ?>
-							
+
  							<div class="checkbox">
 								<label>
                                   <?= $this->Form->checkbox('remember_me'); ?> Keep me signed in
