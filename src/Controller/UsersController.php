@@ -196,6 +196,7 @@ class UsersController extends AppController
      */
     public function dashboard(){
         $propertiesTbl = TableRegistry::get('Properties');
+        $favoritesTbl = TableRegistry::get('FavoriteProperties');
         $propertyCount = $propertiesTbl->find()->where(['user_id' => $this->Auth->user('id')])->count();
         $name = $this->Auth->user('first_name') . ' ' . $this->Auth->user('last_name');
         $this->set(compact('name', 'propertyCount'));
