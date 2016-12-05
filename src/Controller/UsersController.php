@@ -118,6 +118,9 @@ class UsersController extends AppController
     }
 
 
+    /**
+     * @author Muneeb Noor
+     */
 	public function login()
 	{
 
@@ -155,6 +158,9 @@ class UsersController extends AppController
 		}
 	}
 
+    /**
+     * @author Muneeb Noor
+     */
 	public function register()
 	{
 		$user = $this->Users->newEntity();
@@ -184,6 +190,9 @@ class UsersController extends AppController
 
 	}
 
+    /**
+     * @author Muneeb Noor
+     */
 	public function logout()
 	{
 		$this->Flash->success('You are now logged out.');
@@ -198,8 +207,9 @@ class UsersController extends AppController
         $propertiesTbl = TableRegistry::get('Properties');
         $favoritesTbl = TableRegistry::get('FavoriteProperties');
         $propertyCount = $propertiesTbl->find()->where(['user_id' => $this->Auth->user('id')])->count();
+        $favCount = $favoritesTbl->find()->where(['user_id' => $this->Auth->user('id')])->count();
         $name = $this->Auth->user('first_name') . ' ' . $this->Auth->user('last_name');
-        $this->set(compact('name', 'propertyCount'));
+        $this->set(compact('name', 'propertyCount', 'favCount'));
     }
 
 

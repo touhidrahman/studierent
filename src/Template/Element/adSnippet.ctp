@@ -33,7 +33,7 @@
 
                 <?= $this->Html->link('<i class="fa fa-home"></i> View Details', '/properties/view/'.$property['id'], ['class' => 'card-link', 'escapeTitle' => false]) ?>
                 <?= $this->Html->link('<i class="fa fa-user"></i> Landlord Profile', '/users/view/', ['class' => 'card-link text-info', 'escapeTitle' => false]) ?>
-                <?= $this->Html->link('<i class="fa fa-heart-o"></i>', '/favorites/add/', ['class' => 'card-link text-danger', 'escapeTitle' => false, 'title' => 'Click to add this property ad to your favorites!']) ?>
+                <?= $this->Html->link('<i class="fa fa-heart-o"></i>', '/favorites/add/', ['class' => 'card-link text-danger', 'escapeTitle' => false, 'title' => 'Click to add/remove this property ad to/from your favorites!']) ?>
                 <?= $this->Html->link('<i class="fa fa-thumbs-o-up"></i>', '/feedbacks/add/', ['class' => 'card-link text-success', 'escapeTitle' => false, 'title' => 'Click to leave a feedback for the landlord so that others find it useful!']) ?>
                 <?= $this->Html->link('<i class="fa fa-flag-o"></i>', '/reports/add/', ['class' => 'card-link text-muted', 'escapeTitle' => false, 'title' => 'Report this Ad! Help us improve Studierent by filtering abuses.']) ?>
             </div>
