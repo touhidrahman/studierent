@@ -296,7 +296,7 @@ class PropertiesController extends AppController
 
     /**
      * Marks a property as favorite for user
-     * @uses Cake\ORM\Entity\FavoriteProperties
+     * @ uses Cake\ORM\Entity\FavoriteProperties
      * @author Touhidur Rahman
      */
     public function toggleFavorites($property_id)
@@ -307,20 +307,21 @@ class PropertiesController extends AppController
         $query = $favoritesTbl->find()
             ->where(['property_id' => $property_id, 'user_id' => $this->Auth->user('id')]);
 
-        $existsCount = $query->first()->count();
+        $existsCount = $query->count();
         // if existsCount > 0 remove the combo (user is toggling)
         if ($existsCount > 0) {
             $favoritesTbl->deleteAll(['property_id' => $property_id, 'user_id' => $this->Auth->user('id')]);
+            $ret = false;
         } else {
             // insert into db
             $entry = $favoritesTbl->newEntity();
             $entry->property_id = $property_id;
             $entry->user_id = $this->Auth->user('id');
             $favoritesTbl->save($entry);
+            $ret = true;
         }
 
-        // $this->set(compact('properties'));
-        $this->set('_serialize', ['properties']);
+        $this->set('_serialize', ['ret']);
     }
 
 

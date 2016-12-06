@@ -39,10 +39,21 @@ class UsersController extends AppController
      * @param string|null $id User id.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @author Touhidur Rahman
      */
     public function view($id = null)
     {
-
+        $user = $this->Users->get($id);
+        $propertiesTbl = TableRegistry::get('Properties');
+        $query = $propertiesTbl->find()->where(['user_id' => $id]);
+        // join zips.number field
+        $query->contain(['Zips' => function($q){
+            return $q->select('number', 'city', 'province');
+        }]);
+        $propertyCount = $query->count();
+        $properties = $query->toList();
+        $this->set(compact('user', 'properties', 'propertyCount'));
+        $this->set('_serialize', ['user', 'properties', 'propertyCount']);
     }
 
     /**
