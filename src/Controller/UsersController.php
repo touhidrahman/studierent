@@ -44,7 +44,8 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
-        $this->loadComponent('Flash');
+        // if id is not supplied show own profile 
+        if (!$id) $id = $this->Auth->user('id');
         $user = $this->Users->get($id);
         $propertiesTbl = TableRegistry::get('Properties');
         $query = $propertiesTbl->find()->where(['user_id' => $id]);
@@ -54,11 +55,10 @@ class UsersController extends AppController
         }]);
         $propertyCount = $query->count();
         $properties = $query->toList();
+
         //@author Norman Lista
         //send LogUser For verification of rating himself
         $logUser=$this->Auth->user('id');
-
-        //@author Norman Lista
         //for feedback
         $this->loadModel('Feedbacks');
         $feedback=$this->Feedbacks->newEntity();
