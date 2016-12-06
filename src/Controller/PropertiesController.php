@@ -75,7 +75,7 @@ class PropertiesController extends AppController
             if ($this->Properties->save($property)) {
                 $this->Flash->success(__('The property has been saved.'));
 
-                return $this->redirect(['action' => 'myproperties']);
+                return $this->redirect(['controller' => 'Images','action' => 'add']);
             } else {
                 $this->Flash->error(__('The property could not be saved. Please, try again.'));
             }
@@ -84,6 +84,8 @@ class PropertiesController extends AppController
         $users = $this->Properties->Users->find('list', ['limit' => 200]);
         $this->set(compact('property', 'zips', 'users'));
         $this->set('_serialize', ['property']);
+       
+
     }
 
     /**

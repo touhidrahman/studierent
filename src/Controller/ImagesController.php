@@ -29,24 +29,21 @@ class ImagesController extends AppController
 
     /**
      * View method
-     *
+     *@author Mythri Manjunath
      * @param string|null $id Image id.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
     {
-        $image = $this->Images->get($id, [
-            'contain' => ['Properties']
-        ]);
-
-        $this->set('image', $image);
-        $this->set('_serialize', ['image']);
+        $this->set('images', $this->Images->find('all'));
+         $image = $this->Images->get($id);
+         $this->set(compact('image'));
     }
 
     /**
-     * Add method
-     *
+     * Add method - To add property images 
+     * @author Mythri Manjunath
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
     public function add()
@@ -55,15 +52,15 @@ class ImagesController extends AppController
         if ($this->request->is('post')) {
             if(!empty($this->request->data['upload']['name'])){
                 $fileName = $this->request->data['upload']['name'];
-                $uploadPath ='WWW_ROOT\img\uploads\\';
-                if(move_uploaded_file($this->request->data['upload']['tmp_name'],WWW_ROOT . 'img' . DS . 'uploads' . DS .$fileName)){
+                $uploadPath ='WWW_ROOT\img\properties\\';
+                if(move_uploaded_file($this->request->data['upload']['tmp_name'],WWW_ROOT . 'img' . DS . 'properties' . DS .$fileName)){
                     $image = $this->Images->newEntity();  
-                    $image->property_id=$properties;
                     $image->path = $uploadPath.$fileName;
                     $image->created = date("Y-m-d H:i:s");
                     $image->modified = date("Y-m-d H:i:s");
                     if ($this->Images->save($image)) {
                         $this->Flash->success(__('Image has been uploaded and inserted successfully.'));
+                        
                     }else{
                         $this->Flash->error(__('Unable to upload image, please try again.'));
                     }
