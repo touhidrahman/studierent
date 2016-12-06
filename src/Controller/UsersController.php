@@ -180,7 +180,7 @@ class UsersController extends AppController
 					]);
 					$this->Cookie->write('CookieAuth', [
 						'username' => $this->request->data('username'),
-						'password' => $this->request->data('password')
+						'password' => (new DefaultPasswordHasher)->hash($this->request->data('password'))
 					]);
 				}
 				if($user['status']==9)

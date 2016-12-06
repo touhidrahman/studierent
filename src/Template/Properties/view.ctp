@@ -11,13 +11,13 @@
                 </ol>
                 <div class="carousel-inner" role="listbox">
                   <div class="carousel-item active">
-                    <img data-src="holder.js/900x500/auto/#777:#555/text:First slide" alt="First slide">
+                    <img src="http://loremflickr.com/900/500/house?random=1" alt="First slide">
                   </div>
                   <div class="carousel-item">
-                    <img data-src="holder.js/900x500/auto/#666:#444/text:Second slide" alt="Second slide">
+                    <img src="http://loremflickr.com/900/500/house?random=3" alt="Second slide">
                   </div>
                   <div class="carousel-item">
-                    <img data-src="holder.js/900x500/auto/#555:#333/text:Third slide" alt="Third slide">
+                    <img src="http://loremflickr.com/900/500/house?random=2" alt="Third slide">
                   </div>
                 </div>
                 <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
@@ -176,7 +176,7 @@
                                       <p>Not Rated yet</p>
                                       <?php }else{    ?>
                                       <a href="#">
-                                         <?php 
+                                         <?php
                                         For($i=0;$i<$feedback->rate;$i++){?>
 						  <i class="fa fa-star"></i>
 					 <?php	}  ?>
@@ -193,10 +193,10 @@
                   <?php if( $feedback->rate==0){ ?>
                 <p>Not Review yet</p>
                  <?php }else{  ?>
-                <p> <?php echo $feedback->text; ?></p>   
-                     
+                <p> <?php echo $feedback->text; ?></p>
+
                 <?php  }?>
-                     
+
               </blockquote>
             </div>
             <div class="card-block">
