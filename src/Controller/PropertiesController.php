@@ -29,6 +29,7 @@ class PropertiesController extends AppController
      * Index method
      *
      * @return \Cake\Network\Response|null
+     * @author Touhidur Rahman
      */
     public function index()
     {
@@ -59,11 +60,11 @@ class PropertiesController extends AppController
         $property = $this->Properties->get($id, [
             'contain' => ['Zips','Users']
         ]);
-        
-      
+
+
        $feedbackSearch=$this->Feedbacks->find('all',[
     'conditions' => ['for_user_id =' => $property->user->id]]);
-       
+
        if($feedbackSearch->isEmpty()){
            $feedback->rate=0;
        }else{$feedback =$feedbackSearch->first();}
@@ -94,7 +95,7 @@ class PropertiesController extends AppController
         $zips = $this->Properties->Zips->find('list', ['limit' => 200]);
         $users = $this->Properties->Users->find('list', ['limit' => 200]);
         //@author Norman Lista
-        //send user id for my profile button 
+        //send user id for my profile button
         $id=$this->Auth->user('id');
         $this->set(compact('property', 'zips', 'users','id'));
         $this->set('_serialize', ['property']);
@@ -288,7 +289,7 @@ class PropertiesController extends AppController
 
         $properties = $this->paginate($query);
          //@author Norman Lista
-        //send user id for my profile button 
+        //send user id for my profile button
         $id= $this->Auth->user('id');
         $this->set(compact('properties','id'));
         $this->set('_serialize', ['properties']);
@@ -296,7 +297,7 @@ class PropertiesController extends AppController
 
     /**
      * Displays list of properties a user has posted
-     * @author Touhidur Rahman
+     * @author Touhidur Rahman, Norman Lista
      */
     public function myproperties()
     {
@@ -306,8 +307,7 @@ class PropertiesController extends AppController
             return $q->select('number', 'city', 'province');
         }]);
         $properties = $this->paginate($query);
-         //@author Norman Lista
-        //send user id for my profile button 
+        //send user id for my profile button
         $id=$this->Auth->user('id');
         $this->set(compact('properties','id'));
         $this->set('_serialize', ['properties']);
@@ -336,7 +336,7 @@ class PropertiesController extends AppController
             $entry = $favoritesTbl->newEntity();
             $entry->property_id = $property_id;
              //@author Norman Lista
-             //send user id for my profile button 
+             //send user id for my profile button
             $entry->user_id = $this->Auth->user('id');
             $favoritesTbl->save($entry);
             $ret = true;

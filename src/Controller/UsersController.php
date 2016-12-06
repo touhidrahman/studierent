@@ -21,6 +21,7 @@ class UsersController extends AppController
      * Index method
      *
      * @return \Cake\Network\Response|null
+     * @author Muneeb Noor
      */
     public function index()
     {
@@ -39,10 +40,10 @@ class UsersController extends AppController
      * @param string|null $id User id.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     * @author Touhidur Rahman
+     * @author Touhidur Rahman, Norman Lista
      */
     public function view($id = null)
-    {  
+    {
         $this->loadComponent('Flash');
         $user = $this->Users->get($id);
         $propertiesTbl = TableRegistry::get('Properties');
@@ -56,9 +57,7 @@ class UsersController extends AppController
         //@author Norman Lista
         //send LogUser For verification of rating himself
         $logUser=$this->Auth->user('id');
-        $this->set(compact('user', 'properties', 'propertyCount'));
-        $this->set('_serialize', ['user', 'properties', 'propertyCount']);
-        
+
         //@author Norman Lista
         //for feedback
         $this->loadModel('Feedbacks');
@@ -66,12 +65,14 @@ class UsersController extends AppController
         if($this->request->is('post')){
             $feedback= $this->Feedbacks->patchEntity($feedback,$this->request->data);
          if($this->Feedbacks->save($feedback)){
-             $this->Flash->success(__('Feedback added'));   
+             $this->Flash->success(__('Feedback added'));
          }else{
-             $this->Flash-error(__('Unable to add feedback'));    
+             $this->Flash-error(__('Unable to add feedback'));
          }
         }
         $this->set('feedback',$feedback);
+        $this->set(compact('user', 'properties', 'propertyCount', 'logUser'));
+        $this->set('_serialize', ['user', 'properties', 'propertyCount']);
     }
 
     /**
@@ -241,12 +242,11 @@ class UsersController extends AppController
         $propertyCount = $propertiesTbl->find()->where(['user_id' => $this->Auth->user('id')])->count();
         $favCount = $favoritesTbl->find()->where(['user_id' => $this->Auth->user('id')])->count();
         $name = $this->Auth->user('first_name') . ' ' . $this->Auth->user('last_name');
-        $this->set(compact('name', 'propertyCount', 'favCount'));
-    
+        $id=$this->Auth->user('id');
+        $this->set(compact('name', 'propertyCount', 'favCount', 'id'));
+
     }
-        /* 
-        @author Ramanpreet Kaur
-         *          *
+
 
     /**
      * Display Admin dashboard after login
@@ -258,7 +258,7 @@ class UsersController extends AppController
 
         $connection = ConnectionManager::get('default');
         $results = $connection->execute('select count(id) as counts , type from properties group by type')->fetchAll('assoc');
-        
+
         $this->set('results',$results);
         $users = $connection->execute('select count(id) as counts , status from users group by status')->fetchAll('assoc');
         //$users = $connection->execute('select count(id) as counts , status,roles from users left join roles on users.status=roles.id group by status')->fetchAll('assoc');
@@ -274,7 +274,10 @@ class UsersController extends AppController
 
 
 
-
+    /**
+     * Display Admin dashboard after login
+     * @author Ramanpreet
+     */
     public function forgotPassword($username = null)
     {
         if($this->request->is('post'))
@@ -295,7 +298,7 @@ class UsersController extends AppController
                     $this->Flash->success('Password changed Succesfully.');
                      return $this->redirect(['controller' => 'Users','action' => 'login']);*/
                 die($generated_password);
-            
+
     }
         }
     }
@@ -342,8 +345,8 @@ class UsersController extends AppController
 
 
         }
-        
+
     }*/
- 
+
 
 }
