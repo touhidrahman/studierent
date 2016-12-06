@@ -42,7 +42,8 @@ class UsersController extends AppController
      * @author Touhidur Rahman
      */
     public function view($id = null)
-    {
+    {  
+        $this->loadComponent('Flash');
         $user = $this->Users->get($id);
         $propertiesTbl = TableRegistry::get('Properties');
         $query = $propertiesTbl->find()->where(['user_id' => $id]);
@@ -52,8 +53,25 @@ class UsersController extends AppController
         }]);
         $propertyCount = $query->count();
         $properties = $query->toList();
-        $this->set(compact('user', 'properties', 'propertyCount'));
-        $this->set('_serialize', ['user', 'properties', 'propertyCount']);
+        //@author Norman Lista
+        //send LogUser For verification of rating himself
+        $logUser=$this->Auth->user('id');
+        $this->set(compact('user', 'properties', 'propertyCount','logUser'));
+        $this->set('_serialize', ['user', 'properties', 'propertyCount','logUser']);
+        
+        //@author Norman Lista
+        //for feedback
+        $this->loadModel('Feedbacks');
+        $feedback=$this->Feedbacks->newEntity();
+        if($this->request->is('post')){
+            $feedback= $this->Feedbacks->patchEntity($feedback,$this->request->data);
+         if($this->Feedbacks->save($feedback)){
+             $this->Flash->success(__('Feedback added'));   
+         }else{
+             $this->Flash-error(__('Unable to add feedback'));    
+         }
+        }
+        $this->set('feedback',$feedback);
     }
 
     /**
@@ -217,12 +235,13 @@ class UsersController extends AppController
      * @author Touhidur Rahman
      */
     public function dashboard(){
-        $propertiesTbl = TableRegistry::get('Properties');
+        $propertiesTbl = TableRegistry::get('users_properties');
         $favoritesTbl = TableRegistry::get('FavoriteProperties');
         $propertyCount = $propertiesTbl->find()->where(['user_id' => $this->Auth->user('id')])->count();
         $favCount = $favoritesTbl->find()->where(['user_id' => $this->Auth->user('id')])->count();
         $name = $this->Auth->user('first_name') . ' ' . $this->Auth->user('last_name');
-        $this->set(compact('name', 'propertyCount', 'favCount'));
+        $id=$this->Auth->user('id');
+        $this->set(compact('id','name', 'propertyCount', 'favCount'));
     }
 
 

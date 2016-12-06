@@ -170,15 +170,18 @@
 				  <td><?= $property->email ?></td>
 			    </tr>
 			    <tr>
-			      <th>Rating</th>
+			      <th>Rating: </th>
 				  <td>
-					  <a href="#">
+                                      <?php if( $feedback->rate==0){ ?>
+                                      <p>Not Rated yet</p>
+                                      <?php }else{    ?>
+                                      <a href="#">
+                                         <?php 
+                                        For($i=0;$i<$feedback->rate;$i++){?>
 						  <i class="fa fa-star"></i>
-						  <i class="fa fa-star"></i>
-						  <i class="fa fa-star"></i>
-						  <i class="fa fa-star"></i>
-						  <i class="fa fa-star-o"></i>
+					 <?php	}  ?>
 					  </a>
+                                        <?php  } ?>
 				  </td>
 			    </tr>
 			  </tbody>
@@ -187,8 +190,13 @@
             <div class="card-block">
                 <p class="text-success">Recent Reviews:</p>
               <blockquote class="card-blockquote">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                  <?php if( $feedback->rate==0){ ?>
+                <p>Not Review yet</p>
+                 <?php }else{  ?>
+                <p> <?php echo $feedback->text; ?></p>   
+                     
+                <?php  }?>
+                     
               </blockquote>
             </div>
             <div class="card-block">

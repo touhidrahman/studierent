@@ -30,35 +30,40 @@
 			    </tr>
 			    <tr>
 			      <th>Email</th>
-				  <td><?= $user->username ?></td>
+				  <td><?= $user->username.$user->id ?></td>
 			    </tr>
 			  </tbody>
 			</table>
 		</div>
 
+            <?php
+            //@author Norman Lista
+            //for user not rating himself 
+            if(!($logUser==$user->id)){ ?>
 		<div class="card">
 		  <div class="card-header">
-				Send a Feedback
+				Send a Feedback 
 			  </div>
 			  <div class="card-block">
-				  <form>
+                              
+				<?= $this->Form->create($feedback); ?>
 
 
-  					<div class="radio">
-  						<label style="display:block"><input name="rating" value="5" type="radio">
+  					<div class="radio">                                                  
+  						<label style="display:block"><input name="rate" value="5" type="radio">
   							<i class="fa fa-star"></i>
   							<i class="fa fa-star"></i>
   							<i class="fa fa-star"></i>
   							<i class="fa fa-star"></i>
   							<i class="fa fa-star"></i>
   						</label>
-  						<label style="display:block"><input name="rating" value="4" type="radio">
+  						<label style="display:block"><input name="rate" value="4" type="radio">
   							<i class="fa fa-star"></i>
   							<i class="fa fa-star"></i>
   							<i class="fa fa-star"></i>
   							<i class="fa fa-star"></i>
   						</label>
-  						<label style="display:block"><input name="rating" value="3" type="radio">
+  						<label style="display:block"><input name="rate" value="3" type="radio">
   							<i class="fa fa-star"></i>
   							<i class="fa fa-star"></i>
   							<i class="fa fa-star"></i>
@@ -73,8 +78,8 @@
   					</div>
 
 				    <fieldset class="form-group">
-				      <label for="exampleSelect1">How do you know this user?</label>
-				      <select class="form-control" id="exampleSelect1">
+				      <label for="Select">How do you know this user?</label>
+				      <select class="form-control" name=relationship_basis" id="relationship_basis">
 				        <option>Rented a property from him/her</option>
 				        <option>Contacted, but not rented</option>
 				        <option>Personal relation</option>
@@ -82,14 +87,15 @@
 				      </select>
 				    </fieldset>
 				    <fieldset class="form-group">
-				      <label for="exampleTextarea">Details</label>
-				      <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+				      <label for="text">Details</label>
+                                     <?= $this->Form->Textarea('text',['class' => 'form-control','id' => 'text']);?> 
 				    </fieldset>
 
 				    <button type="submit" class="btn btn-success">Submit</button>
-				  </form>
+		       <?= $this->Form->end(); ?>  
 			  </div>
 		</div>
+            <?php } ?>
 	</div>
 
 	<div class="col-xs-8">
