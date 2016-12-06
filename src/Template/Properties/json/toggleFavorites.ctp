@@ -1,3 +1,1 @@
-<?php
-    echo json_encode(compact('ret'))
-?>
+<?php //echo json_encode($data); ?>
