@@ -1,6 +1,5 @@
 <?php
 namespace App\Controller;
-
 use Cake\ORM\TableRegistry;
 use App\Model\Entity\Device;
 use App\Controller\AppController;
@@ -10,6 +9,7 @@ use Cake\ORM\Query;
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\Controller\Component\AuthComponent;
 use Cake\Datasource\ConnectionManager;
+use Cake\Utility;
 /**
  * Users Controller
  *
@@ -201,11 +201,16 @@ class UsersController extends AppController
 		}
 		$this->set(compact('user'));
 		$this->set('_serialize',['user']);
+                
 	}
 
 	public function initialize()
 	{
 		parent::initialize();
+<<<<<<< HEAD
+                $session = $this->request->session();
+=======
+>>>>>>> 439957c344cf950f07dcb08bd1c48dab0e78184f
 		$this->Auth->allow(['logout']);
 		$this->Auth->allow(['register', 'forgotpassword']);
 
@@ -234,11 +239,18 @@ class UsersController extends AppController
     }
 
 
+<<<<<<< HEAD
+    public function dashboard(){}
+        /* 
+        @author Ramanpreet Kaur
+         *          */
+=======
 
     /**
      * Display Admin dashboard after login
      * @author Ramanpreet
      */
+>>>>>>> 439957c344cf950f07dcb08bd1c48dab0e78184f
     public function admin(){
         // In a controller or table method.
         //select type, count(*) from properties group by type
@@ -257,6 +269,30 @@ class UsersController extends AppController
 */
 
     }
+<<<<<<< HEAD
+    
+
+
+   
+    public function forgotPassword($username = null)
+    {
+        if($this->request->is('post'))
+        {
+            $data= $this->request->data();
+                  
+            $user = $this->Users->findByUsername($data['username']);
+            //echo print_r($user);
+            if (!($user->toArray()))
+            {
+                $this->Flash->error('User not found');
+                $this->redirect(['controller' => 'users','action' => 'forgotpassword']);
+            } 
+            else {                          
+                $generated_password=substr(md5(rand(999,999999)) , 0 , 8);
+                mysqli_query("UPDATE 'users' SET 'password' = '$generated_password' WHERE 'username' = '$username'");
+                die($generated_password);
+                 }
+=======
 
     public function activation()  { }
 
@@ -298,7 +334,10 @@ class UsersController extends AppController
                 }
 
 
+>>>>>>> 439957c344cf950f07dcb08bd1c48dab0e78184f
         }
+        
     }
-   }
+ 
 }
+

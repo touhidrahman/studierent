@@ -41,9 +41,9 @@
                       echo $this->Form->input('room_size', ['min' => 0]);
                       echo $this->Form->input('total_size', ['min' => 0]);
                       echo $this->Form->input('available_from');
-                      echo $this->Form->input('available_until');
-                      $options = array('Select'=>'Select','M'=>'Male','F'=>'Female','B'=>'Both');
-                      echo $this->Form->input('looking_for', ['type' => 'select', 'options' => ['Any Gender' => 'Any Gender', 'Male' => 'Male', 'Female' => 'Female']]);
+                      echo $this->Form->input('available_until'); ?>
+                      <?php $options = array('Select'=>'Select','M'=>'Male','F'=>'Female','B'=>'Both'); ?>
+                     <?php echo $this->Form->input('looking_for', ['type' => 'select', 'options' => ['Any Gender' => 'Any Gender', 'Male' => 'Male', 'Female' => 'Female']]);
                       echo $this->Form->input('rent', ['min' => 0, 'label' => 'Rent (Monthly)']);
                       echo $this->Form->input('deposit', ['min' => 0, 'label' => 'Initial Deposit (One Time)']);
                       echo $this->Form->input('utility_cost', ['min' => 0, 'label' => 'Utilities Cost (Monthly)']);

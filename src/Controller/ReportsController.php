@@ -1,3 +1,4 @@
+
 <?php
 namespace App\Controller;
 
@@ -46,6 +47,9 @@ class ReportsController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
+    /*
+    @author Ramanpreet Kaur
+     *      */
     public function add()
     {
         $report = $this->Reports->newEntity();

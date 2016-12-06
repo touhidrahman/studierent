@@ -47,16 +47,16 @@
                 <div class="form-group row">
                     <label for="password" class="col-xs-2 col-form-label">Password</label>
                     <div class="col-xs-10">
-						<?= $this->Form->input('password', array('label'=>false,'placeholder'=>"Password",'type'=>'password')); ?>
+						<?= $this->Form->input('password', array('label'=>false,'placeholder'=>"Password",'type'=>'password','id'=>'pass1')); ?>
 				   </div>
                 </div>
 				<div class="form-group row">
                     <label for="confirmPassword" class="col-xs-2 col-form-label" style="padding-top:0px;">Confirm Password</label>
                     <div class="col-xs-10">
-                        <input type="password" id="confirmPassword" placeholder="Confirm Password" class="form-control">
-                    </div>
+                        <input type="password" placeholder="Confirm Password" class="form-control" id="pass2" onkeyup="myFunction();">
+                    </div><span id="confirmMessage" class="confirmMessage"></span>
                 </div>
-                
+                 
                 <div class="form-group row" >
                      <div class="col-xs-2"></div>
 					
@@ -93,4 +93,34 @@
                 </div>
             </form> <!-- /form -->
         </div>
-	
+/* @author Ramanpreet Kaur
+*/
+	<script>
+    function myFunction() {
+        //Store the password field objects into variables ...
+    var pass1 = document.getElementById('pass1');
+    var pass2 = document.getElementById('pass2');
+    //Store the Confimation Message Object ...
+    var message = document.getElementById('confirmMessage');
+    //Set the colors we will be using ...
+    var goodColor = "#66cc66";
+    var badColor = "#ff6666";
+    //Compare the values in the password field 
+    //and the confirmation field
+    if(pass1.value == pass2.value){
+        //The passwords match. 
+        //Set the color to the good color and inform
+        //the user that they have entered the correct password 
+        pass2.style.borderColor = goodColor;
+        message.style.color = goodColor;
+        message.innerHTML = "Passwords Match!"
+    }else{
+        //The passwords do not match.
+        //Set the color to the bad color and
+        //notify the user.
+        pass2.style.borderColor = badColor;
+        message.style.color = badColor;
+        message.innerHTML = "Passwords Do Not Match!"
+    }
+    }
+</script>
