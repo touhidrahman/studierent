@@ -93,8 +93,7 @@
                 </div>
             </form> <!-- /form -->
         </div>
-/* @author Ramanpreet Kaur
-*/
+
 	<script>
     function myFunction() {
         //Store the password field objects into variables ...

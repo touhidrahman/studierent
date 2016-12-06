@@ -50,7 +50,7 @@ class UsersTable extends Table
             'foreignKey' => 'user_id'
         ]);
         $this->hasMany('Feedbacks', [
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'for_user_id'
         ]);
         $this->hasMany('Properties', [
             'foreignKey' => 'user_id'

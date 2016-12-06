@@ -42,7 +42,8 @@ class UsersController extends AppController
      * @author Touhidur Rahman
      */
     public function view($id = null)
-    {
+    {  
+        $this->loadComponent('Flash');
         $user = $this->Users->get($id);
         $propertiesTbl = TableRegistry::get('Properties');
         $query = $propertiesTbl->find()->where(['user_id' => $id]);
@@ -52,8 +53,25 @@ class UsersController extends AppController
         }]);
         $propertyCount = $query->count();
         $properties = $query->toList();
+        //@author Norman Lista
+        //send LogUser For verification of rating himself
+        $logUser=$this->Auth->user('id');
         $this->set(compact('user', 'properties', 'propertyCount'));
         $this->set('_serialize', ['user', 'properties', 'propertyCount']);
+        
+        //@author Norman Lista
+        //for feedback
+        $this->loadModel('Feedbacks');
+        $feedback=$this->Feedbacks->newEntity();
+        if($this->request->is('post')){
+            $feedback= $this->Feedbacks->patchEntity($feedback,$this->request->data);
+         if($this->Feedbacks->save($feedback)){
+             $this->Flash->success(__('Feedback added'));   
+         }else{
+             $this->Flash-error(__('Unable to add feedback'));    
+         }
+        }
+        $this->set('feedback',$feedback);
     }
 
     /**
@@ -201,16 +219,14 @@ class UsersController extends AppController
 		}
 		$this->set(compact('user'));
 		$this->set('_serialize',['user']);
-                
+
 	}
 
 	public function initialize()
 	{
 		parent::initialize();
-<<<<<<< HEAD
                 $session = $this->request->session();
-=======
->>>>>>> 439957c344cf950f07dcb08bd1c48dab0e78184f
+
 		$this->Auth->allow(['logout']);
 		$this->Auth->allow(['register', 'forgotpassword']);
 
@@ -230,34 +246,29 @@ class UsersController extends AppController
      * @author Touhidur Rahman
      */
     public function dashboard(){
-        $propertiesTbl = TableRegistry::get('Properties');
+        $propertiesTbl = TableRegistry::get('users_properties');
         $favoritesTbl = TableRegistry::get('FavoriteProperties');
         $propertyCount = $propertiesTbl->find()->where(['user_id' => $this->Auth->user('id')])->count();
         $favCount = $favoritesTbl->find()->where(['user_id' => $this->Auth->user('id')])->count();
         $name = $this->Auth->user('first_name') . ' ' . $this->Auth->user('last_name');
         $this->set(compact('name', 'propertyCount', 'favCount'));
+    
     }
-
-
-<<<<<<< HEAD
-    public function dashboard(){}
         /* 
         @author Ramanpreet Kaur
-         *          */
-=======
+         *          *
 
     /**
      * Display Admin dashboard after login
      * @author Ramanpreet
      */
->>>>>>> 439957c344cf950f07dcb08bd1c48dab0e78184f
     public function admin(){
         // In a controller or table method.
         //select type, count(*) from properties group by type
 
         $connection = ConnectionManager::get('default');
         $results = $connection->execute('select count(id) as counts , type from properties group by type')->fetchAll('assoc');
-        //   Aleksandr: please note that Recent properties are not included ^^^
+        
         $this->set('results',$results);
         $users = $connection->execute('select count(id) as counts , status from users group by status')->fetchAll('assoc');
         //$users = $connection->execute('select count(id) as counts , status,roles from users left join roles on users.status=roles.id group by status')->fetchAll('assoc');
@@ -269,31 +280,35 @@ class UsersController extends AppController
 */
 
     }
-<<<<<<< HEAD
-    
 
 
-   
+
+
+
     public function forgotPassword($username = null)
     {
         if($this->request->is('post'))
         {
             $data= $this->request->data();
-                  
+
             $user = $this->Users->findByUsername($data['username']);
             //echo print_r($user);
             if (!($user->toArray()))
             {
                 $this->Flash->error('User not found');
                 $this->redirect(['controller' => 'users','action' => 'forgotpassword']);
-            } 
-            else {                          
+            }
+            else {
                 $generated_password=substr(md5(rand(999,999999)) , 0 , 8);
-                mysqli_query("UPDATE 'users' SET 'password' = '$generated_password' WHERE 'username' = '$username'");
+               /* $data = $this->Users->password =  $generated_password;
+                if ($this->Users->save($data)) {
+                    $this->Flash->success('Password changed Succesfully.');
+                     return $this->redirect(['controller' => 'Users','action' => 'login']);*/
                 die($generated_password);
-                 }
-=======
-
+            
+    }
+        }
+    }
     public function activation()  { }
 
 
@@ -308,9 +323,9 @@ class UsersController extends AppController
     }
 
 
-    public function forgotPassword($username = null)
+    /*public function forgotPassword($username = null)
     {
-
+    {
     if($this->request->is('post')) {
          $username = $this->request->data['username'];
          $options = array('conditions' => array('User.' . $this->Users->username => $username));
@@ -332,12 +347,13 @@ class UsersController extends AppController
                      return $this->redirect(['controller' => 'Users','action' => 'forgotPassword']);
 
                 }
+            }
 
 
->>>>>>> 439957c344cf950f07dcb08bd1c48dab0e78184f
+
         }
         
-    }
+    }*/
  
-}
 
+}

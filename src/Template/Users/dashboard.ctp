@@ -1,5 +1,5 @@
 <div class="row">
-    <?= $this->element('userSidebar', [], ['cache' => true]) ?>
+    <?= $this->element('userSidebar', ['id'=>$id], ['cache' => true]) ?>
 
     <!-- My Profile -->
     <div class="col-md-9 col-sm-8 col-xs-12">

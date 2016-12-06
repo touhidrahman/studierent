@@ -38,21 +38,21 @@
       	</ol>
       	<div class="carousel-inner" role="listbox">
       		<div class="carousel-item active center_please">
-      			<img src="/studierent/img/hochschule_fulda1.jpg" alt="First slide">
+      			<img src="http://loremflickr.com/590/250/house?random=5" alt="First slide">
       			<div class="carousel-caption">
       				<h3>First recent property</h3>
       				<a class="" href="login.html">Check it out</a>
       			</div>
       		</div>
       		<div class="carousel-item center_please">
-      			<img src="/studierent/img/hochschule_fulda2.jpg" alt="Second slide">
+      			<img src="http://loremflickr.com/590/250/house?random=4" alt="Second slide">
       			<div class="carousel-caption">
       				<h3>Second recent property</h3>
       				<a class="" href="login.html">Check it out</a>
       			</div>
       		</div>
       		<div class="carousel-item center_please">
-      			<img src="/studierent/img/hochschule_fulda3.jpg" alt="Third slide">
+      			<img src="http://loremflickr.com/590/250/house?random=2" alt="Third slide">
       			<div class="carousel-caption ">
       				<h3>Third recent property</h3>
       				<a class="" href="login.html">Check it out</a>
@@ -80,24 +80,24 @@
         </ol>
         <div class="carousel-inner" role="listbox">
             <div class="carousel-item active center_please">
-                <img src="/studierent/img/hochschule_fulda3.jpg" alt="First slide">
+                <img src="http://loremflickr.com/590/250/house?random=123" alt="First slide">
                 <div class="carousel-caption">
                     <h3>First top property</h3>
-                    <a class="" href="login.html">Check it out</a>
+                    <a class="" href="/studierent/users/login">Check it out</a>
                 </div>
             </div>
             <div class="carousel-item center_please">
-                <img src="/studierent/img/hochschule_fulda1.jpg" alt="Second slide">
+                <img src="http://loremflickr.com/590/250/house?random=1" alt="Second slide">
                 <div class="carousel-caption">
                     <h3>Second top property</h3>
-                    <a class="" href="login.html">Check it out</a>
+                    <a class="" href="/studierent/users/login">Check it out</a>
                 </div>
             </div>
             <div class="carousel-item center_please">
-                <img src="/studierent/img/hochschule_fulda2.jpg" alt="Third slide">
+                <img src="http://loremflickr.com/590/250/house?random=12" alt="Third slide">
                 <div class="carousel-caption ">
                     <h3>Third top property</h3>
-                    <a class="" href="login.html">Check it out</a>
+                    <a class="" href="/studierent/users/login">Check it out</a>
                 </div>
             </div>
         </div>
@@ -128,7 +128,7 @@
 <div class="spacewide">
 	<div class="card-group uptop ">
 		<div class="card">
-			<img class="card-img-top img-fluid" src="/studierent/img/pic01.jpg" style="width: 100%" alt="Card image cap">
+			<img class="card-img-top img-fluid" src="http://loremflickr.com/340/220?random=1" style="width: 100%" alt="Card image cap">
 			<div class="card-block">
 				<h4 class="card-title">Advertisement 1</h4>
 				<p class="card-text">Eat this and you will never have to diet again, is the miracle plant for fat burning!</p>
@@ -136,7 +136,7 @@
 			</div>
 		</div>
 		<div class="card">
-			<img class="card-img-top img-fluid " src="/studierent/img/pic02.jpg" style="width: 100%" alt="Card image cap">
+			<img class="card-img-top img-fluid " src="http://loremflickr.com/340/220?random=12" style="width: 100%" alt="Card image cap">
 			<div class="card-block">
 				<h4 class="card-title">Advertisement 2</h4>
 				<p class="card-text">You won't belive what nature did to this man, it change his life for ever!</p>
@@ -144,7 +144,7 @@
 			</div>
 		</div>
 		<div class="card">
-			<img class="card-img-top img-fluid " src="/studierent/img/pic03.jpg" style="width: 100%" alt="Card image cap">
+			<img class="card-img-top img-fluid " src="http://loremflickr.com/340/220?random=123" style="width: 100%" alt="Card image cap">
 			<div class="card-block">
 				<h4 class="card-title">Advertisement 3</h4>
 				<p class="card-text"> The bigest garden tournament started! the most beuatiful plants in the world are here!</p>
@@ -152,7 +152,7 @@
 			</div>
 		</div>
 		<div class="card">
-			<img class="card-img-top img-fluid " src="/studierent/img/pic01.jpg" style="width: 100%" alt="Card image cap">
+			<img class="card-img-top img-fluid " src="http://loremflickr.com/340/220?random=1234" style="width: 100%" alt="Card image cap">
 			<div class="card-block">
 				<h4 class="card-title">Advertisement 4</h4>
 				<p class="card-text"> Year's largest music night is here!</p>

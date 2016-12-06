@@ -1,7 +1,7 @@
 <!-- Single Property Ad Card -->
 <div class="card">
     <div class="card-block" style="padding-bottom: 0rem">
-        <a href="/properties/view/<?= $property['id'] ?>">
+        <a href="/studierent/properties/view/<?= $property['id'] ?>">
             <h4 class="card-title"><?= $property['title'] ?></h4>
         </a>
         <h6 class="card-subtitle text-muted">
@@ -13,7 +13,7 @@
     <div class="card-block">
         <div class="row">
             <div class="col-sm-3">
-                <?= $this->Html->image('property.jpg', ['alt' => 'Property image', 'class' => 'rounded-left img-fluid']); ?>
+                <?= $this->Html->image('http://loremflickr.com/340/220/house?random='.$property['id'], ['alt' => 'Property image', 'class' => 'rounded-left img-fluid']); ?>
             </div>
             <div class="col-sm-6">
                 <p class="card-text text-justify"><?= $this->Text->truncate($property['description'], 100, ['exact' => false, 'html' => true]) ?></p>
