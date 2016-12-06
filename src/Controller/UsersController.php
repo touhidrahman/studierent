@@ -1,6 +1,5 @@
 <?php
 namespace App\Controller;
-
 use Cake\ORM\TableRegistry;
 use App\Model\Entity\Device;
 use App\Controller\AppController;
@@ -10,6 +9,7 @@ use Cake\ORM\Query;
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\Controller\Component\AuthComponent;
 use Cake\Datasource\ConnectionManager;
+use Cake\Utility;
 /**
  * Users Controller
  *
@@ -175,12 +175,13 @@ class UsersController extends AppController
 		}
 		$this->set(compact('user'));
 		$this->set('_serialize',['user']);
+                
 	}
 
 	public function initialize()
 	{
 		parent::initialize();
-
+                $session = $this->request->session();
 		$this->Auth->allow(['logout']);
 		$this->Auth->allow(['logout', 'register',]);
 		$this->Auth->allow(['forgotpassword']);
@@ -197,7 +198,9 @@ class UsersController extends AppController
 
 
     public function dashboard(){}
-        
+        /* 
+        @author Ramanpreet Kaur
+         *          */
     public function admin(){
         // In a controller or table method.
         //select type, count(*) from properties group by type
@@ -211,39 +214,30 @@ class UsersController extends AppController
             
     }
     
-    public function activation()
-    {
-        
 
-    }
+
    
     public function forgotPassword($username = null)
     {
-
-    if($this->request->is('post')) {
-         $username = $this->request->data['username'];
-         $options = array('conditions' => array('User.' . $this->Users->username => $username));
-         $found = $this->Users->find('first');
-        
-         
-         if (!$username) {
-             $this->Flash->error(__('No user with that email found.'));
-             return $this->redirect(['controller' => 'Users','action' => 'forgotPassword']);
-
-        }else{
-
-                $random = 'a';
-                $hasher = new DefaultPasswordHasher();
-                $val = $hasher->hash($random);
-                $data = $this->Users->password =  $val; 
-                if ($this->Users->save($data)) {
-                    $this->Flash->success(__('Password changed Succesfully.'));
-                     return $this->redirect(['controller' => 'Users','action' => 'forgotPassword']);
-
-                }
-
-
+        if($this->request->is('post'))
+        {
+            $data= $this->request->data();
+                  
+            $user = $this->Users->findByUsername($data['username']);
+            //echo print_r($user);
+            if (!($user->toArray()))
+            {
+                $this->Flash->error('User not found');
+                $this->redirect(['controller' => 'users','action' => 'forgotpassword']);
+            } 
+            else {                          
+                $generated_password=substr(md5(rand(999,999999)) , 0 , 8);
+                mysqli_query("UPDATE 'users' SET 'password' = '$generated_password' WHERE 'username' = '$username'");
+                die($generated_password);
+                 }
         }
+        
     }
-   }
+ 
 }
+

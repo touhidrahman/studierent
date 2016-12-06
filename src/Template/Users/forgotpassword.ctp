@@ -8,7 +8,7 @@
                 <legend><?= __('Forgot Password?') ?></legend>
             </u></div>
 		<div id="div-forms">
-		<?= $this->Form->create() ?>
+		<?= $this->Form->create('User') ?>
 		<form id="forgotPassword-form">
 		 <div class="modal-body">
         <?php

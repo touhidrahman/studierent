@@ -18,7 +18,7 @@
 					<form id="login-form">
 						<div class="modal-body">
 
-							<?= $this->Form->input('username',array('placeholder'=>'Your email id')); ?>
+							<?= $this->Form->input('username',array('placeholder'=>'Your email id','label'=>'Email')); ?>
 							
 						
 							<?= $this->Form->input('password',array('placeholder'=>'Your password')); ?>
