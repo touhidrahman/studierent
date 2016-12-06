@@ -28,7 +28,7 @@ class UsersController extends AppController
             'contain' => ['Cities']
         ];
         $users = $this->paginate($this->Users);
-
+        
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
     }
@@ -40,14 +40,16 @@ class UsersController extends AppController
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($id=null)
     {
-             
+         $this->set('users', $this->Users->find('all'));
+         $user = $this->Users->get($id);
+         $this->set(compact('user'));
     }
 
     /**
-     * Add method
-     *
+     * Add method - add user images
+     *@Mythri Manjunath
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
     public function add()
@@ -57,11 +59,9 @@ class UsersController extends AppController
             if(!empty($this->request->data['photo']['name'])){
                 $fileName = $this->request->data['photo']['name'];
                 $uploadPath ='WWW_ROOT\img\uploads\\';
-                if(move_uploaded_file($this->request->data['photo']['tmp_name'],WWW_ROOT . 'img' . DS . 'uploads' . DS .$fileName)){
-                    $user = $this->Users->newEntity();  
- 
-                    $user->photo = $uploadPath.$fileName;
-                    
+                if(move_uploaded_file($this->request->data['photo']['tmp_name'],WWW_ROOT . 'img' . DS . 'users' . DS .$fileName)){
+                    $user = $this->Users->newEntity();   
+                    $user->photo = $uploadPath.$fileName;                   
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('Image has been uploaded and inserted successfully.'));
                     }else{
@@ -75,17 +75,6 @@ class UsersController extends AppController
             }
             
         }
-       /* $user = $this->Users->newEntity();
-        if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->data);
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
-            }
-        }*/
         $cities = $this->Users->Cities->find('list', ['limit' => 200]);
         $properties = $this->Users->Properties->find('list', ['limit' => 200]);
         $this->set(compact('user', 'cities', 'properties'));

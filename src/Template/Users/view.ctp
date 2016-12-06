@@ -2,8 +2,17 @@
 	<div class="col-xs-12">
 		<div class="jumbotron jumbotron-fluid text-xs-center">
 		  <div class="container">
-			<?php   
-         echo $this->Html->image('uploads/02.jpg', array('alt' => 'CakePHP','class'=>'rounded-circle','height' => '128', 'width' => '128'));
+			
+                     <?php 
+                     $path= $user->photo;
+                     if(file_exists($path)){
+                     $img=basename($path);
+                     $userimage='uploads/'.$img;                      
+ echo $this->Html->image($userimage, array('alt' => 'CakePHP','class'=>'rounded-circle','height' => '128', 'width' => '128'));
+                     }
+                     else 
+                         echo $this->Html->image('boy.jpg', array('alt' => 'CakePHP','class'=>'rounded-circle','height' => '128', 'width' => '128'));
+                         
 ?>
                           
 			<h1 class="display-3">John Doe</h1>
@@ -15,12 +24,17 @@
 	<div class="col-xs-4">
 		<div class="card">
 		  <div class="card-header">
-				Basic Info
+				User Details
 			  </div>
 			  <div class="card-block">
 				<blockquote class="card-blockquote">
-				  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-				  <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                                    <fieldset class="form-group">
+                                  <label>Name: <?= h($user->username) ?> </label><br/>
+                                       
+                                  <label>Address: <?= h($user->address) ?></label><br/>
+                                  
+                                  <label>Contact_Number: <?= h($user->contact_number) ?></label><br/>
+                                  <fieldset>
 				</blockquote>
 			  </div>
 		</div>
