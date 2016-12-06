@@ -87,7 +87,7 @@
                 </div>
             </div>
             <div class="carousel-item center_please">
-                <img src="http://loremflickr.com/590/2500/house?random=1" alt="Second slide">
+                <img src="http://loremflickr.com/590/250/house?random=1" alt="Second slide">
                 <div class="carousel-caption">
                     <h3>Second top property</h3>
                     <a class="" href="/studierent/users/login">Check it out</a>
