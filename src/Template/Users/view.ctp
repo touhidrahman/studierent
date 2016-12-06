@@ -44,7 +44,7 @@
 			    </tr>
 			    <tr>
 			      <th>Email</th>
-				  <td><?= $user->username.$user->id ?></td>
+				  <td><?= $user->username ?></td>
 			    </tr>
 			  </tbody>
 			</table>
@@ -52,18 +52,18 @@
 
             <?php
             //@author Norman Lista
-            //for user not rating himself 
+            //for user not rating himself
             if(!($logUser==$user->id)){ ?>
 		<div class="card">
 		  <div class="card-header">
-				Send a Feedback 
+				Send a Feedback
 			  </div>
 			  <div class="card-block">
-                              
+
 				<?= $this->Form->create($feedback); ?>
 
 
-  					<div class="radio">                                                  
+  					<div class="radio">
   						<label style="display:block"><input name="rate" value="5" type="radio">
   							<i class="fa fa-star"></i>
   							<i class="fa fa-star"></i>
@@ -102,11 +102,11 @@
 				    </fieldset>
 				    <fieldset class="form-group">
 				      <label for="text">Details</label>
-                                     <?= $this->Form->Textarea('text',['class' => 'form-control','id' => 'text']);?> 
+                      <?= $this->Form->Textarea('text',['class' => 'form-control','id' => 'text']);?>
 				    </fieldset>
 
 				    <button type="submit" class="btn btn-success">Submit</button>
-		       <?= $this->Form->end(); ?>  
+		       <?= $this->Form->end(); ?>
 			  </div>
 		</div>
             <?php } ?>
