@@ -97,15 +97,13 @@
 		    <div class="card-header">
 				Posted Properties (<?= $propertyCount ?>)
 			</div>
-			<div class="row">
-				<div class="card-block">
-						<?php
-							foreach ($properties as $property) { ?>
-								<div class="col-xs-6">
-									<?php echo $this->element('adSnippetUserProfileView', ['property' => $property]); ?>
-								</div>
-						<?php }
-						?>
+			<div class="card-block">
+				<div class="card-columns">
+					<?php
+						foreach ($properties as $property) {
+							echo $this->element('adSnippetUserProfileView', ['property' => $property]);
+						}
+					?>
 				</div>
 			</div>
 		</div>

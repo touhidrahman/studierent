@@ -192,8 +192,8 @@
               </blockquote>
             </div>
             <div class="card-block">
-            <?= $this->Html->link('Landlord Profile', '/users/view/', ['class' => 'btn btn-success']) ?>
-            <?= $this->Html->link('Submit Review', '/users/view/', ['class' => 'btn btn-warning']) ?>
+            <?= $this->Html->link('Landlord Profile', '/users/view/'.$property->user->id, ['class' => 'btn btn-success']) ?>
+            <?= $this->Html->link('Submit Review', '/users/view/'.$property->user->id, ['class' => 'btn btn-warning']) ?>
             </div>
 		</div>
 	</div>
