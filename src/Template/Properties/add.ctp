@@ -26,7 +26,7 @@
                       <?php
                       echo $this->Form->input('house_no', ['label' => 'House Number']);
                       echo $this->Form->input('address');
-					  echo $this->Form->input('zip_id');
+					  echo $this->Form->input('zip_id', ['type' => 'hidden']);
                       echo $this->Form->input('zip', ['type' => 'text', 'label' => 'Zip Code', 'id' => 'zip']);
                       ?>
                   </div>

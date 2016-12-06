@@ -33,8 +33,10 @@ class UsersSeed extends AbstractSeed
                 'photo' => 'user.jpg',
                 'contact_number' => $faker->phoneNumber,
                 'reset_key' => $faker->password,
-                'created' => $faker->dateTimeThisYear(),
-                'modified' => $faker->dateTimeThisYear(),
+				'created' => date('Y-m-d H:i:s'),
+                //'created' => $faker->dateTimeThisYear(),
+				'modified' => date('Y-m-d H:i:s'),
+                //'modified' => $faker->dateTimeThisYear(),
 
             ];
         }

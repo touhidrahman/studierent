@@ -6,21 +6,12 @@ use Migrations\AbstractSeed;
  */
 class PropertiesSeed extends AbstractSeed
 {
-    /**
-     * Run Method.
-     *
-     * Write your database seeder using this method.
-     *
-     * More information on writing seeders is available here:
-     * http://docs.phinx.org/en/latest/seeding.html
-     *
-     * @return void
-     */
+
     public function run()
     {
         $data = [];
         $faker = Faker\Factory::create();
-        for ($i=0; $i < 100; $i++) {
+        for ($i=0; $i < 500; $i++) {
             $data[] = [
                 'type' => $faker->randomElement(['Flatshare', 'Flat', 'Student Residence', 'House']),
                 'title' => $faker->sentence(),
@@ -57,8 +48,10 @@ class PropertiesSeed extends AbstractSeed
                 'electricity_bill_included' => $faker->randomDigit() % 2,
                 'internet' => $faker->randomDigit() % 2,
                 'view_times' => $faker->randomNumber(),
-                'created' => $faker->dateTimeThisYear(),
-                'modified' => $faker->dateTimeThisYear(),
+                'created' => date('Y-m-d H:i:s'),
+                'modified' => date('Y-m-d H:i:s'),
+                'house_no' => $faker->numberBetween(1, 100),
+                'user_id'=> $faker->numberBetween(1, 100)
 
             ];
         }

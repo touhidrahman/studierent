@@ -7,7 +7,7 @@
         <h6 class="card-subtitle text-muted">
             <?= $this->Html->link($property['address'], '/properties/search?address='.$property['address'], ['title' => 'Click here to search all properties in '.$property['address']]) ?>
             &nbsp;|&nbsp;
-            <?= $this->Html->link($property['zip_id'], '/properties/search?address='.$property['zip_id'], ['title' => 'Click here to search all properties in '.$property['zip_id']]) ?>
+            <?= $this->Html->link($property['zip']['number'], '/properties/search?address='.$property['zip']['number'], ['title' => 'Click here to search all properties in '.$property['zip']['number']]) ?>
         </h6>
     </div>
     <div class="card-block">
@@ -16,7 +16,7 @@
                 <?= $this->Html->image('property.jpg', ['alt' => 'Property image', 'class' => 'rounded-left img-fluid']); ?>
             </div>
             <div class="col-sm-6">
-                <p class="card-text text-justify"><?= $property['description'] ?></p>
+                <p class="card-text text-justify"><?= $this->Text->truncate($property['description'], 100, ['exact' => false, 'html' => true]) ?></p>
 
                 <?= $this->Html->link('<i class="fa fa-eye"></i> View Details', '/properties/view/'.$property['id'], ['class' => 'card-link', 'escapeTitle' => false]) ?>
                 <?= $this->Html->link('<i class="fa fa-pencil"></i> Edit', '/properties/edit/'.$property['id'], ['class' => 'card-link text-info', 'escapeTitle' => false]) ?>
