@@ -2,9 +2,9 @@
 use Migrations\AbstractSeed;
 
 /**
- * Zips seed.
+ * FavoriteProperties seed.
  */
-class ZipsSeed extends AbstractSeed
+class FavoritePropertiesSeed extends AbstractSeed
 {
     /**
      * Run Method.
@@ -20,17 +20,16 @@ class ZipsSeed extends AbstractSeed
     {
         $data = [];
         $faker = Faker\Factory::create();
-        for ($i=0; $i < 100; $i++) {
+        for ($i=0; $i < 500; $i++) {
             $data[] = [
-                'city' => $faker->randomElement(['Fulda', 'Darmstdat', 'Giessen']),
-                'number' => $faker->numberBetween(36035, 36040),
-                'province' => 'Hessen',
-                'country' => 'Germany',
-                'city_id' => $faker->randomNumber(2),
+                'user_id' => $faker->numberBetween(1, 100),
+                'property_id'=> $faker->numberBetween(1, 100),
+				'created' => date('Y-m-d H:i:s'),
+				'modified' => date('Y-m-d H:i:s')
             ];
         }
 
-        $table = $this->table('zips');
+        $table = $this->table('favorite_properties');
         $table->insert($data)->save();
     }
 }

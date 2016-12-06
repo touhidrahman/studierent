@@ -28,7 +28,7 @@ class UsersController extends AppController
             'contain' => ['Cities']
         ];
         $users = $this->paginate($this->Users);
-        
+
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
     }
@@ -39,12 +39,21 @@ class UsersController extends AppController
      * @param string|null $id User id.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @author Touhidur Rahman
      */
-    public function view($id=null)
+    public function view($id = null)
     {
-         $this->set('users', $this->Users->find('all'));
-         $user = $this->Users->get($id);
-         $this->set(compact('user'));
+        $user = $this->Users->get($id);
+        $propertiesTbl = TableRegistry::get('Properties');
+        $query = $propertiesTbl->find()->where(['user_id' => $id]);
+        // join zips.number field
+        $query->contain(['Zips' => function($q){
+            return $q->select('number', 'city', 'province');
+        }]);
+        $propertyCount = $query->count();
+        $properties = $query->toList();
+        $this->set(compact('user', 'properties', 'propertyCount'));
+        $this->set('_serialize', ['user', 'properties', 'propertyCount']);
     }
 
     /**
@@ -130,6 +139,9 @@ class UsersController extends AppController
     }
 
 
+    /**
+     * @author Muneeb Noor
+     */
 	public function login()
 	{
 
@@ -155,18 +167,21 @@ class UsersController extends AppController
 				if($user['status']==9)
                 {
                     return $this->redirect(['controller' => 'users','action' => 'admin']);
-                } 
+                }
 				return $this->redirect(['controller' => 'users','action' => 'dashboard']);
 
 			}else{
-                         $this->Flash->error('Username or password is incorrect');    
+                         $this->Flash->error('Username or password is incorrect');
                         }
 
-			
+
 
 		}
 	}
 
+    /**
+     * @author Muneeb Noor
+     */
 	public function register()
 	{
 		$user = $this->Users->newEntity();
@@ -191,25 +206,43 @@ class UsersController extends AppController
 	public function initialize()
 	{
 		parent::initialize();
-		$this->Auth->allow(['logout']); 
+		$this->Auth->allow(['logout']);
 		$this->Auth->allow(['register', 'forgotpassword']);
 
 	}
 
+    /**
+     * @author Muneeb Noor
+     */
 	public function logout()
 	{
 		$this->Flash->success('You are now logged out.');
 		return $this->redirect($this->Auth->logout());
 	}
-        
-      
-    public function dashboard(){}
-        
-//  author: Ramanpreet
+
+    /**
+     * Display User dashboard after login
+     * @author Touhidur Rahman
+     */
+    public function dashboard(){
+        $propertiesTbl = TableRegistry::get('Properties');
+        $favoritesTbl = TableRegistry::get('FavoriteProperties');
+        $propertyCount = $propertiesTbl->find()->where(['user_id' => $this->Auth->user('id')])->count();
+        $favCount = $favoritesTbl->find()->where(['user_id' => $this->Auth->user('id')])->count();
+        $name = $this->Auth->user('first_name') . ' ' . $this->Auth->user('last_name');
+        $this->set(compact('name', 'propertyCount', 'favCount'));
+    }
+
+
+
+    /**
+     * Display Admin dashboard after login
+     * @author Ramanpreet
+     */
     public function admin(){
         // In a controller or table method.
         //select type, count(*) from properties group by type
-          
+
         $connection = ConnectionManager::get('default');
         $results = $connection->execute('select count(id) as counts , type from properties group by type')->fetchAll('assoc');
         //   Aleksandr: please note that Recent properties are not included ^^^
@@ -222,23 +255,23 @@ class UsersController extends AppController
 * $usersAll = $this->Users->find('all');
 * $this->set(compact('usersAll')); //TODO: paginate    http://book.cakephp.org/3.0/en/controllers/components/pagination.html
 */
-            
+
     }
 
     public function activation()  { }
 
 
     //Admin: search for user by id
-    /* the convention is that your URLs are lowercase and dashed using the 
-     * DashedRoute class, therefore /article-categories/view-all is the correct 
+    /* the convention is that your URLs are lowercase and dashed using the
+     * DashedRoute class, therefore /article-categories/view-all is the correct
      * form to access the ArticleCategoriesController::viewAll() action.
      */
     public function adminSearchById($id = null)  { // author: Aleksandr
         $user = $this->Users->get($id);
         $this->set(compact('user'));
     }
-        
-   
+
+
     public function forgotPassword($username = null)
     {
 
@@ -246,8 +279,8 @@ class UsersController extends AppController
          $username = $this->request->data['username'];
          $options = array('conditions' => array('User.' . $this->Users->username => $username));
          $found = $this->Users->find('first');
-        
-         
+
+
          if (!$username) {
              $this->Flash->error(__('No user with that email found.'));
              return $this->redirect(['controller' => 'Users','action' => 'forgotPassword']);
@@ -257,7 +290,7 @@ class UsersController extends AppController
                 $random = 'a';
                 $hasher = new DefaultPasswordHasher();
                 $val = $hasher->hash($random);
-                $data = $this->Users->password =  $val; 
+                $data = $this->Users->password =  $val;
                 if ($this->Users->save($data)) {
                     $this->Flash->success(__('Password changed Succesfully.'));
                      return $this->redirect(['controller' => 'Users','action' => 'forgotPassword']);

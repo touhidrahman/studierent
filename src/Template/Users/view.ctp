@@ -15,106 +15,41 @@
                          
 ?>
                           
-			<h1 class="display-3">John Doe</h1>
-			<p class="lead">"My nice and bold tagline!"</p>
+			<h1 class="display-3"><?= $user->first_name .' '. $user->last_name ?></h1>
+			<!-- <p class="lead"></p> -->
 		  </div>
 		</div>
 	</div>
 
 	<div class="col-xs-4">
 		<div class="card">
-		  <div class="card-header">
-				User Details
-			  </div>
-			  <div class="card-block">
-				<blockquote class="card-blockquote">
-                                    <fieldset class="form-group">
-                                  <label>Name: <?= h($user->username) ?> </label><br/>
-                                       
-                                  <label>Address: <?= h($user->address) ?></label><br/>
-                                  
-                                  <label>Contact_Number: <?= h($user->contact_number) ?></label><br/>
-                                  <fieldset>
-				</blockquote>
-			  </div>
-		</div>
-	</div>
-
 	<div class="col-xs-4">
 		<div class="card">
-		  <div class="card-header">
-				Posted Properties (3)
-			  </div>
-			  <div class="card-block">
-
-				  <a href="#">
-				  <div class="card">
-					  <div class="card-block" style="padding-bottom: 0rem">
-						  <h4 class="card-title">A title of the Property</h4>
-						  <h6 class="card-subtitle text-muted">SomeStreet | 36037</h6>
-					  </div>
-					  <div class="card-block">
-						  <div class="row">
-							  <div class="col-sm-6">
-								  <?= $this->Html->image('property.jpg', ['alt' => 'Property image', 'class' => 'rounded-left img-fluid']); ?>
-							  </div>
-
-							  <div class="col-sm-6">
-								  <p class="text-xs-center text-muted" style="margin-bottom:0">EUR</p>
-								  <h4 class="display-4 text-xs-center text-warning font-weight-bold">250</h4>
-							  </div>
-						  </div>
-					  </div>
-				  </div>
-				</a>
-
-				  <a href="#">
-				  <div class="card">
-					  <div class="card-block" style="padding-bottom: 0rem">
-						  <h4 class="card-title">A title of the Property</h4>
-						  <h6 class="card-subtitle text-muted">SomeStreet | 36037</h6>
-					  </div>
-					  <div class="card-block">
-						  <div class="row">
-							  <div class="col-sm-6">
-								  <?= $this->Html->image('property.jpg', ['alt' => 'Property image', 'class' => 'rounded-left img-fluid']); ?>
-							  </div>
-
-							  <div class="col-sm-6">
-								  <p class="text-xs-center text-muted" style="margin-bottom:0">EUR</p>
-								  <h4 class="display-4 text-xs-center text-warning font-weight-bold">250</h4>
-							  </div>
-						  </div>
-					  </div>
-				  </div>
-				</a>
-
-				  <a href="#">
-				  <div class="card">
-					  <div class="card-block" style="padding-bottom: 0rem">
-						  <h4 class="card-title">A title of the Property</h4>
-						  <h6 class="card-subtitle text-muted">SomeStreet | 36037</h6>
-					  </div>
-					  <div class="card-block">
-						  <div class="row">
-							  <div class="col-sm-6">
-								  <?= $this->Html->image('property.jpg', ['alt' => 'Property image', 'class' => 'rounded-left img-fluid']); ?>
-							  </div>
-
-							  <div class="col-sm-6">
-								  <p class="text-xs-center text-muted" style="margin-bottom:0">EUR</p>
-								  <h4 class="display-4 text-xs-center text-warning font-weight-bold">250</h4>
-							  </div>
-						  </div>
-					  </div>
-				  </div>
-				</a>
-
-			  </div>
+		  	<div class="card-header">
+				Basic Info
+			</div>
+			<table class="table">
+			  <tbody>
+			    <tr>
+			      <th>Gender</th>
+				  <td><?= $user->gender ?></td>
+			    </tr>
+			    <tr>
+			      <th>Address</th>
+				  <td><?= $user->address ?></td>
+			    </tr>
+			    <tr>
+			      <th>Contact No</th>
+				  <td><?= $user->contact_number ?></td>
+			    </tr>
+			    <tr>
+			      <th>Email</th>
+				  <td><?= $user->username ?></td>
+			    </tr>
+			  </tbody>
+			</table>
 		</div>
-	</div>
 
-	<div class="col-xs-4">
 		<div class="card">
 		  <div class="card-header">
 				Send a Feedback
@@ -170,3 +105,23 @@
 			  </div>
 		</div>
 	</div>
+
+	<div class="col-xs-8">
+		<div class="card">
+		    <div class="card-header">
+				Posted Properties (<?= $propertyCount ?>)
+			</div>
+			<div class="row">
+				<div class="card-block">
+						<?php
+							foreach ($properties as $property) { ?>
+								<div class="col-xs-6">
+									<?php echo $this->element('adSnippetUserProfileView', ['property' => $property]); ?>
+								</div>
+						<?php }
+						?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

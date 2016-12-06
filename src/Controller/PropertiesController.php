@@ -181,19 +181,19 @@ class PropertiesController extends AppController
                     ->lte('rent', $this->request->query('max'));
             });
         }
-        if ($qs['dist']) $query->where(['dist_from_uni' => $qs['dist']]);
-        if ($qs['directBus']) $query->where(['direct_bus_to_uni' => $qs['directBus']]);
-        if ($qs['eBillIncl']) $query->where(['electricity_bill_included' => $qs['eBillIncl']]);
-        if ($qs['internet']) $query->where(['internet' => $qs['internet']]);
-        if ($qs['wMachine']) $query->where(['washing_machine' => $qs['wMachine']]);
-        if ($qs['fireAlarm']) $query->where(['fire_alarm' => $qs['fireAlarm']]);
-        if ($qs['heating']) $query->where(['heating' => $qs['heating']]);
-        if ($qs['parking']) $query->where(['parking' => $qs['parking']]);
+        if ($qs['dist'])        $query->where(['dist_from_uni' => $qs['dist']]);
+        if ($qs['directBus'])   $query->where(['direct_bus_to_uni' => $qs['directBus']]);
+        if ($qs['eBillIncl'])   $query->where(['electricity_bill_included' => $qs['eBillIncl']]);
+        if ($qs['internet'])    $query->where(['internet' => $qs['internet']]);
+        if ($qs['wMachine'])    $query->where(['washing_machine' => $qs['wMachine']]);
+        if ($qs['fireAlarm'])   $query->where(['fire_alarm' => $qs['fireAlarm']]);
+        if ($qs['heating'])     $query->where(['heating' => $qs['heating']]);
+        if ($qs['parking'])     $query->where(['parking' => $qs['parking']]);
         if ($qs['bikeParking']) $query->where(['bike_parking' => $qs['bikeParking']]);
-        if ($qs['garden']) $query->where(['garden' => $qs['garden']]);
-        if ($qs['balcony']) $query->where(['balcony' => $qs['balcony']]);
-        if ($qs['smoking']) $query->where(['smoking' => $qs['smoking']]);
-        if ($qs['pets']) $query->where(['pets' => $qs['pets']]);
+        if ($qs['garden'])      $query->where(['garden' => $qs['garden']]);
+        if ($qs['balcony'])     $query->where(['balcony' => $qs['balcony']]);
+        if ($qs['smoking'])     $query->where(['smoking' => $qs['smoking']]);
+        if ($qs['pets'])        $query->where(['pets' => $qs['pets']]);
         // search properties in between +5 / -5 room size than the supplied
         if ($qs['rSize']) {
             $query->where(function($exp){
@@ -252,10 +252,30 @@ class PropertiesController extends AppController
         $this->set('_serialize', ['properties']);
     }
 
-
+    /**
+     * Displays User's favorited ads
+     * @author Touhidur Rahman
+     */
     public function favorites()
     {
-        $properties = $this->Properties->find('all')->limit(10);
+        $query = $this->Properties->find();
+        $query->where(function($exp){
+            $ids = [];
+            $favoritesTbl = TableRegistry::get('FavoriteProperties');
+            $favAds = $favoritesTbl->find()->select('property_id')->where(['user_id' => $this->Auth->user('id')]);
+            foreach ($favAds as $ad) {
+                $ids[] = $ad->property_id;
+            }
+            return $exp->in('Properties.id', $ids);
+        });
+
+        // join zips.number field
+        $query->contain(['Zips' => function($q){
+            return $q->select('number', 'city', 'province');
+        }]);
+
+        $properties = $this->paginate($query);
+
         $this->set(compact('properties'));
         $this->set('_serialize', ['properties']);
     }
@@ -266,11 +286,45 @@ class PropertiesController extends AppController
      */
     public function myproperties()
     {
-        $query = $this->Properties->find('all');
+        $query = $this->Properties->find()->where(['user_id' => $this->Auth->user('id')]);
+        // join zips.number field
+        $query->contain(['Zips' => function($q){
+            return $q->select('number', 'city', 'province');
+        }]);
         $properties = $this->paginate($query);
         $this->set(compact('properties'));
         $this->set('_serialize', ['properties']);
     }
-    
-   
+
+    /**
+     * Marks a property as favorite for user
+     * @ uses Cake\ORM\Entity\FavoriteProperties
+     * @author Touhidur Rahman
+     */
+    public function toggleFavorites($property_id)
+    {
+        // load FavoriteProperties table
+        $favoritesTbl = TableRegistry::get('FavoriteProperties');
+        // check if the combination already exists or not
+        $query = $favoritesTbl->find()
+            ->where(['property_id' => $property_id, 'user_id' => $this->Auth->user('id')]);
+
+        $existsCount = $query->count();
+        // if existsCount > 0 remove the combo (user is toggling)
+        if ($existsCount > 0) {
+            $favoritesTbl->deleteAll(['property_id' => $property_id, 'user_id' => $this->Auth->user('id')]);
+            $ret = false;
+        } else {
+            // insert into db
+            $entry = $favoritesTbl->newEntity();
+            $entry->property_id = $property_id;
+            $entry->user_id = $this->Auth->user('id');
+            $favoritesTbl->save($entry);
+            $ret = true;
+        }
+
+        $this->set('_serialize', ['ret']);
+    }
+
+
 }
