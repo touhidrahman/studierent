@@ -250,7 +250,10 @@ class PropertiesController extends AppController
         $this->set('_serialize', ['properties']);
     }
 
-
+    /**
+     * Displays User's favorited ads
+     * @author Touhidur Rahman
+     */
     public function favorites()
     {
         $query = $this->Properties->find();
@@ -288,6 +291,35 @@ class PropertiesController extends AppController
         }]);
         $properties = $this->paginate($query);
         $this->set(compact('properties'));
+        $this->set('_serialize', ['properties']);
+    }
+
+    /**
+     * Marks a property as favorite for user
+     * @uses Cake\ORM\Entity\FavoriteProperties
+     * @author Touhidur Rahman
+     */
+    public function toggleFavorites($property_id)
+    {
+        // load FavoriteProperties table
+        $favoritesTbl = TableRegistry::get('FavoriteProperties');
+        // check if the combination already exists or not
+        $query = $favoritesTbl->find()
+            ->where(['property_id' => $property_id, 'user_id' => $this->Auth->user('id')]);
+
+        $existsCount = $query->first()->count();
+        // if existsCount > 0 remove the combo (user is toggling)
+        if ($existsCount > 0) {
+            $favoritesTbl->deleteAll(['property_id' => $property_id, 'user_id' => $this->Auth->user('id')]);
+        } else {
+            // insert into db
+            $entry = $favoritesTbl->newEntity();
+            $entry->property_id = $property_id;
+            $entry->user_id = $this->Auth->user('id');
+            $favoritesTbl->save($entry);
+        }
+
+        // $this->set(compact('properties'));
         $this->set('_serialize', ['properties']);
     }
 
