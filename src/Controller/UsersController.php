@@ -56,8 +56,8 @@ class UsersController extends AppController
         //@author Norman Lista
         //send LogUser For verification of rating himself
         $logUser=$this->Auth->user('id');
-        $this->set(compact('user', 'properties', 'propertyCount','logUser'));
-        $this->set('_serialize', ['user', 'properties', 'propertyCount','logUser']);
+        $this->set(compact('user', 'properties', 'propertyCount'));
+        $this->set('_serialize', ['user', 'properties', 'propertyCount']);
         
         //@author Norman Lista
         //for feedback
@@ -215,7 +215,8 @@ class UsersController extends AppController
 	public function initialize()
 	{
 		parent::initialize();
-        $session = $this->request->session();
+                $session = $this->request->session();
+
 		$this->Auth->allow(['logout']);
 		$this->Auth->allow(['register', 'forgotpassword']);
 
@@ -240,11 +241,12 @@ class UsersController extends AppController
         $propertyCount = $propertiesTbl->find()->where(['user_id' => $this->Auth->user('id')])->count();
         $favCount = $favoritesTbl->find()->where(['user_id' => $this->Auth->user('id')])->count();
         $name = $this->Auth->user('first_name') . ' ' . $this->Auth->user('last_name');
-        $id=$this->Auth->user('id');
-        $this->set(compact('id','name', 'propertyCount', 'favCount'));
+        $this->set(compact('name', 'propertyCount', 'favCount'));
+    
     }
-
-
+        /* 
+        @author Ramanpreet Kaur
+         *          *
 
     /**
      * Display Admin dashboard after login
@@ -256,7 +258,7 @@ class UsersController extends AppController
 
         $connection = ConnectionManager::get('default');
         $results = $connection->execute('select count(id) as counts , type from properties group by type')->fetchAll('assoc');
-        //   Aleksandr: please note that Recent properties are not included ^^^
+        
         $this->set('results',$results);
         $users = $connection->execute('select count(id) as counts , status from users group by status')->fetchAll('assoc');
         //$users = $connection->execute('select count(id) as counts , status,roles from users left join roles on users.status=roles.id group by status')->fetchAll('assoc');
@@ -268,6 +270,7 @@ class UsersController extends AppController
 */
 
     }
+
 
 
 
@@ -287,12 +290,15 @@ class UsersController extends AppController
             }
             else {
                 $generated_password=substr(md5(rand(999,999999)) , 0 , 8);
-                mysqli_query("UPDATE 'users' SET 'password' = '$generated_password' WHERE 'username' = '$username'");
+               /* $data = $this->Users->password =  $generated_password;
+                if ($this->Users->save($data)) {
+                    $this->Flash->success('Password changed Succesfully.');
+                     return $this->redirect(['controller' => 'Users','action' => 'login']);*/
                 die($generated_password);
-            }
+            
+    }
         }
     }
-
     public function activation()  { }
 
 
@@ -307,7 +313,8 @@ class UsersController extends AppController
     }
 
 
-    public function forgotPassword2($username = null)
+    /*public function forgotPassword($username = null)
+    {
     {
     if($this->request->is('post')) {
          $username = $this->request->data['username'];
@@ -332,8 +339,11 @@ class UsersController extends AppController
                 }
             }
 
-        }
 
-    }
+
+        }
+        
+    }*/
+ 
 
 }
