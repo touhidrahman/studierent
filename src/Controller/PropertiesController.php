@@ -315,11 +315,13 @@ class PropertiesController extends AppController
 
     /**
      * Marks a property as favorite for user
-     * @ uses Cake\ORM\Entity\FavoriteProperties
+     * URL Pattern: http://localhost/studierent/properties/toggleFavorites.json?id=53
+     * @uses Cake\ORM\Entity\FavoriteProperties
      * @author Touhidur Rahman
      */
-    public function toggleFavorites($property_id)
+    public function toggleFavorites()
     {
+        $property_id = $this->request->query('id');
         // load FavoriteProperties table
         $favoritesTbl = TableRegistry::get('FavoriteProperties');
         // check if the combination already exists or not
@@ -329,8 +331,8 @@ class PropertiesController extends AppController
         $existsCount = $query->count();
         // if existsCount > 0 remove the combo (user is toggling)
         if ($existsCount > 0) {
-            $favoritesTbl->deleteAll(['property_id' => $property_id, 'user_id' => $this->Auth->user('id')]);
-            $ret = false;
+            $ret = $favoritesTbl->deleteAll(['property_id' => $property_id, 'user_id' => $this->Auth->user('id')]);
+            if ($ret) $data['message'] = 'Deleted';
         } else {
             // insert into db
             $entry = $favoritesTbl->newEntity();
@@ -338,11 +340,11 @@ class PropertiesController extends AppController
              //@author Norman Lista
              //send user id for my profile button
             $entry->user_id = $this->Auth->user('id');
-            $favoritesTbl->save($entry);
-            $ret = true;
+            $ret = $favoritesTbl->save($entry);
+            if ($ret) $data['message'] = 'Added';
         }
-
-        $this->set('_serialize', ['ret']);
+        $this->set(compact('data'));
+        $this->set('_serialize', ['data']);
     }
 
 
