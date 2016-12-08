@@ -10,6 +10,7 @@ use Cake\Auth\DefaultPasswordHasher;
 use Cake\Controller\Component\AuthComponent;
 use Cake\Datasource\ConnectionManager;
 use Cake\Utility;
+//use Cake\Network\Request // @author: Aleksandr
 /**
  * Users Controller
  *
@@ -220,6 +221,7 @@ class UsersController extends AppController
 
 		$this->Auth->allow(['logout']);
 		$this->Auth->allow(['register', 'forgotpassword']);
+        $this->Auth->allow(['index', 'view', 'display', 'admin', 'search', 'adminSearchById']); //REM @author Aleksandr Anfilov
 
 	}
 
@@ -250,11 +252,14 @@ class UsersController extends AppController
 
     /**
      * Display Admin dashboard after login
-     * @author Ramanpreet
+     * @author Ramanpreet, 
+     * @author Aleksandr Anfilov
      */
     public function admin(){
-        // In a controller or table method.
-        //select type, count(*) from properties group by type
+        /*@author Ramanpreet
+        * In a controller or table method.
+        * select type, count(*) from properties group by type
+        */
 
         $connection = ConnectionManager::get('default');
         $results = $connection->execute('select count(id) as counts , type from properties group by type')->fetchAll('assoc');
@@ -262,16 +267,45 @@ class UsersController extends AppController
         $this->set('results',$results);
         $users = $connection->execute('select count(id) as counts , status from users group by status')->fetchAll('assoc');
         //$users = $connection->execute('select count(id) as counts , status,roles from users left join roles on users.status=roles.id group by status')->fetchAll('assoc');
-        $this->set('users',$users);
-/*  author: Aleksandr
-* Select all users
-* $usersAll = $this->Users->find('all');
-* $this->set(compact('usersAll')); //TODO: paginate    http://book.cakephp.org/3.0/en/controllers/components/pagination.html
-*/
+        $this->set('users', $users);
 
+        /**
+        * @author Aleksandr Anfilov
+        * Display results of search by user id or name 
+        */
+        if($this->request->is('post'))
+        {
+            $form = $this->request->data();
+            $searchBy = key($form);             // key: input name is 'id' or 'username'
+            $searchParam = $form[$searchBy];    // get input value from array by key
+
+//@source: Selecting Rows From A Table   http://book.cakephp.org/3.0/en/orm/query-builder.html
+//@ERROR: Call to a member function find() on array $this-Users->find()->select(['id', 'first_name']);
+
+            $searchQuery = TableRegistry::get('Users')
+                ->find()                // 1. Prepare a SELECT query:
+                ->select( ['id', 'last_name', 'first_name'] );
+            
+            switch ($searchBy) {        // 2. Add a WHERE condition
+            case 'id':
+                $searchQuery->where(['id' => $searchParam]);
+            break;
+                    
+            case 'username':           //  find by username (which is an e-mail address)
+                $searchQuery->where(['username' => $searchParam]);
+            break;
+            }
+
+            $usersFound = $searchQuery->toArray();// 3. Execute the query
+            
+            if (!empty($usersFound)){
+                $this->set('usersFound', $usersFound);
+            }
+            else{
+                $this->Flash->error(__('No users have been found with the ' . $searchBy . ' ' . $searchParam . '.')); 
+                }
+        }
     }
-
-
 
 
     /**
@@ -304,17 +338,20 @@ class UsersController extends AppController
     }
     public function activation()  { }
 
-
-    //Admin: search for user by id
-    /* the convention is that your URLs are lowercase and dashed using the
-     * DashedRoute class, therefore /article-categories/view-all is the correct
-     * form to access the ArticleCategoriesController::viewAll() action.
-     */
-    public function adminSearchById($id = null)  { // author: Aleksandr
+    
+    /**
+    * Admin::Search user by id
+    * @author Aleksandr Anfilov
+    * =======
+    * the CakePHP convention is that your URLs are lowercase and dashed using the
+    * DashedRoute class, therefore  /article-categories/view-all is 
+    * the correct form to access the ArticleCategoriesController::viewAll() action.
+   
+    public function adminSearchById($id = null)  {
         $user = $this->Users->get($id);
         $this->set(compact('user'));
     }
-
+ */
 
     /*public function forgotPassword($username = null)
     {
@@ -350,3 +387,10 @@ class UsersController extends AppController
 
 
 }
+
+/*  author: Aleksandr
+* Select all users
+* $usersAll = $this->Users->find('all');
+* $this->set(compact('usersAll')); 
+//TODO: paginate    http://book.cakephp.org/3.0/en/controllers/components/pagination.html
+*/

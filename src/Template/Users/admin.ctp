@@ -17,15 +17,6 @@
                             '<li><a href="#">'.$r['type']."(".$r['counts'].")".'</a></li>';
                         }
 ?>
-<!-- STATIC BEFORE:
-                        
-                            <li><a href="#">Recent(3)</a></li>
-                            <li><a href="#">Flats(7)</a></li>
-                            <li><a href="#">Flatshare(8)</a></li>
-                            <li><a href="#">Houses(9)</a></li>
-                            <li><a href="#">Student Residence(15)</a></li>
-                        
--->
                         </ul>
                     </li>
                     
@@ -41,11 +32,6 @@
                             
                         }
 ?>                           
-<!-- STATIC BEFORE:
-                            <li><a href="#">Landlord(10)</a></li>
-                            <li><a href="#">Tenants(10)</a></li>
-                            <li><a href="#">Blocked(3)</a></li>
--->
                         </ul>
                     </li>
                     
@@ -77,54 +63,59 @@
        
         <div class="card-block" style="padding-bottom: 0rem">
             <h4 class="card-title">Search For Users</h4>
-        </div>
-        <div class="card-block">
+<!--        </div>-->
+<!--        <div class="card-block">-->
             <div class="row">
-                <label for="uid"><b>&nbsp;&nbsp;Search by User-Id:</b></label>
-                <form class="form-inline float-lg-center">
-                    <input class="form-control" type="text" placeholder="Enter User Id">
+                <label for="uid"><b>&nbsp;&nbsp; - by user id:</b></label>
+                <form method="POST" class="form-inline">
+                    <input name="id" id="uid" class="form-control" type="number" min="1"
+                        value = "9"
+                    placeholder="Enter User Id">
                     <button class="btn btn-primary" type="submit">Search</button>
                 </form>
                 <br>
-                <label for="uid"><b>&nbsp;&nbsp;Search by User-Name:</b></label>
-                <form class="form-inline float-lg-center">
-                    <input class="form-control" type="text" placeholder="Enter User Name">
+                <label for="uname"><b>&nbsp;&nbsp; - or by user name:</b></label>
+                <form method="POST" class="form-inline">
+                    <input name="username" id="uname" class="form-control" type="email" 
+                        value = "shany.ernser@yahoo.com"
+                    placeholder="Enter User Name">
                     <button class="btn btn-primary" type="submit">Search</button>
                 </form>
                 <br>
                 <br>
-<!-- author: Aleksandr     -->
-                <h3><?= __('Users') ?></h3>
-                <div class="list-group">
-      
+<!-- author: Aleksandr Anfilov    -->
+<?php   if (isset($usersFound)) { //true: search form has been submitted  ?>
+            
+            <h3><?= __('Users') ?>:</h3>
+            <div class="list-group">
+            
+    <?php   
+            if  ( empty($usersFound)) {
+                echo "Nobody has been found with ";
+            }   else {
+                foreach ($usersFound as $u):  ?>
+                <div class="list-group-item "> <!--  Display user image, view link, and name          -->
+                <?php
+                    $imgPath = "/img/boy.jpg";
+                    echo $this->Html->image( $imgPath, 
+                    [
+                    'class'  => "img-thumbnail", 
+                    'height' => "100px",
+                    'width'  => "100px", 
+                    "alt"    => "user photo"
+                    ]);
+                    echo h($u->first_name).' '.h($u->last_name); 
+                ?>
+                    <span class="pull-right">
+                        <button class="btn btn-primary" type="submit">Block</button>
+                    </span>
+                </div>
     
-<?php //foreach ($users as $usersAll): //TODO: pagination   ?>
-  <div class="list-group-item "> <!--  Display user image, view link, and name          -->
-<?php /*
-    $this->Html->image("/img/boy.jpg", 
-    [
-    'class'  => "img-thumbnail", 
-    'height' => "100px",
-    'width'  => "100px", 
-    "alt"    => "user photo",
-    'url'    => ['controller' => 'Users', 'action' => 'view', $user->id]
-    ]
-                      );
-    echo $user->id.'. '.h($user->first_name).' '.h($user->last_name); 
-    */
-?>
-<!--   Block button
-    <span class="pull-right">
-        <button class="btn btn-primary" type="submit">Block</button>
-    </span>
-    </div>
--->
-    
-<?php 
-//  endforeach; 
-?>  
-                </div><!--  list-group-->
-            </div>
+        <?php   endforeach; 
+                }   
+        } ?>
+                </div><!--  list-group-item-->
+            </div><!--  list-group-->
         </div>
     </div>
 </div>
