@@ -221,7 +221,7 @@ class UsersController extends AppController
 
 		$this->Auth->allow(['logout']);
 		$this->Auth->allow(['register', 'forgotpassword']);
-        $this->Auth->allow(['index', 'view', 'display', 'admin', 'search', 'adminSearchById']); //REM @author Aleksandr Anfilov
+        //$this->Auth->allow(['index', 'view', 'display', 'admin', 'search', 'adminSearchById']); //REM @author Aleksandr Anfilov
 
 	}
 
@@ -271,7 +271,7 @@ class UsersController extends AppController
 
         /**
         * @author Aleksandr Anfilov
-        * Display results of search by user id or name 
+        * Display results of search by user id or name:
         */
         if($this->request->is('post'))
         {
@@ -338,23 +338,8 @@ class UsersController extends AppController
     }
     public function activation()  { }
 
-    
-    /**
-    * Admin::Search user by id
-    * @author Aleksandr Anfilov
-    * =======
-    * the CakePHP convention is that your URLs are lowercase and dashed using the
-    * DashedRoute class, therefore  /article-categories/view-all is 
-    * the correct form to access the ArticleCategoriesController::viewAll() action.
-   
-    public function adminSearchById($id = null)  {
-        $user = $this->Users->get($id);
-        $this->set(compact('user'));
-    }
- */
 
     /*public function forgotPassword($username = null)
-    {
     {
     if($this->request->is('post')) {
          $username = $this->request->data['username'];
@@ -375,22 +360,9 @@ class UsersController extends AppController
                 if ($this->Users->save($data)) {
                     $this->Flash->success(__('Password changed Succesfully.'));
                      return $this->redirect(['controller' => 'Users','action' => 'forgotPassword']);
-
                 }
             }
-
-
-
         }
-
     }*/
 
-
 }
-
-/*  author: Aleksandr
-* Select all users
-* $usersAll = $this->Users->find('all');
-* $this->set(compact('usersAll')); 
-//TODO: paginate    http://book.cakephp.org/3.0/en/controllers/components/pagination.html
-*/
