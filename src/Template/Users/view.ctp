@@ -17,7 +17,9 @@
                      ?>
                           
 			<h1 class="display-3"><?= $user->first_name .' '. $user->last_name ?></h1>
-			<!-- <p class="lead"></p> -->
+			<!-- PHP code 
+                        @author Norman Lista
+                        -->
 		  </div>
 		</div>
 	</div>
@@ -91,14 +93,16 @@
   							<i class="fa fa-star"></i>
   						</label>
   					</div>
-
+                                         <input type="hidden" name="status" value="1" />
+                                         <input type="hidden" name="user_id" value="<?= $user->id?>"/>
+                                          <input type="hidden" name="for_user_id" value="<?= $logUser?>"/>
 				    <fieldset class="form-group">
 				      <label for="Select">How do you know this user?</label>
-				      <select class="form-control" name=relationship_basis" id="relationship_basis">
-				        <option>Rented a property from him/her</option>
-				        <option>Contacted, but not rented</option>
-				        <option>Personal relation</option>
-				        <option>Don't know at all</option>
+				      <select class="form-control" name="relationship_basis" id="relationship_basis">
+				        <option value="Rented a property from him/her">Rented a property from him/her</option>
+				        <option value="Contacted, but not rented">Contacted, but not rented</option>
+				        <option Value="Personal relation">Personal relation</option>
+                                        <option value="Don't know at all">Don't know at all</option>
 				      </select>
 				    </fieldset>
 				    <fieldset class="form-group">
