@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\ORM\TableRegistry;
 /**
  * Images Controller
  *
@@ -29,54 +29,60 @@ class ImagesController extends AppController
 
     /**
      * View method
-     *@author Mythri Manjunath
+     *
      * @param string|null $id Image id.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
     {
-        $this->set('images', $this->Images->find('all'));
-         $image = $this->Images->get($id);
-         $this->set(compact('image'));
+        $image = $this->Images->get($id, [
+            'contain' => ['Properties']
+        ]);
+
+        $this->set('image', $image);
+        $this->set('_serialize', ['image']);
     }
 
     /**
-     * Add method - To add property images 
+     * Add method - This method adds properties images
      * @author Mythri Manjunath
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
-    {
-       $image = '';
+    public function add($id=null)
+    {   
+        $propertyTbl = TableRegistry::get('Properties');
+        $pid = $propertyTbl->find()->select('id')->where(['id'=> $id])->first();
+        $image='';
         if ($this->request->is('post')) {
             if(!empty($this->request->data['upload']['name'])){
                 $fileName = $this->request->data['upload']['name'];
-                $uploadPath ='WWW_ROOT\img\properties\\';
-                if(move_uploaded_file($this->request->data['upload']['tmp_name'],WWW_ROOT . 'img' . DS . 'properties' . DS .$fileName)){
+                if(move_uploaded_file($this->request->data['upload']['tmp_name'],WWW_ROOT .'img'. DS .'properties'. DS .$fileName)){
                     $image = $this->Images->newEntity();  
-                    $image->path = $uploadPath.$fileName;
+                    $image->property_id=$pid;
+                    $image->path = $fileName;
                     $image->created = date("Y-m-d H:i:s");
                     $image->modified = date("Y-m-d H:i:s");
                     if ($this->Images->save($image)) {
                         $this->Flash->success(__('Image has been uploaded and inserted successfully.'));
-                        
+                        return $this->redirect([
+                        'controller' => 'Images',
+                         'action' => 'add',$pid
+                       ]);
                     }else{
-                        $this->Flash->error(__('Unable to upload image, please try again.'));
+                        $this->Flash->error(__('Unable to save image, please try again.'));
                     }
                 }else{
                     $this->Flash->error(__('Unable to upload image, please try again.'));
                 }
             }else{
                 $this->Flash->error(__('Please choose a image to upload.'));
-            }
-            
+            }           
         }
-        $this->set('image', $image); 
-       $properties = $this->Images->Properties->find('list', ['limit' => 200]);
+      
+        $properties = $this->Images->Properties->find('list', ['limit' => 200]);
         $this->set(compact('image', 'properties'));
         $this->set('_serialize', ['image']);
-        
     }
 
     /**

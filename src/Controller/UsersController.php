@@ -76,22 +76,26 @@ class UsersController extends AppController
     }
 
     /**
-     * Add method - add user images
+     * Add method - add user profile image
      *@Mythri Manjunath
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
-    {
-        $user = '';
+    public function add($id=null)
+    {   
+        $user='';
         if ($this->request->is('post')) {
             if(!empty($this->request->data['photo']['name'])){
                 $fileName = $this->request->data['photo']['name'];
-                $uploadPath ='WWW_ROOT\img\uploads\\';
-                if(move_uploaded_file($this->request->data['photo']['tmp_name'],WWW_ROOT . 'img' . DS . 'users' . DS .$fileName)){
-                    $user = $this->Users->newEntity();   
-                    $user->photo = $uploadPath.$fileName;                   
+                if(move_uploaded_file($this->request->data['photo']['tmp_name'],WWW_ROOT . 'img' . DS . 'users' . DS .$fileName)){  
+                   if (!$id) $id = $this->Auth->user('id');
+                    $user = $this->Users->get($id);
+                    $user->photo = $fileName;                   
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('Image has been uploaded and inserted successfully.'));
+                        return $this->redirect([
+                        'controller' => 'Users',
+                         'action' => 'view', $id
+                       ]);
                     }else{
                         $this->Flash->error(__('Unable to upload image, please try again.'));
                     }

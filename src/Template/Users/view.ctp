@@ -4,16 +4,17 @@
 		  <div class="container">
 			
                      <?php 
-                     $path= $user->photo;
-                     if(file_exists($path)){
-                     $img=basename($path);
-                     $userimage='uploads/'.$img;                      
- echo $this->Html->image($userimage, array('alt' => 'CakePHP','class'=>'rounded-circle','height' => '128', 'width' => '128'));
+                     $path ='users/';                     
+                     $filename= $user->photo;
+                     $userimage=$path.$filename;
+                     $file = WWW_ROOT . 'img' . DS . 'users' . DS .$filename;  
+                     if(file_exists($file))
+                     {
+                     echo $this->Html->image($userimage, array('alt' => 'CakePHP','class'=>'rounded-circle','height' => '128', 'width' => '128'));    
                      }
-                     else 
-                         echo $this->Html->image('boy.jpg', array('alt' => 'CakePHP','class'=>'rounded-circle','height' => '128', 'width' => '128'));
-                         
-?>
+                    else
+                       echo $this->Html->image('boy.jpg', array('alt' => 'CakePHP','class'=>'rounded-circle','height' => '128', 'width' => '128')); 
+                     ?>
                           
 			<h1 class="display-3"><?= $user->first_name .' '. $user->last_name ?></h1>
 			<!-- <p class="lead"></p> -->

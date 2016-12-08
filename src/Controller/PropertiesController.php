@@ -86,8 +86,8 @@ class PropertiesController extends AppController
             $property = $this->Properties->patchEntity($property, $this->request->data);
             if ($this->Properties->save($property)) {
                 $this->Flash->success(__('The property has been saved.'));
-
-                return $this->redirect(['controller' => 'Images','action' => 'add']);
+                 $property_id= $property->id;
+                return $this->redirect(['controller' => 'Images','action' => 'add',$property_id]);
             } else {
                 $this->Flash->error(__('The property could not be saved. Please, try again.'));
             }
