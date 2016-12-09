@@ -45,6 +45,7 @@
 				</li>
 				<?php endif; ?>
 				<?php if ($loggedIn): ?>
+                                <?php if(<$user):?>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Account</a>
 					<div class="dropdown-menu" aria-labelledby="responsiveNavbarDropdown">
@@ -54,6 +55,8 @@
 					</div>
 				</li>
 				<?php endif; ?>
+                               
+                               
 			</ul>
 			<?= $this->Form->create(NULL, ['url' => ['controller' => 'properties', 'action' => 'search'], 'class' => 'form-inline float-lg-right', 'type' => 'get']); ?>
 				<input class="form-control" type="text" name="address" placeholder="Street or Zipcode">

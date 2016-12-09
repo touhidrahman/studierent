@@ -192,7 +192,7 @@ class UsersController extends AppController
                 {
                     return $this->redirect(['controller' => 'users','action' => 'admin']);
                 }
-				return $this->redirect(['controller' => 'users','action' => 'dashboard']);
+				return $this->redirect(['controller' => 'users','action' => 'admin']);
 
 			}else{
                          $this->Flash->error('Username or password is incorrect');

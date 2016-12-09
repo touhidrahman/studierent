@@ -18,9 +18,9 @@
 					<form id="report-form">
 						<div class="modal-body">
 
-
+                                                
 				                 <?= $this->Form->input('user_id'); ?>
-
+                                                <input type="hidden" name="user_id" value="$username" />
 
 
 
