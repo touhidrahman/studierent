@@ -22,6 +22,7 @@ class PropertiesController extends AppController
         parent::initialize();
         $this->loadComponent('Paginator');
 		$this->Auth->allow(['search']);
+        $this->Auth->allow(); //REM @author: Aleksandr Anfilov. Uncomment for dev purposes.
 
     }
 
