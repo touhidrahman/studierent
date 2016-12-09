@@ -221,8 +221,7 @@ class UsersController extends AppController
 
 		$this->Auth->allow(['logout']);
 		$this->Auth->allow(['register', 'forgotpassword']);
-        //$this->Auth->allow(['index', 'view', 'display', 'admin', 'search', 'adminSearchById']); //REM @author Aleksandr Anfilov
-
+        $this->Auth->allow(['admin']);//REM @author Aleksandr Anfilov. Allow  studierent/users/admin   w/o login.
 	}
 
     /**
