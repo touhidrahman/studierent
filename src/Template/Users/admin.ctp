@@ -1,10 +1,8 @@
 <div class="row">
 <!-- Filter Sidebar -->
-<div class="col-md-3 col-sm-4 col-xs-12">
+<div class="col-md-4 col-sm-4 col-xs-12">
     <div class="card bg-faded">
         <div class="card-block">
-            <p class="card-text">
-            <form>
             <div class="easy-tree">
                 <ul>
                     <li><b>Properties</b>
@@ -49,15 +47,14 @@
                         </ul>
                     </li>
                 </ul>
-            </form>
-            </p>
             </div>
         </div>
     </div>
 </div>
 <!-- end sidebar -->
+
 <!-- Results -->
-<div class="col-md-9 col-sm-8 col-xs-12">
+<div class="col-md-8 col-sm-8 col-xs-12">
     <h1 class="display-4">Welcome Admin!</h1>
     <div class="card">
        
@@ -65,35 +62,39 @@
             <h4 class="card-title">Search For Users</h4>
 <!--        </div>-->
 <!--        <div class="card-block">-->
-            <div class="row">
-                <label for="uid"><b>&nbsp;&nbsp; - by user id:</b></label>
                 <form method="POST" class="form-inline">
-                    <input name="id" id="uid" class="form-control" type="number" min="1"
+                    <div class="form-group">
+                        <label for="uid"><b>&nbsp; - by user id:</b></label>
+                        <input name="id" id="uid" class="form-control" type="number" min="1"
                         value = "9"
-                    placeholder="Enter User Id">
-                    <button class="btn btn-primary" type="submit">Search</button>
+                        placeholder="Enter User Id">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
                 </form>
                 <br>
-                <label for="uname"><b>&nbsp;&nbsp; - or by user name:</b></label>
+                
                 <form method="POST" class="form-inline">
-                    <input name="username" id="uname" class="form-control" type="email" 
+                    <div class="form-group">
+                        <label for="uname"><b>&nbsp; - or by user name:</b></label>
+                        <input name="username" id="uname" class="form-control" type="email" 
                         value = "shany.ernser@yahoo.com"
-                    placeholder="Enter User Name">
-                    <button class="btn btn-primary" type="submit">Search</button>
+                        placeholder="Enter User Name">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
                 </form>
                 <br>
-                <br>
-<!-- author: Aleksandr Anfilov    -->
-<?php   if (isset($usersFound)) { //true: search form has been submitted  ?>
+<?php   /**
+        * Display search results. 
+        * Precondition: if a result set $usersFound is set() in the UsersController, it is not empty
+        * @author: Aleksandr Anfilov
+        */
+            if (isset($usersFound)) {?>
             
             <h3><?= __('Users') ?>:</h3>
             <div class="list-group">
             
     <?php   
-            if  ( empty($usersFound)) {
-                echo "Nobody has been found with ";
-            }   else {
-                foreach ($usersFound as $u):  ?>
+            foreach ($usersFound as $u):  ?>
                 <div class="list-group-item "> <!--  Display user image, view link, and name          -->
                 <?php
                     $imgPath = "/img/boy.jpg";
@@ -109,15 +110,14 @@
                     <span class="pull-right">
                         <button class="btn btn-primary" type="submit">Block</button>
                     </span>
-                </div>
-    
-        <?php   endforeach; 
-                }   
-        } ?>
                 </div><!--  list-group-item-->
+    
+    <?php   endforeach; 
+        }   
+    ?>
             </div><!--  list-group-->
-        </div>
+        </div>    <!--card-block-->
     </div>
-</div>
 <!-- end results! -->
+</div>
 </div>
