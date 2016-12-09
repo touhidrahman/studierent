@@ -191,8 +191,11 @@ class UsersController extends AppController
 				if($user['status']==9)
                 {
                     return $this->redirect(['controller' => 'users','action' => 'admin']);
-                }
-				return $this->redirect(['controller' => 'users','action' => 'admin']);
+                    
+                     }    
+                                       
+				return $this->redirect(['controller' => 'users','action' => 'dashboard']);
+                    return $this->layout='default';
 
 			}else{
                          $this->Flash->error('Username or password is incorrect');

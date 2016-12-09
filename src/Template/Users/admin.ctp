@@ -1,6 +1,4 @@
-<nav class="navbar navbar-light bg-faded">
-		
-	</nav>
+
 <div class="row">
 <!-- Filter Sidebar -->
 <div class="col-md-3 col-sm-4 col-xs-12">

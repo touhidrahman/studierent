@@ -13,7 +13,7 @@
                   <div class="card-block">
                       <h4 class="card-title">Type & Title</h4>
                         <?php  $options = array('Select property type'=>'Select property type','Flat'=>'Flat','Flatshare'=>'Flatshare','Student Residence'=>'Student Residence','House'=>'House'); ?>
-									<?= $this->Form->input('type', array('type'=>'select', 'options'=>$options)) ?>
+			<?= $this->Form->input('type', array('type'=>'select', 'options'=>$options)) ?>
                       <?php echo $this->Form->input('title');?>
                   </div>
                 </div>
@@ -26,8 +26,7 @@
                       <?php
                       echo $this->Form->input('house_no', ['label' => 'House Number']);
                       echo $this->Form->input('address');
-					  echo $this->Form->input('zip_id', ['type' => 'hidden']);
-                      echo $this->Form->input('zip', ['type' => 'text', 'label' => 'Zip Code', 'id' => 'zip']);
+		   
                       ?>
                   </div>
                 </div>
@@ -42,8 +41,7 @@
                       echo $this->Form->input('total_size', ['min' => 0]);
                       echo $this->Form->input('available_from');
                       echo $this->Form->input('available_until'); ?>
-                      <?php $options = array('Select'=>'Select','M'=>'Male','F'=>'Female','B'=>'Both'); ?>
-                     <?php echo $this->Form->input('looking_for', ['type' => 'select', 'options' => ['Any Gender' => 'Any Gender', 'Male' => 'Male', 'Female' => 'Female']]);
+                      <?php echo $this->Form->input('looking_for', ['type' => 'select', 'options' => ['Any Gender' => 'Any Gender', 'Male' => 'Male', 'Female' => 'Female']]);
                       echo $this->Form->input('rent', ['min' => 0, 'label' => 'Rent (Monthly)']);
                       echo $this->Form->input('deposit', ['min' => 0, 'label' => 'Initial Deposit (One Time)']);
                       echo $this->Form->input('utility_cost', ['min' => 0, 'label' => 'Utilities Cost (Monthly)']);

@@ -140,9 +140,11 @@ class PropertiesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $property = $this->Properties->get($id);
+        $property = $this->Properties->get($id, [
+            'contain' => ['Users']
+        ]);
         if ($this->Properties->delete($property)) {
+                    
             $this->Flash->success(__('The property has been deleted.'));
         } else {
             $this->Flash->error(__('The property could not be deleted. Please, try again.'));

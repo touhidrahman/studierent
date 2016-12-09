@@ -20,6 +20,7 @@
 
                 <?= $this->Html->link('<i class="fa fa-eye"></i> View Details', '/properties/view/'.$property['id'], ['class' => 'card-link', 'escapeTitle' => false]) ?>
                 <?= $this->Html->link('<i class="fa fa-pencil"></i> Edit', '/properties/edit/'.$property['id'], ['class' => 'card-link text-info', 'escapeTitle' => false]) ?>
+                <?= $this->Html->link('<i class="fa fa-trash-o fa-lg"></i> Delete', '/properties/delete/'.$property['id'],['class' => 'card-link text-info', 'escapeTitle' => false]) ?>
             </div>
             <div class="col-sm-3">
                 <p class="text-xs-center text-muted" style="margin-bottom:0">EUR</p>

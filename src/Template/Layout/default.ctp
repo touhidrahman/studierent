@@ -45,7 +45,7 @@
 				</li>
 				<?php endif; ?>
 				<?php if ($loggedIn): ?>
-                                <?php if(<$user):?>
+                               
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Account</a>
 					<div class="dropdown-menu" aria-labelledby="responsiveNavbarDropdown">
