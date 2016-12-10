@@ -62,9 +62,10 @@ class ZipsController extends AppController
     }*/
 
     /**
-     * Add method
+     * Add method. Displays a field to add zipcode. After successful insert redirects to add property page
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
+     * @author Touhidur Rahman
      */
     public function add()
     {
@@ -79,6 +80,8 @@ class ZipsController extends AppController
                 $this->Flash->error(__('The zip could not be saved. Please, try again.'));
             }
         }
+        // Set the layout.
+        $this->viewBuilder()->layout('userdash');
         $cities = $this->Zips->Cities->find('list', ['limit' => 200]);
         $this->set(compact('zip', 'cities'));
         $this->set('_serialize', ['zip']);

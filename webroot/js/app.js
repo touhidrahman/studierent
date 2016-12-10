@@ -1,10 +1,12 @@
 /**
 * Application wide Javascript
-* @author Touhidur Rahman
 */
 $(document).ready(function() {
 
-    // search sidebar available from and to date fields, using bootstrap datepicker
+    /**
+    * search sidebar available from and to date fields, using bootstrap datepicker
+    * @author Touhidur Rahman
+    */
     $('#fromDt').datepicker({
         format: "yyyy-mm-dd"
     });
@@ -12,7 +14,10 @@ $(document).ready(function() {
         format: "yyyy-mm-dd"
     });
 
-    // ajax call to toggle favorite
+    /**
+    * ajax call to toggle favorite
+    * @author Touhidur Rahman
+    */
     $('.favTogglers').click(function(e){
         // prevent link to do the default action
         e.preventDefault();

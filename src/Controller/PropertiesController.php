@@ -99,6 +99,10 @@ class PropertiesController extends AppController
         }
         $zips = $this->Properties->Zips->find('list', ['limit' => 200]);
         $users = $this->Properties->Users->find('list', ['limit' => 200]);
+
+        // Set the layout.
+        $this->viewBuilder()->layout('userdash');
+
         //@author Norman Lista
         //send user id for my profile button
         $id=$this->Auth->user('id');
@@ -113,6 +117,7 @@ class PropertiesController extends AppController
      * @param string|null $id Property id.
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @author Ramanpreet Kaur
      */
     public function edit($id = null)
     {
@@ -129,6 +134,8 @@ class PropertiesController extends AppController
                 $this->Flash->error(__('The property could not be saved. Please, try again.'));
             }
         }
+        // Set the layout.
+        $this->viewBuilder()->layout('userdash');
         $zips = $this->Properties->Zips->find('list', ['limit' => 200]);
         $users = $this->Properties->Users->find('list', ['limit' => 200]);
         $this->set(compact('property', 'zips', 'users'));
@@ -304,7 +311,8 @@ class PropertiesController extends AppController
         $query->contain(['Zips' => function($q){
             return $q->select('number', 'city', 'province');
         }]);
-
+        // Set the layout.
+        $this->viewBuilder()->layout('userdash');
         $properties = $this->paginate($query);
          //@author Norman Lista
         //send user id for my profile button
@@ -329,6 +337,8 @@ class PropertiesController extends AppController
         //     return $q->select('path', 'order');
         // }]);
         $properties = $this->paginate($query);
+        // Set the layout.
+        $this->viewBuilder()->layout('userdash');
         //send user id for my profile button
         $id=$this->Auth->user('id');
         $this->set(compact('properties','id'));
