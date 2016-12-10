@@ -50,16 +50,20 @@ class ImagesController extends AppController
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
     public function add($id=null)
-    {   
+    {
         $propertyTbl = TableRegistry::get('Properties');
         $exists = $propertyTbl->exists(['id'=> $id,'user_id'=> $this->Auth->user('id')]);
+        if (!$exists) {
+            $this->Flash->error(__('You cannot upload images to a property which does not belog to you!'));
+            return $this->redirect(['controller'=>'properties', 'action'=>'myproperties']);
+        }
         $image='';
         if ($this->request->is('post')) {
             if(!empty($this->request->data['upload']['name'])){
-                if ($exists){
                 $fileName = $this->request->data['upload']['name'];
-                if(move_uploaded_file($this->request->data['upload']['tmp_name'],WWW_ROOT .'img'. DS .'properties'. DS .$fileName)){
-                    $image = $this->Images->newEntity();  
+                $destDir = WWW_ROOT .'img'. DS .'properties'. DS . $id . '-' . $fileName;
+                if(move_uploaded_file($this->request->data['upload']['tmp_name'], $destDir)){
+                    $image = $this->Images->newEntity();
                     $image->property_id=$id;
                     $image->path = $fileName;
                     $image->created = date("Y-m-d H:i:s");
@@ -67,23 +71,20 @@ class ImagesController extends AppController
                     if ($this->Images->save($image)) {
                         $this->Flash->success(__('Image has been uploaded and inserted successfully.'));
                         return $this->redirect([
-                        'controller' => 'Images',
-                         'action' => 'add',$id
-                       ]);
+                            'controller' => 'Images',
+                            'action' => 'add',$id
+                        ]);
                     }else{
                         $this->Flash->error(__('Unable to save image, please try again.'));
                     }
                 }else{
                     $this->Flash->error(__('Unable to upload image to target location, please try again.'));
                 }
-            }else{
-                $this->Flash->error(__('Not a valid user or property id.'));
-            }           
+            }
         }
-        }
-      
-        $properties = $this->Images->Properties->find('list', ['limit' => 200]);
-        $this->set(compact('image', 'properties'));
+
+        // $properties = $this->Images->Properties->find('list', ['limit' => 200]);
+        $this->set(compact('image'));
         $this->set('_serialize', ['image']);
     }
 

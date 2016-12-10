@@ -266,6 +266,10 @@ class PropertiesController extends AppController
         $query->contain(['Zips' => function($q){
             return $q->select('number', 'city', 'province');
         }]);
+        // // join images table
+        // $query->contain(['Images' => function($q){
+        //     return $q->select('path', 'order');
+        // }]);
         // convert the result set to array
         $properties = $this->paginate($query);
         // count of total retrieved rows
@@ -316,6 +320,10 @@ class PropertiesController extends AppController
         $query->contain(['Zips' => function($q){
             return $q->select('number', 'city', 'province');
         }]);
+        // // join images table
+        // $query->contain(['Images' => function($q){
+        //     return $q->select('path', 'order');
+        // }]);
         $properties = $this->paginate($query);
         //send user id for my profile button
         $id=$this->Auth->user('id');
