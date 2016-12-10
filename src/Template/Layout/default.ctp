@@ -25,7 +25,7 @@
 </head>
 <body>
 	<!-- NAVBAR -->
-	<?= $this->element('navbar', ['loggedIn'=>$loggedIn, 'adminLoggedIn' => $adminLoggedIn], ['cache' => true]) ?>
+	<?= $this->element('navbar', ['cache' => true]) ?>
 	<!-- NAVBAR END -->
 
 	<div class="container-fluid clearfix" style="margin-top:1em;">

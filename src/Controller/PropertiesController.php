@@ -73,32 +73,36 @@ class PropertiesController extends AppController
         $this->set('feedback', $feedback);
     }
 
+
+
     /**
      * Add method
-     *
+     * Accepts a Zip ID otherwise redirects
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      * @author Touhidur Rahman,Ramanpreet Kaur
      */
-    public function add($id=NULL)
+    public function add($zipid=NULL)
     {
+        // if there is no zip id redirect to select zip page
+        // else, send the zip id to view file inside hidden field for onward retrieval
+        if ($zipid == NULL) {
+            return $this->redirect(['controller' => 'zips', 'action' => 'select']);
+        }
+
         $property = $this->Properties->newEntity();
 
         if ($this->request->is('post')) {
             $property = $this->Properties->patchEntity($property, $this->request->data);
             // get reporter user's id from session
             $property->user_id = $this->Auth->user('id');
-            // get property id from URL
-            $property->property_id = $id;
             if ($this->Properties->save($property)) {
-                $this->Flash->success(__('The report has been sent.'));
+                $this->Flash->success(__('The ad is successfully created.'));
 
-                return $this->redirect(['controller' => 'users', 'action' => 'dashboard']);
+                return $this->redirect(['controller' => 'images', 'action' => 'add', $property->id]);
             } else {
-                $this->Flash->error(__('The report could not be sent. Please, try again.'));
+                $this->Flash->error(__('The ad couldn\'t be created. Please, try again.'));
             }
         }
-        $zips = $this->Properties->Zips->find('list', ['limit' => 200]);
-        $users = $this->Properties->Users->find('list', ['limit' => 200]);
 
         // Set the layout.
         $this->viewBuilder()->layout('userdash');
@@ -106,8 +110,8 @@ class PropertiesController extends AppController
         //@author Norman Lista
         //send user id for my profile button
         $id=$this->Auth->user('id');
-        $this->set(compact('property', 'zips', 'users','id'));
-        $this->set('_serialize', ['property']);
+        $this->set(compact('property', 'zipid'));
+        $this->set('_serialize', ['property', 'zipid']);
 
     }
 
