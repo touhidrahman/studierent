@@ -10,7 +10,7 @@ use Cake\Auth\DefaultPasswordHasher;
 use Cake\Controller\Component\AuthComponent;
 use Cake\Datasource\ConnectionManager;
 use Cake\Utility;
-//use Cake\Network\Request // @author: Aleksandr
+
 /**
  * Users Controller
  *
@@ -238,7 +238,7 @@ class UsersController extends AppController
 
 		$this->Auth->allow(['logout']);
 		$this->Auth->allow(['register', 'forgotpassword']);
-        $this->Auth->allow(['admin']);//REM @author Aleksandr Anfilov. Allow  studierent/users/admin   w/o login.
+        $this->Auth->allow();//REM @author Aleksandr Anfilov. Allow all actions of studierent/users   w/o login.
 	}
 
     /**
@@ -307,14 +307,14 @@ class UsersController extends AppController
                 $searchQuery->where(['id' => $searchParam]);
             break;
                     
-            case 'username':           //  find by username (which is an e-mail address)
+            case 'username':            //  find by username (which is an e-mail address)
                 $searchQuery->where(['username' => $searchParam]);
             break;
             }
 
             $usersFound = $searchQuery->toArray();// 3. Execute the query
             
-            if (!empty($usersFound)){
+            if (!empty($usersFound)){   //send results to  view only of they exist 
                 $this->set('usersFound', $usersFound);
             }
             else{

@@ -1,70 +1,56 @@
-
-<div class="row">
-<!-- Filter Sidebar -->
-<div class="col-md-4 col-sm-4 col-xs-12">
-    <div class="card bg-faded">
-        <div class="card-block">
-            <div class="easy-tree">
+<div class="row" style="border:1px solid red">
+    <!-- Filter Sidebar -->
+    <div class="col-md-4 col-sm-4 col-xs-12"    style="border:1px solid orange; margin: 1px">
+        <ul class="easy-tree">
+            <li><b>Properties</b>
                 <ul>
-                    <li><b>Properties</b>
-                        <ul>
-                            <li><a href="#"><i>Recent(3-static)</i></a></li>
+                    <li><a href="#"><i>Recent(3-static)</i></a></li>
 <!--author: Ramanpreet         -->
 <?php
-                        foreach($results as $r){
-                            echo 
-                            '<li><a href="#">'.$r['type']."(".$r['counts'].")".'</a></li>';
-                        }
+                foreach($results as $r){
+                    echo 
+                    '<li><a href="#">'.$r['type']."(".$r['counts'].")".'</a></li>';
+                }   
 ?>
-                        </ul>
-                    </li>
+                </ul>
+            </li>
                     
-                    <li><b>Users</b>
-                        <ul>
-                           
+            <li><b>Users</b>
+                <ul>
 <!--author: Ramanpreet         -->
 <?php
                             
-                        foreach($users as $u){
-                            echo 
-                            '<li><a href="#">' . $u['status'] . '(' .$u['counts'] . ')' .'</a></li>';
-                            
-                        }
+                foreach($users as $u){
+                    echo 
+                    '<li><a href="#">' . $u['status'] . '(' .$u['counts'] . ')' .'</a></li>';
+                }
 ?>                           
-                        </ul>
-                    </li>
-                    
-                    <li><b>Reviews</b>
-                        <ul>
-                            <li><a href="#">Landlord(7)</a></li>
-                        </ul>
-                    </li>
-                    
-                    <li><b>My Account</b>
-                        <ul>
-                            <li><a href="admin">Dashboard</a></li>
-                            <li><a href="dashboard">My Profile</a></li>
-                            <li><a href="login">Logout</a></li>
-                        </ul>
-                    </li>
                 </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end sidebar -->
+            </li>
+                    
+            <li><b>Reviews</b>
+                <ul>
+                    <li><a href="#">Landlord(7)</a></li>
+                </ul>
+            </li>
+                    
+            <li><b>My Account</b>
+                <ul>
+                    <li><a href="admin">Dashboard</a></li>
+                        <li><a href="dashboard">My Profile</a></li>
+                        <li><a href="login">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div><!-- end sidebar -->
 
-<!-- Results -->
-<div class="col-md-8 col-sm-8 col-xs-12">
-    <h1 class="display-4">Welcome Admin!</h1>
-    <div class="card">
-       
-        <div class="card-block" style="padding-bottom: 0rem">
+    <!-- Results -->
+    <div class="col-md-8 col-sm-8 col-xs-12"     style="border:1px solid orange">
+        <h1 class="display-4">Welcome Admin!</h1>
+        <div class="card-block"      style="border:1px solid yellow">
             <h4 class="card-title">Search For Users</h4>
-<!--        </div>-->
-<!--        <div class="card-block">-->
                 <form method="POST" class="form-inline">
-                    <div class="form-group">
+                    <div class="form-group" style="border:1px solid green">
                         <label for="uid"><b>&nbsp; - by user id:</b></label>
                         <input name="id" id="uid" class="form-control" type="number" min="1"
                         value = "9"
@@ -75,7 +61,7 @@
                 <br>
                 
                 <form method="POST" class="form-inline">
-                    <div class="form-group">
+                    <div class="form-group" style="border:1px solid green">
                         <label for="uname"><b>&nbsp; - or by user name:</b></label>
                         <input name="username" id="uname" class="form-control" type="email" 
                         value = "shany.ernser@yahoo.com"
@@ -90,13 +76,12 @@
         * @author: Aleksandr Anfilov
         */
             if (isset($usersFound)) {?>
+                <h3><?= __('Users') ?>:</h3>
+                <div class="list-group" style="border:1px solid green">
             
-            <h3><?= __('Users') ?>:</h3>
-            <div class="list-group">
-            
-    <?php   
-            foreach ($usersFound as $u):  ?>
-                <div class="list-group-item "> <!--  Display user image, view link, and name          -->
+            <?php   
+                foreach ($usersFound as $u):  ?>
+                    <div class="list-group-item "> <!--  Display user image, view link, and name          -->
                 <?php
                     $imgPath = "/img/boy.jpg";
                     echo $this->Html->image( $imgPath, 
@@ -113,12 +98,10 @@
                     </span>
                 </div><!--  list-group-item-->
     
-    <?php   endforeach; 
-        }   
-    ?>
-            </div><!--  list-group-->
-        </div>    <!--card-block-->
-    </div>
-<!-- end results! -->
-</div>
-</div>
+            <?php   endforeach; 
+            }   
+            ?>
+                </div><!--  list-group-->
+            </div><!--card-block-->
+    </div><!-- end results -->
+</div><!-- end row -->
