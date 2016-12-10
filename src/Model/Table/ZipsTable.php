@@ -9,7 +9,6 @@ use Cake\Validation\Validator;
 /**
  * Zips Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Cities
  * @property \Cake\ORM\Association\HasMany $Properties
  *
  * @method \App\Model\Entity\Zip get($primaryKey, $options = [])
@@ -37,10 +36,6 @@ class ZipsTable extends Table
         $this->displayField('number');
         $this->primaryKey('id');
 
-        $this->belongsTo('Cities', [
-            'foreignKey' => 'city_id',
-            'joinType' => 'INNER'
-        ]);
         $this->hasMany('Properties', [
             'foreignKey' => 'zip_id'
         ]);
@@ -86,7 +81,7 @@ class ZipsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['city_id'], 'Cities'));
+        // $rules->add($rules->existsIn(['city_id'], 'Cities'));
 
         return $rules;
     }

@@ -46,7 +46,7 @@
 			          </div>
 
 			        <ul class="list-group list-group-flush">
-			            <li class="list-group-item"><?= $this->Html->link('Add a Property Ad', '/zips/add/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
+			            <li class="list-group-item"><?= $this->Html->link('Add a Property Ad', '/zips/select/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
 			            <li class="list-group-item"><?= $this->Html->link('My Properties', '/properties/myproperties', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
 			            <li class="list-group-item"><?= $this->Html->link('My Favorites', '/properties/favorites/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
 			            <li class="list-group-item"><?= $this->Html->link('My Profile', '/users/view/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
