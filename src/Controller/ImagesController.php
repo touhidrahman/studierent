@@ -52,14 +52,15 @@ class ImagesController extends AppController
     public function add($id=null)
     {   
         $propertyTbl = TableRegistry::get('Properties');
-        $pid = $propertyTbl->find()->select('id')->where(['id'=> $id])->first();
+        $exists = $propertyTbl->exists(['id'=> $id,'user_id'=> $this->Auth->user('id')]);
         $image='';
         if ($this->request->is('post')) {
             if(!empty($this->request->data['upload']['name'])){
+                if ($exists){
                 $fileName = $this->request->data['upload']['name'];
                 if(move_uploaded_file($this->request->data['upload']['tmp_name'],WWW_ROOT .'img'. DS .'properties'. DS .$fileName)){
                     $image = $this->Images->newEntity();  
-                    $image->property_id=$pid;
+                    $image->property_id=$id;
                     $image->path = $fileName;
                     $image->created = date("Y-m-d H:i:s");
                     $image->modified = date("Y-m-d H:i:s");
@@ -67,17 +68,18 @@ class ImagesController extends AppController
                         $this->Flash->success(__('Image has been uploaded and inserted successfully.'));
                         return $this->redirect([
                         'controller' => 'Images',
-                         'action' => 'add',$pid
+                         'action' => 'add',$id
                        ]);
                     }else{
                         $this->Flash->error(__('Unable to save image, please try again.'));
                     }
                 }else{
-                    $this->Flash->error(__('Unable to upload image, please try again.'));
+                    $this->Flash->error(__('Unable to upload image to target location, please try again.'));
                 }
             }else{
-                $this->Flash->error(__('Please choose a image to upload.'));
+                $this->Flash->error(__('Not a valid user or property id.'));
             }           
+        }
         }
       
         $properties = $this->Images->Properties->find('list', ['limit' => 200]);
