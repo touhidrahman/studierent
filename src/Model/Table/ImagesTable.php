@@ -7,20 +7,21 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Reports Model
+ * Images Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Users
  * @property \Cake\ORM\Association\BelongsTo $Properties
  *
- * @method \App\Model\Entity\Report get($primaryKey, $options = [])
- * @method \App\Model\Entity\Report newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\Report[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Report|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Report patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Report[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Report findOrCreate($search, callable $callback = null)
+ * @method \App\Model\Entity\Image get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Image newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Image[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Image|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Image patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Image[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Image findOrCreate($search, callable $callback = null)
+ *
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class ReportsTable extends Table
+class ImagesTable extends Table
 {
 
     /**
@@ -33,14 +34,12 @@ class ReportsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('reports');
+        $this->table('images');
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
-        ]);
+        $this->addBehavior('Timestamp');
+
         $this->belongsTo('Properties', [
             'foreignKey' => 'property_id',
             'joinType' => 'INNER'
@@ -60,16 +59,13 @@ class ReportsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('message', 'create')
-            ->notEmpty('message');
+            ->integer('order')
+            ->requirePresence('order', 'create')
+            ->notEmpty('order');
 
         $validator
-            ->email('email')
-            ->allowEmpty('email');
-
-        $validator
-            ->requirePresence('landlordlink', 'create')
-            ->notEmpty('landlordlink');
+            ->requirePresence('path', 'create')
+            ->notEmpty('path');
 
         return $validator;
     }
@@ -83,7 +79,6 @@ class ReportsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['property_id'], 'Properties'));
 
         return $rules;

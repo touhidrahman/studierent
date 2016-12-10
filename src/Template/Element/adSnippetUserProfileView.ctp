@@ -1,5 +1,5 @@
 <!-- Single Property Ad Snippet for User Profile view -->
-<a href="/studierent/properties/view/<?= $property['id'] ?>">
+<a href="/studierent/properties/view/<?= $property['id'] ?>" target="_blank">
 <div class="card">
     <div class="card-block">
         <h4 class="card-title"><?= $property['title'] ?></h4>
@@ -9,7 +9,7 @@
             <?= $property['zip']['number'] ?>
         </h6>
     </div>
-    <?= $this->Html->image('http://loremflickr.com/340/220/house?random='.$property['id'], ['alt' => 'Property image', 'class' => 'img-fluid']); ?>
+    <?= $this->element('propertyImage', ['path'=>$property['image']['path']], ['cache' => true]) ?>
     <div class="card-block">
         <p class="text-xs-center text-muted" style="margin-bottom:0">EUR</p>
         <h4 class="display-4 text-xs-center text-warning font-weight-bold"><?= $property['rent'] ?></h4>

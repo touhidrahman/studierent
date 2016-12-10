@@ -4,19 +4,18 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Report Entity
+ * Image Entity
  *
  * @property int $id
- * @property int $user_id
  * @property int $property_id
- * @property string $message
- * @property string $email
- * @property string $landlordlink
+ * @property \Cake\I18n\Time $created
+ * @property \Cake\I18n\Time $modified
+ * @property int $order
+ * @property string $path
  *
- * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Property $property
  */
-class Report extends Entity
+class Image extends Entity
 {
 
     /**

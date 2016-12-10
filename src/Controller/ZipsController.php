@@ -51,7 +51,7 @@ class ZipsController extends AppController
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function getZipIdFromCode($code = null)
+   /* public function getZipIdFromCode($code = null)
     {
         $zip = $this->Zips->get($id, [
             'contain' => ['Cities', 'Properties']
@@ -59,12 +59,13 @@ class ZipsController extends AppController
 
         $this->set('zip', $zip);
         $this->set('_serialize', ['zip']);
-    }
+    }*/
 
     /**
-     * Add method
+     * Add method. Displays a field to add zipcode. After successful insert redirects to add property page
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
+     * @author Touhidur Rahman
      */
     public function add()
     {
@@ -79,6 +80,8 @@ class ZipsController extends AppController
                 $this->Flash->error(__('The zip could not be saved. Please, try again.'));
             }
         }
+        // Set the layout.
+        $this->viewBuilder()->layout('userdash');
         $cities = $this->Zips->Cities->find('list', ['limit' => 200]);
         $this->set(compact('zip', 'cities'));
         $this->set('_serialize', ['zip']);

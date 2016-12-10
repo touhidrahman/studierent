@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * Reports Controller
@@ -25,17 +26,20 @@ class ReportsController extends AppController
     }
 
     /**
-     * View method
+     * View method, Only admin can view
      *
      * @param string|null $id Report id.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @author Touhidur Rahman
      */
     public function view($id = null)
     {
-        $report = $this->Reports->get($id, [
-            'contain' => []
-        ]);
+        if ($this->Auth->user('status') == 9) {
+            $report = $this->Reports->get($id, [
+                'contain' => []
+            ]);
+        }
 
         $this->set('report', $report);
         $this->set('_serialize', ['report']);
@@ -45,71 +49,52 @@ class ReportsController extends AppController
      * Add method
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
+     * @author Ramanpreet Kaur, Touhidur Rahman
      */
-    /*
-    @author Ramanpreet Kaur
-     *      */
-    public function add()
+    public function add($id = null)
     {
         $report = $this->Reports->newEntity();
+
         if ($this->request->is('post')) {
             $report = $this->Reports->patchEntity($report, $this->request->data);
+            // get reporter user's id from session
+            $report->user_id = $this->Auth->user('id');
+            // get property id from URL
+            $report->property_id = $id;
             if ($this->Reports->save($report)) {
-                $this->Flash->success(__('The report has been saved.'));
+                $this->Flash->success(__('The report has been sent.'));
 
-                return $this->redirect(['action' => 'add']);
+                return $this->redirect(['controller' => 'users', 'action' => 'dashboard']);
             } else {
-                $this->Flash->error(__('The report could not be saved. Please, try again.'));
+                $this->Flash->error(__('The report could not be sent. Please, try again.'));
             }
         }
-        $this->set(compact('report'));
-        $this->set('_serialize', ['report']);
-       $this->set('users',$this->Reports->Users->find('list')) ;
-       $this->set('properties',$this->Reports->Properties->find('list')) ;
-
+        $property = TableRegistry::get('Properties')->get($id);
+        $this->set(compact('report', 'property'));
+        $this->set('_serialize', ['report', 'property']);
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Report id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        $report = $this->Reports->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $report = $this->Reports->patchEntity($report, $this->request->data);
-            if ($this->Reports->save($report)) {
-                $this->Flash->success(__('The report has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The report could not be saved. Please, try again.'));
-            }
-        }
-        $this->set(compact('report'));
-        $this->set('_serialize', ['report']);
-    }
 
     /**
      * Delete method
-     *
+     * Only admin can delete a report
      * @param string|null $id Report id.
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @author Touhidur Rahman
      */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $report = $this->Reports->get($id);
-        if ($this->Reports->delete($report)) {
-            $this->Flash->success(__('The report has been deleted.'));
+        if ($this->Auth->user('status') == 9) {
+            $report = $this->Reports->get($id);
+            if ($this->Reports->delete($report)) {
+                $this->Flash->success(__('The report has been deleted.'));
+            } else {
+                $this->Flash->error(__('The report could not be deleted. Please, try again.'));
+            }
         } else {
-            $this->Flash->error(__('The report could not be deleted. Please, try again.'));
+            $this->Flash->error(__('You are not authorized to delete.'));
         }
 
         return $this->redirect(['action' => 'index']);

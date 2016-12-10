@@ -45,7 +45,7 @@
 				</li>
 				<?php endif; ?>
 				<?php if ($loggedIn): ?>
-                               
+
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Account</a>
 					<div class="dropdown-menu" aria-labelledby="responsiveNavbarDropdown">
@@ -55,8 +55,8 @@
 					</div>
 				</li>
 				<?php endif; ?>
-                               
-                               
+
+
 			</ul>
 			<?= $this->Form->create(NULL, ['url' => ['controller' => 'properties', 'action' => 'search'], 'class' => 'form-inline float-lg-right', 'type' => 'get']); ?>
 				<input class="form-control" type="text" name="address" placeholder="Street or Zipcode">
@@ -72,10 +72,33 @@
 			</div>
 		</div>
 		<!-- END ALERT -->
+		<div class="row">
+			<!-- User side bar -->
+			<div class="col-md-3 col-sm-4 col-xs-12">
+			    <div class="card">
+			        <img class="card-img img-fluid" src="/studierent/img/property.jpg" alt="Card image cap">
+			          <div class="card-img-overlay">
+			            <h4 class="card-title" style="color:#fff">My Dashboard</h4>
+			            <p class="card-text"></p>
+			            <p class="card-text"><small class="text-muted"></small></p>
+			          </div>
 
-		<!-- CONTENT -->
-		<?= $this->fetch('content') ?>
-		<!-- END CONTENT -->
+			        <ul class="list-group list-group-flush">
+			            <li class="list-group-item"><?= $this->Html->link('Add a Property Ad', '/zips/add/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
+			            <li class="list-group-item"><?= $this->Html->link('My Properties', '/properties/myproperties', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
+			            <li class="list-group-item"><?= $this->Html->link('My Favorites', '/properties/favorites/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
+			            <li class="list-group-item"><?= $this->Html->link('My Profile', '/users/view/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
+			            <li class="list-group-item"><?= $this->Html->link('Logout', '/users/logout', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
+			        </ul>
+			    </div>
+			</div>
+			<!-- end User sidebar -->
+			<!-- CONTENT -->
+			<div class="col-md-9 col-sm-8 col-xs-12">
+				<?= $this->fetch('content') ?>
+			</div>
+			<!-- END CONTENT -->
+		</div>
 	</div>
 
 

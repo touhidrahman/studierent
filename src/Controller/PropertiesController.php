@@ -78,28 +78,38 @@ class PropertiesController extends AppController
      * Add method
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
-     * @author Touhidur Rahman
+     * @author Touhidur Rahman,Ramanpreet Kaur
      */
-    public function add()
+    public function add($id=NULL)
     {
         $property = $this->Properties->newEntity();
+
         if ($this->request->is('post')) {
             $property = $this->Properties->patchEntity($property, $this->request->data);
+            // get reporter user's id from session
+            $property->user_id = $this->Auth->user('id');
+            // get property id from URL
+            $property->property_id = $id;
             if ($this->Properties->save($property)) {
-                $this->Flash->success(__('The property has been saved.'));
+                $this->Flash->success(__('The report has been sent.'));
 
-                return $this->redirect(['action' => 'myproperties']);
+                return $this->redirect(['controller' => 'users', 'action' => 'dashboard']);
             } else {
-                $this->Flash->error(__('The property could not be saved. Please, try again.'));
+                $this->Flash->error(__('The report could not be sent. Please, try again.'));
             }
         }
         $zips = $this->Properties->Zips->find('list', ['limit' => 200]);
         $users = $this->Properties->Users->find('list', ['limit' => 200]);
+
+        // Set the layout.
+        $this->viewBuilder()->layout('userdash');
+
         //@author Norman Lista
         //send user id for my profile button
         $id=$this->Auth->user('id');
         $this->set(compact('property', 'zips', 'users','id'));
         $this->set('_serialize', ['property']);
+
     }
 
     /**
@@ -108,6 +118,7 @@ class PropertiesController extends AppController
      * @param string|null $id Property id.
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @author Ramanpreet Kaur
      */
     public function edit($id = null)
     {
@@ -124,6 +135,8 @@ class PropertiesController extends AppController
                 $this->Flash->error(__('The property could not be saved. Please, try again.'));
             }
         }
+        // Set the layout.
+        $this->viewBuilder()->layout('userdash');
         $zips = $this->Properties->Zips->find('list', ['limit' => 200]);
         $users = $this->Properties->Users->find('list', ['limit' => 200]);
         $this->set(compact('property', 'zips', 'users'));
@@ -136,18 +149,26 @@ class PropertiesController extends AppController
      * @param string|null $id Property id.
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @author Ramanpreet Kaur, Touhidur Rahman
      */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $property = $this->Properties->get($id);
-        if ($this->Properties->delete($property)) {
-            $this->Flash->success(__('The property has been deleted.'));
-        } else {
-            $this->Flash->error(__('The property could not be deleted. Please, try again.'));
+        // user can only delete his property
+        if ($property->user_id == $this->Auth->user('id')){
+            if ($this->Properties->delete($property)) {
+                $this->Flash->success(__('The property has been deleted.'));
+                // delete references to this property from favourite properties table
+                $favPropTbl = TableRegistry::get('FavoriteProperties');
+                $query = $favPropTbl->query();
+                $query->delete()->where(['property_id' => $id])->execute();
+            } else {
+                $this->Flash->error(__('The property could not be deleted. Please, try again.'));
+            }
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'myproperties']);
     }
 
     /**
@@ -257,6 +278,10 @@ class PropertiesController extends AppController
         $query->contain(['Zips' => function($q){
             return $q->select('number', 'city', 'province');
         }]);
+        // // join images table
+        // $query->contain(['Images' => function($q){
+        //     return $q->select('path', 'order');
+        // }]);
         // convert the result set to array
         $properties = $this->paginate($query);
         // count of total retrieved rows
@@ -287,7 +312,8 @@ class PropertiesController extends AppController
         $query->contain(['Zips' => function($q){
             return $q->select('number', 'city', 'province');
         }]);
-
+        // Set the layout.
+        $this->viewBuilder()->layout('userdash');
         $properties = $this->paginate($query);
          //@author Norman Lista
         //send user id for my profile button
@@ -307,7 +333,13 @@ class PropertiesController extends AppController
         $query->contain(['Zips' => function($q){
             return $q->select('number', 'city', 'province');
         }]);
+        // // join images table
+        // $query->contain(['Images' => function($q){
+        //     return $q->select('path', 'order');
+        // }]);
         $properties = $this->paginate($query);
+        // Set the layout.
+        $this->viewBuilder()->layout('userdash');
         //send user id for my profile button
         $id=$this->Auth->user('id');
         $this->set(compact('properties','id'));
@@ -348,5 +380,11 @@ class PropertiesController extends AppController
         $this->set('_serialize', ['data']);
     }
 
+
+    function test(){
+        $property = $this->Properties->get(501, ['contain' => 'Users']);
+        $this->Properties->delete($property);
+        debug($property);
+    }
 
 }

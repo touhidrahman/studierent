@@ -1,3 +1,4 @@
+
 <div class="row">
 <!-- Filter Sidebar -->
 <div class="col-md-4 col-sm-4 col-xs-12">
@@ -41,9 +42,9 @@
                     
                     <li><b>My Account</b>
                         <ul>
-                            <li><a href="admin.html">Dashboard</a></li>
-                            <li><a href="user-profile.html">My Profile</a></li>
-                            <li><a href="index.html">Logout</a></li>
+                            <li><a href="admin">Dashboard</a></li>
+                            <li><a href="dashboard">My Profile</a></li>
+                            <li><a href="login">Logout</a></li>
                         </ul>
                     </li>
                 </ul>

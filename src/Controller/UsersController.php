@@ -77,22 +77,36 @@ class UsersController extends AppController
     }
 
     /**
-     * Add method
-     *
+     * Add method - add user profile image
+     *@Mythri Manjunath
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
-    {
-        $user = $this->Users->newEntity();
+    public function add($id=null)
+    {   
+        $user='';
         if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->data);
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            if(!empty($this->request->data['photo']['name'])){
+                $fileName = $this->request->data['photo']['name'];
+                if(move_uploaded_file($this->request->data['photo']['tmp_name'],WWW_ROOT . 'img' . DS . 'users' . DS .$fileName)){  
+                   if (!$id) $id = $this->Auth->user('id');
+                    $user = $this->Users->get($id);
+                    $user->photo = $fileName;                   
+                    if ($this->Users->save($user)) {
+                        $this->Flash->success(__('Image has been uploaded and inserted successfully.'));
+                        return $this->redirect([
+                        'controller' => 'Users',
+                         'action' => 'view', $id
+                       ]);
+                    }else{
+                        $this->Flash->error(__('Unable to upload image, please try again.'));
+                    }
+                }else{
+                    $this->Flash->error(__('Unable to upload image, please try again.'));
+                }
+            }else{
+                $this->Flash->error(__('Please choose a image to upload.'));
             }
+            
         }
         $cities = $this->Users->Cities->find('list', ['limit' => 200]);
         $properties = $this->Users->Properties->find('list', ['limit' => 200]);
@@ -177,8 +191,11 @@ class UsersController extends AppController
 				if($user['status']==9)
                 {
                     return $this->redirect(['controller' => 'users','action' => 'admin']);
-                }
+                    
+                     }    
+                                       
 				return $this->redirect(['controller' => 'users','action' => 'dashboard']);
+                    return $this->layout='default';
 
 			}else{
                          $this->Flash->error('Username or password is incorrect');
@@ -325,43 +342,31 @@ class UsersController extends AppController
                 $this->redirect(['controller' => 'users','action' => 'forgotpassword']);
             }
             else {
+               
+               
                 $generated_password=substr(md5(rand(999,999999)) , 0 , 8);
+                $this->Users->updateAll(
+                array('password' => "'$generated_password'"),
+                array('username' => $username)
+                );
                /* $data = $this->Users->password =  $generated_password;
                 if ($this->Users->save($data)) {
-                    $this->Flash->success('Password changed Succesfully.');
-                     return $this->redirect(['controller' => 'Users','action' => 'login']);*/
+                    $this->Flash->success('Password changed Succesfully.');*/
+                   //  return $this->redirect(['controller' => 'Users','action' => 'login']);
                 die($generated_password);
 
     }
         }
     }
+    public function forgotindex()
+            {
+        
+            }
+            
+
     public function activation()  { }
 
 
-    /*public function forgotPassword($username = null)
-    {
-    if($this->request->is('post')) {
-         $username = $this->request->data['username'];
-         $options = array('conditions' => array('User.' . $this->Users->username => $username));
-         $found = $this->Users->find('first');
-
-
-         if (!$username) {
-             $this->Flash->error(__('No user with that email found.'));
-             return $this->redirect(['controller' => 'Users','action' => 'forgotPassword']);
-
-        }else{
-
-                $random = 'a';
-                $hasher = new DefaultPasswordHasher();
-                $val = $hasher->hash($random);
-                $data = $this->Users->password =  $val;
-                if ($this->Users->save($data)) {
-                    $this->Flash->success(__('Password changed Succesfully.'));
-                     return $this->redirect(['controller' => 'Users','action' => 'forgotPassword']);
-                }
-            }
-        }
-    }*/
+   
 
 }
