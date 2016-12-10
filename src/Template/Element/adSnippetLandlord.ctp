@@ -1,7 +1,7 @@
 <!-- Single Property Ad Card -->
 <div class="card">
     <div class="card-block" style="padding-bottom: 0rem">
-        <a href="/studierent/properties/view/<?= $property['id'] ?>">
+        <a href="/studierent/properties/view/<?= $property['id'] ?>" target="_blank">
             <h4 class="card-title"><?= $property['title'] ?></h4>
         </a>
         <h6 class="card-subtitle text-muted">
