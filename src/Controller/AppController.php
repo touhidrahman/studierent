@@ -85,6 +85,7 @@ class AppController extends Controller
      *
      * @param \Cake\Event\Event $event The beforeRender event.
      * @return \Cake\Network\Response|null|void
+     * @author Muneeb Noor
      */
     public function beforeRender(Event $event)
     {
@@ -104,10 +105,23 @@ class AppController extends Controller
 		{
 			$this->set('loggedIn',false);
 		}
+
+		//Create a variable for checking admin user
+
+		if($this->request->session()->read('Auth.User.status') == 9)
+		{
+			$this->set('adminLoggedIn',true);
+		}
+		else
+		{
+			$this->set('adminLoggedIn',false);
+		}
+
+
     }
 
 	public function beforeFilter(Event $event) {
-        
+
     //Automaticaly Login.
     if (!$this->Auth->user() && $this->Cookie->read('CookieAuth')) {
 
