@@ -143,11 +143,17 @@ class PropertiesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $property = $this->Properties->get($id);
-        if ($this->Properties->delete($property)) {
-
-            $this->Flash->success(__('The property has been deleted.'));
-        } else {
-            $this->Flash->error(__('The property could not be deleted. Please, try again.'));
+        // user can only delete his property
+        if ($property->user_id == $this->Auth->user('id')){
+            if ($this->Properties->delete($property)) {
+                $this->Flash->success(__('The property has been deleted.'));
+                // delete references to this property from favourite properties table
+                $favPropTbl = TableRegistry::get('FavoriteProperties');
+                $query = $favPropTbl->query();
+                $query->delete()->where(['property_id' => $id])->execute();
+            } else {
+                $this->Flash->error(__('The property could not be deleted. Please, try again.'));
+            }
         }
 
         return $this->redirect(['action' => 'myproperties']);
@@ -351,5 +357,11 @@ class PropertiesController extends AppController
         $this->set('_serialize', ['data']);
     }
 
+
+    function test(){
+        $property = $this->Properties->get(501, ['contain' => 'Users']);
+        $this->Properties->delete($property);
+        debug($property);
+    }
 
 }
