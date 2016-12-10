@@ -15,7 +15,6 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Property $property
- * @property \App\Model\Entity\ReportedByUser $reported_by_user
  */
 class Report extends Entity
 {
