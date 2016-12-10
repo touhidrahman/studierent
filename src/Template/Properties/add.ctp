@@ -3,8 +3,8 @@
 
     <!-- Add Property -->
     <div class="col-md-9 col-sm-8 col-xs-12">
-
-        <h1 class="display-4">Add a Property Ad</h1>
+     
+       <h1 class="display-4">Add a Property Ad</h1>
 
         <?= $this->Form->create($property, ['horizontal' => false]) ?>
         <div class="row">
@@ -26,7 +26,7 @@
                       <?php
                       echo $this->Form->input('house_no', ['label' => 'House Number']);
                       echo $this->Form->input('address');
-		   
+                      echo $this->Form->input('zip_id', ['label' => 'Zip Code']);
                       ?>
                   </div>
                 </div>
@@ -55,9 +55,9 @@
                   <div class="card-block">
                       <h4 class="card-title">Amenities</h4>
                       <?php
-                      echo $this->Form->input('electricity_bill_included', ['label' => 'Electricity Bill Included in Rent']);
                       echo $this->Form->input('dist_from_uni');
                       echo $this->Form->input('time_dist_from_uni', ['type' => 'number', 'min' => 0, 'max' => 100, 'step' => '5', 'label' => 'Walking Distance From the University (Minutes)', 'placeholder' => '10']);
+                      echo $this->Form->input('electricity_bill_included', ['label' => 'Electricity Bill Included in Rent']);
                       echo $this->Form->input('direct_bus_to_uni', ['label' => 'Direct Bus Route to University']);
                       echo $this->Form->input('internet');
                       echo $this->Form->input('heating');

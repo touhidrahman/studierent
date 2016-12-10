@@ -77,19 +77,24 @@ class PropertiesController extends AppController
      * Add method
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
-     * @author Touhidur Rahman
+     * @author Touhidur Rahman,Ramanpreet Kaur
      */
-    public function add()
+    public function add($id=NULL)
     {
         $property = $this->Properties->newEntity();
+
         if ($this->request->is('post')) {
             $property = $this->Properties->patchEntity($property, $this->request->data);
+            // get reporter user's id from session
+            $property->user_id = $this->Auth->user('id');
+            // get property id from URL
+            $property->property_id = $id;
             if ($this->Properties->save($property)) {
-                $this->Flash->success(__('The property has been saved.'));
-                 $property_id= $property->id;
-                return $this->redirect(['controller' => 'Images','action' => 'add',$property_id]);
+                $this->Flash->success(__('The report has been sent.'));
+
+                return $this->redirect(['controller' => 'users', 'action' => 'dashboard']);
             } else {
-                $this->Flash->error(__('The property could not be saved. Please, try again.'));
+                $this->Flash->error(__('The report could not be sent. Please, try again.'));
             }
         }
         $zips = $this->Properties->Zips->find('list', ['limit' => 200]);
@@ -99,7 +104,6 @@ class PropertiesController extends AppController
         $id=$this->Auth->user('id');
         $this->set(compact('property', 'zips', 'users','id'));
         $this->set('_serialize', ['property']);
-
 
     }
 

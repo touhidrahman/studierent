@@ -34,7 +34,7 @@ class ZipsTable extends Table
         parent::initialize($config);
 
         $this->table('zips');
-        $this->displayField('id');
+        $this->displayField('number');
         $this->primaryKey('id');
 
         $this->belongsTo('Cities', [

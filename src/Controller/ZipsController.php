@@ -51,7 +51,7 @@ class ZipsController extends AppController
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function getZipIdFromCode($code = null)
+   /* public function getZipIdFromCode($code = null)
     {
         $zip = $this->Zips->get($id, [
             'contain' => ['Cities', 'Properties']
@@ -59,7 +59,7 @@ class ZipsController extends AppController
 
         $this->set('zip', $zip);
         $this->set('_serialize', ['zip']);
-    }
+    }*/
 
     /**
      * Add method
