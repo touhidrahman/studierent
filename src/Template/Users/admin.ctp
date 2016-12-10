@@ -54,7 +54,7 @@
                         <label for="uid"><b>&nbsp; - by user id:</b></label>
                         <input name="id" id="uid" class="form-control" type="number" min="1"
                         value = "9"
-                        placeholder="Enter User Id">
+                        placeholder="Enter User Id" required="required">
                         <button class="btn btn-primary" type="submit">Search</button>
                     </div>
                 </form>
@@ -65,7 +65,7 @@
                         <label for="uname"><b>&nbsp; - or by user name:</b></label>
                         <input name="username" id="uname" class="form-control" type="email" 
                         value = "shany.ernser@yahoo.com"
-                        placeholder="Enter User Name">
+                        placeholder="Enter User Name" required="required">
                         <button class="btn btn-primary" type="submit">Search</button>
                     </div>
                 </form>
