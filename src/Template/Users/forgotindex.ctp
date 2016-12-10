@@ -13,8 +13,7 @@
 		<form id="forgotPassword-form">
 						<div class="modal-body">
         <?php
-            echo $this->Form->input('enter your email:');
-            
+        $this->Form->input('password',array('label'=>'New Password'))            
         ?>
     </div></div>
     <div class="form-group row">

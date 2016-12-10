@@ -342,43 +342,31 @@ class UsersController extends AppController
                 $this->redirect(['controller' => 'users','action' => 'forgotpassword']);
             }
             else {
+               
+               
                 $generated_password=substr(md5(rand(999,999999)) , 0 , 8);
+                $this->Users->updateAll(
+                array('password' => "'$generated_password'"),
+                array('username' => $username)
+                );
                /* $data = $this->Users->password =  $generated_password;
                 if ($this->Users->save($data)) {
-                    $this->Flash->success('Password changed Succesfully.');
-                     return $this->redirect(['controller' => 'Users','action' => 'login']);*/
+                    $this->Flash->success('Password changed Succesfully.');*/
+                   //  return $this->redirect(['controller' => 'Users','action' => 'login']);
                 die($generated_password);
 
     }
         }
     }
+    public function forgotindex()
+            {
+        
+            }
+            
+
     public function activation()  { }
 
 
-    /*public function forgotPassword($username = null)
-    {
-    if($this->request->is('post')) {
-         $username = $this->request->data['username'];
-         $options = array('conditions' => array('User.' . $this->Users->username => $username));
-         $found = $this->Users->find('first');
-
-
-         if (!$username) {
-             $this->Flash->error(__('No user with that email found.'));
-             return $this->redirect(['controller' => 'Users','action' => 'forgotPassword']);
-
-        }else{
-
-                $random = 'a';
-                $hasher = new DefaultPasswordHasher();
-                $val = $hasher->hash($random);
-                $data = $this->Users->password =  $val;
-                if ($this->Users->save($data)) {
-                    $this->Flash->success(__('Password changed Succesfully.'));
-                     return $this->redirect(['controller' => 'Users','action' => 'forgotPassword']);
-                }
-            }
-        }
-    }*/
+   
 
 }

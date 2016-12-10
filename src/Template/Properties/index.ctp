@@ -221,7 +221,7 @@
                         <?= $this->Html->link('Landlord Profile', '/users/view/', ['class' => 'card-link text-info']) ?>
                         <?= $this->Html->link('<i class="fa fa-heart-o"></i>', '/favorites/add/', ['class' => 'card-link text-danger', 'escapeTitle' => false]) ?>
                         <?= $this->Html->link('<i class="fa fa-thumbs-o-up"></i>', '/feedbacks/add/', ['class' => 'card-link text-success', 'escapeTitle' => false]) ?>
-                        <?= $this->Html->link('<i class="fa fa-flag-o"></i>', '/reports/add/', ['class' => 'card-link text-muted', 'escapeTitle' => false]) ?>
+                        <?= $this->Html->link('<i class="fa fa-flag-o"></i>', '/reports/add/'.$property['id'], ['class' => 'card-link text-muted', 'escapeTitle' => false]) ?>
                     </div>
                     <div class="col-sm-3">
                         <p class="text-xs-center text-muted" style="margin-bottom:0">EUR</p>
