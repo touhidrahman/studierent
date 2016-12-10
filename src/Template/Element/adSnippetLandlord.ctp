@@ -18,9 +18,11 @@
             <div class="col-sm-6">
                 <p class="card-text text-justify"><?= $this->Text->truncate($property['description'], 100, ['exact' => false, 'html' => true]) ?></p>
 
-                <?= $this->Html->link('<i class="fa fa-eye"></i> View Details', '/properties/view/'.$property['id'], ['class' => 'card-link', 'escapeTitle' => false]) ?>
-                <?= $this->Html->link('<i class="fa fa-pencil"></i> Edit', '/properties/edit/'.$property['id'], ['class' => 'card-link text-info', 'escapeTitle' => false]) ?>
-                <?= $this->Html->link('<i class="fa fa-trash-o fa-lg"></i> Delete', '/properties/delete/'.$property['id'],['class' => 'card-link text-info', 'escapeTitle' => false]) ?>
+                <?= $this->Html->link('<i class="fa fa-eye"></i> View Details ', '/properties/view/'.$property['id'], ['class' => 'card-link', 'escapeTitle' => false]) ?>
+                <?= $this->Html->link('<i class="fa fa-pencil"></i> Edit ', '/properties/edit/'.$property['id'], ['class' => 'card-link text-info', 'escapeTitle' => false]) ?>
+                <?= $this->Form->postlink('<i class="fa fa-trash-o"></i> Delete ',
+                    ['action' => 'delete', $property['id']],
+                    ['confirm' => 'Are you sure to delete this property ad?', 'class' => 'card-link text-danger', 'escapeTitle' => false]) ?>
             </div>
             <div class="col-sm-3">
                 <p class="text-xs-center text-muted" style="margin-bottom:0">EUR</p>

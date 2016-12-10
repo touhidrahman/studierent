@@ -1,4 +1,4 @@
-<div class="images form large-9 medium-8 columns content">
+<div class="container-fluid">
    
     <fieldset>
         <legend><?= __('Thank you for adding a property! Add images to attract customers! ') ?></legend>

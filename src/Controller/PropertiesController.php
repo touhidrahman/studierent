@@ -99,7 +99,7 @@ class PropertiesController extends AppController
         $id=$this->Auth->user('id');
         $this->set(compact('property', 'zips', 'users','id'));
         $this->set('_serialize', ['property']);
-       
+
 
     }
 
@@ -137,20 +137,20 @@ class PropertiesController extends AppController
      * @param string|null $id Property id.
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @author Ramanpreet Kaur, Touhidur Rahman
      */
     public function delete($id = null)
     {
-        $property = $this->Properties->get($id, [
-            'contain' => ['Users']
-        ]);
+        $this->request->allowMethod(['post', 'delete']);
+        $property = $this->Properties->get($id);
         if ($this->Properties->delete($property)) {
-                    
+
             $this->Flash->success(__('The property has been deleted.'));
         } else {
             $this->Flash->error(__('The property could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'myproperties']);
     }
 
     /**
