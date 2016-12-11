@@ -13,10 +13,20 @@
     <div class="card-block">
         <div class="row">
             <div class="col-sm-3">
-                <?= $this->element('propertyImage', ['path'=>$property['image']['path']], ['cache' => true]) ?>
+                <?php
+                if ($property['images']) {
+                    echo $this->Html->image('properties'.DS.$property['images'][0]->path, ['alt' => 'Property image', 'class' => 'rounded-left img-fluid']);
+                } else {
+                ?>
+                    <h1 class="display-1 text-xs-center text-success"><i class="fa fa-home fa-lg"></i></h1>
+                <?php
+                }
+                ?>
             </div>
             <div class="col-sm-6">
-                <p class="card-text text-justify"><?= $this->Text->truncate($property['description'], 100, ['exact' => false, 'html' => true]) ?></p>
+                <p class="card-text text-justify">
+                    <?= $this->Text->truncate($property['description'], 100, ['exact' => false, 'html' => true]) ?>
+                </p>
                 <div class="clearfix">
                     <div class="text-success float-xs-left">
                         Studierent Score <i class="fa fa-bolt"></i> <label><strong>86</strong></label>

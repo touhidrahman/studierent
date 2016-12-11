@@ -1,7 +1,7 @@
 
 <div class="row">
 <!-- Filter Sidebar -->
-<div class="col-md-4 col-sm-4 col-xs-12">
+<div class="col-md-3 col-sm-4 col-xs-12">
     <div class="card bg-faded">
         <div class="card-block">
             <div class="easy-tree">
@@ -12,34 +12,34 @@
 <!--author: Ramanpreet         -->
 <?php
                         foreach($results as $r){
-                            echo 
+                            echo
                             '<li><a href="#">'.$r['type']."(".$r['counts'].")".'</a></li>';
                         }
 ?>
                         </ul>
                     </li>
-                    
+
                     <li><b>Users</b>
                         <ul>
-                           
+
 <!--author: Ramanpreet         -->
 <?php
-                            
+
                         foreach($users as $u){
-                            echo 
+                            echo
                             '<li><a href="#">' . $u['status'] . '(' .$u['counts'] . ')' .'</a></li>';
-                            
+
                         }
-?>                           
+?>
                         </ul>
                     </li>
-                    
+
                     <li><b>Reviews</b>
                         <ul>
                             <li><a href="#">Landlord(7)</a></li>
                         </ul>
                     </li>
-                    
+
                     <li><b>My Account</b>
                         <ul>
                             <li><a href="admin">Dashboard</a></li>
@@ -58,7 +58,7 @@
 <div class="col-md-8 col-sm-8 col-xs-12">
     <h1 class="display-4">Welcome Admin!</h1>
     <div class="card">
-       
+
         <div class="card-block" style="padding-bottom: 0rem">
             <h4 class="card-title">Search For Users</h4>
 <!--        </div>-->
@@ -99,14 +99,14 @@
                 <div class="list-group-item "> <!--  Display user image, view link, and name          -->
                 <?php
                     $imgPath = "/img/boy.jpg";
-                    echo $this->Html->image( $imgPath, 
+                    echo $this->Html->image( $imgPath,
                     [
-                    'class'  => "img-thumbnail", 
+                    'class'  => "img-thumbnail",
                     'height' => "100px",
-                    'width'  => "100px", 
+                    'width'  => "100px",
                     "alt"    => "user photo"
                     ]);
-                    echo h($u->first_name).' '.h($u->last_name); 
+                    echo h($u->first_name).' '.h($u->last_name);
                 ?>
                     <span class="pull-right">
                         <button class="btn btn-primary" type="submit">Block</button>

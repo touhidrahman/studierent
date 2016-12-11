@@ -75,16 +75,41 @@ class ZipsController extends AppController
             if ($this->Zips->save($zip)) {
                 $this->Flash->success(__('The zip has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                // send the zip id to properties/add method
+                return $this->redirect(['controller' => 'properties', 'action' => 'add', $zip->id]);
             } else {
                 $this->Flash->error(__('The zip could not be saved. Please, try again.'));
             }
         }
         // Set the layout.
         $this->viewBuilder()->layout('userdash');
-        $cities = $this->Zips->Cities->find('list', ['limit' => 200]);
-        $this->set(compact('zip', 'cities'));
+        // $cities = $this->Zips->Cities->find('list', ['limit' => 200]);
+        $this->set(compact('zip'));
         $this->set('_serialize', ['zip']);
+    }
+
+    /**
+     * Select a Zipcode before posting a property ad
+     *
+     * @return \Cake\Network\Response|void Redirects on successful select, renders view otherwise.
+     * @author Touhidur Rahman
+     */
+    public function select()
+    {
+        if ($this->request->is('post')) {
+            $zip = $this->Zips->find()->where(['number' => $this->request->data('Zip.number')])->first();
+            if ($zip) {
+                $this->Flash->success(__('The zip code has been verified. Enter your property details.'));
+                // send the zip id to properties/add method
+                return $this->redirect(['controller' => 'properties', 'action' => 'add', $zip->id]);
+            } else {
+                $this->Flash->error(__('The zipcode could not be found. Please, enter details of this Zipcode.'));
+                // send to zips/add for adding a new zipcode
+                return $this->redirect(['controller' => 'zips', 'action' => 'add']);
+            }
+        }
+        // Set the layout.
+        $this->viewBuilder()->layout('userdash');
     }
 
     /**

@@ -48,6 +48,7 @@ class ImagesController extends AppController
      * Add method - This method adds properties images
      * @author Mythri Manjunath
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
+     * @author Mythri Manjunath
      */
     public function add($id=null)
     {
@@ -60,8 +61,8 @@ class ImagesController extends AppController
         $image='';
         if ($this->request->is('post')) {
             if(!empty($this->request->data['upload']['name'])){
-                $fileName = $this->request->data['upload']['name'];
-                $destDir = WWW_ROOT .'img'. DS .'properties'. DS . $id . '-' . $fileName;
+                $fileName = $id . '-' .$this->request->data['upload']['name'];
+                $destDir = WWW_ROOT .'img'. DS .'properties'. DS . $fileName;
                 if(move_uploaded_file($this->request->data['upload']['tmp_name'], $destDir)){
                     $image = $this->Images->newEntity();
                     $image->property_id=$id;
@@ -69,7 +70,7 @@ class ImagesController extends AppController
                     $image->created = date("Y-m-d H:i:s");
                     $image->modified = date("Y-m-d H:i:s");
                     if ($this->Images->save($image)) {
-                        $this->Flash->success(__('Image has been uploaded and inserted successfully.'));
+                        $this->Flash->success(__('Image has been uploaded successfully. You can add more!'));
                         return $this->redirect([
                             'controller' => 'Images',
                             'action' => 'add',$id

@@ -21,7 +21,7 @@ $(document).ready(function() {
     $('.favTogglers').click(function(e){
         // prevent link to do the default action
         e.preventDefault();
-
+        var elem = $(this);
         //send ajax call
         $.ajax({
             method: 'GET',
@@ -29,8 +29,10 @@ $(document).ready(function() {
         })
         .done(function(data){
             if (data.data.message == "Added") {
+                elem.removeClass('text-danger').addClass('btn-danger');
                 alert("The property was " + data.data.message + " in your Favorites list");
             } else {
+                elem.removeClass('btn-danger').addClass('text-danger');
                 alert("The property was " + data.data.message + " from your Favorites list");
             }
         });

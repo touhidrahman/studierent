@@ -13,7 +13,6 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\HasMany $FavoriteProperties
  * @property \Cake\ORM\Association\HasMany $Images
  * @property \Cake\ORM\Association\HasMany $Reports
- * @property \Cake\ORM\Association\BelongsToMany $Users
  *
  * @method \App\Model\Entity\Property get($primaryKey, $options = [])
  * @method \App\Model\Entity\Property newEntity($data = null, array $options = [])
@@ -52,10 +51,7 @@ class PropertiesTable extends Table
             'foreignKey' => 'property_id'
         ]);
         $this->hasMany('Images', [
-            'foreignKey' => 'property_id'
-        ]);
-        $this->hasMany('Reports', [
-            'foreignKey' => 'property_id'
+            'foreignKey' => 'property_id',
         ]);
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
@@ -93,16 +89,14 @@ class PropertiesTable extends Table
 
         $validator
             ->integer('status')
-            ->requirePresence('status', 'create')
-            ->notEmpty('status');
+            ->allowEmpty('status');
 
         $validator
             ->allowEmpty('contact_number');
 
         $validator
             ->email('email')
-            ->requirePresence('email', 'create')
-            ->notEmpty('email');
+            ->allowEmpty('email');
 
         $validator
             ->integer('room_size')
@@ -135,8 +129,7 @@ class PropertiesTable extends Table
 
         $validator
             ->date('available_until')
-            ->requirePresence('available_until', 'create')
-            ->notEmpty('available_until');
+            ->allowEmpty('available_until');
 
         $validator
             ->integer('rent')
@@ -150,8 +143,7 @@ class PropertiesTable extends Table
 
         $validator
             ->integer('utility_cost')
-            ->requirePresence('utility_cost', 'create')
-            ->notEmpty('utility_cost');
+            ->allowEmpty('utility_cost');
 
         $validator
             ->integer('dist_from_uni')
@@ -228,10 +220,10 @@ class PropertiesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['email']));
+        // $rules->add($rules->isUnique(['email']));
         // $rules->add($rules->existsIn(['zip_id'], 'Zips'));
 
         return $rules;
     }
-    
+
 }

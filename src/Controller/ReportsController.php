@@ -70,6 +70,7 @@ class ReportsController extends AppController
             }
         }
         $property = TableRegistry::get('Properties')->get($id);
+        $this->viewBuilder()->layout('userdash');
         $this->set(compact('report', 'property'));
         $this->set('_serialize', ['report', 'property']);
     }
