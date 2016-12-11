@@ -51,7 +51,7 @@ class PropertiesTable extends Table
             'foreignKey' => 'property_id'
         ]);
         $this->hasMany('Images', [
-            'foreignKey' => 'property_id'
+            'foreignKey' => 'property_id',
         ]);
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',

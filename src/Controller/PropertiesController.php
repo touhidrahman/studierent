@@ -304,9 +304,7 @@ class PropertiesController extends AppController
             return $q->select('number', 'city', 'province');
         }]);
         // // join images table
-        // $query->contain(['Images' => function($q){
-        //     return $q->select('path', 'order');
-        // }]);
+        $query->contain(['Images']);
         // convert the result set to array
         $properties = $this->paginate($query);
         // count of total retrieved rows
@@ -340,6 +338,8 @@ class PropertiesController extends AppController
         $query->contain(['Zips' => function($q){
             return $q->select('number', 'city', 'province');
         }]);
+        // // join images table
+        $query->contain(['Images']);
         // Set the layout.
         $this->viewBuilder()->layout('userdash');
         $properties = $this->paginate($query);
@@ -365,9 +365,7 @@ class PropertiesController extends AppController
             return $q->select('number', 'city', 'province');
         }]);
         // // join images table
-        // $query->contain(['Images' => function($q){
-        //     return $q->select('path', 'order');
-        // }]);
+        $query->contain(['Images']);
         $properties = $this->paginate($query);
         // Set the layout.
         $this->viewBuilder()->layout('userdash');

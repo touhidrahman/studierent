@@ -1,7 +1,7 @@
 <nav class="navbar navbar-light bg-faded">
     <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"></button>
     <div class="collapse navbar-toggleable-md" id="navbarResponsive">
-        <a class="navbar-brand" href="/studierent"><?= $this->Html->image('logo.png',array('width'=>'80px','height'=>'40px'), ['alt' => 'Property image','class' => 'rounded-left img-fluid']); ?></a>
+        <a class="navbar-brand" href="/studierent"><?= $this->Html->image('logo.png',array('width'=>'80px','height'=>'40px'), ['alt' => 'Property image','class' => 'img-fluid']); ?></a>
         <ul class="nav navbar-nav">
             <li class="nav-item active">
                 <a class="nav-link" href="/studierent">Home <span class="sr-only">(current)</span></a>
