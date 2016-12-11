@@ -12,7 +12,6 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.js"></script>
 		<?= $this->Html->css('style') ?>
 	<!-- JS Dependencies -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -27,7 +26,6 @@
 	<!-- NAVBAR -->
 	<?= $this->element('navbar', ['cache' => true]) ?>
 	<!-- NAVBAR END -->
-
 	<div class="container-fluid clearfix" style="margin-top:1em;">
 		<!-- ALERT or NOTIFICATION BLOCK -->
 		<div class="row">
@@ -36,10 +34,33 @@
 			</div>
 		</div>
 		<!-- END ALERT -->
+		<div class="row">
+			<!-- User side bar -->
+			<div class="col-md-3 col-sm-4 col-xs-12">
+			    <div class="card">
+			        <img class="card-img img-fluid" src="/studierent/img/property.jpg" alt="Card image cap">
+			          <div class="card-img-overlay">
+			            <h4 class="card-title" style="color:#fff">My Dashboard</h4>
+			            <p class="card-text"></p>
+			            <p class="card-text"><small class="text-muted"></small></p>
+			          </div>
 
-		<!-- CONTENT -->
-		<?= $this->fetch('content') ?>
-		<!-- END CONTENT -->
+			        <ul class="list-group list-group-flush">
+			            <li class="list-group-item"><?= $this->Html->link('Add a Property Ad', '/zips/select/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
+			            <li class="list-group-item"><?= $this->Html->link('My Properties', '/properties/myproperties', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
+			            <li class="list-group-item"><?= $this->Html->link('My Favorites', '/properties/favorites/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
+			            <li class="list-group-item"><?= $this->Html->link('My Profile', '/users/view/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
+			            <li class="list-group-item"><?= $this->Html->link('Logout', '/users/logout', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
+			        </ul>
+			    </div>
+			</div>
+			<!-- end User sidebar -->
+			<!-- CONTENT -->
+			<div class="col-md-9 col-sm-8 col-xs-12">
+				<?= $this->fetch('content') ?>
+			</div>
+			<!-- END CONTENT -->
+		</div>
 	</div>
 
 

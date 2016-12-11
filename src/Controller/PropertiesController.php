@@ -15,7 +15,6 @@ class PropertiesController extends AppController
 
     public $paginate = [
         'limit' => 10,
-        // 'order' => ['Properties.created' => 'desc']
     ];
 
     public function initialize() {
@@ -24,6 +23,8 @@ class PropertiesController extends AppController
 		$this->Auth->allow(['search']);
 
     }
+
+
 
     /**
      * Index method
@@ -43,13 +44,15 @@ class PropertiesController extends AppController
         $this->search();
     }
 
+
+
     /**
      * View method
      *
      * @param string|null $id Property id.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     * @author Touhidur Rahman
+     * @author Touhidur Rahman, Norman Lista
      */
     public function view($id = null)
     {
@@ -58,9 +61,12 @@ class PropertiesController extends AppController
         $this->loadModel('Feedbacks');
         // , 'FavoriteProperties', 'Images'
         $property = $this->Properties->get($id, [
-            'contain' => ['Zips','Users']
+            'contain' => ['Zips', 'Users', 'Images']
         ]);
-
+        if ($property->status == 0) {
+            $this->Flash->error(__('Cannot show deactivated ads!'));
+            return $this->redirect(['action' => 'myproperties']);
+        }
 
        $feedbackSearch=$this->Feedbacks->find('all',[
     'conditions' => ['for_user_id =' => $property->user->id]]);
@@ -68,44 +74,58 @@ class PropertiesController extends AppController
        if($feedbackSearch->isEmpty()){
            $feedback->rate=0;
        }else{$feedback =$feedbackSearch->first();}
+
         $this->set('property', $property);
         $this->set('_serialize', ['property']);
         $this->set('feedback', $feedback);
     }
 
+
+
     /**
      * Add method
-     *
+     * Accepts a Zip ID otherwise redirects
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      * @author Touhidur Rahman,Ramanpreet Kaur
      */
-    public function add($id=NULL)
+    public function add($zipid=NULL)
     {
+        // if there is no zip id redirect to select zip page
+        // else, send the zip id to view file inside hidden field for onward retrieval
+        if ($zipid == NULL) {
+            return $this->redirect(['controller' => 'zips', 'action' => 'select']);
+        }
+
         $property = $this->Properties->newEntity();
 
         if ($this->request->is('post')) {
             $property = $this->Properties->patchEntity($property, $this->request->data);
             // get reporter user's id from session
             $property->user_id = $this->Auth->user('id');
-            // get property id from URL
-            $property->property_id = $id;
+            // For now, let every property be approved automatically
+            $property->status = 1;
             if ($this->Properties->save($property)) {
-                $this->Flash->success(__('The report has been sent.'));
+                $this->Flash->success(__('The ad is successfully created.'));
 
-                return $this->redirect(['controller' => 'users', 'action' => 'dashboard']);
+                return $this->redirect(['controller' => 'images', 'action' => 'add', $property->id]);
             } else {
-                $this->Flash->error(__('The report could not be sent. Please, try again.'));
+                $this->Flash->error(__('The ad couldn\'t be created. Please, try again.'));
             }
         }
-        $zips = $this->Properties->Zips->find('list', ['limit' => 200]);
-        $users = $this->Properties->Users->find('list', ['limit' => 200]);
+
+        // Set the layout.
+        $this->viewBuilder()->layout('userdash');
+
         //@author Norman Lista
         //send user id for my profile button
         $id=$this->Auth->user('id');
-        $this->set(compact('property', 'zips', 'users','id'));
-        $this->set('_serialize', ['property']);
+        $this->set(compact('property', 'zipid'));
+        $this->set('_serialize', ['property', 'zipid']);
 
     }
+
+
+
 
     /**
      * Edit method
@@ -113,27 +133,32 @@ class PropertiesController extends AppController
      * @param string|null $id Property id.
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @author Ramanpreet Kaur, Touhidur Rahman
      */
     public function edit($id = null)
     {
-        $property = $this->Properties->get($id, [
-            'contain' => ['Users']
-        ]);
+        // only logged in user can edit his property
+        $property = $this->Properties->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $property = $this->Properties->patchEntity($property, $this->request->data);
-            if ($this->Properties->save($property)) {
-                $this->Flash->success(__('The property has been saved.'));
+            if ($property->user_id == $this->Auth->user('id')){
+                $property = $this->Properties->patchEntity($property, $this->request->data);
+                if ($this->Properties->save($property)) {
+                    $this->Flash->success(__('The property ad has been modified.'));
 
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The property could not be saved. Please, try again.'));
+                    return $this->redirect(['action' => 'myproperties']);
+                } else {
+                    $this->Flash->error(__('The property could not be saved. Please, try again.'));
+                }
             }
         }
-        $zips = $this->Properties->Zips->find('list', ['limit' => 200]);
-        $users = $this->Properties->Users->find('list', ['limit' => 200]);
-        $this->set(compact('property', 'zips', 'users'));
+        // Set the layout.
+        $this->viewBuilder()->layout('userdash');
+        $this->set(compact('property'));
         $this->set('_serialize', ['property']);
     }
+
+
+
 
     /**
      * Delete method
@@ -147,14 +172,19 @@ class PropertiesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $property = $this->Properties->get($id);
-        // user can only delete his property
+        // only owner user can delete his property
         if ($property->user_id == $this->Auth->user('id')){
             if ($this->Properties->delete($property)) {
-                $this->Flash->success(__('The property has been deleted.'));
                 // delete references to this property from favourite properties table
                 $favPropTbl = TableRegistry::get('FavoriteProperties');
-                $query = $favPropTbl->query();
-                $query->delete()->where(['property_id' => $id])->execute();
+                $queryFav = $favPropTbl->query();
+                $queryFav->delete()->where(['property_id' => $id])->execute();
+                // delete references to this property from favourite properties table
+                $imgTbl = TableRegistry::get('Images');
+                $queryImg = $imgTbl->query();
+                $queryImg->delete()->where(['property_id' => $id])->execute();
+
+                $this->Flash->success(__('The property has been deleted.'));
             } else {
                 $this->Flash->error(__('The property could not be deleted. Please, try again.'));
             }
@@ -162,6 +192,9 @@ class PropertiesController extends AppController
 
         return $this->redirect(['action' => 'myproperties']);
     }
+
+
+
 
     /**
      * Search method
@@ -271,9 +304,7 @@ class PropertiesController extends AppController
             return $q->select('number', 'city', 'province');
         }]);
         // // join images table
-        // $query->contain(['Images' => function($q){
-        //     return $q->select('path', 'order');
-        // }]);
+        $query->contain(['Images']);
         // convert the result set to array
         $properties = $this->paginate($query);
         // count of total retrieved rows
@@ -282,6 +313,9 @@ class PropertiesController extends AppController
         $this->set(compact('properties', 'count', 'qs'));
         $this->set('_serialize', ['properties']);
     }
+
+
+
 
     /**
      * Displays User's favorited ads
@@ -304,7 +338,10 @@ class PropertiesController extends AppController
         $query->contain(['Zips' => function($q){
             return $q->select('number', 'city', 'province');
         }]);
-
+        // // join images table
+        $query->contain(['Images']);
+        // Set the layout.
+        $this->viewBuilder()->layout('userdash');
         $properties = $this->paginate($query);
          //@author Norman Lista
         //send user id for my profile button
@@ -312,6 +349,9 @@ class PropertiesController extends AppController
         $this->set(compact('properties','id'));
         $this->set('_serialize', ['properties']);
     }
+
+
+
 
     /**
      * Displays list of properties a user has posted
@@ -325,15 +365,18 @@ class PropertiesController extends AppController
             return $q->select('number', 'city', 'province');
         }]);
         // // join images table
-        // $query->contain(['Images' => function($q){
-        //     return $q->select('path', 'order');
-        // }]);
+        $query->contain(['Images']);
         $properties = $this->paginate($query);
+        // Set the layout.
+        $this->viewBuilder()->layout('userdash');
         //send user id for my profile button
         $id=$this->Auth->user('id');
         $this->set(compact('properties','id'));
         $this->set('_serialize', ['properties']);
     }
+
+
+
 
     /**
      * Marks a property as favorite for user
@@ -369,11 +412,5 @@ class PropertiesController extends AppController
         $this->set('_serialize', ['data']);
     }
 
-
-    function test(){
-        $property = $this->Properties->get(501, ['contain' => 'Users']);
-        $this->Properties->delete($property);
-        debug($property);
-    }
 
 }

@@ -5,3 +5,5 @@
 .directory
 /nbproject/private/
 /nbproject/*
+/webroot/img/properties/*
+/webroot/img/users/*

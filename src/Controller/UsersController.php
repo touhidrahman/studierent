@@ -45,7 +45,7 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
-        // if id is not supplied show own profile 
+        // if id is not supplied show own profile
         if (!$id) $id = $this->Auth->user('id');
         $user = $this->Users->get($id);
         $propertiesTbl = TableRegistry::get('Properties');
@@ -82,15 +82,15 @@ class UsersController extends AppController
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
     public function add($id=null)
-    {   
+    {
         $user='';
         if ($this->request->is('post')) {
             if(!empty($this->request->data['photo']['name'])){
                 $fileName = $this->request->data['photo']['name'];
-                if(move_uploaded_file($this->request->data['photo']['tmp_name'],WWW_ROOT . 'img' . DS . 'users' . DS .$fileName)){  
+                if(move_uploaded_file($this->request->data['photo']['tmp_name'],WWW_ROOT . 'img' . DS . 'users' . DS .$fileName)){
                    if (!$id) $id = $this->Auth->user('id');
                     $user = $this->Users->get($id);
-                    $user->photo = $fileName;                   
+                    $user->photo = $fileName;
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('Image has been uploaded and inserted successfully.'));
                         return $this->redirect([
@@ -106,7 +106,7 @@ class UsersController extends AppController
             }else{
                 $this->Flash->error(__('Please choose a image to upload.'));
             }
-            
+
         }
         $cities = $this->Users->Cities->find('list', ['limit' => 200]);
         $properties = $this->Users->Properties->find('list', ['limit' => 200]);
@@ -191,9 +191,9 @@ class UsersController extends AppController
 				if($user['status']==9)
                 {
                     return $this->redirect(['controller' => 'users','action' => 'admin']);
-                    
-                     }    
-                                       
+
+                     }
+
 				return $this->redirect(['controller' => 'users','action' => 'dashboard']);
                     return $this->layout='default';
 
@@ -261,6 +261,8 @@ class UsersController extends AppController
         $favCount = $favoritesTbl->find()->where(['user_id' => $this->Auth->user('id')])->count();
         $name = $this->Auth->user('first_name') . ' ' . $this->Auth->user('last_name');
         $id=$this->Auth->user('id');
+        // Set the layout.
+        $this->viewBuilder()->layout('userdash');
         $this->set(compact('name', 'propertyCount', 'favCount', 'id'));
 
     }
@@ -268,7 +270,7 @@ class UsersController extends AppController
 
     /**
      * Display Admin dashboard after login
-     * @author Ramanpreet, 
+     * @author Ramanpreet,
      * @author Aleksandr Anfilov
      */
     public function admin(){
@@ -301,24 +303,24 @@ class UsersController extends AppController
             $searchQuery = TableRegistry::get('Users')
                 ->find()                // 1. Prepare a SELECT query:
                 ->select( ['id', 'last_name', 'first_name'] );
-            
+
             switch ($searchBy) {        // 2. Add a WHERE condition
             case 'id':
                 $searchQuery->where(['id' => $searchParam]);
             break;
-                    
+
             case 'username':           //  find by username (which is an e-mail address)
                 $searchQuery->where(['username' => $searchParam]);
             break;
             }
 
             $usersFound = $searchQuery->toArray();// 3. Execute the query
-            
+
             if (!empty($usersFound)){
                 $this->set('usersFound', $usersFound);
             }
             else{
-                $this->Flash->error(__('No users have been found with the ' . $searchBy . ' ' . $searchParam . '.')); 
+                $this->Flash->error(__('No users have been found with the ' . $searchBy . ' ' . $searchParam . '.'));
                 }
         }
     }
@@ -342,8 +344,8 @@ class UsersController extends AppController
                 $this->redirect(['controller' => 'users','action' => 'forgotpassword']);
             }
             else {
-               
-               
+
+
                 $generated_password=substr(md5(rand(999,999999)) , 0 , 8);
                 $this->Users->updateAll(
                 array('password' => "'$generated_password'"),
@@ -360,13 +362,13 @@ class UsersController extends AppController
     }
     public function forgotindex()
             {
-        
+
             }
-            
+
 
     public function activation()  { }
 
 
-   
+
 
 }
