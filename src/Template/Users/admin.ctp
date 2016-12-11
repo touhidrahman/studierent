@@ -74,7 +74,8 @@
         * Display search results. 
         * Precondition: if a result set $usersFound is set() in the UsersController, it is not empty
         * @author: Aleksandr Anfilov
-        * Finished 11.12.2016
+        * Started:  10.12.2016
+        * Updated:  11.12.2016
         */
             if (isset($usersFound)) {?>
                 <h3><?= __('Users') ?>:</h3>
@@ -100,11 +101,9 @@
                             ['confirm' => __('Are you sure you want to block the Landlord # {0}?', $u->id)] ); 
                         break;
                         }
-                            
                 ?>
                         </span>
                     </div><!--  list-group-item-->
-
             <?php   endforeach; 
             }//endif
             ?>

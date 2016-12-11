@@ -332,7 +332,7 @@ class UsersController extends AppController
     * @author Aleksandr Anfilov
     * Block or unblock the landlord.
     * @param id
-    * Created 11.12.2016
+    * Created:  11.12.2016
     */
     public function adminUserStatus($id = null, $newStatus = 0) {
         $this->request->allowMethod(['post', 'adminUserStatus']);
