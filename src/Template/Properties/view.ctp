@@ -92,6 +92,7 @@
 <div class="card-block">
 	<h4>Transportation</h4>
 	<p><?php echo ($property->direct_bus_to_uni == 1) ? $check : $times; ?>  Direct bus to University</p>
+	<p class="text-success"><?php echo $property->dist_from_uni; ?>  KM Far from University / <?php echo $property->time_dist_from_uni; ?> Minutes by Walking (Approximate Estimation)</p>
 	<p class="text-justify"><?= h($property->transportation) ?></p>
 </div>
 <div class="card-block">

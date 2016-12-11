@@ -54,6 +54,9 @@ class UsersController extends AppController
         $query->contain(['Zips' => function($q){
             return $q->select('number', 'city', 'province');
         }]);
+        // join images table for property images
+        $query->contain(['Images']);
+        
         $propertyCount = $query->count();
         $properties = $query->toList();
 
