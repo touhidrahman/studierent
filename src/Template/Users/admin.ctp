@@ -74,6 +74,7 @@
         * Display search results. 
         * Precondition: if a result set $usersFound is set() in the UsersController, it is not empty
         * @author: Aleksandr Anfilov
+        * Finished 11.12.2016
         */
             if (isset($usersFound)) {?>
                 <h3><?= __('Users') ?>:</h3>
@@ -102,7 +103,7 @@
                             
                 ?>
                         </span>
-                        </div><!--  list-group-item-->
+                    </div><!--  list-group-item-->
 
             <?php   endforeach; 
             }//endif
