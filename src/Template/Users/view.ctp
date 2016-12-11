@@ -2,8 +2,7 @@
 	<div class="col-xs-12">
 		<div class="jumbotron jumbotron-fluid text-xs-center">
 		  <div class="container">
-			
-                     <?php 
+			<?php 
                      $path ='users/';                     
                      $filename= $user->photo;
                      $userimage=$path.$filename;
@@ -15,6 +14,7 @@
                     else
                        echo $this->Html->image('boy.jpg', array('alt' => 'CakePHP','class'=>'rounded-circle','height' => '128', 'width' => '128')); 
                      ?>
+                     
                           
 			<h1 class="display-3"><?= $user->first_name .' '. $user->last_name ?></h1>
 			<!-- PHP code 

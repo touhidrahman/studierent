@@ -16,15 +16,24 @@ class ImagesController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
-    public function index()
-    {
+    public function index($id=null)
+    { 
+      
+        $propertyTbl = TableRegistry::get('Properties');
+        $exists = $propertyTbl->exists(['id'=> $id,'user_id'=> $this->Auth->user('id')]);
+        if($exists)
+        {
+        //$images = $this->Images->find()->select('id')->where(['property_id' => $id]);
+        
+    //}
         $this->paginate = [
             'contain' => ['Properties']
         ];
-        $images = $this->paginate($this->Images);
+        $images = $this->paginate($this->Images->find()->where(['property_id' => $id]));
 
-        $this->set(compact('images'));
+        $this->set('images', $images);
         $this->set('_serialize', ['images']);
+    }
     }
 
     /**
@@ -36,13 +45,18 @@ class ImagesController extends AppController
      */
     public function view($id = null)
     {
-        $image = $this->Images->get($id, [
-            'contain' => ['Properties']
-        ]);
-
+        /*$propertyTbl = TableRegistry::get('Properties');
+        $exists = $propertyTbl->exists(['id'=> $id,'user_id'=> $this->Auth->user('id')]);
+        if($exists)
+        {
+            $images = $this->Images->find(all)->select('id')->where(['property_id' => $id]);
+        $this->set('image', $images);
+        $this->set('_serialize', ['image']);*/
+        $image = $this->Images->get($id);
         $this->set('image', $image);
         $this->set('_serialize', ['image']);
     }
+    
 
     /**
      * Add method - This method adds properties images
@@ -132,6 +146,6 @@ class ImagesController extends AppController
             $this->Flash->error(__('The image could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'index',$image->property_id]);
     }
 }
