@@ -13,7 +13,7 @@ class ImagesController extends AppController
 
     /**
      * Index method
-     *
+     * @ Mythri Manjunath
      * @return \Cake\Network\Response|null
      */
     public function index($id=null)
@@ -35,20 +35,13 @@ class ImagesController extends AppController
 
     /**
      * View method
-     *
+     *@ Mythri Manjunath
      * @param string|null $id Image id.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
-    {
-        /*$propertyTbl = TableRegistry::get('Properties');
-        $exists = $propertyTbl->exists(['id'=> $id,'user_id'=> $this->Auth->user('id')]);
-        if($exists)
-        {
-            $images = $this->Images->find(all)->select('id')->where(['property_id' => $id]);
-        $this->set('image', $images);
-        $this->set('_serialize', ['image']);*/
+    {       
         $image = $this->Images->get($id);
         $this->set('image', $image);
         $this->set('_serialize', ['image']);
@@ -129,7 +122,7 @@ class ImagesController extends AppController
 
     /**
      * Delete method
-     *
+     * @ Mythri Manjunath
      * @param string|null $id Image id.
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
