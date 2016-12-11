@@ -238,7 +238,7 @@ class UsersController extends AppController
 
 		$this->Auth->allow(['logout']);
 		$this->Auth->allow(['register', 'forgotpassword']);
-        $this->Auth->allow();//REM @author Aleksandr Anfilov. Allow all actions of studierent/users   w/o login.
+        //$this->Auth->allow();//REM @author Aleksandr Anfilov. Allow all actions of studierent/users   w/o login.
 	}
 
     /**
@@ -294,15 +294,17 @@ class UsersController extends AppController
         if($this->request->is('post'))
         {
             $form = $this->request->data();
+            //$form = Sanitize::clean($this->request->data(), array('encode' => false));
             $searchBy = key($form);             // key: input name is 'id' or 'username'
+            
             $searchParam = $form[$searchBy];    // get input value from array by key
-
+            
 //@source: Selecting Rows From A Table   http://book.cakephp.org/3.0/en/orm/query-builder.html
 //@ERROR: Call to a member function find() on array $this-Users->find()->select(['id', 'first_name']);
 
             $searchQuery = TableRegistry::get('Users')
                 ->find()                // 1. Prepare a SELECT query:
-                ->select( ['id', 'last_name', 'first_name'] );
+                ->select( ['id', 'last_name', 'first_name', 'username', 'status'] );
 
             switch ($searchBy) {        // 2. Add a WHERE condition
             case 'id':
@@ -324,7 +326,30 @@ class UsersController extends AppController
                 }
         }
     }
-
+    
+    
+    /**
+    * @author Aleksandr Anfilov
+    * Block or unblock the landlord.
+    * @param id
+    */
+    public function adminUserStatus($id = null, $newStatus = 0) {
+        $this->request->allowMethod(['post', 'adminUserStatus']);
+      
+        if ($id > 0) {
+            $conn = ConnectionManager::get('default');
+            
+            $conn->transactional(function ($conn) use ($id, $newStatus){
+            $conn->execute('UPDATE properties SET status = ? WHERE user_id = ?', [$newStatus, $id]);
+            $conn->execute('UPDATE users SET status = ? WHERE id = ?', [$newStatus, $id]);
+            });
+            
+            $this->Flash->success(__('The user status has been changed.'));
+        }   else {
+                $this->Flash->error(__('The user status has not been changed.'));}
+    return $this->redirect(['action' => 'admin']);
+    }
+    
 
     /**
      * Display Admin dashboard after login
