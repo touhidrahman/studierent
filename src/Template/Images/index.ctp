@@ -1,11 +1,13 @@
-<h1>Properties</h1>
-<p><?= $this->Html->link('Add Images', ['action' => 'add']) ?></p>
-<table>
+<h1 class="display-4">Property Images</h1>
+<br>
+<table class="table table-sm table-bordered">
+    <thead class="thead-default">
 <tr>
 <th>Id</th>
-<th>Title</th>
-<th>Actions</th>
+<th>View</th>
+<th>Delete</th>
 </tr>
+    </thead>
 <!-- Here's where we loop through our $images query object, printing out images  -->
 <?php foreach ($images as $image): ?>
 <tr>
@@ -20,7 +22,7 @@
 ['action' => 'delete', $image->id],
 ['confirm' => 'Are you sure?'])
 ?>
-<?= $this->Html->link('Edit', ['action' => 'edit', $image->id])?>
+
 </td>
 </tr>
 <?php endforeach; ?>

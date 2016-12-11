@@ -22,10 +22,7 @@ class ImagesController extends AppController
         $propertyTbl = TableRegistry::get('Properties');
         $exists = $propertyTbl->exists(['id'=> $id,'user_id'=> $this->Auth->user('id')]);
         if($exists)
-        {
-        //$images = $this->Images->find()->select('id')->where(['property_id' => $id]);
-        
-    //}
+        {          
         $this->paginate = [
             'contain' => ['Properties']
         ];
@@ -141,7 +138,9 @@ class ImagesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $image = $this->Images->get($id);
-        if ($this->Images->delete($image)) {
+        $destDir = WWW_ROOT .'img'. DS .'properties'. DS;
+        if ($this->Images->delete($image)) {          
+            unlink($destDir.$image->path);
             $this->Flash->success(__('The image has been deleted.'));
         } else {
             $this->Flash->error(__('The image could not be deleted. Please, try again.'));
