@@ -23,9 +23,9 @@
                 <td><?= h($user->address) ?></td>
                 <td><?= $this->Number->format($user->contact_number) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
+                    <?= $this->Html->link(__('View'), ['controller'=>'Users','action' => 'view', $user->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller'=>'Users','action' => 'edit', $user->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller'=>'Users','action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
