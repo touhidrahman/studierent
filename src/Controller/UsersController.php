@@ -164,9 +164,10 @@ class UsersController extends AppController
         } else {
             $this->Flash->error(__('The user could not be deleted. Please, try again.'));
         }
-
-        return $this->redirect(['action' => 'index']);
-    }
+		
+		return $this->redirect($this->referer());
+    
+	}
 
 
     /**
