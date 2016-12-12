@@ -440,6 +440,10 @@ class Initial extends AbstractMigration
             )
             ->create();
 
+        /* @author: Aleksandr. 
+        * Touhid: we are no more using users_properties table. I have added a user_id field in properties. 
+        * I have figured out that each property has only one creator. So we don't need a separate table.
+        
         $this->table('users_properties', ['id' => false])
             ->addColumn('user_id', 'integer', [
                 'default' => null,
@@ -462,6 +466,7 @@ class Initial extends AbstractMigration
                 ]
             )
             ->create();
+        */
 
         $this->table('zips')
             ->addColumn('number', 'integer', [

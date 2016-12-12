@@ -1,7 +1,6 @@
-
 <div class="row">
-<!-- Filter Sidebar -->
-<div class="col-md-3 col-sm-4 col-xs-12">
+    <!-- Filter Sidebar -->
+    <div class="col-md-3 col-sm-4 col-xs-12  card bg-faded">
     <div class="card bg-faded">
         <div class="card-block">
             <p class="card-text">
@@ -41,6 +40,7 @@
                             <li><a href="#">Landlord(7)</a></li>
                         </ul>
                     </li>
+                    
                     <li><b>Reported Abuse</b>
                         <ul>
                             <?php
@@ -61,6 +61,7 @@
     </div>
 </div>
 <!-- end sidebar -->
+
 <!-- Results -->
 <div class="col-md-9 col-sm-8 col-xs-12">
     <h1 class="display-4">Welcome Admin!</h1>
@@ -73,10 +74,13 @@
             <div class="row">
                 <label for="uid"><b>&nbsp;&nbsp; - by user id:</b></label>
                 <form method="POST" class="form-inline">
+                    <div class="form-group">
+                        <label for="uid"><b>&nbsp; - by user id:</b></label>
                     <input name="id" id="uid" class="form-control" type="number" min="1"
                         value = "9"
                     placeholder="Enter User Id">
                     <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
                 </form>
                 <br>
                 <label for="uname"><b>&nbsp;&nbsp; - or by user name:</b></label>
@@ -85,6 +89,7 @@
                         value = "shany.ernser@yahoo.com"
                     placeholder="Enter User Name">
                     <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
                 </form>
                 <br>
                 <br>
@@ -110,6 +115,7 @@
                     "alt"    => "user photo"
                     ]);
                     echo h($u->first_name).' '.h($u->last_name);
+                        . ' || email: ' . h($u->username);
                 ?>
                     <span class="pull-right">
                         <button class="btn btn-primary" type="submit">Block</button>
