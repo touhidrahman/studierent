@@ -135,6 +135,18 @@ public function users(string $type){
 		$this->set('recentPropertiesCount',$recentPropertiesCount);
 		
 	}
+	
+	public function beforeFilter(\Cake\Event\Event $event)
+	{
+		parent::beforeFilter($event);
+		$session = $this->request->session();
+		echo $session->read('User.admin');
+		echo "TEEEEEEEEEEEEEEEEEEEEEEEE";
+         if($session->read('User.admin') != '1')
+					return $this->redirect(
+        array('controller' => 'users', 'action' => 'dashboard')
+    );
+    }
 
 }
 

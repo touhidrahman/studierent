@@ -195,11 +195,17 @@ class UsersController extends AppController
 						'password' => (new DefaultPasswordHasher)->hash($this->request->data('password'))
 					]);
 				}
+				$session = $this->request->session();
 				if($user['status']==9)
                 {
+					
+					$session->write('User.admin', '1');
                     return $this->redirect(['controller' => 'users','action' => 'admin']);
 
-                     }
+                }
+				else
+					$session->write('User.admin', '0');
+                    
 
 				return $this->redirect(['controller' => 'users','action' => 'dashboard']);
                     return $this->layout='default';
