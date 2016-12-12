@@ -74,30 +74,26 @@
                     <li><b>Users</b>
                         <ul>
                            
-<!--author: Ramanpreet         -->
-<?php
-                            
-                        foreach($userslist as $u){
-							if($u['status'] == 9)
-                        echo 
-						'<li>'.$this->Html->link(
-    'Admin'.'('.$u['counts'].')',
-    ['controller' => 'admin', 'action' => 'users', '_full' => true,'admin']
-).'</li>';
-  						else if($u['status'] == 1)
-							echo 
-          			'<li>'.$this->Html->link(
-    'Normal'.'('.$u['counts'].')',
-    ['controller' => 'admin', 'action' => 'users', '_full' => true,'normal']
-).'</li>';					
-else if($u['status'] == 0)
-          			'<li>'.$this->Html->link(
-    'Blocked'.'('.$u['counts'].')',
-    ['controller' => 'admin', 'action' => 'users', '_full' => true,'blocked']
-).'</li>';
-
-                            
-                        }
+<?php   /* @authors:        Ramanpreet, 
+        * switch:           Aleksandr Anfilov, 
+        * ->Html->link:     ???
+        */
+        foreach($userslist as $u){
+            switch ($u['status']){
+            case '9':
+                $status = 'Admin';
+            break;
+            
+            case '1':
+                $status = 'Normal';
+            break;
+            
+            case '0':
+                $status = 'Blocked';
+            }
+            echo '<li>'.$this->Html->link( $status.'('.$u['counts'].')',
+                        ['controller' => 'admin', 'action' => 'users', '_full' => true, strtolower($status) ]                       ).'</li>';
+        }
 ?>                           
                         </ul>
                     </li>
