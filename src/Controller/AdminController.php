@@ -16,7 +16,7 @@ class AdminController extends AppController
 
 public function index()
 {
-	/*@author Ramanpreet
+	   /* @author Ramanpreet
         * In a controller or table method.
         * select type, count(*) from properties group by type
         */
@@ -40,7 +40,7 @@ public function index()
 
             $searchQuery = TableRegistry::get('Users')
                 ->find()                // 1. Prepare a SELECT query:
-                ->select( ['id', 'last_name', 'first_name'] );
+                ->select( ['id', 'last_name', 'first_name', 'username', 'status'] );
 
             switch ($searchBy) {        // 2. Add a WHERE condition
             case 'id':
@@ -54,7 +54,7 @@ public function index()
 
             $usersFound = $searchQuery->toArray();// 3. Execute the query
 
-            if (!empty($usersFound)){
+            if (!empty($usersFound)){   //send results to  view only of they exist 
                 $this->set('usersFound', $usersFound);
             }
             else{
@@ -164,7 +164,7 @@ public function users(string $type){
 	public function initialize()
 	{
 		parent::initialize();
-		
+
         $this->viewBuilder()->layout('adminlayout');
 		
         $connection = ConnectionManager::get('default');
@@ -192,13 +192,37 @@ public function users(string $type){
 	{
 		parent::beforeFilter($event);
 		$session = $this->request->session();
-	
+
          if($session->read('User.admin') != '1')
 					return $this->redirect(
         array('controller' => 'users', 'action' => 'dashboard')
     );
+
     }
 
-}
 
-?>
+/**
+* Block or unblock the landlord.
+* @author Aleksandr Anfilov
+* @param id
+* Created:  11.12.2016
+*/
+public function changeUserStatus($id = null, $newStatus = 0) {
+    $this->request->allowMethod(['post', 'changeUserStatus']);
+      
+    if ($id > 0) {
+        $conn = ConnectionManager::get('default');
+
+        $conn->transactional(function ($conn) use ($id, $newStatus){
+        $conn->execute('UPDATE properties SET status = ? WHERE user_id = ?', [$newStatus, $id]);
+        $conn->execute('UPDATE users SET status = ? WHERE id = ?', [$newStatus, $id]);
+        });
+            
+        $this->Flash->success(__('The user status has been changed.'));
+    }   else {
+            $this->Flash->error(__('The user status has not been changed.'));}
+    return $this->redirect(['action' => 'index']);
+}
+    
+    
+}?>
