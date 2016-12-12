@@ -16,8 +16,55 @@ class AdminController extends AppController
 
 public function index()
 {
-}
+	/*@author Ramanpreet
+        * In a controller or table method.
+        * select type, count(*) from properties group by type
+        */
 
+        $connection = ConnectionManager::get('default');
+        $reports = $connection->execute('select count(id) as counts , user_id from reports group by user_id')->fetchAll('assoc');
+
+        $this->set('reports',$reports);
+        /**
+        * @author Aleksandr Anfilov
+        * Display results of search by user id or name:
+        */
+        if($this->request->is('post'))
+        {
+            $form = $this->request->data();
+            $searchBy = key($form);             // key: input name is 'id' or 'username'
+            $searchParam = $form[$searchBy];    // get input value from array by key
+
+//@source: Selecting Rows From A Table   http://book.cakephp.org/3.0/en/orm/query-builder.html
+//@ERROR: Call to a member function find() on array $this-Users->find()->select(['id', 'first_name']);
+
+            $searchQuery = TableRegistry::get('Users')
+                ->find()                // 1. Prepare a SELECT query:
+                ->select( ['id', 'last_name', 'first_name'] );
+
+            switch ($searchBy) {        // 2. Add a WHERE condition
+            case 'id':
+                $searchQuery->where(['id' => $searchParam]);
+            break;
+
+            case 'username':           //  find by username (which is an e-mail address)
+                $searchQuery->where(['username' => $searchParam]);
+            break;
+            }
+
+            $usersFound = $searchQuery->toArray();// 3. Execute the query
+
+            if (!empty($usersFound)){
+                $this->set('usersFound', $usersFound);
+            }
+            else{
+                $this->Flash->error(__('No users have been found with the ' . $searchBy . ' ' . $searchParam . '.'));
+                }
+        }
+}
+  /**
+     * @author Muneeb Noor
+     */
 public function users(string $type){
 
 	
@@ -47,7 +94,9 @@ public function users(string $type){
 
 		}
 
-
+  /**
+     * @author Muneeb Noor
+     */
 	    public function properties(string $type){
        
 			
@@ -136,6 +185,9 @@ public function users(string $type){
 		
 	}
 	
+	  /**
+     * @author Muneeb Noor
+     */
 	public function beforeFilter(\Cake\Event\Event $event)
 	{
 		parent::beforeFilter($event);
