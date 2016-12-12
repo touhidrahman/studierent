@@ -203,7 +203,8 @@ class UsersController extends AppController
 					
 					$session->write('User.admin', '1');
 					$this->set('admin',true);
-                    return $this->redirect(['controller' => 'users','action' => 'admin']);
+                    //return $this->redirect(['controller' => 'users','action' => 'admin']);
+                    return $this->redirect(['controller' => 'admin','action' => 'index']);
 
                 }
 				else
