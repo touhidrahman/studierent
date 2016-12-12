@@ -13,36 +13,40 @@ class ImagesController extends AppController
 
     /**
      * Index method
-     *
+     * @ Mythri Manjunath
      * @return \Cake\Network\Response|null
      */
-    public function index()
-    {
+    public function index($id=null)
+    { 
+      
+        $propertyTbl = TableRegistry::get('Properties');
+        $exists = $propertyTbl->exists(['id'=> $id,'user_id'=> $this->Auth->user('id')]);
+        if($exists)
+        {          
         $this->paginate = [
             'contain' => ['Properties']
         ];
-        $images = $this->paginate($this->Images);
+        $images = $this->paginate($this->Images->find()->where(['property_id' => $id]));
 
-        $this->set(compact('images'));
+        $this->set('images', $images);
         $this->set('_serialize', ['images']);
+    }
     }
 
     /**
      * View method
-     *
+     *@ Mythri Manjunath
      * @param string|null $id Image id.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
-    {
-        $image = $this->Images->get($id, [
-            'contain' => ['Properties']
-        ]);
-
+    {       
+        $image = $this->Images->get($id);
         $this->set('image', $image);
         $this->set('_serialize', ['image']);
     }
+    
 
     /**
      * Add method - This method adds properties images
@@ -118,7 +122,7 @@ class ImagesController extends AppController
 
     /**
      * Delete method
-     *
+     * @ Mythri Manjunath
      * @param string|null $id Image id.
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
@@ -127,12 +131,14 @@ class ImagesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $image = $this->Images->get($id);
-        if ($this->Images->delete($image)) {
+        $destDir = WWW_ROOT .'img'. DS .'properties'. DS;
+        if ($this->Images->delete($image)) {          
+            unlink($destDir.$image->path);
             $this->Flash->success(__('The image has been deleted.'));
         } else {
             $this->Flash->error(__('The image could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'index',$image->property_id]);
     }
 }

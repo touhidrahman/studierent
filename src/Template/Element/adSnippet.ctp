@@ -15,7 +15,7 @@
             <div class="col-sm-3">
                 <?php
                 if ($property['images']) {
-                    echo $this->Html->image('properties'.DS.$property['images'][0]->path, ['alt' => 'Property image', 'class' => 'rounded-left img-fluid']);
+                    echo $this->Html->image('properties'.DS.$property['images'][0]->path, ['alt' => 'Property image', 'class' => 'rounded-left img-fluid', 'style' => 'width:100%;']);
                 } else {
                 ?>
                     <h1 class="display-1 text-xs-center text-success"><i class="fa fa-home fa-lg"></i></h1>

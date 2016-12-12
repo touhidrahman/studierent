@@ -19,12 +19,11 @@ class ImagesControllerTest extends IntegrationTestCase
         'app.images',
         'app.properties',
         'app.zips',
-        'app.favorite_properties',
-        'app.reports',
-        'app.users',
         'app.cities',
+        'app.favorite_properties',
+        'app.users',
         'app.feedbacks',
-        'app.users_properties'
+        'app.reports'
     ];
 
     /**
