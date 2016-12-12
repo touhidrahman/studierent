@@ -25,7 +25,7 @@
                 <div class="dropdown-menu" aria-labelledby="responsiveNavbarDropdown">
                     <?php
                         if ($adminLoggedIn) {
-                            echo $this->Html->link(__('Admin Dashboard'), ['controller' => 'users', 'action' => 'admin'], ['class' => 'dropdown-item']);
+                            echo $this->Html->link(__('Admin Dashboard'), ['controller' => 'admin', 'action' => 'index'], ['class' => 'dropdown-item']);
                         }
                     ?>
                     <?= $this->Html->link(__('Dashboard'), ['controller' => 'users', 'action' => 'dashboard'], ['class' => 'dropdown-item']); ?>
