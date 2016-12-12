@@ -292,7 +292,9 @@ class UsersController extends AppController
         $users = $connection->execute('select count(id) as counts , status from users group by status')->fetchAll('assoc');
         //$users = $connection->execute('select count(id) as counts , status,roles from users left join roles on users.status=roles.id group by status')->fetchAll('assoc');
         $this->set('users', $users);
+        $reports = $connection->execute('select count(id) as counts , user_id from reports group by user_id')->fetchAll('assoc');
 
+        $this->set('reports',$reports);
         /**
         * @author Aleksandr Anfilov
         * Display results of search by user id or name:
@@ -366,11 +368,7 @@ class UsersController extends AppController
     }
         }
     }
-    public function forgotindex()
-            {
-
-            }
-
+  
 
     public function activation()  { }
 

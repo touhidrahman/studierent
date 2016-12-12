@@ -41,7 +41,18 @@
                             <li><a href="#">Landlord(7)</a></li>
                         </ul>
                     </li>
+                    <li><b>Reported Abuse</b>
+                        <ul>
+                            <?php
 
+                        foreach($reports as $r){
+                            echo
+                            '<li><a href="#">' . $r['user_id'] . '(' .$r['counts'] . ')' .'</a></li>';
+
+                        }
+?>
+                        </ul>
+                    </li>
                 </ul>
             </form>
             </p>
