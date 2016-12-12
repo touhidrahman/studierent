@@ -404,6 +404,22 @@ class UsersController extends AppController
     }
   
 
+	public function makeAdmin($id = null)
+	{
+        $this->request->allowMethod(['post', 'makeAdmin']);
+        $user = $this->Users->get($id);
+        $user->status = 9;
+		
+		if ($this->Users->save($user)) {
+            $this->Flash->success(__('The user has been added as an admin.'));
+        } else {
+            $this->Flash->error(__('The user could not be added as an admin. Please, try again.'));
+        }
+		
+		return $this->redirect($this->referer());
+    
+	
+	}
     public function activation()  { }
 
 
