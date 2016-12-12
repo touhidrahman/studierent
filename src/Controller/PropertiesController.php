@@ -279,6 +279,20 @@ class PropertiesController extends AppController
                 return $exp->gte('available_until', new Date($this->request->query('avalTo')));
             });
         }
+        // search based on landlord rating
+        if ($qs['rating']) {
+            $query->where(function($exp){
+                $avgRatingsTbl = TableRegistry::get('AvgRatings');
+                $qualifiedUsersRaw = $avgRatingsTbl->find()
+                    ->select(['user_id'])
+                    ->where(['avg_rate >=' => $this->request->query('rating')]);
+                $qualifiedLandlords = [];
+                foreach ($qualifiedUsersRaw as $usr) {
+                    $qualifiedLandlords[] = $usr->user_id;
+                }
+                return $exp->in('user_id', $qualifiedLandlords);
+            });
+        }
         // prepare sort by
         switch ($qs['sortby']) {
             case 'rentUp':
