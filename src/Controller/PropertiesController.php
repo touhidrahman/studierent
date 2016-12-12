@@ -190,7 +190,7 @@ class PropertiesController extends AppController
             }
         }
 
-        return $this->redirect(['action' => 'myproperties']);
+        return $this->redirect($this->referer());
     }
 
 
