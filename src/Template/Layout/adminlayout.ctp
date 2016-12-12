@@ -117,12 +117,18 @@
     'Admin'.'('.$u['counts'].')',
     ['controller' => 'admin', 'action' => 'users', '_full' => true,'admin']
 ).'</li>';
-  						else
+  						else if($u['status'] == 1)
 							echo 
           			'<li>'.$this->Html->link(
     'Normal'.'('.$u['counts'].')',
     ['controller' => 'admin', 'action' => 'users', '_full' => true,'normal']
 ).'</li>';					
+else if($u['status'] == 0)
+          			'<li>'.$this->Html->link(
+    'Blocked'.'('.$u['counts'].')',
+    ['controller' => 'admin', 'action' => 'users', '_full' => true,'blocked']
+).'</li>';
+
                             
                         }
 ?>                           
