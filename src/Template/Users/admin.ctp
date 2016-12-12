@@ -114,8 +114,7 @@
                     'width'  => "100px",
                     "alt"    => "user photo"
                     ]);
-                    echo h($u->first_name).' '.h($u->last_name);
-                        . ' || email: ' . h($u->username);
+                    echo h($u->first_name).' '.h($u->last_name). ' || email: ' . h($u->username);
                 ?>
                     <span class="pull-right">
                         <button class="btn btn-primary" type="submit">Block</button>
