@@ -88,12 +88,15 @@ class UsersController extends AppController
     {
         $user='';
         if ($this->request->is('post')) {
-            if(!empty($this->request->data['photo']['name'])){
+            if(!empty($this->request->data['photo']['name'])){            
                 $fileName = $this->request->data['photo']['name'];
-                if(move_uploaded_file($this->request->data['photo']['tmp_name'],WWW_ROOT . 'img' . DS . 'users' . DS .$fileName)){
+                $extention = pathinfo($fileName,PATHINFO_EXTENSION);                
+                $newfileName=$id.'.'.$extention;
+                $destDir = WWW_ROOT .'img'. DS .'users'. DS . $newfileName;
+                if(move_uploaded_file($this->request->data['photo']['tmp_name'],$destDir)){
                    if (!$id) $id = $this->Auth->user('id');
                     $user = $this->Users->get($id);
-                    $user->photo = $fileName;
+                    $user->photo = $newfileName;
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('Image has been uploaded and inserted successfully.'));
                         return $this->redirect([
