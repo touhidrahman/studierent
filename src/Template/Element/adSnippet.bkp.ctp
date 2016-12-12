@@ -33,20 +33,11 @@
                     </div>
                     <div class="text-info float-xs-right">
                         Landlord Rating
-                        <?php
-                        foreach ($avgRatings as $value) {
-                            if ($value->user_id == $property['user_id']) {
-                                $filledStar = ceil($value->avg_rate);
-                                $hollowStar = 5 - $filledStar;
-                                for ($i=0; $i < $filledStar; $i++) {
-                                    echo '<i class="fa fa-star"></i>';
-                                }
-                                for ($i=0; $i < $hollowStar; $i++) {
-                                    echo '<i class="fa fa-star-o"></i>';
-                                }
-                            }
-                        }
-                        ?>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
                     </div>
                 </div>
 

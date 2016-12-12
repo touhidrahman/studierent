@@ -154,6 +154,7 @@
 		<div class="card-header">
 			<i class="fa fa-user"></i> Landlord Info
 		</div>
+
 		<table class="table">
 			<tbody>
 				<tr>
@@ -171,39 +172,50 @@
 				<tr>
 					<th>Rating: </th>
 					<td>
-						<?php if( $feedback->rate==0){ ?>
-							<p>Not Rated yet</p>
-							<?php }else{    ?>
-								<a href="#">
-									<?php
-									For($i=0;$i<$feedback->rate;$i++){?>
-										<i class="fa fa-star"></i>
-										<?php	}  ?>
-									</a>
-									<?php  } ?>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+						<?php
+						$avgRatingCount = 0;
+						foreach ($avgRating as $avg) {
+							$avgRatingCount = $avg->avg_rate;
+							if ($avg->user_id == $property['user_id']) {
+								if( $avg->avg_rate==0){ ?>
+								<p>Not Rated yet</p>
+								<?php
+								} else {
+	                                $filledStar = ceil($avg->avg_rate);
+	                                $hollowStar = 5 - $filledStar;
+	                                for ($i=0; $i < $filledStar; $i++) {
+	                                    echo '<i class="fa fa-star text-info"></i>';
+	                                }
+	                                for ($i=0; $i < $hollowStar; $i++) {
+	                                    echo '<i class="fa fa-star-o text-info"></i>';
+	                                }
+	                            }
+							}
+						}
+		                ?>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 
-					<div class="card-block">
-						<p class="text-success">Recent Reviews:</p>
-						<blockquote class="card-blockquote">
-							<?php if( $feedback->rate==0){ ?>
-								<p>Not Review yet</p>
-								<?php }else{  ?>
-									<p> <?php echo $feedback->text; ?></p>
+		<div class="card-block">
+			<p class="text-success">Recent Reviews:</p>
+			<blockquote class="card-blockquote">
+				<?php if( $avgRatingCount==0){ ?>
+					<p>No Review So Far</p>
+					<?php }else{  ?>
+						<p> <?php echo $feedback->text; ?></p>
 
-									<?php  }?>
+						<?php  }?>
 
-								</blockquote>
-							</div>
-							<div class="card-block">
-								<?= $this->Html->link('Landlord Profile', '/users/view/'.$property->user->id, ['class' => 'btn btn-success']) ?>
-								<?= $this->Html->link('Submit Review', '/users/view/'.$property->user->id, ['class' => 'btn btn-warning']) ?>
-							</div>
-						</div>
-					</div>
-
-
+					</blockquote>
 				</div>
+				<div class="card-block">
+					<?= $this->Html->link('Landlord Profile', '/users/view/'.$property->user->id, ['class' => 'btn btn-success']) ?>
+					<?= $this->Html->link('Submit Review', '/users/view/'.$property->user->id, ['class' => 'btn btn-warning']) ?>
+				</div>
+			</div>
+		</div>
+
+
+</div>

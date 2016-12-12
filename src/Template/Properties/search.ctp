@@ -1,4 +1,3 @@
-
 <div class="row">
     <!-- Filter Sidebar -->
     <div class="col-md-3 col-sm-4 col-xs-12">
@@ -192,9 +191,9 @@
 
         <h1 class="display-4"><?= $count ?> Properties Found</h1>
         <?php foreach ($properties as $property){
-            echo $this->element('adSnippet', ['property' => $property]);
+            echo $this->element('adSnippet', ['property' => $property, 'avgRatings' => $avgRatings]);
         } ?>
-        
+
         <div class="text-xs-center">
             <?php echo $this->Paginator->prev('<<'); ?>
             <?php echo $this->Paginator->numbers(); ?>

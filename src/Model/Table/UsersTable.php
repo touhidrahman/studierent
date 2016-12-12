@@ -60,6 +60,9 @@ class UsersTable extends Table
         //     'targetForeignKey' => 'property_id',
         //     'joinTable' => 'users_properties'
         // ]);
+        $this->hasOne('AvgRatings', [
+            'foreignKey' => 'user_id',
+        ]);
     }
 
     /**
