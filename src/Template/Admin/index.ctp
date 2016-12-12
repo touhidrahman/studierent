@@ -47,13 +47,13 @@
         <?php   switch ($u->status) {
                 case '0':       // landlord is blocked
                     echo $this->Form->postLink( __('Unblock'), 
-                    ['action' => 'adminUserStatus', $u->id, 1],
+                    ['action' => 'changeUserStatus', $u->id, 1],
                     ['confirm' => __('Unblock the Landlord # {0}?', $u->id)] ); 
                 break;
 
                 case '1':       // landlord is active
                     echo $this->Form->postLink( __('Block'), 
-                    ['action' => 'adminUserStatus', $u->id, 0],
+                    ['action' => 'changeUserStatus', $u->id, 0],
                     ['confirm' => __('Are you sure you want to block the Landlord # {0}?', $u->id)] ); 
                 break;
                 }
