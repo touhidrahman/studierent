@@ -58,7 +58,7 @@ class AdminController extends AppController
 	}
 
 
-	
+
   /**
      * @author Muneeb Noor
      */
@@ -180,6 +180,12 @@ public function users(string $type){
 		$recentPropertiesCount = $newProperties->count();
 		$this->set('recentPropertiesCount',$recentPropertiesCount);
 
+      /**
+       * @author Touhidur Rahman
+       */
+       $reportsTbl = TableRegistry::get('Reports');
+       $reportsCount = $reportsTbl->find('all')->count();
+       $this->set(compact('reportsCount'));
 	}
 
 	  /**
@@ -222,4 +228,43 @@ public function changeUserStatus($id = null, $newStatus = 0) {
 }
 
 
-}?>
+	/**
+	 * Reports index method
+	 * @author Touhidur Rahman
+	 * @return \Cake\Network\Response|null
+	 */
+	public function reports()
+	{
+		$this->loadModel('Reports');
+      $results = $this->Reports->find('all')->contain(['Users', 'Properties']);
+
+		$reports = $this->paginate($results);
+
+		$this->set(compact('reports'));
+		$this->set('_serialize', ['reports']);
+	}
+
+	/**
+	 * View report, Only admin can view
+	 *
+	 * @param string|null $id Report id.
+	 * @return \Cake\Network\Response|null
+	 * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+	 * @author Alexandr Anfilov
+	 */
+	public function viewReport($id = null)
+	{
+		$this->loadModel('Reports');
+		if ($this->Auth->user('status') != 9) {
+			return $this->$this->redirect(['controller' => 'properties', 'action' => 'search']);
+		}
+		$report = $this->Reports->get($id, [
+			'contain' => ['Users', 'Properties']
+		]);
+		$this->set('report', $report);
+		$this->set('_serialize', ['report']);
+	}
+
+
+}
+?>

@@ -51,7 +51,7 @@
 						<?php
                         echo
 				'<li>'.$this->Html->link(
-    'Recently Added'.'('.$recentPropertiesCount.')',
+    'Recently Added'.' ('.$recentPropertiesCount.')',
     ['controller' => 'admin', 'action' => 'properties', '_full' => true,'recent']
 ).'</li>';
 						?>
@@ -62,7 +62,7 @@
                         foreach($results as $r){
                             echo
 				'<li>'.$this->Html->link(
-    $r['type'].'('.$r['counts'].')',
+    $r['type'].' ('.$r['counts'].')',
     ['controller' => 'admin', 'action' => 'properties', '_full' => true,str_replace(' ', '_',strtolower($r['type']))]
 ).'</li>';
                         }
@@ -91,7 +91,7 @@
             case '0':
                 $status = 'Blocked';
             }
-            echo '<li>'.$this->Html->link( $status.'('.$u['counts'].')',
+            echo '<li>'.$this->Html->link( $status.' ('.$u['counts'].')',
                         ['controller' => 'admin', 'action' => 'users', '_full' => true, strtolower($status) ]                       ).'</li>';
         }
 ?>
@@ -100,8 +100,7 @@
 <!-- Links updated by Touhid -->
                     <li><b>Reports</b>
                         <ul>
-                            <li><?= $this->Html->link(__('Resolved'), ['controller' => 'reports', 'action' => 'index']); ?></li>
-                            <li><?= $this->Html->link(__('Un-Resolved'), ['controller' => 'reports', 'action' => 'index']); ?></li>
+                            <li><?= $this->Html->link(__('Total').' ('. $reportsCount .')', ['action' => 'reports']); ?></li>
                         </ul>
                     </li>
 

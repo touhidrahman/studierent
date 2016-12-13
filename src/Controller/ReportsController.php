@@ -13,39 +13,6 @@ class ReportsController extends AppController
 {
 
     /**
-     * Index method
-     *
-     * @return \Cake\Network\Response|null
-     */
-    public function index()
-    {
-        $reports = $this->paginate($this->Reports);
-
-        $this->set(compact('reports'));
-        $this->set('_serialize', ['reports']);
-    }
-
-    /**
-     * View method, Only admin can view
-     *
-     * @param string|null $id Report id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     * @author Alexandr Anfilov
-     */
-    public function view($id = null)
-    {
-        if ($this->Auth->user('status') != 9) {
-            return $this->$this->redirect(['controller' => 'properties', 'action' => 'search']);
-        }
-        $report = $this->Reports->get($id, [
-            'contain' => ['Users', 'Properties']
-        ]);
-        $this->set('report', $report);
-        $this->set('_serialize', ['report']);
-    }
-
-    /**
      * Add method
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
