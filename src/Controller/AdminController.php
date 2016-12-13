@@ -70,7 +70,7 @@ public function users(string $type){
 	
 		
 		$users = TableRegistry::get('Users');
-		
+		$this->set('type',$type);
 		if($type == 'normal') //show admins
  		{
 			
