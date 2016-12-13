@@ -193,6 +193,7 @@ class UsersController extends AppController
 	}
 
 
+
     /**
      * @author Muneeb Noor
      */
@@ -224,25 +225,27 @@ class UsersController extends AppController
 
 					$session->write('User.admin', '1');
 					$this->set('admin',true);
-                    //return $this->redirect(['controller' => 'users','action' => 'admin']);
                     return $this->redirect(['controller' => 'admin','action' => 'index']);
 
                 }
-				else
-					$session->write('User.admin', '0');
+				else {
+                    $session->write('User.admin', '0');
+                    return $this->redirect(['controller' => 'users','action' => 'dashboard']);
+                }
 
+			} else if ($user['status'] == 0) {
+                $this->Flash->error('Account is not activated yet!');
+                return $this->redirect(['controller' => 'users','action' => 'activation']);
+            } else {
 
-				return $this->redirect(['controller' => 'users','action' => 'dashboard']);
-                    return $this->layout='default';
-
-			}else{
-                         $this->Flash->error('Username or password is incorrect');
-                        }
-
-
+                $this->Flash->error('Username or password is incorrect');
+            }
 
 		}
+        // $this->viewBuilder()->layout('default');
 	}
+
+
 
     /**
      * @author Muneeb Noor
@@ -323,20 +326,7 @@ class UsersController extends AppController
 
         $this->set('reports',$reports);
     }
-/**
-* @author Aleksandr Anfilov
-* Display results of search by user id or name:
-* Moved the code to AdminController::index()
-*/
 
-
-/**
-* @author Aleksandr Anfilov
-* Block or unblock the landlord.
-* @param id
-* Created:  11.12.2016
-* Moved the code to AdminController::changeUserStatus()
-*/
 
 
     /**
@@ -361,10 +351,11 @@ class UsersController extends AppController
                 // generate a hashed code for user verification
                 $resetCode = substr(md5(rand(999,999999)) , 0 , 8);
                 $user->reset_key = $resetCode;
-                // $user->reset_key = $resetCode;
+                $user->status = 0;
                 if ($this->Users->save($user)) {
                     // in ideal case, we should be sending email. but for now we are displaying that code
-                    $this->Flash->success('Password change request received. Please check your email for reset code. <br>'.$resetCode);
+                    $this->Flash->success('Password change request received. Please check your email for reset code.');
+                    $this->Flash->error($resetCode);
                     return $this->redirect(['controller' => 'users','action' => 'activation']);
 
                 }
