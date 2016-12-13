@@ -24,7 +24,7 @@ class UsersController extends AppController
 		parent::initialize();
         $session = $this->request->session();
 
-		$this->Auth->allow(['logout', 'register', 'forgotPassword', 'activation']);
+		$this->Auth->allow(['logout', 'register', 'forgotPassword', 'activation', 'resetPasswords']);
 	}
 
 
@@ -408,7 +408,6 @@ class UsersController extends AppController
                 // code verified, let user change password
                 $session = $this->request->session();
                 $session->write('User.tmp', $user->id);
-                $this->Flash->success('Password change request received. Please check your email for reset code.');
                 return $this->redirect(['controller' => 'users','action' => 'resetPassword']);
             }
         }
@@ -440,7 +439,7 @@ class UsersController extends AppController
 
 
 
-                
+
                 $this->Flash->success('Password changed! You can login now.');
                 return $this->redirect(['controller' => 'users','action' => 'resetPassword']);
             }
