@@ -322,6 +322,7 @@ class UsersController extends AppController
         $reports = $connection->execute('select count(id) as counts , user_id from reports group by user_id')->fetchAll('assoc');
 
         $this->set('reports',$reports);
+    }
 /**
 * @author Aleksandr Anfilov
 * Display results of search by user id or name:
