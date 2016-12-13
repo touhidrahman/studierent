@@ -304,8 +304,7 @@ class UsersController extends AppController
 
     /**
      * Display Admin dashboard after login
-     * @author Ramanpreet,
-     * @author Aleksandr Anfilov
+     * @author Ramanpreet Kaur
      */
     public function admin(){
         /*@author Ramanpreet
@@ -318,77 +317,25 @@ class UsersController extends AppController
 
         $this->set('results',$results);
         $users = $connection->execute('select count(id) as counts , status from users group by status')->fetchAll('assoc');
-        //$users = $connection->execute('select count(id) as counts , status,roles from users left join roles on users.status=roles.id group by status')->fetchAll('assoc');
+
         $this->set('users', $users);
         $reports = $connection->execute('select count(id) as counts , user_id from reports group by user_id')->fetchAll('assoc');
 
         $this->set('reports',$reports);
-        /**
-        * @author Aleksandr Anfilov
-        * Display results of search by user id or name:
-        */
-        if($this->request->is('post'))
-        {
-            $form = $this->request->data();
-            //$form = Sanitize::clean($this->request->data(), array('encode' => false));
-            $searchBy = key($form);             // key: input name is 'id' or 'username'
-
-            $searchParam = $form[$searchBy];    // get input value from array by key
-
-//@source: Selecting Rows From A Table   http://book.cakephp.org/3.0/en/orm/query-builder.html
-//@ERROR: Call to a member function find() on array $this-Users->find()->select(['id', 'first_name']);
-
-            $searchQuery = TableRegistry::get('Users')
-                ->find()                // 1. Prepare a SELECT query:
-                ->select( ['id', 'last_name', 'first_name', 'username', 'status'] );
-
-            switch ($searchBy) {        // 2. Add a WHERE condition
-            case 'id':
-                $searchQuery->where(['id' => $searchParam]);
-            break;
-
-            case 'username':            //  find by username (which is an e-mail address)
-                $searchQuery->where(['username' => $searchParam]);
-            break;
-            }
-
-            $usersFound = $searchQuery->toArray();// 3. Execute the query
-
-            if (!empty($usersFound)){   //send results to  view only of they exist
-                $this->set('usersFound', $usersFound);
-            }
-            else{
-                $this->Flash->error(__('No users have been found with the ' . $searchBy . ' ' . $searchParam . '.'));
-                }
-        }
-    }
+/**
+* @author Aleksandr Anfilov
+* Display results of search by user id or name:
+* Moved the code to AdminController::index()
+*/
 
 
-
-    /**
-    * @author Aleksandr Anfilov
-    * Block or unblock the landlord.
-    * @param id
-    * Created:  11.12.2016
-    */
-    public function adminUserStatus($id = null, $newStatus = 0) {
-        $this->request->allowMethod(['post', 'adminUserStatus']);
-
-        if ($id > 0) {
-            $conn = ConnectionManager::get('default');
-
-            $conn->transactional(function ($conn) use ($id, $newStatus){
-            $conn->execute('UPDATE properties SET status = ? WHERE user_id = ?', [$newStatus, $id]);
-            $conn->execute('UPDATE users SET status = ? WHERE id = ?', [$newStatus, $id]);
-            });
-
-            $this->Flash->success(__('The user status has been changed.'));
-        }   else {
-                $this->Flash->error(__('The user status has not been changed.'));}
-    return $this->redirect(['action' => 'admin']);
-    }
-
-
+/**
+* @author Aleksandr Anfilov
+* Block or unblock the landlord.
+* @param id
+* Created:  11.12.2016
+* Moved the code to AdminController::changeUserStatus()
+*/
 
 
     /**
