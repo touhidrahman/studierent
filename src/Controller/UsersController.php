@@ -149,9 +149,7 @@ class UsersController extends AppController
     {
 		if (!$id) $id = $this->Auth->user('id');
 
-        $user = $this->Users->get($id, [
-            'contain' => ['Properties']
-        ]);
+        $user = $this->Users->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
@@ -162,8 +160,7 @@ class UsersController extends AppController
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
         }
-        $cities = $this->Users->Cities->find('list', ['limit' => 200]);
-        $properties = $this->Users->Properties->find('list', ['limit' => 200]);
+        $this->viewBuilder()->layout('userdash');
         $this->set(compact('user', 'cities', 'properties'));
         $this->set('_serialize', ['user']);
     }

@@ -1,7 +1,7 @@
 <!-- Results -->
-<div class="col-md-9 col-sm-8 col-xs-12">
-     <h3><?= __('Users') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+<div class="">
+    <h3><?= __('Users') ?></h3>
+    <table class="table table-striped table-sm">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
@@ -26,13 +26,13 @@
                     <?= $this->Html->link(__('View'), ['controller'=>'Users','action' => 'view', $user->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller'=>'Users','action' => 'edit', $user->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['controller'=>'Users','action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
-				    
-					  
-					<?php 
+
+
+					<?php
 					if ($type !='admin')
 					{
 					?>
-					
+
 				<?=	$this->Form->postLink(__('Make Admin'), ['controller'=>'Users','action' => 'makeAdmin', $user->id], ['confirm' => __('Are you sure you want to make admin # {0}?', $user->id)]); ?>
 				<?php } ?>
 				</td>
@@ -40,13 +40,13 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
+    <div class="paginator text-xs-center">
         <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->prev('< ' . __('<')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
+            <?= $this->Paginator->next(__('>') . ' >') ?>
         </ul>
-        <p><?= $this->Paginator->counter() ?></p>
+        <p class="text-xs-center"><?= $this->Paginator->counter() ?></p>
     </div>
 <!-- end results! -->
 </div>

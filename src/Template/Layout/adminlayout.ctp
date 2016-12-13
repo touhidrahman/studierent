@@ -53,29 +53,29 @@
 				'<li>'.$this->Html->link(
     'Recently Added'.'('.$recentPropertiesCount.')',
     ['controller' => 'admin', 'action' => 'properties', '_full' => true,'recent']
-).'</li>';						
+).'</li>';
 						?>
 <!--author: Ramanpreet         -->
 <!-- Modifications by Muneeb to display dynamic links -->
-						
+
 <?php
                         foreach($results as $r){
                             echo
 				'<li>'.$this->Html->link(
     $r['type'].'('.$r['counts'].')',
     ['controller' => 'admin', 'action' => 'properties', '_full' => true,str_replace(' ', '_',strtolower($r['type']))]
-).'</li>';							
+).'</li>';
                         }
 ?>
 
                         </ul>
                     </li>
-                    
+
                     <li><b>Users</b>
                         <ul>
-                           
-<?php   /* @authors:        Ramanpreet, 
-        * switch:           Aleksandr Anfilov, 
+
+<?php   /* @authors:        Ramanpreet,
+        * switch:           Aleksandr Anfilov,
         * ->Html->link:     ???
         */
         foreach($userslist as $u){
@@ -83,27 +83,27 @@
             case '9':
                 $status = 'Admin';
             break;
-            
+
             case '1':
                 $status = 'Normal';
             break;
-            
+
             case '0':
                 $status = 'Blocked';
             }
             echo '<li>'.$this->Html->link( $status.'('.$u['counts'].')',
                         ['controller' => 'admin', 'action' => 'users', '_full' => true, strtolower($status) ]                       ).'</li>';
         }
-?>                           
+?>
                         </ul>
                     </li>
-                    
+
                     <li><b>Reviews</b>
                         <ul>
                             <li><a href="#">Landlord(7)</a></li>
                         </ul>
                     </li>
-                    
+
                     <li><b>My Account</b>
                         <ul>
                             <li><a href="admin.html">Dashboard</a></li>
@@ -119,13 +119,14 @@
     </div>
 </div>
 <!-- end sidebar --
-		
+
 <!-- Results -->
 
-		
+		<div class="col-md-9 col-sm-8 col-xs-12">
 		<!-- CONTENT -->
 		<?= $this->fetch('content') ?>
 		<!-- END CONTENT -->
+		</div>
 	</div>
 
 
