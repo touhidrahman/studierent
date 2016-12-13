@@ -97,18 +97,19 @@
 ?>
                         </ul>
                     </li>
-
-                    <li><b>Reviews</b>
+<!-- Links updated by Touhid -->
+                    <li><b>Reports</b>
                         <ul>
-                            <li><a href="#">Landlord(7)</a></li>
+                            <li><?= $this->Html->link(__('Resolved'), ['controller' => 'reports', 'action' => 'index']); ?></li>
+                            <li><?= $this->Html->link(__('Un-Resolved'), ['controller' => 'reports', 'action' => 'index']); ?></li>
                         </ul>
                     </li>
 
                     <li><b>My Account</b>
                         <ul>
-                            <li><a href="admin.html">Dashboard</a></li>
-                            <li><a href="user-profile.html">My Profile</a></li>
-                            <li><a href="index.html">Logout</a></li>
+                            <li><?= $this->Html->link(__('Dashboard'), ['controller' => 'users', 'action' => 'dashboard']); ?></li>
+                            <li><?= $this->Html->link(__('My Profile'), ['controller' => 'users', 'action' => 'view']); ?></li>
+                            <li><?= $this->Html->link(__('Logout'), ['controller' => 'users', 'action' => 'logout']); ?></li>
                         </ul>
                     </li>
                 </ul>
@@ -118,7 +119,7 @@
         </div>
     </div>
 </div>
-<!-- end sidebar --
+<!-- end sidebar -->
 
 <!-- Results -->
 
@@ -127,7 +128,7 @@
 		<?= $this->fetch('content') ?>
 		<!-- END CONTENT -->
 		</div>
-	</div>
+</div>
 
 
 	<footer>

@@ -31,16 +31,16 @@ class ReportsController extends AppController
      * @param string|null $id Report id.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     * @author Touhidur Rahman
+     * @author Alexandr Anfilov
      */
     public function view($id = null)
     {
-        if ($this->Auth->user('status') == 9) {
-            $report = $this->Reports->get($id, [
-                'contain' => []
-            ]);
+        if ($this->Auth->user('status') != 9) {
+            return $this->$this->redirect(['controller' => 'properties', 'action' => 'search']);
         }
-
+        $report = $this->Reports->get($id, [
+            'contain' => ['Users', 'Properties']
+        ]);
         $this->set('report', $report);
         $this->set('_serialize', ['report']);
     }
@@ -100,4 +100,6 @@ class ReportsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+
 }
