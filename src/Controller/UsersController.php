@@ -349,22 +349,23 @@ class UsersController extends AppController
         {
             $data= $this->request->data();
 
-            $user = $this->Users->findByUsername($data['username']);
+            $user = $this->Users->find()->where(['username' => $data['username']])->first();
             // no user is available with this email
             if (!($user->toArray()))
             {
                 $this->Flash->error('We did not find any user with that email address!');
-                return $this->redirect(['controller' => 'users','action' => 'forgotpassword']);
+                return $this->redirect(['controller' => 'users','action' => 'forgotPassword']);
             }
             else
             {
                 // generate a hashed code for user verification
                 $resetCode = substr(md5(rand(999,999999)) , 0 , 8);
                 $user->reset_key = $resetCode;
+                // $user->reset_key = $resetCode;
                 if ($this->Users->save($user)) {
                     // in ideal case, we should be sending email. but for now we are displaying that code
                     $this->Flash->success('Password change request received. Please check your email for reset code. <br>'.$resetCode);
-                    return $this->redirect(['controller' => 'Users','action' => 'login']);
+                    return $this->redirect(['controller' => 'users','action' => 'activation']);
 
                 }
             }

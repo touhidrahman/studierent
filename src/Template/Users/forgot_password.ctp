@@ -16,7 +16,7 @@
             ?>
             </p>
                 <?= $this->Form->create() ?>
-                <?= $this->Form->input('email', ['label' => 'Your Email']); ?>
+                <?= $this->Form->input('username', ['label' => 'Your Email']); ?>
                 <?= $this->Form->submit('Submit',array('class'=>'btn btn-success')); ?>
                 <?= $this->Form->end(); ?>
         </div>
