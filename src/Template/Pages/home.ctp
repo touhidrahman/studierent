@@ -1,6 +1,7 @@
 <!-- HOMEPAGE -->
-
-<img src="/studierent/img/fulda.jpg" alt="Welcome image" class="img-fluid img-thumbnail rounded mx-auto d-block uptop spacewide">
+<div class="">
+  <img src="/studierent/img/fulda.jpg" alt="Welcome image" class="img-fluid rounded" style="width:100%">
+</div>
 <div class="jumbotron text-xs-center" style="background-color: #ffffff">
     <h1 class="display-3">Hello, Students!</h1>
     <p class="lead">Finding a comfy accomodation so that your studies go on flawless - is hard! To make your life easier, we are HERE!</p>
