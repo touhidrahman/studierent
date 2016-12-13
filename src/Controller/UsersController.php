@@ -386,7 +386,66 @@ class UsersController extends AppController
 
 
 	}
-    public function activation()  { }
+
+
+
+    /**
+     * GET: displays code entry form
+     * POST: check code and redirect to change password
+     * @author Touhidur Rahman
+     */
+    public function activation()  {
+        if($this->request->is('post')) {
+            $data= $this->request->data();
+
+            $user = $this->Users->find()->where(['reset_key' => $data['reset_key']])->first();
+            // no user is available with this code
+            if (!($user->toArray()))
+            {
+                $this->Flash->error('Oops! Are you sure about the code?');
+                return $this->redirect(['controller' => 'users','action' => 'forgotPassword']);
+            } else {
+                // code verified, let user change password
+                $session = $this->request->session();
+                $session->write('User.tmp', $user->id);
+                $this->Flash->success('Password change request received. Please check your email for reset code.');
+                return $this->redirect(['controller' => 'users','action' => 'resetPassword']);
+            }
+        }
+    }
+
+
+
+
+    /**
+     * GET: displays password entry form
+     * POST: check password and save to db
+     * @author Touhidur Rahman
+     */
+    public function resetPassword()  {
+        if($this->request->is('post')) {
+            $session = $this->request->session();
+            $id = $session->read('User.tmp');
+            $data = $this->request->data();
+
+            $user = $this->Users->get($id);
+            // no user is available
+            if (!($user->toArray())) {
+                $this->Flash->error('What a Terrible Failure! Please try again.');
+            } else {
+                // change password
+                // TODO:
+
+
+
+
+
+                
+                $this->Flash->success('Password changed! You can login now.');
+                return $this->redirect(['controller' => 'users','action' => 'resetPassword']);
+            }
+        }
+    }
 
 
 
