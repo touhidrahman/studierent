@@ -8,11 +8,8 @@
        	<div class="col-md-2 col-sm-12 col-xs-12"></div>
 <div class="col-md-8 col-sm-8 col-xs-12" style="padding-top:20px;">
 
-			<?= $this->Form->create($user,['type' => 'file']); ?>
-
-
-
                 <h2 style="text-align:center; margin-left:12%;">Edit Profile!</h2>
+
                 <div class="form-group row" style="padding-top:20px;">
 
 					<label for="firstName" class="col-xs-3 col-form-label">First Name</label>
@@ -59,15 +56,14 @@
                     </div><span id="confirmMessage" class="confirmMessage"></span>
                 </div>
 
-                   </fieldset>
-	 <div class="form-group row">
-                    <div class="col-md-5 col-sm-3"></div>
-					<div class="col-md-3 col-sm-9 ">
-					<?php echo $this->Form->button(__('Submit'), ['type'=>'submit','class' => 'btn btn-success']); ?>
-					<?= $this->Form->end() ?>
+                <div class="form-group row">
+                    <div class="col-sm-9 offset-xs-3">
+                        <?php echo $this->Form->button(__('Submit'), ['type'=>'submit','class' => 'btn btn-success']); ?>
+                <?= $this->Html->link('Upload Profile Photo', ['action' => 'add'], ['class' => 'btn btn-warning']); ?>
+                        <?= $this->Form->end() ?>
                     </div>
-
                 </div>
+                   </fieldset>
 
 </div>
 
@@ -104,4 +100,3 @@
  }
  }
  </script>
-

@@ -103,17 +103,17 @@ class UsersController extends AppController
 
     /**
      * Add method - upload user profile image
-     *@Mythri Manjunath 
-     *@param integer $id user_id.    
+     * @author Mythri Manjunath
+     * @param integer $id user_id.
      */
-    public function add($id=null)
+    public function add()
     {
-        $user='';
-        //check if the request is post 
+        //check for logged in user authentication
+        $id = $this->Auth->user('id');
+        $user = '';
+        //check if the request is post
         if ($this->request->is('post')) {
-            //check for logged in user authentication
-            if (!$id) $id = $this->Auth->user('id');
-                $user = $this->Users->get($id);
+            $user = $this->Users->get($id);
                 //check if upload file is not empty
                  if(!empty($this->request->data['photo']['name'])){
                     $fileName = $this->request->data['photo']['name'];
@@ -124,7 +124,7 @@ class UsersController extends AppController
                     $newfileName=$id.'.'.$extention;
                     $destDir = WWW_ROOT .'img'. DS .'users'. DS . $newfileName;
                     //move uploded file to destination
-                    if(move_uploaded_file($this->request->data['photo']['tmp_name'],$destDir)){                  
+                    if(move_uploaded_file($this->request->data['photo']['tmp_name'],$destDir)){
                     $user->photo = $newfileName;
                     //save the uploded image in user table
                     if ($this->Users->save($user)) {
