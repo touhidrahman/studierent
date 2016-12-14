@@ -1,7 +1,7 @@
 <!-- Results -->
-<div class="properties index large-9 medium-8 columns content">
+<div class="">
     <h3><?= __('Properties') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+    <table class="table table-striped table-sm">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
@@ -33,12 +33,12 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
+    <div class="paginator text-xs-center">
         <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->prev('< ' . __('<')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
+            <?= $this->Paginator->next(__('>') . ' >') ?>
         </ul>
-        <p><?= $this->Paginator->counter() ?></p>
+        <p class="text-xs-center"><?= $this->Paginator->counter() ?></p>
     </div>
 </div>

@@ -18,6 +18,17 @@ use Cake\Utility;
  */
 class UsersController extends AppController
 {
+
+	public function initialize()
+	{
+		parent::initialize();
+        $session = $this->request->session();
+
+		$this->Auth->allow(['logout', 'register', 'forgotPassword', 'activation', 'resetPasswords']);
+	}
+
+
+
     /**
      * Index method
      *
@@ -34,6 +45,8 @@ class UsersController extends AppController
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
     }
+
+
 
     /**
      * View method
@@ -56,7 +69,7 @@ class UsersController extends AppController
         }]);
         // join images table for property images
         $query->contain(['Images']);
-        
+
         $propertyCount = $query->count();
         $properties = $query->toList();
 
@@ -79,6 +92,8 @@ class UsersController extends AppController
         $this->set('_serialize', ['user', 'properties', 'propertyCount']);
     }
 
+
+
     /**
      * Add method - add user profile image
      *@Mythri Manjunath
@@ -88,9 +103,9 @@ class UsersController extends AppController
     {
         $user='';
         if ($this->request->is('post')) {
-            if(!empty($this->request->data['photo']['name'])){            
+            if(!empty($this->request->data['photo']['name'])){
                 $fileName = $this->request->data['photo']['name'];
-                $extention = pathinfo($fileName,PATHINFO_EXTENSION);                
+                $extention = pathinfo($fileName,PATHINFO_EXTENSION);
                 $newfileName=$id.'.'.$extention;
                 $destDir = WWW_ROOT .'img'. DS .'users'. DS . $newfileName;
                 if(move_uploaded_file($this->request->data['photo']['tmp_name'],$destDir)){
@@ -120,36 +135,45 @@ class UsersController extends AppController
         $this->set('_serialize', ['user']);
     }
 
+
+
+
     /**
-     * Edit method
-     *@author Mythri Manjunath
-     * @param string|null $id User id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @Author Muneeb Noor
      */
-    public function edit($id)
-    {	      
-                $user = $this->Users->get($id);                
-                if ($user->id == $this->Auth->user('id')){                   
-                if ($this->request->is(['patch', 'post', 'put'])) {      
-                $user = $this->Users->patchEntity($user, $this->request->data);                   
-                if ($this->Users->save($user)) {
-                $this->Flash->success(__('Your profile has been updated successfully.'));
+    public function edit($id = null)
+    {
+	
+		if (!$id) 
+			$id = $this->Auth->user('id');
+		
+		else if($id != $this->Auth->user('id'))
+		{
+			$session = $this->request->session();
+			   if($session->read('User.admin') != '1')
+					return $this->redirect(
+        array('controller' => 'users', 'action' => 'dashboard')
+    );
+			
+		}					
+        $user = $this->Users->get($id);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $user = $this->Users->patchEntity($user, $this->request->data);
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('The user has been saved.'));
+
                 return $this->redirect(['action' => 'add',$id]);
-                } else {
-                $this->Flash->error(__('The user profile could not be updated. Please, try again.'));
-                }
-                }
-                }
-               else
-                {
-                    $this->Flash->error(__('You are not authorized user.'));
-                }
-        $cities = $this->Users->Cities->find('list', ['limit' => 200]);
-        $properties = $this->Users->Properties->find('list', ['limit' => 200]);
+            } else {
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            }
+        }
+        $this->viewBuilder()->layout('userdash');
         $this->set(compact('user', 'cities', 'properties'));
-        $this->set('_serialize', ['user']);                
+        $this->set('_serialize', ['user']);
     }
+
+
+
 
     /**
      * Delete method
@@ -167,10 +191,11 @@ class UsersController extends AppController
         } else {
             $this->Flash->error(__('The user could not be deleted. Please, try again.'));
         }
-		
+
 		return $this->redirect($this->referer());
-    
+
 	}
+
 
 
     /**
@@ -201,28 +226,30 @@ class UsersController extends AppController
 				$session = $this->request->session();
 				if($user['status']==9)
                 {
-					
+
 					$session->write('User.admin', '1');
 					$this->set('admin',true);
-                    //return $this->redirect(['controller' => 'users','action' => 'admin']);
                     return $this->redirect(['controller' => 'admin','action' => 'index']);
 
                 }
-				else
-					$session->write('User.admin', '0');
-                    
+				else {
+                    $session->write('User.admin', '0');
+                    return $this->redirect(['controller' => 'users','action' => 'dashboard']);
+                }
 
-				return $this->redirect(['controller' => 'users','action' => 'dashboard']);
-                    return $this->layout='default';
+			} else if ($user['status'] == 0) {
+                $this->Flash->error('Account is not activated yet!');
+                return $this->redirect(['controller' => 'users','action' => 'activation']);
+            } else {
 
-			}else{
-                         $this->Flash->error('Username or password is incorrect');
-                        }
-
-
+                $this->Flash->error('Username or password is incorrect');
+            }
 
 		}
+        // $this->viewBuilder()->layout('default');
 	}
+
+
 
     /**
      * @author Muneeb Noor
@@ -249,15 +276,8 @@ class UsersController extends AppController
 
 	}
 
-	public function initialize()
-	{
-		parent::initialize();
-                $session = $this->request->session();
 
-		$this->Auth->allow(['logout']);
-		$this->Auth->allow(['register', 'forgotpassword']);
-        //$this->Auth->allow();//REM @author Aleksandr Anfilov. Allow all actions of studierent/users   w/o login.
-	}
+
 
     /**
      * @author Muneeb Noor
@@ -267,6 +287,8 @@ class UsersController extends AppController
 		$this->Flash->success('You are now logged out.');
 		return $this->redirect($this->Auth->logout());
 	}
+
+
 
     /**
      * Display User dashboard after login
@@ -286,10 +308,10 @@ class UsersController extends AppController
     }
 
 
+
     /**
      * Display Admin dashboard after login
-     * @author Ramanpreet,
-     * @author Aleksandr Anfilov
+     * @author Ramanpreet Kaur
      */
     public function admin(){
         /*@author Ramanpreet
@@ -302,129 +324,131 @@ class UsersController extends AppController
 
         $this->set('results',$results);
         $users = $connection->execute('select count(id) as counts , status from users group by status')->fetchAll('assoc');
-        //$users = $connection->execute('select count(id) as counts , status,roles from users left join roles on users.status=roles.id group by status')->fetchAll('assoc');
+
         $this->set('users', $users);
         $reports = $connection->execute('select count(id) as counts , user_id from reports group by user_id')->fetchAll('assoc');
 
         $this->set('reports',$reports);
-        /**
-        * @author Aleksandr Anfilov
-        * Display results of search by user id or name:
-        */
-        if($this->request->is('post'))
-        {
-            $form = $this->request->data();
-            //$form = Sanitize::clean($this->request->data(), array('encode' => false));
-            $searchBy = key($form);             // key: input name is 'id' or 'username'
-            
-            $searchParam = $form[$searchBy];    // get input value from array by key
-            
-//@source: Selecting Rows From A Table   http://book.cakephp.org/3.0/en/orm/query-builder.html
-//@ERROR: Call to a member function find() on array $this-Users->find()->select(['id', 'first_name']);
-
-            $searchQuery = TableRegistry::get('Users')
-                ->find()                // 1. Prepare a SELECT query:
-                ->select( ['id', 'last_name', 'first_name', 'username', 'status'] );
-
-            switch ($searchBy) {        // 2. Add a WHERE condition
-            case 'id':
-                $searchQuery->where(['id' => $searchParam]);
-            break;
-                    
-            case 'username':            //  find by username (which is an e-mail address)
-                $searchQuery->where(['username' => $searchParam]);
-            break;
-            }
-
-            $usersFound = $searchQuery->toArray();// 3. Execute the query
-            
-            if (!empty($usersFound)){   //send results to  view only of they exist 
-                $this->set('usersFound', $usersFound);
-            }
-            else{
-                $this->Flash->error(__('No users have been found with the ' . $searchBy . ' ' . $searchParam . '.'));
-                }
-        }
     }
-    
-    
-    /**
-    * @author Aleksandr Anfilov
-    * Block or unblock the landlord.
-    * @param id
-    * Created:  11.12.2016
-    */
-    public function adminUserStatus($id = null, $newStatus = 0) {
-        $this->request->allowMethod(['post', 'adminUserStatus']);
-      
-        if ($id > 0) {
-            $conn = ConnectionManager::get('default');
-            
-            $conn->transactional(function ($conn) use ($id, $newStatus){
-            $conn->execute('UPDATE properties SET status = ? WHERE user_id = ?', [$newStatus, $id]);
-            $conn->execute('UPDATE users SET status = ? WHERE id = ?', [$newStatus, $id]);
-            });
-            
-            $this->Flash->success(__('The user status has been changed.'));
-        }   else {
-                $this->Flash->error(__('The user status has not been changed.'));}
-    return $this->redirect(['action' => 'admin']);
-    }
-    
+
+
 
     /**
-     * Display Admin dashboard after login
-     * @author Ramanpreet
+     * Forgot password | generate code if post method, display form otherwise
+     * @author Ramanpreet Kaur, Touhidur Rahman
      */
-    public function forgotPassword($username = null)
+    public function forgotPassword()
     {
         if($this->request->is('post'))
         {
             $data= $this->request->data();
 
-            $user = $this->Users->findByUsername($data['username']);
-            //echo print_r($user);
+            $user = $this->Users->find()->where(['username' => $data['username']])->first();
+            // no user is available with this email
             if (!($user->toArray()))
             {
-                $this->Flash->error('User not found');
-                $this->redirect(['controller' => 'users','action' => 'forgotpassword']);
+                $this->Flash->error('We did not find any user with that email address!');
+                return $this->redirect(['controller' => 'users','action' => 'forgotPassword']);
             }
-            else {
+            else
+            {
+                // generate a hashed code for user verification
+                $resetCode = substr(md5(rand(999,999999)) , 0 , 8);
+                $user->reset_key = $resetCode;
+                $user->status = 0;
+                if ($this->Users->save($user)) {
+                    // in ideal case, we should be sending email. but for now we are displaying that code
+                    $this->Flash->success('Password change request received. Please check your email for reset code.');
+                    $this->Flash->error($resetCode);
+                    return $this->redirect(['controller' => 'users','action' => 'activation']);
 
-
-                $generated_password=substr(md5(rand(999,999999)) , 0 , 8);
-                $this->Users->updateAll(
-                array('password' => "'$generated_password'"),
-                array('username' => $username)
-                );
-               /* $data = $this->Users->password =  $generated_password;
-                if ($this->Users->save($data)) {
-                    $this->Flash->success('Password changed Succesfully.');*/
-                   //  return $this->redirect(['controller' => 'Users','action' => 'login']);
-                die($generated_password);
-
-    }
+                }
+            }
         }
     }
-  
 
+
+
+
+    /**
+     * Upgrade an user to admin
+     * @author
+     */
 	public function makeAdmin($id = null)
 	{
         $this->request->allowMethod(['post', 'makeAdmin']);
         $user = $this->Users->get($id);
         $user->status = 9;
-		
+
 		if ($this->Users->save($user)) {
             $this->Flash->success(__('The user has been added as an admin.'));
         } else {
             $this->Flash->error(__('The user could not be added as an admin. Please, try again.'));
         }
-		
+
 		return $this->redirect($this->referer());
-    
-	
+
+
 	}
-    public function activation()  { }
+
+
+
+    /**
+     * GET: displays code entry form
+     * POST: check code and redirect to change password
+     * @author Touhidur Rahman
+     */
+    public function activation()  {
+        if($this->request->is('post')) {
+            $data= $this->request->data();
+
+            $user = $this->Users->find()->where(['reset_key' => $data['reset_key']])->first();
+            // no user is available with this code
+            if (!($user->toArray()))
+            {
+                $this->Flash->error('Oops! Are you sure about the code?');
+                return $this->redirect(['controller' => 'users','action' => 'forgotPassword']);
+            } else {
+                // code verified, let user change password
+                $session = $this->request->session();
+                $session->write('User.tmp', $user->id);
+                return $this->redirect(['controller' => 'users','action' => 'resetPassword']);
+            }
+        }
+    }
+
+
+
+
+    /**
+     * GET: displays password entry form
+     * POST: check password and save to db
+     * @author Touhidur Rahman
+     */
+    public function resetPassword()  {
+        if($this->request->is('post')) {
+            $session = $this->request->session();
+            $id = $session->read('User.tmp');
+            $data = $this->request->data();
+
+            $user = $this->Users->get($id);
+            // no user is available
+            if (!($user->toArray())) {
+                $this->Flash->error('What a Terrible Failure! Please try again.');
+            } else {
+                // change password
+                // TODO:
+
+
+
+
+
+
+                $this->Flash->success('Password changed! You can login now.');
+                return $this->redirect(['controller' => 'users','action' => 'resetPassword']);
+            }
+        }
+    }
 
 
 

@@ -51,31 +51,31 @@
 						<?php
                         echo
 				'<li>'.$this->Html->link(
-    'Recently Added'.'('.$recentPropertiesCount.')',
+    'Recently Added'.' ('.$recentPropertiesCount.')',
     ['controller' => 'admin', 'action' => 'properties', '_full' => true,'recent']
-).'</li>';						
+).'</li>';
 						?>
 <!--author: Ramanpreet         -->
 <!-- Modifications by Muneeb to display dynamic links -->
-						
+
 <?php
                         foreach($results as $r){
                             echo
 				'<li>'.$this->Html->link(
-    $r['type'].'('.$r['counts'].')',
+    $r['type'].' ('.$r['counts'].')',
     ['controller' => 'admin', 'action' => 'properties', '_full' => true,str_replace(' ', '_',strtolower($r['type']))]
-).'</li>';							
+).'</li>';
                         }
 ?>
 
                         </ul>
                     </li>
-                    
+
                     <li><b>Users</b>
                         <ul>
-                           
-<?php   /* @authors:        Ramanpreet, 
-        * switch:           Aleksandr Anfilov, 
+
+<?php   /* @authors:        Ramanpreet,
+        * switch:           Aleksandr Anfilov,
         * ->Html->link:     ???
         */
         foreach($userslist as $u){
@@ -83,32 +83,32 @@
             case '9':
                 $status = 'Admin';
             break;
-            
+
             case '1':
                 $status = 'Normal';
             break;
-            
+
             case '0':
                 $status = 'Blocked';
             }
-            echo '<li>'.$this->Html->link( $status.'('.$u['counts'].')',
+            echo '<li>'.$this->Html->link( $status.' ('.$u['counts'].')',
                         ['controller' => 'admin', 'action' => 'users', '_full' => true, strtolower($status) ]                       ).'</li>';
         }
-?>                           
+?>
                         </ul>
                     </li>
-                    
-                    <li><b>Reviews</b>
+<!-- Links updated by Touhid -->
+                    <li><b>Reports</b>
                         <ul>
-                            <li><a href="#">Landlord(7)</a></li>
+                            <li><?= $this->Html->link(__('Total').' ('. $reportsCount .')', ['action' => 'reports']); ?></li>
                         </ul>
                     </li>
-                    
+
                     <li><b>My Account</b>
                         <ul>
-                            <li><a href="admin.html">Dashboard</a></li>
-                            <li><a href="user-profile.html">My Profile</a></li>
-                            <li><a href="index.html">Logout</a></li>
+                            <li><?= $this->Html->link(__('Dashboard'), ['controller' => 'users', 'action' => 'dashboard']); ?></li>
+                            <li><?= $this->Html->link(__('My Profile'), ['controller' => 'users', 'action' => 'view']); ?></li>
+                            <li><?= $this->Html->link(__('Logout'), ['controller' => 'users', 'action' => 'logout']); ?></li>
                         </ul>
                     </li>
                 </ul>
@@ -118,15 +118,16 @@
         </div>
     </div>
 </div>
-<!-- end sidebar --
-		
+<!-- end sidebar -->
+
 <!-- Results -->
 
-		
+		<div class="col-md-9 col-sm-8 col-xs-12">
 		<!-- CONTENT -->
 		<?= $this->fetch('content') ?>
 		<!-- END CONTENT -->
-	</div>
+		</div>
+</div>
 
 
 	<footer>

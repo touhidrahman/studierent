@@ -128,7 +128,7 @@ class UsersTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['username']));
-        $rules->add($rules->existsIn(['city_id'], 'Cities'));
+        // $rules->add($rules->existsIn(['city_id'], 'Cities'));
 
         return $rules;
     }
