@@ -114,11 +114,11 @@
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
 						</label>
-						<label style="display:block"><input name="rating" value="2" type="radio">
+						<label style="display:block"><input name="rate" value="2" type="radio">
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
 						</label>
-						<label style="display:block"><input name="rating" value="1" type="radio">
+						<label style="display:block"><input name="rate" value="1" type="radio">
 							<i class="fa fa-star"></i>
 						</label>
 					</div>
