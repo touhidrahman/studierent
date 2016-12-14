@@ -227,16 +227,6 @@ class UsersController extends AppController
 			{
 				$this->Auth->setUser($user);
 
-				if($this->request->data('remember_me')) {
-					$this->Cookie->configKey('CookieAuth', [
-						'expires' => '+1 month',
-						'httpOnly' => true
-					]);
-					$this->Cookie->write('CookieAuth', [
-						'username' => $this->request->data('username'),
-						'password' => (new DefaultPasswordHasher)->hash($this->request->data('password'))
-					]);
-				}
 				$session = $this->request->session();
 				if($user['status']==9)
                 {

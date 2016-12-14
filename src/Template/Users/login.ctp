@@ -23,11 +23,6 @@
 
 							<?= $this->Form->input('password',array('required'=>true, 'placeholder'=>'Your password')); ?>
 
- 							<div class="checkbox">
-								<label>
-                                  <?= $this->Form->checkbox('remember_me'); ?> Keep me signed in
-								  </label>
-							</div>
 						</div>
 						<div class="modal-footer">
 							<div>
