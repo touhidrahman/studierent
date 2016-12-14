@@ -18,10 +18,10 @@
 					<form id="login-form">
 						<div class="modal-body">
 
-							<?= $this->Form->input('username',array('placeholder'=>'Your email id', 'label' => 'Email')); ?>
+							<?= $this->Form->input('username',array('type' => 'email', 'required'=>true, 'placeholder'=>'Your email id', 'label' => 'Email')); ?>
 
 
-							<?= $this->Form->input('password',array('placeholder'=>'Your password')); ?>
+							<?= $this->Form->input('password',array('required'=>true, 'placeholder'=>'Your password')); ?>
 
  							<div class="checkbox">
 								<label>
