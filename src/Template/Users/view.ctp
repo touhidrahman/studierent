@@ -77,12 +77,12 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<?php
 		//@author Norman Lista
 		//for user not rating himself
 		if(!($logUser==$user->id)){ ?>
-			<div class="card">
+			<div class="card" id="sendFeedback">
 				<div class="card-header">
 					Send a Feedback
 				</div>
