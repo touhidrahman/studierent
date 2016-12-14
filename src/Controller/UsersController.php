@@ -139,16 +139,26 @@ class UsersController extends AppController
 
 
     /**
-     * Edit method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @Author Muneeb Noor
      */
     public function edit($id = null)
     {
-		if (!$id) $id = $this->Auth->user('id');
-
+	
+		if (!$id) 
+			$id = $this->Auth->user('id');
+		
+		else if($id != $this->Auth->user('id'))
+		{
+			$session = $this->request->session();
+			   if($session->read('User.admin') != '1')
+					return $this->redirect(
+        array('controller' => 'users', 'action' => 'dashboard')
+    );
+			
+		}
+		
+		
+		
         $user = $this->Users->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->data);
