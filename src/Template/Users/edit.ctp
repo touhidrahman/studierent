@@ -1,12 +1,16 @@
 <div class="users form large-9 medium-8 columns content">
+
+
     <?= $this->Form->create($user) ?>
     <fieldset>
         
        	<div class="col-md-2 col-sm-12 col-xs-12"></div>
 <div class="col-md-8 col-sm-8 col-xs-12" style="padding-top:20px;">
 			
-			<?= $this->Form->create($user); ?>
-			
+			<?= $this->Form->create($user,['type' => 'file']); ?>
+		
+
+
                 <h2 style="text-align:center; margin-left:12%;">Edit Profile!</h2>
                 <div class="form-group row" style="padding-top:20px;">
                     
@@ -40,18 +44,11 @@
 		            </div>
                 </div>
 				
-                <div class="form-group row">
-                    <label for="email" class="col-xs-2 col-form-label">Email</label>
-                    <div class="col-xs-10">
-                    
-					<?= $this->Form->input('username', array('label'=>false,'placeholder'=>"abc@xyz.com",'type'=>'email')); ?>
-		            
-					</div>
-                </div>
+                
                 <div class="form-group row">
                     <label for="password" class="col-xs-2 col-form-label">Password</label>
                     <div class="col-xs-10">
-						<?= $this->Form->input('password', array('label'=>false,'placeholder'=>"Password",'type'=>'password','id'=>'pass1')); ?>
+						<?= $this->Form->input('password', array('label'=>false,'placeholder'=>"Password",'type'=>'password','id'=>'pass1','value'=>'')); ?>
 				   </div>
                 </div>
 				<div class="form-group row">
@@ -61,34 +58,16 @@
                     </div><span id="confirmMessage" class="confirmMessage"></span>
                 </div>
                  
-                <div class="form-group row" >
-                     <div class="col-xs-2"></div>
-					
-					<div class="col-xs-10">
-                   
-						<div class="row">
-    <?php    
-       $options=array('M'=>'Male', 'F'=>'Female');
-       echo $this->Form->radio('gender',$options,array('class'=>'radioForm'));?>
-    </div>
-	
-	
-
-						
-						</div>
-                            
-                        </div>
-						
-	       <?php echo $this->Form->input('photo',['type' => 'file']); ?>
-           
-                    </div>
-    </fieldset>
+                   </fieldset>
 	 <div class="form-group row">
                     <div class="col-md-5 col-sm-3"></div>
 					<div class="col-md-3 col-sm-9 ">
-					<?= $this->Form->button(__('Submit')) ?>
+					<?php echo $this->Form->button(__('Submit'), ['type'=>'submit','class' => 'btn btn-success']); ?>
 					<?= $this->Form->end() ?>  
                     </div>
+
                 </div>
-    
+   
 </div>
+
+

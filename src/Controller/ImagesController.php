@@ -16,9 +16,9 @@ class ImagesController extends AppController
      * @ Mythri Manjunath
      * @return \Cake\Network\Response|null
      */
-    public function index($id=null)
+    public function index($id)
     { 
-      
+         
         $propertyTbl = TableRegistry::get('Properties');
         $exists = $propertyTbl->exists(['id'=> $id,'user_id'=> $this->Auth->user('id')]);
         if($exists)
@@ -54,8 +54,9 @@ class ImagesController extends AppController
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      * @author Mythri Manjunath
      */
-    public function add($id=null)
+    public function add($id)
     {
+        
         $propertyTbl = TableRegistry::get('Properties');
         $exists = $propertyTbl->exists(['id'=> $id,'user_id'=> $this->Auth->user('id')]);
         if (!$exists) {
@@ -89,6 +90,7 @@ class ImagesController extends AppController
         }
 
         // $properties = $this->Images->Properties->find('list', ['limit' => 200]);
+        $this->set('id', $id);
         $this->set(compact('image'));
         $this->set('_serialize', ['image']);
     }

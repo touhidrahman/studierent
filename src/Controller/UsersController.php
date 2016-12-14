@@ -98,7 +98,7 @@ class UsersController extends AppController
                     $user = $this->Users->get($id);
                     $user->photo = $newfileName;
                     if ($this->Users->save($user)) {
-                        $this->Flash->success(__('Image has been uploaded and inserted successfully.'));
+                        $this->Flash->success(__('Your profile Image has been uploaded successfully.'));
                         return $this->redirect([
                         'controller' => 'Users',
                          'action' => 'view', $id
@@ -122,32 +122,33 @@ class UsersController extends AppController
 
     /**
      * Edit method
-     *
+     *@author Mythri Manjunath
      * @param string|null $id User id.
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
-    {
-		if (!$id) $id = $this->Auth->user('id');
-        
-        $user = $this->Users->get($id, [
-            'contain' => ['Properties']
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->data);
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-
-                return $this->redirect(['action' => 'view']);
-            } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
-            }
-        }
+    public function edit($id)
+    {	      
+                $user = $this->Users->get($id);                
+                if ($user->id == $this->Auth->user('id')){                   
+                if ($this->request->is(['patch', 'post', 'put'])) {      
+                $user = $this->Users->patchEntity($user, $this->request->data);                   
+                if ($this->Users->save($user)) {
+                $this->Flash->success(__('Your profile has been updated successfully.'));
+                return $this->redirect(['action' => 'add',$id]);
+                } else {
+                $this->Flash->error(__('The user profile could not be updated. Please, try again.'));
+                }
+                }
+                }
+               else
+                {
+                    $this->Flash->error(__('You are not authorized user.'));
+                }
         $cities = $this->Users->Cities->find('list', ['limit' => 200]);
         $properties = $this->Users->Properties->find('list', ['limit' => 200]);
         $this->set(compact('user', 'cities', 'properties'));
-        $this->set('_serialize', ['user']);
+        $this->set('_serialize', ['user']);                
     }
 
     /**
