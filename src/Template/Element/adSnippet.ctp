@@ -30,7 +30,7 @@
                 </p>
                 <div class="clearfix">
                     <div class="text-success float-xs-left">
-                        Studierent Score <i class="fa fa-bolt"></i> <label><strong>86</strong></label>
+                        Studierent Score <i class="fa fa-bolt"></i> <label><strong><?= $property['studierent_score'] ?></strong></label>
                     </div>
                     <div class="text-info float-xs-right">
                         Landlord Rating

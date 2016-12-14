@@ -123,6 +123,10 @@
 			</thead>
 			<tbody>
 				<tr>
+					<td class="text-success">Studierent Score <i class="fa fa-bolt"></i></td>
+					<td class="text-success"><?= $property->studierent_score ?> (Out of 100)</td>
+				</tr>
+				<tr>
 					<td>Room Size</td>
 					<td><?= $property->room_size ?> M<sup>2</sup></td>
 				</tr>
