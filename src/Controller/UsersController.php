@@ -61,15 +61,22 @@ class UsersController extends AppController
         // if id is not supplied show own profile
         if (!$id) $id = $this->Auth->user('id');
         $user = $this->Users->get($id);
+        // get properties posted by this user
         $propertiesTbl = TableRegistry::get('Properties');
         $query = $propertiesTbl->find()->where(['user_id' => $id]);
+        // get feedbacks belong to this user
+        $feedbacksTbl = TableRegistry::get('Feedbacks');
+        $otherFeedbacks = $feedbacksTbl->find()->where(['for_user_id' => $id])->contain(['Users'])
+        ;
+        // get avg rating of user
+        $avgRating = TableRegistry::get('AvgRatings')->find()->where(['user_id' => $id])->first();
         // join zips.number field
         $query->contain(['Zips' => function($q){
             return $q->select('number', 'city', 'province');
         }]);
         // join images table for property images
         $query->contain(['Images']);
-
+        // get total property count
         $propertyCount = $query->count();
         $properties = $query->toList();
 
@@ -88,7 +95,7 @@ class UsersController extends AppController
          }
         }
         $this->set('feedback',$feedback);
-        $this->set(compact('user', 'properties', 'propertyCount', 'logUser'));
+        $this->set(compact('user', 'properties', 'propertyCount', 'logUser', 'otherFeedbacks', 'avgRating'));
         $this->set('_serialize', ['user', 'properties', 'propertyCount']);
     }
 
