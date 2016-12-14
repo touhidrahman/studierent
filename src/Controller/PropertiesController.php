@@ -403,6 +403,9 @@ class PropertiesController extends AppController
             return $exp->in('Properties.id', $ids);
         });
 
+		$id_exists = true;
+		if($ids > 0)
+		{
         // join zips.number field
         $query->contain(['Zips' => function($q){
             return $q->select('number', 'city', 'province');
@@ -424,6 +427,11 @@ class PropertiesController extends AppController
         $id= $this->Auth->user('id');
         $this->set(compact('properties','id', 'avgRatings'));
         $this->set('_serialize', ['properties']);
+		}
+		else 
+			$id_exists = false;
+		
+		$this->set('id_exists',$id_exists);
     }
 
 
