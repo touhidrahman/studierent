@@ -113,6 +113,8 @@ class UsersController extends AppController
             if(!empty($this->request->data['photo']['name'])){
                 $fileName = $this->request->data['photo']['name'];
                 $extention = pathinfo($fileName,PATHINFO_EXTENSION);
+                $arr_ext = array('jpg', 'jpeg', 'gif','png'); 
+                 if(in_array($extention, $arr_ext)){
                 $newfileName=$id.'.'.$extention;
                 $destDir = WWW_ROOT .'img'. DS .'users'. DS . $newfileName;
                 if(move_uploaded_file($this->request->data['photo']['tmp_name'],$destDir)){
@@ -135,6 +137,7 @@ class UsersController extends AppController
                 $this->Flash->error(__('Please choose a image to upload.'));
             }
 
+        }
         }
         $cities = $this->Users->Cities->find('list', ['limit' => 200]);
         $properties = $this->Users->Properties->find('list', ['limit' => 200]);

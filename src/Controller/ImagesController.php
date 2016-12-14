@@ -67,6 +67,9 @@ class ImagesController extends AppController
         if ($this->request->is('post')) {
             if(!empty($this->request->data['upload']['name'])){
                 $fileName = $id . '-' .$this->request->data['upload']['name'];
+                $extention = pathinfo($fileName,PATHINFO_EXTENSION);
+                $arr_ext = array('jpg', 'jpeg', 'gif','png'); 
+                 if(in_array($extention, $arr_ext)){
                 $destDir = WWW_ROOT .'img'. DS .'properties'. DS . $fileName;
                 if(move_uploaded_file($this->request->data['upload']['tmp_name'], $destDir)){
                     $image = $this->Images->newEntity();
@@ -87,8 +90,11 @@ class ImagesController extends AppController
                     $this->Flash->error(__('Unable to upload image to target location, please try again.'));
                 }
             }
+            else{
+                $this->Flash->error(__('Please choose a image to upload.'));
+            }
         }
-
+        }
         // $properties = $this->Images->Properties->find('list', ['limit' => 200]);
         $this->set('id', $id);
         $this->set(compact('image'));
