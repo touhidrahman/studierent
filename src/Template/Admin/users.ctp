@@ -29,7 +29,7 @@
 
 
 					<?php
-					if ($type !='admin')
+					if ($type =='normal')
 					{
 					?>
 
