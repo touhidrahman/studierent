@@ -87,12 +87,12 @@
                                         <div class="row">
                                             <fieldset class="form-group col-sm-6">
                                                 <label for="">Room Size</label>
-                                                <input type="text" name="rSize" class="form-control" id="" placeholder="Sq M." value="<?= ($qs['rSize']) ? $qs['rSize'] : ''; ?>">
+                                                <input type="number"  min="8" name="rSize" class="form-control" id="" placeholder="Sq M." value="<?= ($qs['rSize']) ? $qs['rSize'] : ''; ?>">
                                             </fieldset>
 
                                             <fieldset class="form-group col-sm-6">
                                                 <label for="">Flat Size</label>
-                                                <input type="text" name="fSize" class="form-control" id="" placeholder="Sq M." value="<?= ($qs['fSize']) ? $qs['fSize'] : ''; ?>">
+                                                <input type="number" min="8" name="fSize" class="form-control" id="" placeholder="Sq M." value="<?= ($qs['fSize']) ? $qs['fSize'] : ''; ?>">
                                             </fieldset>
                                         </div>
                                         <!-- size fields end -->
