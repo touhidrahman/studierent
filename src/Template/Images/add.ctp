@@ -6,7 +6,7 @@
             <h4 class="card-title"><?= __('Upload Photo') ?></h4>
         </p><?= __('Thank you for adding a property! Add images to attract customers! ') ?></p>
             <?php echo $this->Form->create($image, ['type' => 'file']); ?>
-            <?php echo $this->Form->input('upload',['label'=>'Upload Images','type' => 'file', 'class' => 'form-control']); ?>
+            <?php echo $this->Form->input('upload',['label'=>' ','type' => 'file', 'class' => 'form-control']); ?>
             <br/>
             <input class="btn btn-success" type="submit" value="Upload Photo">
             <?php echo $this->Html->link('View My Property Ad', '/properties/view/'.$id, ['class' => 'btn btn-warning']) ?>
