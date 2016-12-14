@@ -60,7 +60,7 @@
 			<div class="card-block">
 
 					<?php
-						if( !property_exists('avgRating', 'avg_rate')){ ?>
+						if(!isset($avgRating->avg_rate) ||$avgRating->avg_rate==0){ ?>
                             <h1 class="display-3 text-xs-center text-warning">No rating yet</h1>
 				<div class="text-xs-center">
 							<p>Not Rated yet</p>
@@ -114,11 +114,11 @@
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
 						</label>
-						<label style="display:block"><input name="rating" value="2" type="radio">
+						<label style="display:block"><input name="rate" value="2" type="radio">
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
 						</label>
-						<label style="display:block"><input name="rating" value="1" type="radio">
+						<label style="display:block"><input name="rate" value="1" type="radio">
 							<i class="fa fa-star"></i>
 						</label>
 					</div>
