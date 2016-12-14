@@ -31,7 +31,12 @@
                 <?= $this->Html->link('<i class="fa fa-image"></i> Upload Images ', '/images/add/'.$property['id'], ['class' => 'card-link text-info', 'escapeTitle' => false]) ?>
                 <?= $this->Form->postlink('&nbsp;<i class="fa fa-trash-o"></i> Delete ',
                     ['action' => 'delete', $property['id']],
-                    ['confirm' => 'Are you sure to delete this property ad?', 'class' => 'card-link text-danger', 'escapeTitle' => false]) ?>
+                   ['confirm' => 'Are you sure to delete this property ad?', 'class' => 'card-link text-danger', 'escapeTitle' => false]) ?>
+              <?php if($property['is_boosted']==1){?>  
+            <br><?= $this->Html->link('<i class="fa fa-rocket"style="color:blue"></i> boosted! ', '/properties/boost/'.$property['id'], ['class' => 'card-link text-primary', 'escapeTitle' => false]) ?>
+              <?php }else{?> 
+            <br><?= $this->Html->link('<i class="fa fa-rocket"style="color:orange"></i> This add is not boosted, boost here ', '/properties/boost/'.$property['id'], ['class' => 'card-link text-warning', 'escapeTitle' => false]) ?>
+            <?php }?> 
             </div>
             <div class="col-sm-3">
                 <p class="text-xs-center text-muted" style="margin-bottom:0">EUR</p>

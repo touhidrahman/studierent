@@ -145,16 +145,16 @@ class PropertiesController extends AppController
     {
         // only logged in user can edit his property
         $property = $this->Properties->get($id);
-		
+
 		//To ensure that only administrators are able to edit all the properties
 		if($property->user_id != $this->Auth->user('id'))
 		{
 			$session = $this->request->session();
 			   if($session->read('User.admin') != '1')
 		return $this->redirect($this->referer());
-			
+
 		}
-		
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             if ($property->user_id == $this->Auth->user('id')){
                 $property = $this->Properties->patchEntity($property, $this->request->data);
@@ -173,7 +173,36 @@ class PropertiesController extends AppController
         $this->set('_serialize', ['property']);
     }
 
+ public function boost($id = null)
+    {
+        // @author Norman Lista
+        $property = $this->Properties->get($id);
 
+		//
+		if($property->user_id != $this->Auth->user('id'))
+		{
+	      $this->Flash->error(__('You are not the owner of this property'));
+
+		return $this->redirect(['action' => 'myproperties']);
+                } else{
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+                $property = $this->Properties->patchEntity($property, $this->request->data);
+                if ($this->Properties->save($property)) {
+                    $this->Flash->success(__('The property ad has been Boost'));
+
+                    return $this->redirect(['action' => 'myproperties']);
+                } else {
+                    $this->Flash->error(__('The property could not be boosted Please, try again.'));
+                }
+
+        }
+                }
+        // Set the layout.
+        $this->viewBuilder()->layout('userdash');
+        $this->set(compact('property'));
+        $this->set('_serialize', ['property']);
+    }
 
 
     /**
@@ -393,20 +422,32 @@ class PropertiesController extends AppController
         $this->set(compact('properties','id', 'avgRatings'));
         $this->set('_serialize', ['properties']);
     }
-	
-	
+
+
+
+	/**
+	 * Landing page
+     * @author Muneeb Noor
+	 */
 	public function home()
 	{
-		
+
 		$recentProperties = $this->Properties
     ->find()
 	->contain(['Images'])
     ->order(['created' => 'DESC'])
 	->limit(3);
-	 
-	 $this->set(compact('recentProperties'));
-	 $this->set('_serialize', ['recentProperties']);
-	 
+
+		$boostedProperties = $this->Properties
+    ->find()
+    ->where(['is_boosted' => 1])
+	->contain(['Images'])
+    ->order(['created' => 'DESC'])
+	->limit(3);
+
+	 $this->set(compact('recentProperties', 'boostedProperties'));
+	 $this->set('_serialize', ['recentProperties', 'boostedProperties']);
+
 	}
 
 

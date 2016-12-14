@@ -43,6 +43,7 @@ use Cake\ORM\Entity;
  * @property bool $electricity_bill_included
  * @property bool $internet
  * @property int $view_times
+ * @property int $is_boosted
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
  *
