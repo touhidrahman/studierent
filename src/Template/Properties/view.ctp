@@ -7,7 +7,7 @@
 			</div>
 			<div class="card-block text-xs-center">
 				<?php $i = 0; foreach ($property->images as $img) : ?>
-					<a class="" data-lightbox="sample" href="/studierent/img/properties/<?= $img->path ?>">
+					<a class="" data-lightbox="sample" href="/img/properties/<?= $img->path ?>">
 						<?= $this->Html->image('properties'.DS.$img->path, ['class' => 'card-img', 'width' => '240', 'height' => '180', 'style' => 'padding:.5rem']); ?>
 					</a>
 					<?php $i++; endforeach; ?>
