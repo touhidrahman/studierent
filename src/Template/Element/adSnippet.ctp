@@ -1,6 +1,12 @@
 <!-- Single Property Ad Snippet -->
-<?php $boosted = (($property['is_boosted'] == 1) && ($property['boosted_till']->isWithinNext(7))) ? true : false; ?>
-
+<?php
+$boosted = false;
+if ($property['is_boosted'] == 1) {
+    if($property['boosted_till']->isWithinNext(7)) {
+        $boosted = true;
+    }
+}
+?>
 <div class="card <?= ($boosted)? 'card-outline-warning' : '' ?>">
     <div class="card-block" style="padding-bottom: 0rem">
         <h4 class="card-title">
