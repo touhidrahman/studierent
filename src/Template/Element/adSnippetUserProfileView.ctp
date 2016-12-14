@@ -2,7 +2,7 @@
 <a href="/properties/view/<?= $property['id'] ?>" target="_blank">
 <div class="card">
     <div class="card-block">
-        <h4 class="card-title"><?= $property['title'] ?></h4>
+        <h4 class="card-title"><?= ($property['is_boosted'] == 1)? '<i class="fa fa-diamond fa-lg text-warning"></i>' : '' ?><?= $property['title'] ?></h4>
         <h6 class="card-subtitle text-muted">
             <?= $property['address'] ?>
             &nbsp;|&nbsp;
