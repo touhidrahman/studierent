@@ -58,14 +58,17 @@
 				Average Rating
 			</div>
 			<div class="card-block">
-				<h1 class="display-3 text-xs-center text-warning"><?= round($avgRating->avg_rate, 2) ?></h1>
-				<div class="text-xs-center">
+				
 					<?php
-						if( $avgRating->avg_rate==0){ ?>
+						if( !property_exists('avgRating', 'avg_rate')){ ?>
+                            <h1 class="display-3 text-xs-center text-warning">No rating yet</h1>
+				<div class="text-xs-center">
 							<p>Not Rated yet</p>
 							<?php
-						} else {
-							$filledStar = ceil($avgRating->avg_rate);
+                                                } else {?>
+                                                    <h1 class="display-3 text-xs-center text-warning"><?= round($avgRating->avg_rate, 2) ?></h1>
+				<div class="text-xs-center">
+						<?php	$filledStar = ceil($avgRating->avg_rate);
 							$hollowStar = 5 - $filledStar;
 							for ($i=0; $i < $filledStar; $i++) {
 								echo '<i class="fa fa-star text-info"></i>';
@@ -73,7 +76,7 @@
 							for ($i=0; $i < $hollowStar; $i++) {
 								echo '<i class="fa fa-star-o text-info"></i>';
 							}
-						}
+                                                }
 					?>
 				</div>
 			</div>

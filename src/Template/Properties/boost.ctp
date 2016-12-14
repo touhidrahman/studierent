@@ -28,7 +28,7 @@ if ($property['is_boosted'] == 1) {
     }
 }
 ?>
-<?php if($bossted){  ?>
+<?php if($boosted){  ?>
 <h6 style="text-align: center;">
     This add is already boosted
         </h6>
