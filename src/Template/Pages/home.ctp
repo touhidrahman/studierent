@@ -118,7 +118,7 @@
 
     <div class="jumbotron text-xs-center" style="background-color: #ffffff">
         <h1 class="display-4">What Our Customers Are Saying?</h1>
-        <img src="/studierent/img/boy.jpg" class="img-fluid rounded-circle">
+        <img src="img/boy.jpg" class="img-fluid rounded-circle">
         <p class="lead">
             I am so happy! <br>
             <small>- Alexandr Anfilov</small>
