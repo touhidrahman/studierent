@@ -25,12 +25,12 @@
                         <div class="row">
                             <fieldset class="form-group col-sm-6">
                                 <label for="">Min Rent</label>
-                                <input type="text" class="form-control" id="" name="min" placeholder="EUR" value="<?= ($qs['min']) ? $qs['min'] : ''; ?>">
+                                <input type="number"  min="0" class="form-control" id="" name="min" placeholder="EUR" value="<?= ($qs['min']) ? $qs['min'] : ''; ?>">
                             </fieldset>
 
                             <fieldset class="form-group col-sm-6">
                                 <label for="">Max Rent</label>
-                                <input type="text" class="form-control" id="" name="max" placeholder="EUR" value="<?= ($qs['max']) ? $qs['max'] : ''; ?>">
+                                <input type="number" min="0" class="form-control" id="" name="max" placeholder="EUR" value="<?= ($qs['max']) ? $qs['max'] : ''; ?>">
                             </fieldset>
                         </div>
 
@@ -87,12 +87,12 @@
                                         <div class="row">
                                             <fieldset class="form-group col-sm-6">
                                                 <label for="">Room Size</label>
-                                                <input type="text" name="rSize" class="form-control" id="" placeholder="Sq M." value="<?= ($qs['rSize']) ? $qs['rSize'] : ''; ?>">
+                                                <input type="number"  min="8" name="rSize" class="form-control" id="" placeholder="Sq M." value="<?= ($qs['rSize']) ? $qs['rSize'] : ''; ?>">
                                             </fieldset>
 
                                             <fieldset class="form-group col-sm-6">
                                                 <label for="">Flat Size</label>
-                                                <input type="text" name="fSize" class="form-control" id="" placeholder="Sq M." value="<?= ($qs['fSize']) ? $qs['fSize'] : ''; ?>">
+                                                <input type="number" min="8" name="fSize" class="form-control" id="" placeholder="Sq M." value="<?= ($qs['fSize']) ? $qs['fSize'] : ''; ?>">
                                             </fieldset>
                                         </div>
                                         <!-- size fields end -->

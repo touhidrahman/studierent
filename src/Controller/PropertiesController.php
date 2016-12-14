@@ -4,7 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Cake\I18n\Date;
-
+use Cake\I18n\Time;
 
 /**
  * Properties Controller
@@ -173,31 +173,34 @@ class PropertiesController extends AppController
         $this->set('_serialize', ['property']);
     }
 
- public function boost($id = null)
+
+    /**
+     * @author Norman Lista
+     */
+    public function boost($id = null)
     {
-        // @author Norman Lista
+
         $property = $this->Properties->get($id);
 
-		//
 		if($property->user_id != $this->Auth->user('id'))
 		{
-	      $this->Flash->error(__('You are not the owner of this property'));
-
-		return $this->redirect(['action' => 'myproperties']);
-                } else{
-        if ($this->request->is(['patch', 'post', 'put'])) {
-
+    	    $this->Flash->error(__('You are not the owner of this property'));
+    		return $this->redirect(['action' => 'myproperties']);
+        } else {
+            if ($this->request->is(['patch', 'post', 'put'])) {
                 $property = $this->Properties->patchEntity($property, $this->request->data);
+                $now = Time::now();
+                $property->boosted_till = $now->addDays(7);
                 if ($this->Properties->save($property)) {
-                    $this->Flash->success(__('The property ad has been Boost'));
+                    $this->Flash->success(__('The property ad has been Boosted'));
 
                     return $this->redirect(['action' => 'myproperties']);
                 } else {
-                    $this->Flash->error(__('The property could not be boosted Please, try again.'));
+                    $this->Flash->error(__('The property could not be boosted. Please, try again.'));
                 }
 
+            }
         }
-                }
         // Set the layout.
         $this->viewBuilder()->layout('userdash');
         $this->set(compact('property'));
