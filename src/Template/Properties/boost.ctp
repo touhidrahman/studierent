@@ -23,8 +23,8 @@
 <?php
 $boosted = false;
 if ($property['is_boosted'] == 1) {
-    if($property['boosted_till']->isWithinNext(7)) {
-        $boosted = true;
+    if($property['boosted_till']) {
+        if ($property['boosted_till']->isWithinNext(7)) $boosted = true;
     }
 }
 ?>
