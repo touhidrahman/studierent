@@ -24,7 +24,7 @@ class UsersController extends AppController
 		parent::initialize();
         $session = $this->request->session();
 
-		$this->Auth->allow(['logout', 'register', 'forgotPassword', 'activation', 'resetPasswords']);
+		$this->Auth->allow(['logout', 'register', 'forgotPassword', 'activation', 'resetPassword']);
 	}
 
 
@@ -410,15 +410,15 @@ class UsersController extends AppController
 
             $user = $this->Users->find()->where(['reset_key' => $data['reset_key']])->first();
             // no user is available with this code
-            if (!($user->toArray()))
+            if ($user->id)
             {
-                $this->Flash->error('Oops! Are you sure about the code?');
-                return $this->redirect(['controller' => 'users','action' => 'forgotPassword']);
-            } else {
                 // code verified, let user change password
                 $session = $this->request->session();
                 $session->write('User.tmp', $user->id);
-                return $this->redirect(['controller' => 'users','action' => 'resetPassword']);
+                return $this->redirect(['action' => 'resetPassword']);
+            } else {die("exit");
+                $this->Flash->error('Oops! Are you sure about the code?');
+                return $this->redirect(['action' => 'forgotPassword']);
             }
         }
     }
@@ -439,19 +439,19 @@ class UsersController extends AppController
 
             $user = $this->Users->get($id);
             // no user is available
-            if (!($user->toArray())) {
-                $this->Flash->error('What a Terrible Failure! Please try again.');
-            } else {
+            if ($user->toArray()) {
                 // change password
-                // TODO:
-
-
-
-
-
-
-                $this->Flash->success('Password changed! You can login now.');
-                return $this->redirect(['controller' => 'users','action' => 'resetPassword']);
+                if ($data['password'] == $data['confirmPassword']) {
+                    $user->password = $data['password'];    // set password
+                    $user->status = 1;                      // set status = 1
+                    if ($this->Users->save($user)){
+                        $this->Flash->success('Password changed! You can login now.');
+                    }
+                }
+                return $this->redirect(['action' => 'login']);
+            } else {
+                $this->Flash->error('Session time out! Please try again from the begining.');
+                return $this->redirect(['action' => 'forgotPassword']);
             }
         }
     }
