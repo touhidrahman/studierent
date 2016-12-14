@@ -32,6 +32,7 @@
                 <?= $this->Form->postlink('&nbsp;<i class="fa fa-trash-o"></i> Delete ',
                     ['action' => 'delete', $property['id']],
                     ['confirm' => 'Are you sure to delete this property ad?', 'class' => 'card-link text-danger', 'escapeTitle' => false]) ?>
+            <br><?= $this->Html->link('<i class="fa fa-rocket"style="color:orange"></i> This add is not boosted, boost here ', '/properties/boost/'.$property['id'], ['class' => 'card-link text-warning', 'escapeTitle' => false]) ?>
             </div>
             <div class="col-sm-3">
                 <p class="text-xs-center text-muted" style="margin-bottom:0">EUR</p>
