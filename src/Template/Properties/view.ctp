@@ -3,6 +3,8 @@
 
 		<div class="row">
 			<div class="col-xs-12">
+				<div class="fill">
+
 				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 					<ol class="carousel-indicators">
 						<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -13,7 +15,9 @@
 						<?php $i = 0; foreach ($property->images as $img) : ?>
 
 						<div class="carousel-item <?= ($i==0)? 'active' : ''; ?>">
-							<?= $this->Html->image('properties'.DS.$img->path); ?>
+							<div class="fill">
+								<?= $this->Html->image('properties'.DS.$img->path); ?>
+							</div>
 						</div>
 
 						<?php $i++; endforeach; ?>
@@ -27,6 +31,7 @@
 						<span class="sr-only">Next</span>
 					</a>
 				</div>
+			</div>
 
 			</div>
 			<?php $boosted = (($property['is_boosted'] == 1) && ($property['boosted_till']->isWithinNext(7))) ? true : false; ?>
@@ -153,6 +158,10 @@
 				<tr>
 					<td>Address</td>
 					<td><?php echo $property->address .' '. $property->house_no .',<br> '. $property->zip->number .' '. $property->zip->city; ?></td>
+				</tr>
+				<tr>
+					<td>Favorite?</td>
+					<td><?= $this->Html->link('<i class="fa fa-heart-o"></i>', '/properties/toggleFavorites.json?id='.$property['id'], ['class' => 'card-link text-danger favTogglers', 'escapeTitle' => false, 'title' => 'Click to add/remove this property ad to/from your favorites!']) ?></td>
 				</tr>
 			</tbody>
 		</table>

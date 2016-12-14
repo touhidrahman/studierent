@@ -23,10 +23,14 @@
      margin-right: 5%;
 }
 
-.carousel >img {
+/*.carousel >img {
   position: absolute;
   top: 0;
   left: 0;
   min-width: 100%;
   height: 100%;
-}
+}*/
+
+.carousel,.item,.active{height:100%;}
+.carousel-inner{height:100%;}
+.fill{width:100%;height:100%;background-position:center;background:cover;}
