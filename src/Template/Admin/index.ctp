@@ -5,14 +5,10 @@
         <h4 class="card-title">Search For Users</h4>
 <!-- @author: Aleksandr Anfilov -->
             <form method="POST" class="form-inline">
-                <div class="form-group row">
-                  <div class="col-xs-4">
+                <div class="form-group">
                     <label for="uid"><b>&nbsp; - by user id:</b></label>
-                  </div>
-                  <div class="col-xs-4">
-                      <input name="id" id="uid" class="form-control" type="number" min="1" placeholder="enter user ID" required="required">
-                  </div>
-                  <div class="col-xs-4"><button class="btn btn-primary" type="submit">Search</button></div>
+                    <input name="id" id="uid" class="form-control" type="number" min="1" placeholder="enter user ID" required="required">
+                    <button class="btn btn-primary" type="submit">Search</button></div>
                 </div>
             </form>
             <hr>
