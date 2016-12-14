@@ -92,7 +92,7 @@ public function users(string $type){
 
 		$users = TableRegistry::get('Users');
 		$this->set('type',$type);
-		if($type == 'normal') //show admins
+		if($type == 'normal') //show normal users
  		{
 
 			$query =  $users->find('all', [
@@ -100,6 +100,13 @@ public function users(string $type){
 			]);
 		}
 
+		else if($type == 'blocked') 
+ 		{
+$query =  $users->find('all', [
+    'conditions' => ['Users.status'=>0]
+			]);
+
+		}		
 		else
 		{
 			$query =  $users->find('all', [

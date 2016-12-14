@@ -34,7 +34,7 @@
                             </fieldset>
                         </div>
 
-                        <fieldset class="form-group">
+                        <!-- <fieldset class="form-group">
                             <label for="" style="display:block" data-toggle="tooltip" data-placement="right" title="A score ranging 0-100 given by Studierent website to help you find the best match!">Studierent Score <i class="fa fa-question"></i></label>
                             <select class="form-control" id="" name="score">
                               <option value="0" checked>Select</option>
@@ -45,7 +45,7 @@
                               <option value="50">50+</option>
                               <option value="0">0+</option>
                           </select>
-                        </fieldset>
+                        </fieldset> -->
 
                         <div class="radio">
                             <label for="">Distance from University</label>

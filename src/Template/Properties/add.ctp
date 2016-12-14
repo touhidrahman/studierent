@@ -33,8 +33,8 @@
             <div class="card-block">
                 <h4 class="card-title">Details</h4>
                 <?php
-                echo $this->Form->input('room_size', ['min' => 0]);
-                echo $this->Form->input('total_size', ['min' => 0]);
+                echo $this->Form->input('room_size', ['min' => 0, 'label' => 'Room Size (sq M)']);
+                echo $this->Form->input('total_size', ['min' => 0, 'label' => 'Total Size (sq M)']);
                 echo $this->Form->input('available_from');
                 echo $this->Form->input('available_until'); ?>
                 <?php echo $this->Form->input('looking_for', ['type' => 'select', 'options' => ['Any Gender' => 'Any Gender', 'Male' => 'Male', 'Female' => 'Female']]);

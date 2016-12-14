@@ -14,11 +14,13 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.js"></script>
 		<?= $this->Html->css('style') ?>
+		<?= $this->Html->css('lightbox.min') ?>
 	<!-- JS Dependencies -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
 	<?= $this->Html->script('app') ?>
+	<?= $this->Html->script('lightbox.min') ?>
 	<?= $this->fetch('meta') ?>
 	<?= $this->fetch('css') ?>
 	<?= $this->fetch('script') ?>

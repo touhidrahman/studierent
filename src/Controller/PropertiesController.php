@@ -184,10 +184,18 @@ class PropertiesController extends AppController
 
 		if($property->user_id != $this->Auth->user('id'))
 		{
+
     	    $this->Flash->error(__('You are not the owner of this property'));
     		return $this->redirect(['action' => 'myproperties']);
         } else {
             if ($this->request->is(['patch', 'post', 'put'])) {
+
+	      $this->Flash->error(__('You are not the owner of this property'));
+
+		return $this->redirect(['action' => 'myproperties']);
+                } else{
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
                 $property = $this->Properties->patchEntity($property, $this->request->data);
                 $now = Time::now();
                 $property->boosted_till = $now->addDays(7);
@@ -206,7 +214,9 @@ class PropertiesController extends AppController
         $this->set(compact('property'));
         $this->set('_serialize', ['property']);
     }
+    }
 
+    
 
     /**
      * Delete method
@@ -392,25 +402,37 @@ class PropertiesController extends AppController
      */
     public function favorites()
     {
-        $query = $this->Properties->find();
+		
+		$id_exists = true; //to tackle empty properties id
+		$favoritesTbl = TableRegistry::get('FavoriteProperties');
+        $favAdsCount = $favoritesTbl->find()->select('property_id')->where(['user_id' => $this->Auth->user('id')])->count();	
+		
+		
+		$query = $this->Properties->find();
         $query->where(function($exp){
             $ids = [];
-            $favoritesTbl = TableRegistry::get('FavoriteProperties');
-            $favAds = $favoritesTbl->find()->select('property_id')->where(['user_id' => $this->Auth->user('id')]);
-            foreach ($favAds as $ad) {
+         $favoritesTbl = TableRegistry::get('FavoriteProperties');
+         $favAds = $favoritesTbl->find()->select('property_id')->where(['user_id' => $this->Auth->user('id')]);	
+		
+			foreach ($favAds as $ad) {
                 $ids[] = $ad->property_id;
             }
             return $exp->in('Properties.id', $ids);
         });
 
-        // join zips.number field
+		
+		  // Set the layout.
+        $this->viewBuilder()->layout('userdash');
+      
+	   
+		if($favAdsCount > 0 )
+		{
+			        // join zips.number field
         $query->contain(['Zips' => function($q){
             return $q->select('number', 'city', 'province');
         }]);
         // // join images table
         $query->contain(['Images']);
-        // Set the layout.
-        $this->viewBuilder()->layout('userdash');
         $properties = $this->paginate($query);
 
         // Retrieve landlord avg rating
@@ -424,6 +446,12 @@ class PropertiesController extends AppController
         $id= $this->Auth->user('id');
         $this->set(compact('properties','id', 'avgRatings'));
         $this->set('_serialize', ['properties']);
+
+		}
+		else 
+			$id_exists = false;
+		
+		$this->set('id_exists',$id_exists);
     }
 
 

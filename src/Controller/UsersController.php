@@ -264,7 +264,7 @@ class UsersController extends AppController
 		if($this->request->is('post'))
 		{
 			$user = $this->Users->patchEntity($user, $this->request->data);
-
+			$user->status = 1;
 			if($this->Users->save($user))
 			{
 				$this->Flash->success('Thank you for registration, you can log in now');

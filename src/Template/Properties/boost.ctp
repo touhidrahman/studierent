@@ -20,7 +20,15 @@
         <h4 class="display-4 text-xs-center text-warning font-weight-bold"><?= $property['rent']?></h4>
     </div>
 </div>
-<?php if($property['is_boosted']==1){  ?>
+<?php
+$boosted = false;
+if ($property['is_boosted'] == 1) {
+    if($property['boosted_till']) {
+        if ($property['boosted_till']->isWithinNext(7)) $boosted = true;
+    }
+}
+?>
+<?php if($bossted){  ?>
 <h6 style="text-align: center;">
     This add is already boosted
         </h6>

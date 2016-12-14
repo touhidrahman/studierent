@@ -1,8 +1,16 @@
 <!-- Single Property Ad Snippet for User Profile view -->
+<?php
+$boosted = false;
+if ($property['is_boosted'] == 1) {
+    if($property['boosted_till']) {
+        if ($property['boosted_till']->isWithinNext(7)) $boosted = true;
+    }
+}
+?>
 <a href="/properties/view/<?= $property['id'] ?>" target="_blank">
 <div class="card">
     <div class="card-block">
-        <h4 class="card-title"><?= ($property['is_boosted'] == 1)? '<i class="fa fa-diamond fa-lg text-warning"></i>' : '' ?><?= $property['title'] ?></h4>
+        <h4 class="card-title"><?= ($boosted)? '<i class="fa fa-diamond fa-lg text-warning"></i>' : '' ?><?= $property['title'] ?></h4>
         <h6 class="card-subtitle text-muted">
             <?= $property['address'] ?>
             &nbsp;|&nbsp;
