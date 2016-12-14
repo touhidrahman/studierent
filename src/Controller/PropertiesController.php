@@ -20,8 +20,7 @@ class PropertiesController extends AppController
     public function initialize() {
         parent::initialize();
         $this->loadComponent('Paginator');
-		$this->Auth->allow(['search']);
-        //$this->Auth->allow(); //REM @author: Aleksandr Anfilov. Uncomment for dev purposes.
+		$this->Auth->allow(['search','home']);
 
     }
 
@@ -398,6 +397,12 @@ class PropertiesController extends AppController
 	public function home()
 	{
 		
+		$recentProperties = $this->Properties
+    ->find()
+    ->order(['created' => 'DESC'])
+	->limit(3);
+	 
+	 $this->set(compact('recentProperties'));
 	}
 
 

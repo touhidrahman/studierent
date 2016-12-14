@@ -38,7 +38,7 @@
 			<!-- User side bar -->
 			<div class="col-md-3 col-sm-4 col-xs-12">
 			    <div class="card">
-			        <img class="card-img img-fluid" src="/studierent/img/property.jpg" alt="Card image cap">
+			        <img class="card-img img-fluid" src="/img/property.jpg" alt="Card image cap">
 			          <div class="card-img-overlay">
 			            <h4 class="card-title" style="color:#fff">My Dashboard</h4>
 			            <p class="card-text"></p>
@@ -50,7 +50,7 @@
 			            <li class="list-group-item"><?= $this->Html->link('My Properties', '/properties/myproperties', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
 			            <li class="list-group-item"><?= $this->Html->link('My Favorites', '/properties/favorites/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
 			            <li class="list-group-item"><?= $this->Html->link('My Profile', '/users/view/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
-			            <li class="list-group-item"><?= $this->Html->link('Edit Profile', '/users/edit/'.$id, ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
+			            <li class="list-group-item"><?= $this->Html->link('Edit Profile', '/users/edit/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
 						<li class="list-group-item"><?= $this->Html->link('Logout', '/users/logout', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
 			        </ul>
 			    </div>

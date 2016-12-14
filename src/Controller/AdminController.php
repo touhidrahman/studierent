@@ -26,37 +26,61 @@ class AdminController extends AppController
 
         $this->set('reports',$reports);
 
+        /**
+        * @author Aleksandr Anfilov
+        * Display results of search by user id or name:
+        */
         if($this->request->is('post'))
         {
-            $form = $this->request->data();
-            $searchBy = key($form);             // key: input name is 'id' or 'username'
-            $searchParam = $form[$searchBy];    // get input value from array by key
+            //reuse Touhid's code from PropertiesController::search()
+            $qs = [];                   // access query strings and store in array
+            $validInputs = ['id', 'email', 'first_name', 'last_name'];
+            foreach ($validInputs as $key) {
+            // put into qs array only if input key is not null
+                if ($this->request->data($key)) {
+                    $qs[$key] = $this->request->data($key);
+                }
+            }
+            
+            $searchQuery = $connection->newQuery();
+            // 1. Prepare the statement
+            $searchQuery->select('id, last_name, first_name, username, status, 
+                CASE status 
+                WHEN 0 THEN \'Blocked\' 
+                WHEN 1 THEN \'Normal\' 
+                WHEN 9 THEN \'Admin\' 
+                ELSE \'Unknown\'    end AS `type`')
+            ->from('users');
 
-            $searchQuery = TableRegistry::get('Users')
-                ->find()                // 1. Prepare a SELECT query:
-                ->select( ['id', 'last_name', 'first_name', 'username', 'status'] );
-
-            switch ($searchBy) {        // 2. Add a WHERE condition
-	            case 'id':
-	                $searchQuery->where(['id' => $searchParam]);
-		            break;
-
-	            case 'username':        //  find by username (which is an e-mail address)
-	                $searchQuery->where(['username' => $searchParam]);
-		            break;
+            // 2. Add WHERE conditions
+            if ( isset($qs['id']) ) {
+                $searchQuery->where( 
+                [   'id'           => $qs['id']            ] );
             }
 
-            $usersFound = $searchQuery->toArray();// 3. Execute the query
+            if ( isset($qs['email'])        ) {
+                $searchQuery->where( 
+                [   'username'     => $qs['email']         ] );
+            }
 
-            if (!empty($usersFound)){   //send results to  view only of they exist
+            if ( isset($qs['first_name'])   ) {
+                $searchQuery->where( 
+                [   'first_name'   => $qs['first_name']    ] );
+            }
+            if ( isset($qs['last_name'])    ) {
+                $searchQuery->where( ['last_name' => $qs['last_name']]);
+            }
+
+            $usersFound = $searchQuery->execute();
+
+            if (!empty($usersFound)){   //send results to  view only if they exist 
                 $this->set('usersFound', $usersFound);
             }
             else{
                 $this->Flash->error(__('No users have been found with the ' . $searchBy . ' ' . $searchParam . '.'));
             }
         }
-	}
-
+}
 
 
   /**

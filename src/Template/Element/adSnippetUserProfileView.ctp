@@ -1,5 +1,5 @@
 <!-- Single Property Ad Snippet for User Profile view -->
-<a href="/studierent/properties/view/<?= $property['id'] ?>" target="_blank">
+<a href="/properties/view/<?= $property['id'] ?>" target="_blank">
 <div class="card">
     <div class="card-block">
         <h4 class="card-title"><?= $property['title'] ?></h4>
