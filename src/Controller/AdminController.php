@@ -32,48 +32,48 @@ class AdminController extends AppController
         */
         if($this->request->is('post'))
         {
-            //reuse Touhid's code from PropertiesController::search()
             $qs = [];                   // access query strings and store in array
-            $validInputs = ['id', 'email', 'first_name', 'last_name'];
+            $validInputs = ['id', 'email', 'name'];
             foreach ($validInputs as $key) {
             // put into qs array only if input key is not null
                 if ($this->request->data($key)) {
                     $qs[$key] = $this->request->data($key);
                 }
             }
-            
+
             $searchQuery = $connection->newQuery();
             // 1. Prepare the statement
-            $searchQuery->select('id, last_name, first_name, username, status, 
-                CASE status 
-                WHEN 0 THEN \'Blocked\' 
-                WHEN 1 THEN \'Normal\' 
-                WHEN 9 THEN \'Admin\' 
+            $searchQuery->select('id, last_name, first_name, username, status,
+                CASE status
+                WHEN 0 THEN \'Blocked\'
+                WHEN 1 THEN \'Normal\'
+                WHEN 9 THEN \'Admin\'
                 ELSE \'Unknown\'    end AS `type`')
             ->from('users');
 
             // 2. Add WHERE conditions
             if ( isset($qs['id']) ) {
-                $searchQuery->where( 
+                $searchQuery->where(
                 [   'id'           => $qs['id']            ] );
             }
 
             if ( isset($qs['email'])        ) {
-                $searchQuery->where( 
+                $searchQuery->where(
                 [   'username'     => $qs['email']         ] );
             }
 
-            if ( isset($qs['first_name'])   ) {
-                $searchQuery->where( 
-                [   'first_name'   => $qs['first_name']    ] );
-            }
-            if ( isset($qs['last_name'])    ) {
-                $searchQuery->where( ['last_name' => $qs['last_name']]);
+            if ( isset($qs['name'])   ) {
+				$searchQuery->where(function($exp){
+					return $exp->or_([
+						'first_name LIKE' => '%'.$this->request->data('name').'%',
+						'last_name LIKE' => '%'.$this->request->data('name').'%',
+					]);
+                });
             }
 
             $usersFound = $searchQuery->execute();
 
-            if (!empty($usersFound)){   //send results to  view only if they exist 
+            if (!empty($usersFound)){   //send results to  view only if they exist
                 $this->set('usersFound', $usersFound);
             }
             else{

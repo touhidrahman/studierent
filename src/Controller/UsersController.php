@@ -113,7 +113,7 @@ class UsersController extends AppController
             if(!empty($this->request->data['photo']['name'])){
                 $fileName = $this->request->data['photo']['name'];
                 $extention = pathinfo($fileName,PATHINFO_EXTENSION);
-                $arr_ext = array('jpg', 'jpeg', 'gif','png'); 
+                $arr_ext = array('jpg', 'jpeg', 'gif','png');
                  if(in_array($extention, $arr_ext)){
                 $newfileName=$id.'.'.$extention;
                 $destDir = WWW_ROOT .'img'. DS .'users'. DS . $newfileName;
@@ -437,7 +437,7 @@ class UsersController extends AppController
     public function resetPassword()  {
         if($this->request->is('post')) {
             $session = $this->request->session();
-            $id = $session->read('User.tmp');
+            $id = $session->consume('User.tmp');
             $data = $this->request->data();
 
             $user = $this->Users->get($id);
