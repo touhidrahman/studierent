@@ -58,15 +58,15 @@
 				Average Rating
 			</div>
 			<div class="card-block">
-				
+
 					<?php
 						if(!isset($avgRating->avg_rate) ||$avgRating->avg_rate==0){ ?>
                             <h1 class="display-3 text-xs-center text-warning">No rating yet</h1>
 				<div class="text-xs-center">
 							<p>Not Rated yet</p>
 							<?php
-                                                } else {?>
-                                                    <h1 class="display-3 text-xs-center text-warning"><?= round($avgRating->avg_rate, 2) ?></h1>
+                            } else {?>
+                                <h1 class="display-3 text-xs-center text-warning"><?= round($avgRating->avg_rate, 2) ?></h1>
 				<div class="text-xs-center">
 						<?php	$filledStar = ceil($avgRating->avg_rate);
 							$hollowStar = 5 - $filledStar;
@@ -76,7 +76,7 @@
 							for ($i=0; $i < $hollowStar; $i++) {
 								echo '<i class="fa fa-star-o text-info"></i>';
 							}
-                                                }
+                        }
 					?>
 				</div>
 			</div>
