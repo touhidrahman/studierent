@@ -1,28 +1,29 @@
 <div class="row">
-	<div class="col-xs-12">
-		<div class="jumbotron jumbotron-fluid text-xs-center">
-			<div class="container">
-
-				<?php
-				$path ='users/';
-				$filename= $user->photo;
-				$userimage=$path.$filename;
-				$file = WWW_ROOT . 'img' . DS . 'users' . DS .$filename;
-				if(file_exists($file))
-				{
-					echo $this->Html->image($userimage, array('alt' => 'User Image','class'=>'rounded-circle','height' => '128', 'width' => '128'));
-				}
-				else
-				echo $this->Html->image('boy.jpg', array('alt' => 'User Image','class'=>'rounded-circle','height' => '128', 'width' => '128'));
-				?>
-
-				<h1 class="display-3"><?= $user->first_name .' '. $user->last_name ?></h1>
+    <div class="col-xs-12">
+	<div class="jumbotron jumbotron-fluid text-xs-center">
+	    <div class="container">
+                <!-- PHP code
+        	@author Mythri Manjunath
+	        -->
+		<?php
+		$path ='users/';
+		$filename= $user->photo;
+		$userimage=$path.$filename;
+		$file = WWW_ROOT . 'img' . DS . 'users' . DS .$filename;
+		if(file_exists($file))
+		{
+           	echo $this->Html->image($userimage, array('alt' => 'User Image','class'=>'rounded-circle','height' => '128', 'width' => '128'));
+                }
+		else
+		echo $this->Html->image('boy.jpg', array('alt' => 'User Image','class'=>'rounded-circle','height' => '128', 'width' => '128'));
+		?>
+		    <h1 class="display-3"><?= $user->first_name .' '. $user->last_name ?></h1>
 				<!-- PHP code
 				@author Norman Lista
 			-->
-			</div>
-		</div>
-	</div>
+	    </div>
+        </div>
+    </div>
 
 	<div class="col-xs-4">
 

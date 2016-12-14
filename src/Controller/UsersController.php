@@ -102,42 +102,47 @@ class UsersController extends AppController
 
 
     /**
-     * Add method - add user profile image
-     *@Mythri Manjunath
-     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
+     * Add method - upload user profile image
+     *@Mythri Manjunath 
+     *@param integer $id user_id.    
      */
     public function add($id=null)
     {
         $user='';
+        //check if the request is post 
         if ($this->request->is('post')) {
-            if(!empty($this->request->data['photo']['name'])){
-                $fileName = $this->request->data['photo']['name'];
-                $extention = pathinfo($fileName,PATHINFO_EXTENSION);
-                $arr_ext = array('jpg', 'jpeg', 'gif','png');
-                 if(in_array($extention, $arr_ext)){
-                $newfileName=$id.'.'.$extention;
-                $destDir = WWW_ROOT .'img'. DS .'users'. DS . $newfileName;
-                if(move_uploaded_file($this->request->data['photo']['tmp_name'],$destDir)){
-                   if (!$id) $id = $this->Auth->user('id');
-                    $user = $this->Users->get($id);
+            //check for logged in user authentication
+            if (!$id) $id = $this->Auth->user('id');
+                $user = $this->Users->get($id);
+                //check if upload file is not empty
+                 if(!empty($this->request->data['photo']['name'])){
+                    $fileName = $this->request->data['photo']['name'];
+                    $extention = pathinfo($fileName,PATHINFO_EXTENSION);
+                    $arr_ext = array('jpg', 'jpeg', 'gif','png');
+                    //check for uploded file extension
+                    if(in_array($extention, $arr_ext)){
+                    $newfileName=$id.'.'.$extention;
+                    $destDir = WWW_ROOT .'img'. DS .'users'. DS . $newfileName;
+                    //move uploded file to destination
+                    if(move_uploaded_file($this->request->data['photo']['tmp_name'],$destDir)){                  
                     $user->photo = $newfileName;
+                    //save the uploded image in user table
                     if ($this->Users->save($user)) {
-                        $this->Flash->success(__('Your profile Image has been uploaded successfully.'));
-                        return $this->redirect([
-                        'controller' => 'Users',
-                         'action' => 'view', $id
-                       ]);
-                    }else{
+                    $this->Flash->success(__('Your profile photo has been uploaded successfully.'));
+                    return $this->redirect([
+                            'controller' => 'Users',
+                            'action' => 'view', $id
+                             ]);
+                    } else{
                         $this->Flash->error(__('Unable to upload image, please try again.'));
                     }
-                }else{
+                    }else{
                     $this->Flash->error(__('Unable to upload image, please try again.'));
+                    }
+                    }else{
+                    $this->Flash->error(__('Please choose a image to upload.'));
                 }
-            }else{
-                $this->Flash->error(__('Please choose a image to upload.'));
             }
-
-        }
         }
         $this->set(compact('user'));
         $this->set('_serialize', ['user']);

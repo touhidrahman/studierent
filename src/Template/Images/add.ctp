@@ -1,10 +1,12 @@
+<!-- PHP code
+ @author Mythri Manjunath
+-->
 <div class="row">
-
-  <div class="col-xs-6 offset-xs-3">
-    <div class="card">
-        <div class="card-block">
+    <div class="col-xs-6 offset-xs-3">
+        <div class="card">
+            <div class="card-block">
             <h4 class="card-title"><?= __('Upload Photo') ?></h4>
-        </p><?= __('Thank you for adding a property! Add images to attract customers! ') ?></p>
+            </p><?= __('Thank you for adding a property! Add images to attract customers! ') ?></p>
             <?php echo $this->Form->create($image, ['type' => 'file']); ?>
             <?php echo $this->Form->input('upload',['label'=>' ','type' => 'file', 'class' => 'form-control']); ?>
             <br/>
@@ -15,5 +17,4 @@
         </div>
     </div>
   </div>
-
 </div>
