@@ -177,16 +177,16 @@ class PropertiesController extends AppController
     {
         // @author Norman Lista
         $property = $this->Properties->get($id);
-		
+
 		//
 		if($property->user_id != $this->Auth->user('id'))
 		{
 	      $this->Flash->error(__('You are not the owner of this property'));
-                    
+
 		return $this->redirect(['action' => 'myproperties']);
-                } else{	
+                } else{
         if ($this->request->is(['patch', 'post', 'put'])) {
-           
+
                 $property = $this->Properties->patchEntity($property, $this->request->data);
                 if ($this->Properties->save($property)) {
                     $this->Flash->success(__('The property ad has been Boost'));
@@ -195,7 +195,7 @@ class PropertiesController extends AppController
                 } else {
                     $this->Flash->error(__('The property could not be boosted Please, try again.'));
                 }
-            
+
         }
                 }
         // Set the layout.
@@ -438,8 +438,15 @@ class PropertiesController extends AppController
     ->order(['created' => 'DESC'])
 	->limit(3);
 
-	 $this->set(compact('recentProperties'));
-	 $this->set('_serialize', ['recentProperties']);
+		$boostedProperties = $this->Properties
+    ->find()
+    ->where(['is_boosted' => 1])
+	->contain(['Images'])
+    ->order(['created' => 'DESC'])
+	->limit(3);
+
+	 $this->set(compact('recentProperties', 'boostedProperties'));
+	 $this->set('_serialize', ['recentProperties', 'boostedProperties']);
 
 	}
 

@@ -1,9 +1,10 @@
 <!-- Single Property Ad Snippet -->
-<div class="card">
+<div class="card <?= ($property['is_boosted'] == 1)? 'card-outline-warning' : '' ?>">
     <div class="card-block" style="padding-bottom: 0rem">
-        <a href="/properties/view/<?= $property['id'] ?>" target="_blank">
-            <h4 class="card-title"><?= $property['title'] ?></h4>
-        </a>
+        <h4 class="card-title">
+        <?= ($property['is_boosted'] == 1)? '<i class="fa fa-diamond fa-lg text-warning"></i>' : '' ?>
+        <?= $this->Html->link($property['title'], ['action' => 'view', $property['id']], ['target' => '_blank']) ?>
+        </h4>
         <h6 class="card-subtitle text-muted">
             <?= $this->Html->link($property['address'], '/properties/search?address='.$property['address'], ['title' => 'Click here to search all properties in '.$property['address']]) ?>
             &nbsp;|&nbsp;

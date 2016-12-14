@@ -74,13 +74,13 @@
         </ol>
       	<div class="carousel-inner" role="listbox">
 
-        <?php $i = 0; foreach ($recentProperties as $rp): ?>
+        <?php $i = 0; foreach ($boostedProperties as $bp): ?>
 
                <div class="carousel-item <?= ($i==0)? 'active' : ''; ?>">
-                <?= $this->Html->image('properties/'.$rp->images[0]->path); ?>
+                <?= $this->Html->image('properties/'.$bp->images[0]->path); ?>
                     <div class="carousel-caption">
-                        <h3><?php echo $rp->title; ?></h3>
-                        <?= $this->Html->link('Check it out', ['action' => 'view', $rp->id]) ?>
+                        <h3><?php echo $bp->title; ?></h3>
+                        <?= $this->Html->link('Check it out', ['action' => 'view', $bp->id]) ?>
                     </div>
                 </div>
 
