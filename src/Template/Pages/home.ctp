@@ -1,6 +1,6 @@
 <!-- HOMEPAGE -->
 <div class="">
-  <img src="/studierent/img/fulda.jpg" alt="Welcome image" class="img-fluid rounded" style="width:100%">
+  <img src="img/fulda.jpg" alt="Welcome image" class="img-fluid rounded" style="width:100%">
 </div>
 <div class="jumbotron text-xs-center" style="background-color: #ffffff">
     <h1 class="display-3">Hello, Students!</h1>
