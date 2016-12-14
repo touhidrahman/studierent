@@ -29,11 +29,15 @@
 				</div>
 
 			</div>
+			<?php $boosted = (($property['is_boosted'] == 1) && ($property['boosted_till']->isWithinNext(7))) ? true : false; ?>
 
 			<div class="col-xs-12">
 				<div class="card">
 					<div class="card-header">
-						<h3 class="text-success"><?= $property->title ?></h3>
+						<h3 class="text-success">
+							<?= ($boosted)? '<i class="fa fa-diamond fa-lg text-warning"></i>' : '' ?>
+							<?= $property->title ?>
+						</h3>
 					</div>
 
 					<!-- <div class="row">

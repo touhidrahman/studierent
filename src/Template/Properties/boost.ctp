@@ -1,4 +1,3 @@
-<?php use Cake\I18n\Time;?>
 <h1 class="display-4" style="text-align:center;">Boost your property for more views!</h1>
 <div class="card">
     <div class="card-block">
@@ -30,7 +29,7 @@
 <p>You <?=date('Y-m-d H:i:s');?> can boost your ad with only 2 EUR for 7 days. If you click the "Boost" button, it will take you to the third party payment site, where you can pay through Credit card.</p>
 <div class="form-group row" style="text-align: center;" >
     <input type="hidden" name="is_boosted" value="1"/>
-<?= $this->Form->button(__('Boost'), ['class' => 'btn btn-success']) ?>
+    <?= $this->Form->button(__('Boost'), ['class' => 'btn btn-success']) ?>
     </div>
-<?= $this->Form->end(); ?>
+    <?= $this->Form->end(); ?>
 <?php }?>
