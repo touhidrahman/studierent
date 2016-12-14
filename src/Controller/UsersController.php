@@ -138,6 +138,7 @@ class UsersController extends AppController
             }
 
         }
+        }
         $this->set(compact('user'));
         $this->set('_serialize', ['user']);
         $this->set('id', $id);
