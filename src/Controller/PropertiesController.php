@@ -187,13 +187,7 @@ class PropertiesController extends AppController
 
     	    $this->Flash->error(__('You are not the owner of this property'));
     		return $this->redirect(['action' => 'myproperties']);
-        } else {
-            if ($this->request->is(['patch', 'post', 'put'])) {
-
-	      $this->Flash->error(__('You are not the owner of this property'));
-
-		return $this->redirect(['action' => 'myproperties']);
-                } else{
+        } else { 
         if ($this->request->is(['patch', 'post', 'put'])) {
 
                 $property = $this->Properties->patchEntity($property, $this->request->data);
@@ -208,7 +202,7 @@ class PropertiesController extends AppController
                 }
 
             }
-        }
+        
         // Set the layout.
         $this->viewBuilder()->layout('userdash');
         $this->set(compact('property'));

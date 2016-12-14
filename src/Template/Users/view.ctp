@@ -58,14 +58,17 @@
 				Average Rating
 			</div>
 			<div class="card-block">
-				<h1 class="display-3 text-xs-center text-warning"><?= round($avgRating->avg_rate, 2) ?></h1>
-				<div class="text-xs-center">
+
 					<?php
-						if( $avgRating->avg_rate==0){ ?>
+						if( !property_exists('avgRating', 'avg_rate')){ ?>
+                            <h1 class="display-3 text-xs-center text-warning">No rating yet</h1>
+				<div class="text-xs-center">
 							<p>Not Rated yet</p>
 							<?php
-						} else {
-							$filledStar = ceil($avgRating->avg_rate);
+                            } else {?>
+                                <h1 class="display-3 text-xs-center text-warning"><?= round($avgRating->avg_rate, 2) ?></h1>
+				<div class="text-xs-center">
+						<?php	$filledStar = ceil($avgRating->avg_rate);
 							$hollowStar = 5 - $filledStar;
 							for ($i=0; $i < $filledStar; $i++) {
 								echo '<i class="fa fa-star text-info"></i>';
@@ -73,7 +76,7 @@
 							for ($i=0; $i < $hollowStar; $i++) {
 								echo '<i class="fa fa-star-o text-info"></i>';
 							}
-						}
+                        }
 					?>
 				</div>
 			</div>
@@ -120,8 +123,8 @@
 						</label>
 					</div>
 					<input type="hidden" name="status" value="1" />
-					<input type="hidden" name="user_id" value="<?= $user->id?>"/>
-					<input type="hidden" name="for_user_id" value="<?= $logUser?>"/>
+					<input type="hidden" name="for_user_id" value="<?= $user->id?>"/>
+					<input type="hidden" name="user_id" value="<?= $logUser?>"/>
 					<fieldset class="form-group">
 						<label for="Select">How do you know this user?</label>
 						<select class="form-control" name="relationship_basis" id="relationship_basis">

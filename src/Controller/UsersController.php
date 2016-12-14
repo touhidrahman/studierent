@@ -91,7 +91,7 @@ class UsersController extends AppController
          if($this->Feedbacks->save($feedback)){
              $this->Flash->success(__('Feedback added'));
          }else{
-             $this->Flash-error(__('Unable to add feedback'));
+             $this->Flash->error(__('Unable to add feedback'));
          }
         }
         $this->set('feedback',$feedback);
