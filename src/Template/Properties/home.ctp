@@ -37,28 +37,24 @@
       		<li data-target="#carousel" data-slide-to="1"></li>
       		<li data-target="#carousel" data-slide-to="2"></li>
       	</ol>
+		
       	<div class="carousel-inner" role="listbox">
-      		<div class="carousel-item active center_please">
-      			<img src="http://loremflickr.com/590/250/house?random=5" alt="First slide">
+      	
+<?php $i = 0; foreach ($recentProperties as $rp): ?>
+    
+	<div class="carousel-item <?= ($i==0)? 'active' : ''; ?>">
+				<?= $this->Html->image('properties'.'/'.$rp->images[0]->path); ?>
       			<div class="carousel-caption">
-      				<h3>First recent property</h3>
-      				<a class="" href="login.html">Check it out</a>
+      				<h3><?php echo $rp->title; ?></h3>
+      				<?= $this->Html->link('Check it out', ['action' => 'view', $rp->id]) ?>
       			</div>
       		</div>
-      		<div class="carousel-item center_please">
-      			<img src="http://loremflickr.com/590/250/house?random=4" alt="Second slide">
-      			<div class="carousel-caption">
-      				<h3>Second recent property</h3>
-      				<a class="" href="login.html">Check it out</a>
-      			</div>
-      		</div>
-      		<div class="carousel-item center_please">
-      			<img src="http://loremflickr.com/590/250/house?random=2" alt="Third slide">
-      			<div class="carousel-caption ">
-      				<h3>Third recent property</h3>
-      				<a class="" href="login.html">Check it out</a>
-      			</div>
-      		</div>
+			
+    <?php $i++; endforeach; ?>
+	
+	
+		
+      		
       	</div>
       	<a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
       		<span class="icon-prev" aria-hidden="true"></span>
