@@ -4,7 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Cake\I18n\Date;
-
+use Cake\I18n\Time;
 
 /**
  * Properties Controller
@@ -175,6 +175,7 @@ class PropertiesController extends AppController
 
  public function boost($id = null)
     {
+     
         // @author Norman Lista
         $property = $this->Properties->get($id);
 
@@ -186,7 +187,7 @@ class PropertiesController extends AppController
 		return $this->redirect(['action' => 'myproperties']);
                 } else{
         if ($this->request->is(['patch', 'post', 'put'])) {
-
+            $property->boosted_till->addDays(7); 
                 $property = $this->Properties->patchEntity($property, $this->request->data);
                 if ($this->Properties->save($property)) {
                     $this->Flash->success(__('The property ad has been Boost'));

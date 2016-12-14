@@ -1,4 +1,4 @@
-
+<?php use Cake\I18n\Time;?>
 <h1 class="display-4" style="text-align:center;">Boost your property for more views!</h1>
 <div class="card">
     <div class="card-block">
@@ -25,12 +25,11 @@
 <h6 style="text-align: center;">
     This add is already boosted
         </h6>
-<?php }else{ ?>
+<?php }else{  ?>
 <?= $this->Form->create($property)?>
-<p>You can boost your ad with only 2 EUR for 7 days. If you click the "Boost" button, it will take you to the third party payment site, where you can pay through Credit card.</p>
+<p>You <?=date('Y-m-d H:i:s');?> can boost your ad with only 2 EUR for 7 days. If you click the "Boost" button, it will take you to the third party payment site, where you can pay through Credit card.</p>
 <div class="form-group row" style="text-align: center;" >
     <input type="hidden" name="is_boosted" value="1"/>
-    <input type="hidden" name="boosted_till" value=<?=date("y-m-d");?>/>
 <?= $this->Form->button(__('Boost'), ['class' => 'btn btn-success']) ?>
     </div>
 <?= $this->Form->end(); ?>
