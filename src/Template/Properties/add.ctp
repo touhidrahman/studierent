@@ -51,7 +51,7 @@
             <div class="card-block">
                 <h4 class="card-title">Amenities</h4>
                 <?php
-                echo $this->Form->input('dist_from_uni');
+                echo $this->Form->input('dist_from_uni', ['label' => 'Distance from University (KM)']);
                 echo $this->Form->input('time_dist_from_uni', ['type' => 'number', 'min' => 0, 'max' => 100, 'step' => '5', 'label' => 'Walking Distance From the University (Minutes)', 'placeholder' => '10']);
                 echo $this->Form->input('electricity_bill_included', ['label' => 'Electricity Bill Included in Rent']);
                 echo $this->Form->input('direct_bus_to_uni', ['label' => 'Direct Bus Route to University']);

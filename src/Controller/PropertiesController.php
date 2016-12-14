@@ -145,16 +145,16 @@ class PropertiesController extends AppController
     {
         // only logged in user can edit his property
         $property = $this->Properties->get($id);
-		
+
 		//To ensure that only administrators are able to edit all the properties
 		if($property->user_id != $this->Auth->user('id'))
 		{
 			$session = $this->request->session();
 			   if($session->read('User.admin') != '1')
 		return $this->redirect($this->referer());
-			
+
 		}
-		
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             if ($property->user_id == $this->Auth->user('id')){
                 $property = $this->Properties->patchEntity($property, $this->request->data);
@@ -393,20 +393,25 @@ class PropertiesController extends AppController
         $this->set(compact('properties','id', 'avgRatings'));
         $this->set('_serialize', ['properties']);
     }
-	
-	
+
+
+
+	/**
+	 * Landing page
+     * @author Muneeb Noor
+	 */
 	public function home()
 	{
-		
+
 		$recentProperties = $this->Properties
     ->find()
 	->contain(['Images'])
     ->order(['created' => 'DESC'])
 	->limit(3);
-	 
+
 	 $this->set(compact('recentProperties'));
 	 $this->set('_serialize', ['recentProperties']);
-	 
+
 	}
 
 

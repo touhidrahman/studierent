@@ -1,6 +1,6 @@
 <!-- HOMEPAGE -->
 <div class="">
-  <img src="img/fulda.jpg" alt="Welcome image" class="img-fluid rounded" style="width:100%">
+    <?= $this->Html->image('fulda.jpg', ['alt' => 'Welcome image', 'class' => 'img-fluid rounded', 'style' => 'width:100%']); ?>
 </div>
 <div class="jumbotron text-xs-center" style="background-color: #ffffff">
     <h1 class="display-3">Hello, Students!</h1>
@@ -30,31 +30,28 @@
 <p></p>
 <div class="row">
   <div class="col-xs-6">
-      <h1 class="text-xs-center text-success">Recent Properties</h1>
+      <h3 class="text-xs-center text-success">Recent Properties</h3>
       <div id="carousel" class="carousel slide uptop spacewide" data-ride="carousel">
       	<ol class="carousel-indicators">
       		<li data-target="#carousel" data-slide-to="0" class="active"></li>
       		<li data-target="#carousel" data-slide-to="1"></li>
       		<li data-target="#carousel" data-slide-to="2"></li>
       	</ol>
-		
+
       	<div class="carousel-inner" role="listbox">
-      	
-<?php $i = 0; foreach ($recentProperties as $rp): ?>
-    
-	<div class="carousel-item <?= ($i==0)? 'active' : ''; ?>">
-				<?= $this->Html->image('properties'.'/'.$rp->images[0]->path); ?>
-      			<div class="carousel-caption">
-      				<h3><?php echo $rp->title; ?></h3>
-      				<?= $this->Html->link('Check it out', ['action' => 'view', $rp->id]) ?>
-      			</div>
-      		</div>
-			
-    <?php $i++; endforeach; ?>
-	
-	
-		
-      		
+
+            <?php $i = 0; foreach ($recentProperties as $rp): ?>
+
+	               <div class="carousel-item <?= ($i==0)? 'active' : ''; ?>">
+    				<?= $this->Html->image('properties/'.$rp->images[0]->path); ?>
+              			<div class="carousel-caption">
+              				<h3><?php echo $rp->title; ?></h3>
+              				<?= $this->Html->link('Check it out', ['action' => 'view', $rp->id]) ?>
+              			</div>
+      		        </div>
+
+            <?php $i++; endforeach; ?>
+
       	</div>
       	<a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
       		<span class="icon-prev" aria-hidden="true"></span>
@@ -68,41 +65,32 @@
   </div>
 
   <div class="col-xs-6">
-      <h1 class="text-xs-center text-success">Top Properties</h1>
-      <div id="carousel" class="carousel slide uptop spacewide" data-ride="carousel">
+      <h3 class="text-xs-center text-success">Top Properties</h3>
+      <div id="carouselTop" class="carousel slide uptop spacewide" data-ride="carousel">
         <ol class="carousel-indicators">
-            <li data-target="#carousel" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel" data-slide-to="1"></li>
-            <li data-target="#carousel" data-slide-to="2"></li>
+            <li data-target="#carouselTop" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselTop" data-slide-to="1"></li>
+            <li data-target="#carouselTop" data-slide-to="2"></li>
         </ol>
-        <div class="carousel-inner" role="listbox">
-            <div class="carousel-item active center_please">
-                <img src="http://loremflickr.com/590/250/house?random=123" alt="First slide">
-                <div class="carousel-caption">
-                    <h3>First top property</h3>
-                    <a class="" href="/users/login">Check it out</a>
+      	<div class="carousel-inner" role="listbox">
+
+        <?php $i = 0; foreach ($recentProperties as $rp): ?>
+
+               <div class="carousel-item <?= ($i==0)? 'active' : ''; ?>">
+                <?= $this->Html->image('properties/'.$rp->images[0]->path); ?>
+                    <div class="carousel-caption">
+                        <h3><?php echo $rp->title; ?></h3>
+                        <?= $this->Html->link('Check it out', ['action' => 'view', $rp->id]) ?>
+                    </div>
                 </div>
-            </div>
-            <div class="carousel-item center_please">
-                <img src="http://loremflickr.com/590/250/house?random=1" alt="Second slide">
-                <div class="carousel-caption">
-                    <h3>Second top property</h3>
-                    <a class="" href="/users/login">Check it out</a>
-                </div>
-            </div>
-            <div class="carousel-item center_please">
-                <img src="http://loremflickr.com/590/250/house?random=12" alt="Third slide">
-                <div class="carousel-caption ">
-                    <h3>Third top property</h3>
-                    <a class="" href="/users/login">Check it out</a>
-                </div>
-            </div>
+
+        <?php $i++; endforeach; ?>
         </div>
-        <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+        <a class="left carousel-control" href="#carouselTop" role="button" data-slide="prev">
             <span class="icon-prev" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
         </a>
-        <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+        <a class="right carousel-control" href="#carouselTop" role="button" data-slide="next">
             <span class="icon-next" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
@@ -112,15 +100,15 @@
 <p></p>
 <p></p>
 
-    <div class="jumbotron text-xs-center" style="background-color: #ffffff">
-        <h1 class="display-4">What Our Customers Are Saying?</h1>
-        <img src="img/boy.jpg" class="img-fluid rounded-circle">
-        <p class="lead">
-            I am so happy! <br>
-            <small>- Alexandr Anfilov</small>
-        </p>
-        <hr class="m-y-md">
-    </div>
+<div class="jumbotron text-xs-center" style="background-color: #ffffff">
+    <h1 class="display-4">What Our Customers Are Saying?</h1>
+    <img src="img/boy.jpg" class="img-fluid rounded-circle" style="width:140px">
+    <p class="lead">
+        I am so happy! <br>
+        <small>- Alexandr Anfilov</small>
+    </p>
+    <hr class="m-y-md">
+</div>
 
 <div class="spacewide">
 	<div class="card-group uptop ">
@@ -129,7 +117,7 @@
 			<div class="card-block">
 				<h4 class="card-title">Advertisement 1</h4>
 				<p class="card-text">Eat this and you will never have to diet again, is the miracle plant for fat burning!</p>
-				<a href="#" class="btn btn-primary">Read More</a>
+                <a href="#" class="card-link">Read More</a>
 			</div>
 		</div>
 		<div class="card">
@@ -137,7 +125,7 @@
 			<div class="card-block">
 				<h4 class="card-title">Advertisement 2</h4>
 				<p class="card-text">You won't belive what nature did to this man, it change his life for ever!</p>
-				<a href="#" class="btn btn-primary">Read More</a>
+				<a href="#" class="card-link">Read More</a>
 			</div>
 		</div>
 		<div class="card">
@@ -145,7 +133,7 @@
 			<div class="card-block">
 				<h4 class="card-title">Advertisement 3</h4>
 				<p class="card-text"> The bigest garden tournament started! the most beuatiful plants in the world are here!</p>
-				<a href="#" class="btn btn-primary">Read More</a>
+                <a href="#" class="card-link">Read More</a>
 			</div>
 		</div>
 		<div class="card">
@@ -153,7 +141,7 @@
 			<div class="card-block">
 				<h4 class="card-title">Advertisement 4</h4>
 				<p class="card-text"> Year's largest music night is here!</p>
-				<a href="#" class="btn btn-primary">Read More</a>
+                <a href="#" class="card-link">Read More</a>
 			</div>
 		</div>
 	</div>
