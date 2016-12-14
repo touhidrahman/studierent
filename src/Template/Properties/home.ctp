@@ -80,21 +80,21 @@
                 <img src="http://loremflickr.com/590/250/house?random=123" alt="First slide">
                 <div class="carousel-caption">
                     <h3>First top property</h3>
-                    <a class="" href="/studierent/users/login">Check it out</a>
+                    <a class="" href="/users/login">Check it out</a>
                 </div>
             </div>
             <div class="carousel-item center_please">
                 <img src="http://loremflickr.com/590/250/house?random=1" alt="Second slide">
                 <div class="carousel-caption">
                     <h3>Second top property</h3>
-                    <a class="" href="/studierent/users/login">Check it out</a>
+                    <a class="" href="/users/login">Check it out</a>
                 </div>
             </div>
             <div class="carousel-item center_please">
                 <img src="http://loremflickr.com/590/250/house?random=12" alt="Third slide">
                 <div class="carousel-caption ">
                     <h3>Third top property</h3>
-                    <a class="" href="/studierent/users/login">Check it out</a>
+                    <a class="" href="/users/login">Check it out</a>
                 </div>
             </div>
         </div>

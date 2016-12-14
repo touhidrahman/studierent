@@ -24,7 +24,7 @@ class UsersController extends AppController
 		parent::initialize();
         $session = $this->request->session();
 
-		$this->Auth->allow(['logout', 'register', 'forgotPassword', 'activation', 'resetPasswords']);
+		$this->Auth->allow(['logout', 'register', 'forgotPassword', 'activation', 'resetPassword']);
 	}
 
 
@@ -113,6 +113,8 @@ class UsersController extends AppController
             if(!empty($this->request->data['photo']['name'])){
                 $fileName = $this->request->data['photo']['name'];
                 $extention = pathinfo($fileName,PATHINFO_EXTENSION);
+                $arr_ext = array('jpg', 'jpeg', 'gif','png'); 
+                 if(in_array($extention, $arr_ext)){
                 $newfileName=$id.'.'.$extention;
                 $destDir = WWW_ROOT .'img'. DS .'users'. DS . $newfileName;
                 if(move_uploaded_file($this->request->data['photo']['tmp_name'],$destDir)){
@@ -136,9 +138,8 @@ class UsersController extends AppController
             }
 
         }
-        $cities = $this->Users->Cities->find('list', ['limit' => 200]);
-        $properties = $this->Users->Properties->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'cities', 'properties'));
+        }
+        $this->set(compact('user'));
         $this->set('_serialize', ['user']);
         $this->set('id', $id);
     }
@@ -151,10 +152,10 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
-	
-		if (!$id) 
+
+		if (!$id)
 			$id = $this->Auth->user('id');
-		
+
 		else if($id != $this->Auth->user('id'))
 		{
 			$session = $this->request->session();
@@ -162,8 +163,8 @@ class UsersController extends AppController
 					return $this->redirect(
         array('controller' => 'users', 'action' => 'dashboard')
     );
-			
-		}					
+
+		}
         $user = $this->Users->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->data);
@@ -412,15 +413,15 @@ class UsersController extends AppController
 
             $user = $this->Users->find()->where(['reset_key' => $data['reset_key']])->first();
             // no user is available with this code
-            if (!($user->toArray()))
+            if ($user->id)
             {
-                $this->Flash->error('Oops! Are you sure about the code?');
-                return $this->redirect(['controller' => 'users','action' => 'forgotPassword']);
-            } else {
                 // code verified, let user change password
                 $session = $this->request->session();
                 $session->write('User.tmp', $user->id);
-                return $this->redirect(['controller' => 'users','action' => 'resetPassword']);
+                return $this->redirect(['action' => 'resetPassword']);
+            } else {die("exit");
+                $this->Flash->error('Oops! Are you sure about the code?');
+                return $this->redirect(['action' => 'forgotPassword']);
             }
         }
     }
@@ -441,19 +442,19 @@ class UsersController extends AppController
 
             $user = $this->Users->get($id);
             // no user is available
-            if (!($user->toArray())) {
-                $this->Flash->error('What a Terrible Failure! Please try again.');
-            } else {
+            if ($user->toArray()) {
                 // change password
-                // TODO:
-
-
-
-
-
-
-                $this->Flash->success('Password changed! You can login now.');
-                return $this->redirect(['controller' => 'users','action' => 'resetPassword']);
+                if ($data['password'] == $data['confirmPassword']) {
+                    $user->password = $data['password'];    // set password
+                    $user->status = 1;                      // set status = 1
+                    if ($this->Users->save($user)){
+                        $this->Flash->success('Password changed! You can login now.');
+                    }
+                }
+                return $this->redirect(['action' => 'login']);
+            } else {
+                $this->Flash->error('Session time out! Please try again from the begining.');
+                return $this->redirect(['action' => 'forgotPassword']);
             }
         }
     }
