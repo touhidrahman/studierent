@@ -60,7 +60,7 @@
 			<div class="card-block">
 				
 					<?php
-						if( !property_exists('avgRating', 'avg_rate')){ ?>
+						if(!isset($avgRating->avg_rate) ||$avgRating->avg_rate==0){ ?>
                             <h1 class="display-3 text-xs-center text-warning">No rating yet</h1>
 				<div class="text-xs-center">
 							<p>Not Rated yet</p>
