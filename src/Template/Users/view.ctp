@@ -123,8 +123,8 @@
 						</label>
 					</div>
 					<input type="hidden" name="status" value="1" />
-					<input type="hidden" name="user_id" value="<?= $user->id?>"/>
-					<input type="hidden" name="for_user_id" value="<?= $logUser?>"/>
+					<input type="hidden" name="for_user_id" value="<?= $user->id?>"/>
+					<input type="hidden" name="user_id" value="<?= $logUser?>"/>
 					<fieldset class="form-group">
 						<label for="Select">How do you know this user?</label>
 						<select class="form-control" name="relationship_basis" id="relationship_basis">
