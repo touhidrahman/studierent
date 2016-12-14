@@ -5,6 +5,7 @@ use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Cake\I18n\Date;
 
+
 /**
  * Properties Controller
  *
@@ -399,10 +400,13 @@ class PropertiesController extends AppController
 		
 		$recentProperties = $this->Properties
     ->find()
+	->contain(['Images'])
     ->order(['created' => 'DESC'])
 	->limit(3);
 	 
 	 $this->set(compact('recentProperties'));
+	 $this->set('_serialize', ['recentProperties']);
+	 
 	}
 
 
