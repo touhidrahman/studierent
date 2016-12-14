@@ -5,9 +5,13 @@
       
             <?php echo $this->Form->create($user, ['type' => 'file']); ?>
             <?php echo $this->Form->input('photo',['label'=>'Upload Photo','type' => 'file', 'class' => 'form-control']); ?>
-            <?php echo $this->Form->button(__('Submit'), ['type'=>'submit','class' => 'btn btn-success']); ?>
+            <br/>
+            <div class="btn-group" role="group">    
+            <input class="btn btn-success" type="submit" value="Submit">
+            <input class="btn btn-success" type="reset" value="Cancel">
+            <?php echo $this->Html->link('My Profile', '/users/view/'.$id, ['class' => 'btn btn-success']) ?> 
             <?php echo $this->Form->end(); ?>
-      
+            </div>
     </fieldset>
  
 </div>

@@ -140,6 +140,7 @@ class UsersController extends AppController
         $properties = $this->Users->Properties->find('list', ['limit' => 200]);
         $this->set(compact('user', 'cities', 'properties'));
         $this->set('_serialize', ['user']);
+        $this->set('id', $id);
     }
 
 
