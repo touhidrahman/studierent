@@ -52,6 +52,32 @@
 			</table>
 		</div>
 
+		<div class="card">
+			<div class="card-header">
+				Average Rating
+			</div>
+			<div class="card-block">
+				<h1 class="display-3 text-xs-center text-warning"><?= round($avgRating->avg_rate, 2) ?></h1>
+				<div class="text-xs-center">
+					<?php
+						if( $avgRating->avg_rate==0){ ?>
+							<p>Not Rated yet</p>
+							<?php
+						} else {
+							$filledStar = ceil($avgRating->avg_rate);
+							$hollowStar = 5 - $filledStar;
+							for ($i=0; $i < $filledStar; $i++) {
+								echo '<i class="fa fa-star text-info"></i>';
+							}
+							for ($i=0; $i < $hollowStar; $i++) {
+								echo '<i class="fa fa-star-o text-info"></i>';
+							}
+						}
+					?>
+				</div>
+			</div>
+		</div>
+		
 		<?php
 		//@author Norman Lista
 		//for user not rating himself
@@ -114,7 +140,10 @@
 				</div>
 			</div>
 		<?php } ?>
-		</div>
+
+	</div>
+
+
 
 	<div class="col-xs-8">
 		<div class="card">
@@ -131,5 +160,36 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="card">
+			<div class="card-header">
+				Feedbacks
+			</div>
+			<div class="card-block">
+				<?php
+				foreach ($otherFeedbacks as $fdbk) {
+					?>
+					<h5><?= $this->Html->link($fdbk->user->first_name .' '. $fdbk->user->last_name, ['controller' => 'users', 'action' => 'view', $fdbk->user->id]) ?></h5>
+					<p>
+						<?php
+							$filledStar = $fdbk->rate;
+							$hollowStar = 5 - $filledStar;
+							for ($i=0; $i < $filledStar; $i++) {
+								echo '<i class="fa fa-star text-info"></i>';
+							}
+							for ($i=0; $i < $hollowStar; $i++) {
+								echo '<i class="fa fa-star-o text-info"></i>';
+							}
+						?>
+						<br>
+						<?= $fdbk->text ?>
+					</p>
+					<?php
+				}
+				?>
+			</div>
+		</div>
+
 	</div>
+
 </div>

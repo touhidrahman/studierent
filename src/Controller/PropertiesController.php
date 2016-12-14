@@ -393,6 +393,12 @@ class PropertiesController extends AppController
         $this->set(compact('properties','id', 'avgRatings'));
         $this->set('_serialize', ['properties']);
     }
+	
+	
+	public function home()
+	{
+		
+	}
 
 
 
