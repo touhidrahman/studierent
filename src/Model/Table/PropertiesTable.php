@@ -207,6 +207,10 @@ class PropertiesTable extends Table
         $validator
             ->integer('view_times')
             ->allowEmpty('view_times');
+        
+         $validator
+            ->boolean('is_boosted')
+            ->allowEmpty('is_boosted');
 
         return $validator;
     }
