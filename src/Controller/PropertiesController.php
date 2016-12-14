@@ -139,12 +139,22 @@ class PropertiesController extends AppController
      * @param string|null $id Property id.
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     * @author Ramanpreet Kaur, Touhidur Rahman
+     * @author Ramanpreet Kaur, Touhidur Rahman, Muneeb Noor
      */
     public function edit($id = null)
     {
         // only logged in user can edit his property
         $property = $this->Properties->get($id);
+		
+		//To ensure that only administrators are able to edit all the properties
+		if($property->user_id != $this->Auth->user('id'))
+		{
+			$session = $this->request->session();
+			   if($session->read('User.admin') != '1')
+		return $this->redirect($this->referer());
+			
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             if ($property->user_id == $this->Auth->user('id')){
                 $property = $this->Properties->patchEntity($property, $this->request->data);
