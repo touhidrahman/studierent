@@ -50,7 +50,7 @@
 			            <li class="list-group-item"><?= $this->Html->link('My Properties', '/properties/myproperties', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
 			            <li class="list-group-item"><?= $this->Html->link('My Favorites', '/properties/favorites/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
 			            <li class="list-group-item"><?= $this->Html->link('My Profile', '/users/view/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
-			            <li class="list-group-item"><?= $this->Html->link('Edit Profile', '/users/edit/'.$id, ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
+			            <li class="list-group-item"><?= $this->Html->link('Edit Profile', '/users/edit/', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
 						<li class="list-group-item"><?= $this->Html->link('Logout', '/users/logout', ['class' => 'card-link btn-block', 'escapeTitle' => false]) ?></li>
 			        </ul>
 			    </div>

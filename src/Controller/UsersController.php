@@ -136,9 +136,7 @@ class UsersController extends AppController
             }
 
         }
-        $cities = $this->Users->Cities->find('list', ['limit' => 200]);
-        $properties = $this->Users->Properties->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'cities', 'properties'));
+        $this->set(compact('user'));
         $this->set('_serialize', ['user']);
         $this->set('id', $id);
     }
@@ -151,10 +149,10 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
-	
-		if (!$id) 
+
+		if (!$id)
 			$id = $this->Auth->user('id');
-		
+
 		else if($id != $this->Auth->user('id'))
 		{
 			$session = $this->request->session();
@@ -162,8 +160,8 @@ class UsersController extends AppController
 					return $this->redirect(
         array('controller' => 'users', 'action' => 'dashboard')
     );
-			
-		}					
+
+		}
         $user = $this->Users->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->data);
