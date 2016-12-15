@@ -60,13 +60,12 @@ class UsersController extends AppController
     {
         // if id is not supplied show own profile
         if (!$id) $id = $this->Auth->user('id');
-        if ($this->Auth->user('status') == 9) {
-            $user = $this->Users->get($id);
-        } else {
-            $user = $this->Users->find()->where(['id' => $id, 'status' => 1])->first();
-            if (!$user->id) {
+        // only admin can view blocked user
+        $user = $this->Users->get($id);
+        if ($user->status == 0){
+            if ($this->Auth->user('status') != 9) {
                 $this->Flash->error('The user does not exist');
-                return $this->redirect(['action' => 'view']);
+                return $this->redirect(['action' => 'dashboard']);
             }
         }
         // get properties posted by this user
@@ -96,7 +95,7 @@ class UsersController extends AppController
         $this->loadModel('Feedbacks');
         $feedback=$this->Feedbacks->newEntity();
         if($this->request->is('post')){
-         if($thisFeedback->count()==0){   
+         if($thisFeedback->count()==0){
             $feedback= $this->Feedbacks->patchEntity($feedback,$this->request->data);
          if($this->Feedbacks->save($feedback)){
              $this->Flash->success(__('Feedback added'));
@@ -105,7 +104,7 @@ class UsersController extends AppController
          }
         }else{
             $this->Flash->error(__('You already rated this landlord'));
-            
+
         }}
         $this->set('feedback',$feedback);
         $this->set(compact('user', 'properties', 'propertyCount', 'logUser', 'otherFeedbacks', 'avgRating'));
