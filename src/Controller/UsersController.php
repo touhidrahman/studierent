@@ -66,7 +66,7 @@ class UsersController extends AppController
             $user = $this->Users->find()->where(['id' => $id, 'status' => 1])->first();
             if (!$user->id) {
                 $this->Flash->error('The user does not exist');
-                return $this->$this->redirect(['action' => 'view']);
+                return $this->redirect(['action' => 'view']);
             }
         }
         // get properties posted by this user
@@ -108,7 +108,7 @@ class UsersController extends AppController
              $this->Flash->error(__('Unable to add feedback'));
          }
 		 }
-		 
+
 			}
         }
         $this->set('feedback',$feedback);
