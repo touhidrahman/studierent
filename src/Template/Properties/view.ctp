@@ -138,8 +138,8 @@
 							<td><?php echo $property->address .' '. $property->house_no .',<br> '. $property->zip->number .' '. $property->zip->city; ?></td>
 						</tr>
 						<tr>
-							<td class="text-danger">Favorite?</td>
-							<td><?= $this->Html->link('<i class="fa fa-heart-o"></i>', '/properties/toggleFavorites.json?id='.$property['id'], ['class' => 'card-link text-danger favTogglers', 'escapeTitle' => false, 'title' => 'Click to add/remove this property ad to/from your favorites!']) ?></td>
+							<td class="text-danger">Favorite? <?= $this->Html->link('<i class="fa fa-heart-o"></i>', '/properties/toggleFavorites.json?id='.$property['id'], ['class' => 'card-link text-danger favTogglers', 'escapeTitle' => false, 'title' => 'Click to add/remove this property ad to/from your favorites!']) ?></td>
+							<td>Report? <?= $this->Html->link('<i class="fa fa-flag-o"></i>', '/reports/add/'.$property['id'], ['class' => 'card-link text-muted', 'escapeTitle' => false, 'title' => 'Report this Ad! Help us improve Studierent by filtering abuses.']) ?></td>
 						</tr>
 					</tbody>
 				</table>

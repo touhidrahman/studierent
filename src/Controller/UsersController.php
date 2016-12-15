@@ -325,29 +325,6 @@ class UsersController extends AppController
 
 
 
-    /**
-     * Display Admin dashboard after login
-     * @author Ramanpreet Kaur
-     */
-    public function admin(){
-        /*@author Ramanpreet
-        * In a controller or table method.
-        * select type, count(*) from properties group by type
-        */
-
-        $connection = ConnectionManager::get('default');
-        $results = $connection->execute('select count(id) as counts , type from properties group by type')->fetchAll('assoc');
-
-        $this->set('results',$results);
-        $users = $connection->execute('select count(id) as counts , status from users group by status')->fetchAll('assoc');
-
-        $this->set('users', $users);
-        $reports = $connection->execute('select count(id) as counts , user_id from reports group by user_id')->fetchAll('assoc');
-
-        $this->set('reports',$reports);
-    }
-
-
 
     /**
      * Forgot password | generate code if post method, display form otherwise
