@@ -65,7 +65,7 @@ class UsersController extends AppController
         if ($user->status == 0){
             if ($this->Auth->user('status') != 9) {
                 $this->Flash->error('The user does not exist');
-                return $this->redirect(['action' => 'view']);
+                return $this->redirect(['action' => 'dashboard']);
             }
         }
     
@@ -74,8 +74,9 @@ class UsersController extends AppController
         $query = $propertiesTbl->find()->where(['user_id' => $id]);
         // get feedbacks belong to this user
         $feedbacksTbl = TableRegistry::get('Feedbacks');
-        $otherFeedbacks = $feedbacksTbl->find()->where(['for_user_id' => $id])->contain(['Users'])
-        ;
+        $otherFeedbacks = $feedbacksTbl->find()->where(['for_user_id' => $id])->contain(['Users']);
+        //for not rating more than once Norman Lista
+        $thisFeedback = $feedbacksTbl->find()->where(['user_id' => $this->Auth->user('id'),'for_user_id' => $id]);
         // get avg rating of user
         $avgRating = TableRegistry::get('AvgRatings')->find()->where(['user_id' => $id])->first();
         // join zips.number field
@@ -95,22 +96,17 @@ class UsersController extends AppController
         $this->loadModel('Feedbacks');
         $feedback=$this->Feedbacks->newEntity();
         if($this->request->is('post')){
-            {
-				$check = $feedbacksTbl->find()->where(['for_user_id' => $id,'user_id' =>$logUser ])->count();
-	            if($check > 0)
-					$this->Flash->success(__('You have already added a feedback for this user'));
-				else
-				{
-				$feedback= $this->Feedbacks->patchEntity($feedback,$this->request->data);
+         if($thisFeedback->count()==0){
+            $feedback= $this->Feedbacks->patchEntity($feedback,$this->request->data);
          if($this->Feedbacks->save($feedback)){
              $this->Flash->success(__('Feedback added'));
          }else{
              $this->Flash->error(__('Unable to add feedback'));
          }
-		 }
+        }else{
+            $this->Flash->error(__('You already rated this landlord'));
 
-			}
-        }
+        }}
         $this->set('feedback',$feedback);
         $this->set(compact('user', 'properties', 'propertyCount', 'logUser', 'otherFeedbacks', 'avgRating'));
         $this->set('_serialize', ['user', 'properties', 'propertyCount']);
