@@ -60,7 +60,15 @@ class UsersController extends AppController
     {
         // if id is not supplied show own profile
         if (!$id) $id = $this->Auth->user('id');
-        $user = $this->Users->get($id);
+        if ($this->Auth->user('status') == 9) {
+            $user = $this->Users->get($id);
+        } else {
+            $user = $this->Users->find()->where(['id' => $id, 'status' => 1])->first();
+            if (!$user->id) {
+                $this->Flash->error('The user does not exist');
+                return $this->$this->redirect(['action' => 'view']);
+            }
+        }
         // get properties posted by this user
         $propertiesTbl = TableRegistry::get('Properties');
         $query = $propertiesTbl->find()->where(['user_id' => $id]);
