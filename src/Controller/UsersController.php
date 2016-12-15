@@ -6,6 +6,7 @@ use App\Controller\AppController;
 use Cake\Error\Debugger;
 use Cake\ORM\Entity;
 use Cake\ORM\Query;
+use Cake\Validation\Validator;
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\Controller\Component\AuthComponent;
 use Cake\Datasource\ConnectionManager;
@@ -19,6 +20,8 @@ use Cake\Utility;
 class UsersController extends AppController
 {
 
+	
+	
 	public function initialize()
 	{
 		parent::initialize();
@@ -272,9 +275,38 @@ class UsersController extends AppController
      */
 	public function register()
 	{
+		$validator = new Validator();
+		
+		
 		$user = $this->Users->newEntity();
 		if($this->request->is('post'))
 		{
+
+$validator
+    ->requirePresence('password')
+    ->add('password', 'length', [
+        'rule' => ['minLength', 6],
+        'message' => 'Password must be atleast 6 characters long'
+    ]);
+
+	$errors = $validator->errors($this->request->data());
+     
+     
+	 
+     $already_exists = $this->Users->find()->where(['username' => $this->request->data['username']])->count();
+
+	 
+	 if($already_exists > 0)
+	 {
+		     $this->Flash->error('Email already registered');
+	 }
+ else 	if($errors)
+	{
+		if($errors['password']['length'] !=null)
+             $this->Flash->error('Minimum 6 characters password required');
+	}
+	else
+	{
 			$user = $this->Users->patchEntity($user, $this->request->data);
 			$user->status = 1;
 			if($this->Users->save($user))
@@ -286,10 +318,12 @@ class UsersController extends AppController
 			else
 				$this->Flash->error('Registration not successful');
 
-		}
+	}
+	
+	}
 		$this->set(compact('user'));
 		$this->set('_serialize',['user']);
-
+	 
 	}
 
 
