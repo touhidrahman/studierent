@@ -87,12 +87,21 @@ class UsersController extends AppController
         $this->loadModel('Feedbacks');
         $feedback=$this->Feedbacks->newEntity();
         if($this->request->is('post')){
-            $feedback= $this->Feedbacks->patchEntity($feedback,$this->request->data);
+            {
+				$check = $feedbacksTbl->find()->where(['for_user_id' => $id,'user_id' =>$logUser ])->count();
+	            if($check > 0)
+					$this->Flash->success(__('You have already added a feedback for this user'));
+				else
+				{
+				$feedback= $this->Feedbacks->patchEntity($feedback,$this->request->data);
          if($this->Feedbacks->save($feedback)){
              $this->Flash->success(__('Feedback added'));
          }else{
              $this->Flash->error(__('Unable to add feedback'));
          }
+		 }
+		 
+			}
         }
         $this->set('feedback',$feedback);
         $this->set(compact('user', 'properties', 'propertyCount', 'logUser', 'otherFeedbacks', 'avgRating'));
