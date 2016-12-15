@@ -41,7 +41,7 @@
       	<div class="carousel-inner" role="listbox">
 
             <?php $i = 0; foreach ($recentProperties as $rp): ?>
-
+                         <?php if (isset($rp->images[0])){ ?>
 	               <div class="carousel-item <?= ($i==0)? 'active' : ''; ?>">
     				<?= $this->Html->image('properties/'.$rp->images[0]->path); ?>
               			<div class="carousel-caption">
@@ -49,7 +49,15 @@
               				<?= $this->Html->link('Check it out', ['action' => 'view', $rp->id]) ?>
               			</div>
       		        </div>
-
+                                                <?php }else{ ?>
+            <div class="carousel-item <?= ($i==0)? 'active' : ''; ?>">
+    				<?= $this->Html->image('http://www.freeiconspng.com/uploads/school-house-icon-21.png'); ?>
+              			<div class="carousel-caption">
+              				<h3><?php echo $rp->title; ?></h3>
+              				<?= $this->Html->link('Check it out', ['action' => 'view', $rp->id]) ?>
+              			</div>
+      		        </div>
+<?php } ?>
             <?php $i++; endforeach; ?>
 
       	</div>
@@ -75,7 +83,7 @@
       	<div class="carousel-inner" role="listbox">
 
         <?php $i = 0; foreach ($boostedProperties as $bp): ?>
-
+                <?php if (isset($bp->images[0])){ ?>
                <div class="carousel-item <?= ($i==0)? 'active' : ''; ?>">
                 <?= $this->Html->image('properties/'.$bp->images[0]->path); ?>
                     <div class="carousel-caption">
@@ -83,7 +91,15 @@
                         <?= $this->Html->link('Check it out', ['action' => 'view', $bp->id]) ?>
                     </div>
                 </div>
-
+ <?php }else{ ?>
+               <div class="carousel-item <?= ($i==0)? 'active' : ''; ?>">
+                <?= $this->Html->image('http://www.freeiconspng.com/uploads/school-house-icon-21.png'); ?>
+                    <div class="carousel-caption">
+                        <h3><?php echo $bp->title; ?></h3>
+                        <?= $this->Html->link('Check it out', ['action' => 'view', $bp->id]) ?>
+                    </div>
+                </div>
+<?php } ?>
         <?php $i++; endforeach; ?>
         </div>
         <a class="left carousel-control" href="#carouselTop" role="button" data-slide="prev">
