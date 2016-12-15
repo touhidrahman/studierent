@@ -60,7 +60,15 @@ class UsersController extends AppController
     {
         // if id is not supplied show own profile
         if (!$id) $id = $this->Auth->user('id');
-        $user = $this->Users->get($id);
+        if ($this->Auth->user('status') == 9) {
+            $user = $this->Users->get($id);
+        } else {
+            $user = $this->Users->find()->where(['id' => $id, 'status' => 1])->first();
+            if (!$user->id) {
+                $this->Flash->error('The user does not exist');
+                return $this->$this->redirect(['action' => 'view']);
+            }
+        }
         // get properties posted by this user
         $propertiesTbl = TableRegistry::get('Properties');
         $query = $propertiesTbl->find()->where(['user_id' => $id]);
@@ -87,12 +95,21 @@ class UsersController extends AppController
         $this->loadModel('Feedbacks');
         $feedback=$this->Feedbacks->newEntity();
         if($this->request->is('post')){
-            $feedback= $this->Feedbacks->patchEntity($feedback,$this->request->data);
+            {
+				$check = $feedbacksTbl->find()->where(['for_user_id' => $id,'user_id' =>$logUser ])->count();
+	            if($check > 0)
+					$this->Flash->success(__('You have already added a feedback for this user'));
+				else
+				{
+				$feedback= $this->Feedbacks->patchEntity($feedback,$this->request->data);
          if($this->Feedbacks->save($feedback)){
              $this->Flash->success(__('Feedback added'));
          }else{
              $this->Flash->error(__('Unable to add feedback'));
          }
+		 }
+		 
+			}
         }
         $this->set('feedback',$feedback);
         $this->set(compact('user', 'properties', 'propertyCount', 'logUser', 'otherFeedbacks', 'avgRating'));
