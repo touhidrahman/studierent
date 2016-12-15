@@ -224,8 +224,11 @@ class PropertiesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $property = $this->Properties->get($id);
+		
+		$session = $this->request->session();
+			   
         // only owner user can delete his property
-        if ($property->user_id == $this->Auth->user('id')){
+        if ($property->user_id == $this->Auth->user('id') || $session->read('User.admin') == '1'){
             if ($this->Properties->delete($property)) {
                 // delete references to this property from favourite properties table
                 $favPropTbl = TableRegistry::get('FavoriteProperties');
@@ -242,7 +245,17 @@ class PropertiesController extends AppController
             }
         }
 
-        return $this->redirect($this->referer());
+		if($session->read('User.admin') != '1')
+					return $this->redirect(
+        array('controller' => 'users', 'action' => 'dashboard')
+		);
+		else
+		{
+		
+        		return $this->redirect(
+        array('controller' => 'admin', 'action' => 'properties')
+		);
+		}
     }
 
 
