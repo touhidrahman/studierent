@@ -40,7 +40,9 @@
 
       	<div class="carousel-inner" role="listbox">
 
-            <?php $i = 0; foreach ($recentProperties as $rp): ?>
+            <?php //@Author Norman Lista 
+            //if there is no image it displays one by default 
+            $i = 0; foreach ($recentProperties as $rp): ?>
                          <?php if (isset($rp->images[0])){ ?>
 	               <div class="carousel-item <?= ($i==0)? 'active' : ''; ?>">
     				<?= $this->Html->image('properties/'.$rp->images[0]->path); ?>
